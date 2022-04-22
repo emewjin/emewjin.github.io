@@ -15,8 +15,10 @@ import { useTag } from '~/hooks/useTag';
 import Layout from '~/layout';
 import { filterPostsByTag, filterPostsByTitle } from '~/utils/filterPosts';
 
-
-const BlogIndex = ({ data, location }: PageProps<GatsbyTypes.BlogIndexQuery>) => {
+const BlogIndex = ({
+  data,
+  location,
+}: PageProps<GatsbyTypes.BlogIndexQuery>) => {
   const infiniteScrollRef = useRef(null);
   const [page, setPage] = usePage();
   const [titleFilter, setTitleFilter] = useSearchFilter();
@@ -28,8 +30,7 @@ const BlogIndex = ({ data, location }: PageProps<GatsbyTypes.BlogIndexQuery>) =>
   const siteTitle = data.site?.siteMetadata?.title ?? '';
   const siteThumbnail = data.site?.siteMetadata?.thumbnail;
   const posts = filterPostsByTag(
-    filterPostsByTitle(
-      data.allMarkdownRemark.nodes, titleFilter),
+    filterPostsByTitle(data.allMarkdownRemark.nodes, titleFilter),
     currentTag
   );
   const articlePerPage = 5;
@@ -56,12 +57,14 @@ const BlogIndex = ({ data, location }: PageProps<GatsbyTypes.BlogIndexQuery>) =>
     }
   }
 
-  useInfiniteScroll(infiniteScrollRef, useCallback(() => {
-    if (page < totalPage) {
-      setPage(page + 1);
-    }
-  }, [page, setPage, totalPage]));
-
+  useInfiniteScroll(
+    infiniteScrollRef,
+    useCallback(() => {
+      if (page < totalPage) {
+        setPage(page + 1);
+      }
+    }, [page, setPage, totalPage])
+  );
 
   return (
     <Layout location={location} title={siteTitle} resetFilter={resetFilter}>
@@ -81,15 +84,13 @@ const BlogIndex = ({ data, location }: PageProps<GatsbyTypes.BlogIndexQuery>) =>
         setCurrentTag={setCurrentTag}
       />
       {posts.length === 0 ? (
-        <p>
-          No posts found.
-        </p>
-      ): (
+        <p>No posts found.</p>
+      ) : (
         <>
           <ArticleList posts={posts.slice(0, page * articlePerPage)} />
         </>
       )}
-      <div className='infinite-scroll' ref={infiniteScrollRef}/>
+      <div className='infinite-scroll' ref={infiniteScrollRef} />
     </Layout>
   );
 };
@@ -105,7 +106,9 @@ export const pageQuery = graphql`
         thumbnail
       }
     }
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+    allMarkdownRemark(
+      sort: { fields: [frontmatter___lastUpdated], order: DESC }
+    ) {
       nodes {
         excerpt
         fields {
@@ -115,6 +118,7 @@ export const pageQuery = graphql`
           title
           description
           tags
+          lastUpdated(formatString: "YYYY. MM. DD")
         }
       }
     }

@@ -11,7 +11,13 @@ interface Props {
   noSiteName?: boolean;
 }
 
-const Seo = ({ description, lang, meta = [], title, noSiteName = false }: Props) => {
+const Seo = ({
+  description,
+  lang,
+  meta = [],
+  title,
+  noSiteName = false,
+}: Props) => {
   const { site } = useSeo();
 
   if (site === undefined) {
@@ -19,7 +25,7 @@ const Seo = ({ description, lang, meta = [], title, noSiteName = false }: Props)
   }
 
   const metaDescription = description || site.siteMetadata?.description;
-  const defaultTitle= site.siteMetadata?.title;
+  const defaultTitle = site.siteMetadata?.title;
 
   return (
     <Helmet
@@ -60,6 +66,14 @@ const Seo = ({ description, lang, meta = [], title, noSiteName = false }: Props)
         {
           name: 'twitter:description',
           content: metaDescription,
+        },
+        {
+          name: 'google-site-verification',
+          content: 'A0laYsg8I6K8AsAfHC3tcbE96HfVzrxnCYcPyII67RY',
+        },
+        {
+          name: 'naver-site-verification',
+          content: '4a519a1eb6f97e3b51daa81a5509a649a73b03d4',
         },
       ].concat(meta)}
     />

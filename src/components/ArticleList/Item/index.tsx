@@ -1,15 +1,16 @@
 import { Link } from 'gatsby';
 import React, { memo } from 'react';
 
-import { Header, Section, Title } from './styles';
+import { Header, Section, Title, Footer } from './styles';
 
 interface Props {
   slug: string;
   title: string;
   description: string;
+  lastUpdated: string;
 }
 
-const ArticleListItem = ({ slug, title, description }: Props) => (
+const ArticleListItem = ({ slug, title, description, lastUpdated }: Props) => (
   <li key={slug}>
     <article
       className='post-list-item'
@@ -31,6 +32,9 @@ const ArticleListItem = ({ slug, title, description }: Props) => (
           itemProp='description'
         />
       </Section>
+      <Footer>
+        <p>{lastUpdated && `${lastUpdated} 업데이트`}</p>
+      </Footer>
     </article>
   </li>
 );

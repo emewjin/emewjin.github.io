@@ -19,6 +19,7 @@ const ArticleList = ({ posts }: Props) => {
         const title = post.frontmatter?.title ?? post.fields?.slug ?? '';
         const slug = post.fields?.slug ?? '';
         const description = post.frontmatter?.description ?? post.excerpt ?? '';
+        const lastUpdated = post.frontmatter?.lastUpdated ?? '';
 
         return (
           <ArticleListItem
@@ -26,6 +27,7 @@ const ArticleList = ({ posts }: Props) => {
             title={title}
             slug={slug}
             description={description}
+            lastUpdated={lastUpdated}
           />
         );
       })}

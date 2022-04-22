@@ -11,7 +11,7 @@ export const Container = styled('header', {
   '@md': {
     flexDirection: 'row',
     justifyContent: 'space-between',
-  }
+  },
 });
 
 export const TitleWrapper = styled('div', {
@@ -23,7 +23,7 @@ export const TitleWrapper = styled('div', {
 
   '@md': {
     width: 'auto',
-  }
+  },
 });
 
 export const Circle = styled('div', {
@@ -48,5 +48,5 @@ export const Title = styled('h1', {
     transition: 'color $transitionDuration $transitionTiming',
 
     textDecoration: 'none',
-  }
+  },
 });

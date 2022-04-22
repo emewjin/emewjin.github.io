@@ -1,25 +1,25 @@
 {
-  "name": "gatsby-starter-lavender",
+  "name": "emewjin.log",
   "private": true,
-  "description": "purple flavored blog starter based on Gatsby",
+  "description": "Frontend Dev",
   "version": "1.0.0",
-  "author": "Changhui Lee <iam@xo.dev>",
+  "author": "emewjin <emewjin@gmail.com>",
   "scripts": {
-    "build": "gatsby build",
+    "build": "gatsby clean && gatsby build && cp content/blog/google2885a4a9e03f5486.html public/",
     "dev": "gatsby develop",
     "serve": "gatsby serve",
+    "test": "gatsby build && gatsby serve",
     "clean": "gatsby clean",
     "lint:fix": "eslint --fix src",
     "lint-staged": "lint-staged",
     "typecheck": "tsc --noEmit --skipLibCheck",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "deploy": "gatsby clean && gatsby build && cp content/blog/google2885a4a9e03f5486.html public/ && gh-pages -d public -b deploy",
+    "create": "gatsby-post-gen"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/blurfx/gatsby-starter-lavender.git"
-  },
-  "bugs": {
-    "url": "https://github.com/blurfx/gatsby-starter-lavender/issues"
+    "url": "git+https://github.com/emewjin/emewjin.github.io.git"
   },
   "dependencies": {
     "@stitches/react": "^1.2.7",
@@ -66,11 +66,13 @@
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "gatsby-post-gen": "^1.0.0",
+    "gh-pages": "^3.2.3",
     "husky": "^7.0.1",
     "lint-staged": "^11.0.0",
     "typescript": "^4.3.2"
   },
-  "homepage": "https://github.com/blurfx/gatsby-starter-lavender#readme",
+  "homepage": "https://github.com/emewjin/emewjin.github.io",
   "keywords": [
     "gatsby",
     "gatsby-starter",

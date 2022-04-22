@@ -2,14 +2,15 @@ import siteMetadata from './blog-config';
 
 interface FeedSerializeProps {
   query: {
-    site: GatsbyTypes.Site,
+    site: GatsbyTypes.Site;
     allMarkdownRemark: {
-      nodes: GatsbyTypes.MarkdownRemark[],
-    }
-  }
+      nodes: GatsbyTypes.MarkdownRemark[];
+    };
+  };
 }
 
 export const plugins = [
+  'gatsby-plugin-advanced-sitemap',
   'gatsby-plugin-image',
   {
     resolve: 'gatsby-plugin-module-resolver',
@@ -54,14 +55,14 @@ export const plugins = [
           resolve: 'gatsby-remark-autolink-headers',
           options: {
             className: 'heading-anchor',
-            isIconAfterHeader: true,
-          }
+            isIconAfterHeader: false,
+          },
         },
         {
           resolve: 'gatsby-remark-katex',
           options: {
             strict: 'ignore',
-          }
+          },
         },
         'gatsby-remark-external-links',
         'gatsby-remark-prismjs',
@@ -98,21 +99,27 @@ export const plugins = [
       `,
       feeds: [
         {
-          serialize: ({ query: { site, allMarkdownRemark } }: FeedSerializeProps) => allMarkdownRemark.nodes.map((node) => {
-            const url = `${site.siteMetadata?.siteUrl ?? ''}${node.fields?.slug ?? ''}`;
-            return {
-              ...node.frontmatter,
-              url,
-              description: node.excerpt,
-              date: node.frontmatter?.date,
-              guid: url,
-              custom_elements: [{ 'content:encoded': node.html }],
-            };
-          }),
+          serialize: ({
+            query: { site, allMarkdownRemark },
+          }: FeedSerializeProps) =>
+            allMarkdownRemark.nodes.map((node) => {
+              const url = `${site.siteMetadata?.siteUrl ?? ''}${
+                node.fields?.slug ?? ''
+              }`;
+              return {
+                ...node.frontmatter,
+                url,
+                description: node.excerpt,
+                date: node.frontmatter?.date,
+                lastUpdated: node.frontmatter?.date,
+                guid: url,
+                custom_elements: [{ 'content:encoded': node.html }],
+              };
+            }),
           query: `
             {
               allMarkdownRemark(
-                sort: { order: DESC, fields: [frontmatter___date] },
+                sort: { order: DESC, fields: [frontmatter___lastUpdated] },
               ) {
                 nodes {
                   excerpt
@@ -123,6 +130,7 @@ export const plugins = [
                   frontmatter {
                     title
                     date
+                    lastUpdated
                   }
                 }
               }
@@ -146,9 +154,17 @@ export const plugins = [
       icon: siteMetadata.icon,
     },
   },
+  {
+    resolve: 'gatsby-plugin-robots-txt',
+    options: {
+      host: 'https://emewjin.github.io',
+      sitemap: 'https://emewjin.github.io/sitemap.xml',
+      policy: [{ userAgent: '*' }],
+    },
+  },
   'gatsby-plugin-react-helmet',
   'gatsby-plugin-offline',
-  'gatsby-plugin-typegen'
+  'gatsby-plugin-typegen',
 ];
 
 export { siteMetadata };

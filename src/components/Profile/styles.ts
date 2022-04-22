@@ -37,6 +37,7 @@ export const Name = styled('p', {
 export const Description = styled('p', {
   lineHeight: 1.2,
   wordBreak: 'keep-all',
+  whiteSpace: 'pre-line',
 });
 
 export const ExternalLinks = styled('ul', {
@@ -53,7 +54,7 @@ export const LinkItem = styled('li', {
 
   transition: 'color $transitionDuration $transitionTiming',
 
-  'a': {
+  a: {
     color: '$link',
-  }
+  },
 });

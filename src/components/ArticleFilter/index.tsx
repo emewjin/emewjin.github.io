@@ -1,4 +1,9 @@
-import React, { ChangeEventHandler, memo, MouseEvent, useCallback } from 'react';
+import React, {
+  ChangeEventHandler,
+  memo,
+  MouseEvent,
+  useCallback,
+} from 'react';
 
 import { TAG } from '~/constants';
 
@@ -12,12 +17,21 @@ interface Props {
   setCurrentTag: (tag: string) => void;
 }
 
-const ArticleFilter = ({ tags, currentTag, setCurrentTag, titleFilter, onTitleFilterChange }: Props) => {
-  const onClickTag = useCallback((e: MouseEvent<HTMLButtonElement>) => {
-    const tag = (e.target as HTMLButtonElement).dataset['tag'] as string;
+const ArticleFilter = ({
+  tags,
+  currentTag,
+  setCurrentTag,
+  titleFilter,
+  onTitleFilterChange,
+}: Props) => {
+  const onClickTag = useCallback(
+    (e: MouseEvent<HTMLButtonElement>) => {
+      const tag = (e.target as HTMLButtonElement).dataset['tag'] as string;
 
-    setCurrentTag(tag);
-  }, [setCurrentTag]);
+      setCurrentTag(tag);
+    },
+    [setCurrentTag]
+  );
 
   return (
     <Container>
@@ -35,7 +49,7 @@ const ArticleFilter = ({ tags, currentTag, setCurrentTag, titleFilter, onTitleFi
           onClick={onClickTag}
           filtered={currentTag === TAG.ALL}
         >
-          { TAG.ALL }
+          {TAG.ALL}
         </Tag>
         {tags.map((tag) => (
           <Tag
@@ -45,7 +59,7 @@ const ArticleFilter = ({ tags, currentTag, setCurrentTag, titleFilter, onTitleFi
             onClick={onClickTag}
             filtered={currentTag === tag}
           >
-            { tag }
+            {tag}
           </Tag>
         ))}
       </TagListWrapper>

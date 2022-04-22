@@ -2,7 +2,8 @@ import { styled, globalCss } from '~/stitches.config';
 
 export const globalStyles = globalCss({
   ':root': {
-    fontFamily: '"Pretendard", apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+    fontFamily:
+      '"Pretendard", apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
     textRendering: 'optimizeLegibility',
   },
   '*': {
@@ -34,9 +35,11 @@ export const globalStyles = globalCss({
   },
   h3: {
     fontSize: '1.25rem',
+    margin: '1.5rem 0',
   },
   h4: {
     fontSize: '1rem',
+    margin: '1rem 0',
   },
   h5: {
     fontSize: '0.875rem',
@@ -78,7 +81,7 @@ export const globalStyles = globalCss({
     marginTop: '0.75rem',
     marginBottom: '0.75rem',
 
-    lineHeight: 1.625,
+    lineHeight: 1.8,
 
     '> code[class*="language-"]': {
       whiteSpace: 'pre-wrap',
@@ -87,11 +90,12 @@ export const globalStyles = globalCss({
   blockquote: {
     paddingLeft: '1rem',
     borderLeft: '0.25rem solid $borderPrimary',
+    color: '$text100',
   },
   article: {
     overflowWrap: 'break-word',
-
     'ul, ol': {
+      lineHeight: 1.8,
       marginLeft: '2rem',
 
       'ul, ol': {
@@ -99,6 +103,7 @@ export const globalStyles = globalCss({
       },
 
       li: {
+        lineHeight: 1.8,
         marginTop: '0.375rem',
         marginBottom: '0.375rem',
 
@@ -110,12 +115,15 @@ export const globalStyles = globalCss({
 
     'pre[class^="language-"]': {
       borderRadius: '0.25rem',
-    }
+    },
   },
   ':not(pre) > code[class*="language-"]': {
     color: '$inlineCodeColor',
     background: '$inlineCodeBackground',
-  }
+    border: 'solid 1px #f1f3f5',
+    borderRadius: '2px',
+    fontSize: '0.9rem',
+  },
 });
 export const Root = styled('div', {
   display: 'flex',
@@ -125,7 +133,8 @@ export const Root = styled('div', {
 
   backgroundColor: '$backgroundColor',
 
-  transition: 'color $transitionDuration $transitionTiming, background-color $transitionDuration $transitionTiming',
+  transition:
+    'color $transitionDuration $transitionTiming, background-color $transitionDuration $transitionTiming',
 });
 
 export const Container = styled('div', {

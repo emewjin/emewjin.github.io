@@ -1,31 +1,42 @@
+import { Link } from 'gatsby';
 import { StaticImage } from 'gatsby-plugin-image';
 import React, { memo, PropsWithChildren } from 'react';
 
 import { useAuthorProfile } from '~/hooks/useAuthorProfile';
 
-import { Container, ExternalLinks, LinkItem, Name, Description, Wrapper } from './styles';
-
+import {
+  Container,
+  ExternalLinks,
+  LinkItem,
+  Name,
+  Description,
+  Wrapper,
+} from './styles';
 
 interface SocialLinkProps {
-  username?: string,
-  urlPrefix: string,
+  username?: string;
+  urlPrefix: string;
 }
 
-const ExternalLink = ({ username, urlPrefix, children }: PropsWithChildren<SocialLinkProps>) => {
+const ExternalLink = ({
+  username,
+  urlPrefix,
+  children,
+}: PropsWithChildren<SocialLinkProps>) => {
   if (!username) {
     return null;
   }
 
   return (
     <LinkItem>
-      <a href={`${urlPrefix}${username}`}>{ children }</a>
+      <a href={`${urlPrefix}${username}`}>{children}</a>
     </LinkItem>
   );
 };
 
 interface SocialLink {
-  text: string,
-  url: string,
+  text: string;
+  url: string;
 }
 
 const Profile = () => {
@@ -55,7 +66,7 @@ const Profile = () => {
     linkedin: {
       text: 'LinkedIn',
       url: 'https://www.linkedin.com/in/',
-    }
+    },
   };
 
   return (
@@ -64,7 +75,7 @@ const Profile = () => {
         className='profile-image'
         layout='fixed'
         formats={['auto', 'webp', 'avif']}
-        src='../../images/profile-pic.jpeg'
+        src='https://avatars.githubusercontent.com/u/76927618?v=4'
         width={70}
         height={70}
         quality={95}
@@ -72,7 +83,9 @@ const Profile = () => {
       />
       <Wrapper>
         <Name>
-          <strong>{author}</strong>
+          <Link to={'/'}>
+            <strong>{author}</strong>
+          </Link>
         </Name>
 
         <Description>{description}</Description>
@@ -82,7 +95,11 @@ const Profile = () => {
             const serviceName = key as keyof GatsbyTypes.Social;
 
             return (
-              <ExternalLink key={serviceName} username={username} urlPrefix={socialLinks[serviceName].url}>
+              <ExternalLink
+                key={serviceName}
+                username={username}
+                urlPrefix={socialLinks[serviceName].url}
+              >
                 {socialLinks[serviceName].text}
               </ExternalLink>
             );

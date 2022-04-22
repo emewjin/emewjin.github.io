@@ -1,22 +1,30 @@
 import * as path from 'path';
 
-import type { CreateNodeArgs, CreatePagesArgs, CreateSchemaCustomizationArgs } from 'gatsby';
+import type {
+  CreateNodeArgs,
+  CreatePagesArgs,
+  CreateSchemaCustomizationArgs,
+} from 'gatsby';
 import { createFilePath } from 'gatsby-source-filesystem';
 
-export const createPages = async ({ graphql, actions, reporter }: CreatePagesArgs) => {
+export const createPages = async ({
+  graphql,
+  actions,
+  reporter,
+}: CreatePagesArgs) => {
   const blogPost = path.resolve('./src/templates/blog-post.tsx');
 
   const result: {
     errors?: Error;
     data?: {
       allMarkdownRemark: {
-        nodes: GatsbyTypes.MarkdownRemark[]
-      }
-    }
+        nodes: GatsbyTypes.MarkdownRemark[];
+      };
+    };
   } = await graphql(`
     {
       allMarkdownRemark(
-        sort: { fields: [frontmatter___date], order: ASC }
+        sort: { fields: [frontmatter___lastUpdated], order: ASC }
         limit: 1000
       ) {
         nodes {
@@ -42,7 +50,8 @@ export const createPages = async ({ graphql, actions, reporter }: CreatePagesArg
   if (posts !== undefined && posts.length > 0) {
     posts.forEach((post, index) => {
       const previousPostId = index === 0 ? null : posts[index - 1].id;
-      const nextPostId = index === posts.length - 1 ? null : posts[index + 1].id;
+      const nextPostId =
+        index === posts.length - 1 ? null : posts[index + 1].id;
 
       actions.createPage({
         path: post.fields?.slug || '',
@@ -69,7 +78,9 @@ export const onCreateNode = ({ node, actions, getNode }: CreateNodeArgs) => {
   }
 };
 
-export const createSchemaCustomization = ({ actions }: CreateSchemaCustomizationArgs) => {
+export const createSchemaCustomization = ({
+  actions,
+}: CreateSchemaCustomizationArgs) => {
   actions.createTypes(`
     type SiteSiteMetadata {
       author: String
@@ -96,6 +107,7 @@ export const createSchemaCustomization = ({ actions }: CreateSchemaCustomization
       title: String
       description: String
       date: Date @dateformat
+      lastUpdated: Date @dateformat
       tags: [String]
       thumbnail: String
     }

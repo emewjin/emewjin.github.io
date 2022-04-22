@@ -13,17 +13,27 @@ import Layout from '~/layout';
 import 'katex/dist/katex.min.css';
 
 import {
-  Article, TableOfContents, Content, Footer, Header, ArticleMetadata, Title
+  Article,
+  TableOfContents,
+  Content,
+  Footer,
+  Header,
+  ArticleMetadata,
+  Title,
+  ArticleDates,
 } from './styles';
 
-
-const BlogPostTemplate = ({ data, location }: PageProps<GatsbyTypes.BlogPostBySlugQuery>) => {
+const BlogPostTemplate = ({
+  data,
+  location,
+}: PageProps<GatsbyTypes.BlogPostBySlugQuery>) => {
   const post = data.markdownRemark!;
   const siteUrl = data.site?.siteMetadata?.siteUrl ?? '';
   const siteTitle = data.site?.siteMetadata?.title ?? '';
   const siteThumbnail = data.site?.siteMetadata?.thumbnail;
   const { previous, next } = data;
-  const { title, description, date, tags, thumbnail } = post.frontmatter!;
+  const { title, description, date, lastUpdated, tags, thumbnail } =
+    post.frontmatter!;
   const commentConfig = useComment().site?.siteMetadata?.comment;
 
   const disqusConfig = {
@@ -51,14 +61,14 @@ const BlogPostTemplate = ({ data, location }: PageProps<GatsbyTypes.BlogPostBySl
         description={description ?? post.excerpt ?? ''}
         meta={meta}
       />
-      <Article
-        itemScope
-        itemType='http://schema.org/Article'
-      >
+      <Article itemScope itemType='http://schema.org/Article'>
         <Header>
           <Title itemProp='headline'>{title}</Title>
           <ArticleMetadata>
-            <span>{date}</span>
+            <ArticleDates>
+              <span>{date}</span>
+              <span>{lastUpdated}</span>
+            </ArticleDates>
             <Tags tags={tags as string[]} />
           </ArticleMetadata>
         </Header>
@@ -66,16 +76,21 @@ const BlogPostTemplate = ({ data, location }: PageProps<GatsbyTypes.BlogPostBySl
           dangerouslySetInnerHTML={{ __html: post.tableOfContents ?? '' }}
         />
         <Content
-          dangerouslySetInnerHTML={{ __html: post.html ?? ''}}
+          dangerouslySetInnerHTML={{ __html: post.html ?? '' }}
           itemProp='articleBody'
         />
         <Footer>
           <Profile />
         </Footer>
       </Article>
-      { commentConfig?.utterances && <Utterances repo={commentConfig.utterances} /> }
-      { commentConfig?.disqusShortName && (
-        <DiscussionEmbed shortname={commentConfig?.disqusShortName} config={disqusConfig} />
+      {commentConfig?.utterances && (
+        <Utterances repo={commentConfig.utterances} />
+      )}
+      {commentConfig?.disqusShortName && (
+        <DiscussionEmbed
+          shortname={commentConfig?.disqusShortName}
+          config={disqusConfig}
+        />
       )}
       <ArticleNavigator previousArticle={previous} nextArticle={next} />
     </Layout>
@@ -108,6 +123,7 @@ export const pageQuery = graphql`
       frontmatter {
         title
         date(formatString: "YYYY-MM-DD")
+        lastUpdated(formatString: "YYYY-MM-DD")
         description
         tags
         thumbnail

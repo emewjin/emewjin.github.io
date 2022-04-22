@@ -8,8 +8,8 @@ export const Article = styled('article', {
 
     svg: {
       fill: '$text500',
-    }
-  }
+    },
+  },
 });
 
 export const TableOfContents = styled('div', {
@@ -33,7 +33,7 @@ export const TableOfContents = styled('div', {
 
       a: {
         textDecoration: 'underline',
-      }
+      },
     },
   },
 });
@@ -43,24 +43,39 @@ export const Header = styled('header', {
 });
 
 export const Title = styled('h1', {
-  fontSize: '2.25rem',
+  fontSize: '1.8rem',
+  lineHeight: '1.4',
 });
 
 export const ArticleMetadata = styled('div', {
   display: 'flex',
-  alignItems: 'center',
-  marginTop: '0.5rem',
+  flexDirection: 'column',
+  alignItems: 'flex-start',
+  marginTop: '0.8rem',
 
   color: '$text200',
 
   fontWeight: 700,
 
   transition: 'color $transitionDuration $transitionTiming',
+
+  'span:first-of-type::after': {
+    margin: '0px 0.25rem',
+    content: '|',
+  },
+  '@md': {
+    marginTop: '0.5rem',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+});
+
+export const ArticleDates = styled('div', {
+  display: 'flex',
 });
 
 export const Content = styled('section', {
-  wordBreak: 'keep-all',
-
+  wordBreak: 'break-all',
   h1: {
     marginTop: '2rem',
     marginBottom: '1.25rem',
@@ -69,24 +84,28 @@ export const Content = styled('section', {
 
     a: {
       borderBottom: 'none',
-    }
+    },
   },
   h2: {
-    marginTop: '1.5rem',
+    width: 'fit-content',
+    marginTop: '4rem',
     marginBottom: '1rem',
     paddingBottom: '0.25rem',
-    borderBottom: '1px solid $borderGray',
+    borderBottom: '3px solid $borderPrimary',
 
     a: {
       borderBottom: 'none',
-    }
+      right: '0 !important',
+      transform: 'translateX(110%) !important',
+    },
   },
   a: {
     borderBottom: '1px solid $borderPrimary',
 
     color: '$link',
 
-    transition: 'color $transitionDuration $transitionTiming, border-bottom-color $transitionDuration $transitionTiming',
+    transition:
+      'color $transitionDuration $transitionTiming, border-bottom-color $transitionDuration $transitionTiming',
   },
   pre: {
     code: {
@@ -96,7 +115,13 @@ export const Content = styled('section', {
   },
   'pre, code': {
     fontVariantLigatures: 'none',
-  }
+  },
+  li: {
+    strong: {
+      color: '$primary300',
+    },
+    // margin: '1rem 0',
+  },
 });
 
 export const Footer = styled('footer', {
@@ -111,5 +136,5 @@ export const Footer = styled('footer', {
     transition: 'background-color $transitionDuration $transitionTiming',
 
     content: '',
-  }
+  },
 });
