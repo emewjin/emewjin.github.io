@@ -1,8 +1,8 @@
 ---
-title: [번역] Array map을 깊게 파보자
+title: 번역 - Array map을 깊게 파보자
 date: 2021-04-15
 lastUpdated: 2021-04-15
-description: '이 글의 내용은 [BENJAMIN JOHNSON의 Deep Dive into JavaScript's Array Map Method](https://www.robinwieruch.de/javascript-map-array)를 기반으로 작성되었습니다. 사실상 번역글.'
+description: 이 글의 내용은 BENJAMIN JOHNSON의 Deep Dive into JavaScript's Array Map Method를 기반으로 작성되었습니다. 사실상 번역글.
 tags: [Javascript]
 ---
 
@@ -83,7 +83,7 @@ const newArray = originalArray.map((value) => {
   return value * 2;
 });
 
-//undefined은 숫자가 아니기 때문에 2를 곱했을 때  NaN이 반환됩니다.
+//undefined은 숫자가 아니기 때문에 2를 곱했을 때 NaN이 반환됩니다.
 console.log(newArray); // [2, 4, NaN, 6]
 ```
 
