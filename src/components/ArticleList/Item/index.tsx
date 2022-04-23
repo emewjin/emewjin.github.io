@@ -20,7 +20,7 @@ const ArticleListItem = ({ slug, title, description, lastUpdated }: Props) => (
       <Header>
         <Title>
           <Link to={slug} itemProp='url'>
-            <span itemProp='headline'>{title}!</span>
+            <span itemProp='headline'>{title}</span>
           </Link>
         </Title>
       </Header>
