@@ -6,7 +6,7 @@
   "author": "emewjin <emewjin@gmail.com>",
   "scripts": {
     "build": "gatsby clean && gatsby build && cp content/blog/google2885a4a9e03f5486.html public/",
-    "dev": "gatsby develop",
+    "dev": "yarn install --frozen-lockfile && gatsby develop",
     "serve": "gatsby serve",
     "test": "gatsby build && gatsby serve",
     "clean": "gatsby clean",

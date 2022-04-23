@@ -96,7 +96,15 @@ export const Content = styled('section', {
     a: {
       borderBottom: 'none',
       right: '0 !important',
-      transform: 'translateX(110%) !important',
+      transform: 'translateX(105%) !important',
+    },
+  },
+  'h3, h4': {
+    width: 'fit-content',
+    a: {
+      borderBottom: 'none',
+      right: '0 !important',
+      transform: 'translateX(105%) !important',
     },
   },
   a: {
