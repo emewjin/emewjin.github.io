@@ -5,8 +5,9 @@
   "version": "1.0.0",
   "author": "emewjin <emewjin@gmail.com>",
   "scripts": {
+    "install": "yarn install --frozen-lockfile",
     "build": "gatsby clean && gatsby build && cp content/blog/google2885a4a9e03f5486.html public/",
-    "dev": "yarn install --frozen-lockfile && gatsby develop",
+    "dev": "gatsby develop",
     "serve": "gatsby serve",
     "test": "gatsby build && gatsby serve",
     "clean": "gatsby clean",
