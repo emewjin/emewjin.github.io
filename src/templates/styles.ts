@@ -95,7 +95,9 @@ export const Content = styled('section', {
 
     a: {
       borderBottom: 'none',
+      left: 'unset !important',
       right: '0 !important',
+      width: 'fit-content',
       transform: 'translateX(105%) !important',
     },
   },
@@ -103,7 +105,9 @@ export const Content = styled('section', {
     width: 'fit-content',
     a: {
       borderBottom: 'none',
+      left: 'unset !important',
       right: '0 !important',
+      width: 'fit-content',
       transform: 'translateX(105%) !important',
     },
   },
