@@ -10,7 +10,7 @@ interface FeedSerializeProps {
 }
 
 export const plugins = [
-  'gatsby-plugin-advanced-sitemap',
+  'gatsby-plugin-sitemap',
   'gatsby-plugin-image',
   {
     resolve: 'gatsby-plugin-module-resolver',
