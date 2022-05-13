@@ -10,7 +10,12 @@ interface FeedSerializeProps {
 }
 
 export const plugins = [
-  'gatsby-plugin-sitemap',
+  {
+    resolve: 'gatsby-plugin-sitemap',
+    options: {
+      output: '/',
+    },
+  },
   'gatsby-plugin-image',
   {
     resolve: 'gatsby-plugin-module-resolver',
@@ -152,14 +157,6 @@ export const plugins = [
       theme_color: '#663399',
       display: 'minimal-ui',
       icon: siteMetadata.icon,
-    },
-  },
-  {
-    resolve: 'gatsby-plugin-robots-txt',
-    options: {
-      host: 'https://emewjin.github.io',
-      sitemap: 'https://emewjin.github.io/sitemap.xml',
-      policy: [{ userAgent: '*' }],
     },
   },
   'gatsby-plugin-react-helmet',
