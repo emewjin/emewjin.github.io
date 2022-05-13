@@ -27,7 +27,7 @@ workbox.core.clientsClaim();
  */
 self.__precacheManifest = [
   {
-    "url": "webpack-runtime-c1a4aaff8c8c3ee322e0.js"
+    "url": "webpack-runtime-6c4c064bf9cc5cdc5041.js"
   },
   {
     "url": "styles.aeec35016cb73a1ca50e.css"
@@ -36,21 +36,21 @@ self.__precacheManifest = [
     "url": "framework-b8771cbd1d1710dce1bf.js"
   },
   {
-    "url": "app-0d9ac76f6742fee5e42d.js"
+    "url": "app-566a1acfbbbc9809e8aa.js"
   },
   {
     "url": "offline-plugin-app-shell-fallback/index.html",
-    "revision": "8b932ea1a6574c7ca694f6a4a60b2fa4"
+    "revision": "d8ac4d66261de08272de18fddf1872c5"
   },
   {
-    "url": "component---cache-caches-gatsby-plugin-offline-app-shell-js-e8115d5181d5b7c255e1.js"
+    "url": "component---cache-caches-gatsby-plugin-offline-app-shell-js-03e9f3f9fb7f835eeb0a.js"
   },
   {
-    "url": "polyfill-5ac90f71fce4e4488315.js"
+    "url": "polyfill-f8c29d7d02c54027bb28.js"
   },
   {
     "url": "manifest.webmanifest",
-    "revision": "51821b8272fa4e958cede606d4566d42"
+    "revision": "487003d90b57d9510eb305e13d71d7e3"
   }
 ].concat(self.__precacheManifest || []);
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
@@ -76,6 +76,24 @@ const MessageAPI = {
 
   clearPathResources: event => {
     event.waitUntil(idbKeyval.clear())
+
+    // We detected compilation hash mismatch
+    // we should clear runtime cache as data
+    // files might be out of sync and we should
+    // do fresh fetches for them
+    event.waitUntil(
+      caches.keys().then(function (keyList) {
+        return Promise.all(
+          keyList.map(function (key) {
+            if (key && key.includes(`runtime`)) {
+              return caches.delete(key)
+            }
+
+            return Promise.resolve()
+          })
+        )
+      })
+    )
   },
 
   enableOfflineShell: () => {
@@ -142,7 +160,7 @@ const navigationRoute = new NavigationRoute(async ({ event }) => {
   // Check for resources + the app bundle
   // The latter may not exist if the SW is updating to a new version
   const resources = await idbKeyval.get(`resources:${pathname}`)
-  if (!resources || !(await caches.match(`/app-0d9ac76f6742fee5e42d.js`))) {
+  if (!resources || !(await caches.match(`/app-566a1acfbbbc9809e8aa.js`))) {
     return await fetch(event.request)
   }
 
