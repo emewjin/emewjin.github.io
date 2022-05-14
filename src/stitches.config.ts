@@ -36,6 +36,7 @@ export const { styled, css, getCssText, createTheme, globalCss } =
 
         inlineCodeBackground: '#f8f8f8',
         inlineCodeColor: '#816eec',
+        inlineCodeBorderColor: '#f1f3f5',
         link: '$primary400',
 
         titleFilterBackground: '$gray100',
@@ -90,6 +91,10 @@ export const darkTheme = createTheme('dark-theme', {
 
     borderGray: '$gray200',
     borderPrimary: '$primary200',
+
+    inlineCodeBackground: '#3d4144',
+    inlineCodeColor: '#edeafc',
+    inlineCodeBorderColor: '#3d4144',
 
     link: '$primary200',
 

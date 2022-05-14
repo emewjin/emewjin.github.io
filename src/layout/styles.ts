@@ -120,7 +120,7 @@ export const globalStyles = globalCss({
   ':not(pre) > code[class*="language-"]': {
     color: '$inlineCodeColor',
     background: '$inlineCodeBackground',
-    border: 'solid 1px #f1f3f5',
+    border: 'solid 1px $inlineCodeBorderColor',
     borderRadius: '2px',
     fontSize: '0.9rem',
   },

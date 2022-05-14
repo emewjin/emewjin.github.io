@@ -68,7 +68,11 @@
 }
 
 pre::-webkit-scrollbar {
-  width: 14px;
+  display: none;
+}
+
+pre::-webkit-scrollbar {
+  -ms-overflow-style: none;
 }
 
 pre::-webkit-scrollbar-track {
@@ -243,20 +247,15 @@ pre[class*='language-'] {
 pre[class*='language-'] {
   background: var(--background);
   border-radius: 0.5em;
-  padding: 1em;
+  padding: 1.5em;
   margin: 0.5em 0;
   overflow: auto;
   height: auto;
 }
 
-/* :not(pre) > code[class*='language-'],
-pre[class*='language-'] {
-  background: var(--background);
-} */
-
 /* Inline code */
 :not(pre) > code[class*='language-'] {
-  padding: 4px 7px;
+  padding: 2px 5px;
   border-radius: 0.3em;
   white-space: normal;
 }
