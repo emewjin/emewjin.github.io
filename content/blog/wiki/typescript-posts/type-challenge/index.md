@@ -1,8 +1,8 @@
 ---
 title: 'Type Challenge'
 date: 2021-12-29
-lastUpdated: 2021-12-30
-description: '타입 챌린지 문제 풀이 기록'
+lastUpdated: 2022-05-14
+description: '타입 챌린지 문제를 풀며 타입에 대해 공부한 내용들을 기록합니다'
 tags: [Typescript]
 ---
 
@@ -213,4 +213,117 @@ type MyOmit<T, K> = {
 
 K가 주어지지 않으면 T의 모든 프로퍼티를 읽기 전용으로, K가 주어지면 T에서 K 프로퍼티만 읽기 전용으로 설정하는 제네릭을 구현하기.
 
+**예시**
+
+```ts
+interface Todo {
+  title: string;
+  description: string;
+  completed: boolean;
+}
+
+const todo: MyReadonly2<Todo, 'title' | 'description'> = {
+  title: 'Hey',
+  description: 'foobar',
+  completed: false,
+};
+
+todo.title = 'Hello'; // Error: cannot reassign a readonly property
+todo.description = 'barFoo'; // Error: cannot reassign a readonly property
+todo.completed = true; // OK
+```
+
+**정답**
+
+```ts
+// K가 T의 프로퍼티 중 하나이고, K가 주어지진 않을 땐 T 프로퍼티 전체를 사용할 것이니까
+type MyReadonly2<T, K extends keyof T = keyof T> = {
+  readonly [P in K]: T[P];
+} & {
+  // K를 제외하고 readonly를 품
+  [P in Exclude<keyof T, K>]: T[P];
+};
+```
+
+### 9. Deep Readonly
+
+nested 된 객체까지도 재귀적으로 전부! 모든 프로퍼티를 Readonly로 바꾸는 타입이다. 이 챌린지에서는 Object만을 다루며 array, function 등은 고려하지 않는다고 한다.
+
+일단 1depth까지 Readonly로 만드는 것부터 시작하면 다음과 같다.
+
+```ts
+type DeepReadonly<T> = {
+  readonly [key in keyof T]: T[key];
+};
+```
+
+만약 `T[key]`가 객체이면 그 속은 Readonly가 아니므로 재귀적으로 처리를 해주어야 한다. 결국 `T[key]`가 객체인지를 확인해야 하는데, 타입스크립트의 `object`는 지금 확인하고자 하는 리터럴 객체가 아니라서 `T[key] extends object` 로는 해결할 수 없다. 자바스크립트에서 함수도, 배열도 객체이기 때문이다.
+
+대신 `keyof T[key] extends never`로 문제를 해결한다. `keyof T[key] extends never`의 의미는 `T[key]`의 key가 없는 값이라는 것이므로 리터럴 객체가 아니라는 뜻과 같아 조건으로 활용이 가능하다.
+
+```ts
+type DeepReadonly<T> = {
+  readonly [key in keyof T]: keyof T[key] extends never
+    ? T[key]
+    : DeepReadonly<T[key]>;
+};
+```
+
 ## 🥇 hard
+
+## 기타 궁금증
+
+### Exclude와 Omit의 차이점
+
+타입스크립트에서 Exclude와 Omit의 차이가 궁금해서 찾아보니 [이런 글](https://iamshadmirza.com/difference-between-omit-and-exclude-in-typescript)이 있었다.
+
+```ts
+// not working
+type mappedTypeWithOmit = {
+  [k in Omit<something, 'def'>]: string;
+};
+
+// working
+type mappedTypeWithExclude = {
+  [k in Exclude<something, 'def'>]: string;
+};
+```
+
+유니온 타입으로 객체를 매핑할 때 특정 프로퍼티만 제외하고 싶은데 Omit을 쓸 때는 에러가 난다는 글이었다. 이 글에서 소개한 문제의 원인은 다음과 같다.
+
+> Omit is used on interface or object type and we are trying to use it on union string literal. That's why the error.
+>
+> ...
+>
+> Exclude is different, it is used to exclude a union type.
+
+Omit은 Exclude로 구현되어있는데, **인터페이스나 객체** 타입에 사용할 수 있는 것이고 (key-value pair)  
+Exclude는 **유니온 타입**(프로퍼티)에 사용할 수 있는 거라고 함.  
+그러니까 Omit을 사용해서 에러를 해결하고 원하는 결과를 얻으려면 아래와 같이 사용해야 한다.
+
+```ts
+// 이게 아니라
+type mappedTypeWithOmit = {
+  [k in Omit<something, 'def'>]: string;
+};
+
+// 이렇게 써야 한다.
+type mappedType = {
+  [k in something]: string;
+};
+type mappedTypeWithOmit = Omit<mappedType, 'def'>;
+```
+
+### Never
+
+코드 흐름 상 자연적으로 절대 발생할 수 없는 결과가 있는데, 이를 표현하기 위한 타입이 `Never`이다. 예를들어, 아무런 값도 리턴하지 않는 함수에게 리턴 타입을 `Never`로 지정할 수 있다.
+
+아무런 값도 리턴하지 않는 함수라고 하니 굉장히 자주 쓰는 `() => void` 가 생각난다. 근데 여기서 주의해야할 점은 **'정말로 아무것도 리턴하지 않는가?'** 이다. 자바스크립트는 명시적으로 리턴하는 값이 없을 경우 암시적으로 `undefined`를 리턴하기 때문이다.
+
+따라서 `Never`는 절대로! 영원히! 아무것도 리턴하지 않는 함수를 의미할 때 쓰여 `throw`를 하는 함수에 쓰인다면 `void`는 `console.log` 등만을 수행하는 함수에도 쓸 수 있다는 차이점이 있다. `void` 는 `void`를 리턴하지만, `never`는 아무것도 리턴하지 않기 때문이다.
+
+더 자세한 내용은 [https://mariusschulz.com/blog/the-never-type-in-typescript#the-difference-between-never-and-void](https://mariusschulz.com/blog/the-never-type-in-typescript#the-difference-between-never-and-void)을 참고한다.
+
+> A function that doesn't explicitly return a value implicitly returns the value undefined in JavaScript. Although we typically say that such a function "doesn't return anything", it returns. We usually ignore the return value in these cases. Such a function is inferred to have a void return type in TypeScript.
+>
+> A function that has a never return type never returns. It doesn't return undefined, either. The function doesn't have a normal completion, which means it throws an error or never finishes running at all.
