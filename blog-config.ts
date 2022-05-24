@@ -1,7 +1,8 @@
 const config = {
   title: 'emewjin.log', // Blog name
-  author: 'emewjin', // Your name
   description: 'Frontend Dev',
+  author: 'emewjin', // Your name
+  introduction: 'Product Engineer, Web Frontend Engineer',
   siteUrl: 'https://emewjin.github.io',
   thumbnail: '/thumbnails/zzal.jpg', // Default blog thumbnail. i.e. '/thumbnails/main.png'
   social: {
@@ -11,6 +12,15 @@ const config = {
     linkedin: '', // LinkedIn username
     instagram: '', // Instagram username
   },
+  keywords: [
+    'blog',
+    'javascript',
+    'typescript',
+    'web',
+    'react',
+    'frontend',
+    'development',
+  ],
   comment: {
     utterances: 'emewjin/comments', // Your GitHub repository
     disqusShortName: '', // Disqus short name
