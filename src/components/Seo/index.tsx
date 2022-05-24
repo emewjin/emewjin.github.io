@@ -36,6 +36,10 @@ const Seo = ({
       titleTemplate={noSiteName ? undefined : `%s | ${defaultTitle}`}
       meta={[
         {
+          name: 'author',
+          content: 'emewjin',
+        },
+        {
           name: 'description',
           content: metaDescription,
         },
