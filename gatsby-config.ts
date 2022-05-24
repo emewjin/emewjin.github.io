@@ -11,6 +11,13 @@ interface FeedSerializeProps {
 
 export const plugins = [
   {
+    resolve: 'gatsby-plugin-robots-txt',
+    options: {
+      host: 'https://emewjin.github.io',
+      sitemap: 'https://emewjin.github.io/sitemap-0.xml',
+    },
+  },
+  {
     resolve: 'gatsby-plugin-sitemap',
     options: {
       output: '/',
