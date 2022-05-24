@@ -269,6 +269,28 @@ type DeepReadonly<T> = {
 };
 ```
 
+### 10. Tuple to Union
+
+튜플의 각 원소들을 유니온 타입으로 만드는 유틸 타입을 구현하라는 문제이다.
+
+**예시**
+
+```ts
+type Arr = ['1', '2', '3'];
+
+type Test = TupleToUnion<Arr>; // expected to be '1' | '2' | '3'
+```
+
+**정답**
+
+```ts
+type TupleToUnion<T extends any[]> = T[number];
+```
+
+### 12. Chainable Options
+
+체이닝은 자바스크립트에서 매우 흔하게 쓰이는데, 타입스크립트에서는 어떻게 할 거냐는 문제이다.
+
 ## 🥇 hard
 
 ## 기타 궁금증
