@@ -1,2 +1,4 @@
 User-agent: *
-Disallow:
+Allow: /
+Sitemap: https://emewjin.github.io/sitemap-0.xml
+Host: https://emewjin.github.io
