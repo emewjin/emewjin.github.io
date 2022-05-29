@@ -88,10 +88,10 @@ export const Content = styled('section', {
   },
   h2: {
     width: 'fit-content',
-    marginTop: '4rem',
+    marginTop: '3rem',
     marginBottom: '1rem',
     paddingBottom: '0.25rem',
-    borderBottom: '3px solid $borderPrimary',
+    borderBottom: '2px solid $borderGray',
 
     a: {
       borderBottom: 'none',
