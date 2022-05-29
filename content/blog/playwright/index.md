@@ -29,7 +29,7 @@ playwright 문법에 익숙하지 않은데 테스트를 똑같이 다시 짜려
 **playwright로 돌렸을 때**
 ![](./playwright.png)
 
-왜 cypress gui가 cypress headless보다 느린건지 이해할 수 없어 신뢰하기 어려운 실험 결과가 나왔지만 그걸 감안하더라도 playwright가 cypress보다 훨씬 빠른건 맞는거 같다.
+왜 cypress gui가 cypress headless보다 빠른지 이해할 수 없어 신뢰하기 어려운 실험 결과가 나왔지만 그걸 감안하더라도 playwright가 cypress보다 훨씬 빠른건 맞는거 같다.
 
 물론 vitest나 jest를 이용한 단위테스트나 통합테스트에는 비빌 수 없는 속도긴 하지만 cypress의 끔찍한 속도로부터 탈출할 수 있다면 이정도도 감지덕지가 아닐까? 최근에 cypress 테스트를 통째로 돌리다가 한 30개 넘어가면서부터 테스트가 그냥 셧다운되었는데 playwright는 안 그럴지도 확인이 필요할 거 같다.
 
