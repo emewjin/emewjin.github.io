@@ -24,6 +24,7 @@
 <url> <loc>https://emewjin.github.io/type-challenge/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://emewjin.github.io/culture/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://emewjin.github.io/graphql-wiki/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://emewjin.github.io/playwright/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://emewjin.github.io/storybook/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://emewjin.github.io/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 </urlset>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Lavendar RSS Feed]]></title><description><![CDATA[Frontend Dev]]></description><link>https://emewjin.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Sun, 29 May 2022 01:35:23 GMT</lastBuildDate><item><title><![CDATA[No title]]></title><link>https://emewjin.github.io/storybook/</link><guid isPermaLink="false">https://emewjin.github.io/storybook/</guid><content:encoded></content:encoded></item><item><title><![CDATA[graphQL 위키]]></title><description><![CDATA[회사에서 레거시 어드민을 개편하면서 프론트선에서 기존 ORM 들을  으로 간단하게 API로 만들고 거기에 graphQL을 활용하기로 했다. 그래서 공부하는 graphQL. 예제코드 저장소 graphQL 등장 배경 graphQL은 REST API…]]></description><link>https://emewjin.github.io/graphql-wiki/</link><guid isPermaLink="false">https://emewjin.github.io/graphql-wiki/</guid><pubDate>Sun, 29 May 2022 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;회사에서 레거시 어드민을 개편하면서 프론트선에서 기존 ORM 들을 &lt;code class=&quot;language-text&quot;&gt;res.json&lt;/code&gt; 으로 간단하게 API로 만들고 거기에 graphQL을 활용하기로 했다. 그래서 공부하는 graphQL.&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Lavendar RSS Feed]]></title><description><![CDATA[Frontend Dev]]></description><link>https://emewjin.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Sun, 29 May 2022 06:21:04 GMT</lastBuildDate><item><title><![CDATA[No title]]></title><link>https://emewjin.github.io/storybook/</link><guid isPermaLink="false">https://emewjin.github.io/storybook/</guid><content:encoded></content:encoded></item><item><title><![CDATA[graphQL 위키]]></title><description><![CDATA[회사에서 레거시 어드민을 개편하면서 프론트선에서 기존 ORM 들을  으로 간단하게 API로 만들고 거기에 graphQL을 활용하기로 했다. 그래서 공부하는 graphQL. 예제코드 저장소 graphQL 등장 배경 graphQL은 REST API…]]></description><link>https://emewjin.github.io/graphql-wiki/</link><guid isPermaLink="false">https://emewjin.github.io/graphql-wiki/</guid><pubDate>Sun, 29 May 2022 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;회사에서 레거시 어드민을 개편하면서 프론트선에서 기존 ORM 들을 &lt;code class=&quot;language-text&quot;&gt;res.json&lt;/code&gt; 으로 간단하게 API로 만들고 거기에 graphQL을 활용하기로 했다. 그래서 공부하는 graphQL.&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://github.com/emewjin/tweetql&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;예제코드 저장소&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&quot;graphql-등장-배경&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#graphql-%EB%93%B1%EC%9E%A5-%EB%B0%B0%EA%B2%BD&quot; aria-label=&quot;graphql 등장 배경 permalink&quot; class=&quot;heading-anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;graphQL 등장 배경&lt;/h2&gt;
 &lt;p&gt;graphQL은 REST API의 문제를 해결하기 위해 등장했다고 알려져있다.&lt;/p&gt;
@@ -88,7 +88,128 @@ mutation {
     }
   }
 `;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;이렇게 쿼리에 이름을 지어주지 않으면 이미지에서처럼 Unnamed라고 나오니 지어주는 편이 디버깅하기에 좋다.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[팀문화, 작은 것부터 시작하기]]></title><description><![CDATA[지금 다니고 있는 회사에 21년 9월에 입사했으니 어느덧…]]></description><link>https://emewjin.github.io/culture/</link><guid isPermaLink="false">https://emewjin.github.io/culture/</guid><pubDate>Sun, 15 May 2022 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;지금 다니고 있는 회사에 21년 9월에 입사했으니 어느덧 9개월째가 되었다. 처음 입사했을 때에는 문화적인 것 외에 코드적인 것에서는 기존에 작성되어있는 코드를 보고 스스로 이해해야겠다는 생각이 강해 따로 튜토리얼 문서가 없었던 것에 의문을 가지지 않았었다. 코드를 보다가 이해가 안되는 부분은 질문하고, 그러다보니 어느덧 적응하고 익숙해지고. 그랬었는데 최근 입사하신 분들께 이런 저런 질문을 받다보니 문서 정리를 다시 해야겠단 생각이 들었다.&lt;/p&gt;
+&lt;p&gt;이렇게 쿼리에 이름을 지어주지 않으면 이미지에서처럼 Unnamed라고 나오니 지어주는 편이 디버깅하기에 좋다.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Playwright로 테스트 작성하기 위키]]></title><description><![CDATA[최근들어 실용적인 프론트엔드 테스트에는 e2e 테스트가 맞는 거 같다는 생각이 들지만 cypress…]]></description><link>https://emewjin.github.io/playwright/</link><guid isPermaLink="false">https://emewjin.github.io/playwright/</guid><pubDate>Sun, 29 May 2022 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;최근들어 실용적인 프론트엔드 테스트에는 e2e 테스트가 맞는 거 같다는 생각이 들지만 cypress의 끔찍하게 느린 속도는 도저히 용납이 되지 않아 고민되던 차에 마이크로소프트에서 개발하는 (정확히는 개발팀이 마이크로소프트로 들어간거지만) Playwright라는 테스트 도구를 알게 되었다. 정확히는 테스트 도구는 아니지만 어쨌든 e2e 테스트 도구로 쓸 수 있다.&lt;/p&gt;
+&lt;p&gt;여튼 주된 관심사는 어느 블로그에서 &lt;strong&gt;“cypress와는 비교할 수 없을 정도로 더 빠르다”&lt;/strong&gt; 라고 평가된 점이었는데, Playwright는 병렬로 테스트를 수행하기 때문에 더 빠르다는 말이 진짜인지, 어느정도로 더 빠른지가 궁금했다. cypress에서는 불가능한 호버 테스트 (css hover가 아닌 javascript hover)도 가능하다는 점도 관심이 갔다.&lt;/p&gt;
+&lt;h2 id=&quot;cypress에서는-못-하는-것들이-playwright에서는-될까&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#cypress%EC%97%90%EC%84%9C%EB%8A%94-%EB%AA%BB-%ED%95%98%EB%8A%94-%EA%B2%83%EB%93%A4%EC%9D%B4-playwright%EC%97%90%EC%84%9C%EB%8A%94-%EB%90%A0%EA%B9%8C&quot; aria-label=&quot;cypress에서는 못 하는 것들이 playwright에서는 될까 permalink&quot; class=&quot;heading-anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Cypress에서는 못 하는 것들이 Playwright에서는 될까?&lt;/h2&gt;
+&lt;p&gt;일단 팀에 도입하자고 주장하려면 실험 결과라는 실체가 필요해서, 간단하게 궁금한 점들을 실험해보려고 한다.&lt;/p&gt;
+&lt;h3 id=&quot;q-얼마나-더-빠를까&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#q-%EC%96%BC%EB%A7%88%EB%82%98-%EB%8D%94-%EB%B9%A0%EB%A5%BC%EA%B9%8C&quot; aria-label=&quot;q 얼마나 더 빠를까 permalink&quot; class=&quot;heading-anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Q. 얼마나 더 빠를까?&lt;/h3&gt;
+&lt;p&gt;playwright 문법에 익숙하지 않은데 테스트를 똑같이 다시 짜려니까 솔직히 좀 귀찮아서 아주 조금만 짜봤다. 병렬로 돌리니까 더 빠르다는 말을 확인하기 위해서는 더 많은 spec을 작성해서 비교해보는 것이 더 정확하겠지만 이건 조만간 진행할 티켓에서 해보기로…&lt;/p&gt;
+&lt;p&gt;똑같은 테스트 케이스를 cypress, playwright로 돌렸을 때의 소요 시간을 측정해보았다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;cypress로 돌렸을 때&lt;/strong&gt;&lt;br&gt;
+이건 headless
+&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/3c950181503e9af48dcd7a9bd13534bc/c946b/cypress-headless.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 60.12658227848101%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAMCAYAAABiDJ37AAAACXBIWXMAAAsTAAALEwEAmpwYAAABqUlEQVQoz5WS227aQBRF/SMpFOPx/QLMeGyPMXcaSIio8tK89QOq/v/bqmwCiUiipA9LZ4402rP3nGPF2ZSRnCP1mmwyw/FyvLDscIPiRFic+rDtS/yoIM7aOxrh57iBvmBFmUFPd8yWR6aLB2TxAz9pCLM5YTrDj2uCZNqd2+rHDZk0NMuGMC0Q3pWgCHJSvUKVe2S5Q5Z7MrUhGa9I1W13yfFk5+SE6lLYQl3cvXZpCU+hijVVc0CbHdrsMc2Bsd7iPzsL0/mbaGfeRBaRxk5yRFxiu5qeM6HvSPpC4fj68p8fCV5jOVmBPTWIicHoNfNqTVOu2NRbxlnN0FOv4n6O5SjDYLtgEGue1g/8+fnE77tH/h5/sTFbBq7C66arv+bQSwxBvsSPDf1Ac+MqekJxIyS2r/Gj6hL7cyqsdi3G+kAYz3BkgZeWeK1Q+PLp/xW5dTapjiSjDUNZIKIC18sRrdgVX4rcCo70HXG6xNEGW1e4vsZ1c1yRv9TnR9x22u9M/LwFXeSRvidKFwwnBd8eF/QOMwa14fuyxq4Ng8YwVGUn9JHbs+A/b1B4LkAMwMsAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;cypress headless&quot;
+        title=&quot;cypress headless&quot;
+        src=&quot;/static/3c950181503e9af48dcd7a9bd13534bc/f058b/cypress-headless.png&quot;
+        srcset=&quot;/static/3c950181503e9af48dcd7a9bd13534bc/c26ae/cypress-headless.png 158w,
+/static/3c950181503e9af48dcd7a9bd13534bc/6bdcf/cypress-headless.png 315w,
+/static/3c950181503e9af48dcd7a9bd13534bc/f058b/cypress-headless.png 630w,
+/static/3c950181503e9af48dcd7a9bd13534bc/c946b/cypress-headless.png 805w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;
+이건 gui
+&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/04175e4c1c7e78d29d4621dc8d707e22/4597d/cypress.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 53.16455696202532%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAAAsTAAALEwEAmpwYAAABTElEQVQoz5WSi27CMAxF8/8/OaDrI23jJM4TKNwpZmNCA22LdGW7bdyTXCtrLaxzmOdZovOMZVmxrgarMSCyEj0zrtfrC+GeK61nkLXQxsAaA0cEQwQiwrIsovbeeY+YEmKM35KawZ7AHOC9h5pnjRADpuiRLKE6Jx/mnGCMgZ4mlFJQa0XOGaVkqUvOyKWiRAumDp4DLBHUYQrYDYy3nrEbAw46YDcy9tNXHbEfWZ6R9fDewTkvNP7zivwnHTNDTYPG7vCOfdcjpoKUCkIskkfJ8z0vtQrpT5V7rlKKWNcVRAZikCX5WwgsYr5RtaP+ZamaMiat0XUd+r7H8XgUty6Xy4NeO/woddo2GCGzQtroXq224VfCbdug51matVlszp7P53uD/0q1jf04YhgGmbkW2wz+heYp4el0gvEOZG6mtGZfR2/3WV86+1wf76pUTFa0mXgAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;cypress&quot;
+        title=&quot;cypress&quot;
+        src=&quot;/static/04175e4c1c7e78d29d4621dc8d707e22/f058b/cypress.png&quot;
+        srcset=&quot;/static/04175e4c1c7e78d29d4621dc8d707e22/c26ae/cypress.png 158w,
+/static/04175e4c1c7e78d29d4621dc8d707e22/6bdcf/cypress.png 315w,
+/static/04175e4c1c7e78d29d4621dc8d707e22/f058b/cypress.png 630w,
+/static/04175e4c1c7e78d29d4621dc8d707e22/4597d/cypress.png 631w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;playwright로 돌렸을 때&lt;/strong&gt;
+&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 630px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/3e0154e4bbc11911c1b1db285dc504bb/23592/playwright.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 53.16455696202532%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAAAsTAAALEwEAmpwYAAACGUlEQVQoz22RW08TURhF+0Ok0BY6l86cuZy5tJ3OTC/IUAoV0yAYFCwgqC/yoAGjkfhgfPMvLzOHimB42Pl2zkx2sveqfLz4weeL31y+/cX54XcuXt1wevCVk/1vzA8+cXw64XBecPZ+wng2woxy8v4Ey0lY00M0M6Jp/FPFj3JE0MXyOkqGiHhSa7FUL2WztCKp1gKWliW1RkBTC2k0A9b0CK3VRjPvK6bihCNke0LQ2VHXCwuEv47tjRByHSEX1x8ob/ulH2F7GYadYNg9pZZI0FsxFVNkOH6BE47xojFOsIGQT7G9oQp2gjK8j5BDFWypsAG2m6Fb3UVgilmGW20qVU/S8EMaus9OOmI2LFhZFVQbFtWGoFqTLNcCVVtV1kMaWqD2+r+uqnx++oUP85+8e33Dyd4VZy+uOd674mh2zdHeJa/mW7w8Ljg536LYHWLIlE6yQUt0H4fyfPqG2fSMna0jRsN9paQzJWk/I+lsk+QZ3SwlHWT4cRfd7uD6GXqr/SDoLtALc4Ts4cgU5b0etaZHXfOpNyX1tZJqrO6qFqEZsSLcNOIHlfXWgrLp9vHiKX5nFyfaxpabuNFYgXHCTdxwU90SVvlewnPDAlcOb2GITMly0lsoTSfB9PqYIscP1nH9gfrxjp7IMKwEU6R3Kr+Zdu8e5R5G6ctAJ+8TDQocP6MfD+hFA1VVU5uEC9334aPb/d3wD5Dcaot/3adQAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;playwright&quot;
+        title=&quot;playwright&quot;
+        src=&quot;/static/3e0154e4bbc11911c1b1db285dc504bb/f058b/playwright.png&quot;
+        srcset=&quot;/static/3e0154e4bbc11911c1b1db285dc504bb/c26ae/playwright.png 158w,
+/static/3e0154e4bbc11911c1b1db285dc504bb/6bdcf/playwright.png 315w,
+/static/3e0154e4bbc11911c1b1db285dc504bb/f058b/playwright.png 630w,
+/static/3e0154e4bbc11911c1b1db285dc504bb/40601/playwright.png 945w,
+/static/3e0154e4bbc11911c1b1db285dc504bb/23592/playwright.png 1031w&quot;
+        sizes=&quot;(max-width: 630px) 100vw, 630px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;왜 cypress gui가 cypress headless보다 느린건지 이해할 수 없어 신뢰하기 어려운 실험 결과가 나왔지만 그걸 감안하더라도 playwright가 cypress보다 훨씬 빠른건 맞는거 같다.&lt;/p&gt;
+&lt;p&gt;물론 vitest나 jest를 이용한 단위테스트나 통합테스트에는 비빌 수 없는 속도긴 하지만 cypress의 끔찍한 속도로부터 탈출할 수 있다면 이정도도 감지덕지가 아닐까? 최근에 cypress 테스트를 통째로 돌리다가 한 30개 넘어가면서부터 테스트가 그냥 셧다운되었는데 playwright는 안 그럴지도 확인이 필요할 거 같다.&lt;/p&gt;
+&lt;p&gt;확인되면, 위키에 추가하기로&lt;/p&gt;
+&lt;h3 id=&quot;q-특정-테스트만-선택적으로-돌릴-수-있을까&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#q-%ED%8A%B9%EC%A0%95-%ED%85%8C%EC%8A%A4%ED%8A%B8%EB%A7%8C-%EC%84%A0%ED%83%9D%EC%A0%81%EC%9C%BC%EB%A1%9C-%EB%8F%8C%EB%A6%B4-%EC%88%98-%EC%9E%88%EC%9D%84%EA%B9%8C&quot; aria-label=&quot;q 특정 테스트만 선택적으로 돌릴 수 있을까 permalink&quot; class=&quot;heading-anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Q. 특정 테스트만 선택적으로 돌릴 수 있을까?&lt;/h3&gt;
+&lt;h3 id=&quot;q-실패한-테스트만-rerun-할-수-있을까&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#q-%EC%8B%A4%ED%8C%A8%ED%95%9C-%ED%85%8C%EC%8A%A4%ED%8A%B8%EB%A7%8C-rerun-%ED%95%A0-%EC%88%98-%EC%9E%88%EC%9D%84%EA%B9%8C&quot; aria-label=&quot;q 실패한 테스트만 rerun 할 수 있을까 permalink&quot; class=&quot;heading-anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Q. 실패한 테스트만 rerun 할 수 있을까?&lt;/h3&gt;
+&lt;h3 id=&quot;q-javascript-hover-테스트가-가능할까&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#q-javascript-hover-%ED%85%8C%EC%8A%A4%ED%8A%B8%EA%B0%80-%EA%B0%80%EB%8A%A5%ED%95%A0%EA%B9%8C&quot; aria-label=&quot;q javascript hover 테스트가 가능할까 permalink&quot; class=&quot;heading-anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Q. javascript hover 테스트가 가능할까?&lt;/h3&gt;
+&lt;h2 id=&quot;컴포넌트-테스트&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8-%ED%85%8C%EC%8A%A4%ED%8A%B8&quot; aria-label=&quot;컴포넌트 테스트 permalink&quot; class=&quot;heading-anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;컴포넌트 테스트&lt;/h2&gt;
+&lt;p&gt;이제 playwright에서 컴포넌트 테스트를 지원한다는 소식을 접했다.
+&lt;img src=&quot;https://user-images.githubusercontent.com/76927618/170854817-ca21c54c-5d9a-4516-9a0b-6f409c588ab2.png&quot; alt=&quot;image&quot;&gt;&lt;/p&gt;
+&lt;p&gt;기존에 컴포넌트 테스트는 RTL로 작성했기 때문에 cypress와 비교할 건 아니다. RTL로 작성된 테스트와 비교했을 때 속도가 더 느리지만 않는다면 e2e도 컴포넌트 테스트도 모두 playwright 하나로 해결할 수 있다는 점이 끌렸다. playwright 문법에만 익숙해지면 되니까.&lt;/p&gt;
+&lt;p&gt;그래서 아주 간단하게 동일한 컴포넌트 테스트를 RTL, playwright로 짜서 비교해보았는데 속도차이가 없었다. 다만 이 부분도 테스트가 너무 간단해서 그럴 수 있어 대규모 spec에서도 차이가 없는지 확인이 필요하다.&lt;/p&gt;
+&lt;p&gt;속도보다도 더 중요한 부분을 발견했는데, playwright의 컴포넌트 테스트가 아직 실험적 기능이다보니 아주 간단한 테스트를 작성하던 중에도 버그를 발견하는 등 불안정한 것 같단 생각이 들었다. 발견한 버그는 이슈리포팅(&lt;a href=&quot;https://github.com/microsoft/playwright/issues/14339&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;https://github.com/microsoft/playwright/issues/14339&lt;/a&gt;) 했고, 다음 버전에서 수정 예정인듯.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;tailwind의 [] 표현 (arbitrary value)이 사용된 컴포넌트 테스트시 에러나는 점&lt;/li&gt;
+&lt;li&gt;React의 fragment를 인지하지 못해 에러나는 점 (div로 바꿔주어야 했음)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;따라서 당장 활용은 불가능할거 같고 stable될 때까지 좀 더 지켜보기로 했다.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[팀문화, 작은 것부터 시작하기]]></title><description><![CDATA[지금 다니고 있는 회사에 21년 9월에 입사했으니 어느덧…]]></description><link>https://emewjin.github.io/culture/</link><guid isPermaLink="false">https://emewjin.github.io/culture/</guid><pubDate>Sun, 15 May 2022 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;지금 다니고 있는 회사에 21년 9월에 입사했으니 어느덧 9개월째가 되었다. 처음 입사했을 때에는 문화적인 것 외에 코드적인 것에서는 기존에 작성되어있는 코드를 보고 스스로 이해해야겠다는 생각이 강해 따로 튜토리얼 문서가 없었던 것에 의문을 가지지 않았었다. 코드를 보다가 이해가 안되는 부분은 질문하고, 그러다보니 어느덧 적응하고 익숙해지고. 그랬었는데 최근 입사하신 분들께 이런 저런 질문을 받다보니 문서 정리를 다시 해야겠단 생각이 들었다.&lt;/p&gt;
 &lt;p&gt;그와 더불어 문서작업 외에 팀문화적으로 챙길 수 있는 작은 부분들도 틈틈이 챙겨보았는데 그 과정을 기록하고자 한다.&lt;/p&gt;
 &lt;h2 id=&quot;온보딩-튜토리얼-문서-추가&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%98%A8%EB%B3%B4%EB%94%A9-%ED%8A%9C%ED%86%A0%EB%A6%AC%EC%96%BC-%EB%AC%B8%EC%84%9C-%EC%B6%94%EA%B0%80&quot; aria-label=&quot;온보딩 튜토리얼 문서 추가 permalink&quot; class=&quot;heading-anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;온보딩 튜토리얼 문서 추가&lt;/h2&gt;
 &lt;p&gt;우리 팀의 온보딩 프로세스 개선의 목적은 ‘최대한으로 친절하게, 그래서 신규입사자가 빠르게 적응하고 퍼포먼스를 낼 수 있게’이다. 이 부분에 있어 팀에서 &lt;a href=&quot;https://www.facebook.com/cjunekim/posts/5135784833116709&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;참고한 글&lt;/a&gt;이 있어 링크를 남긴다.&lt;/p&gt;
