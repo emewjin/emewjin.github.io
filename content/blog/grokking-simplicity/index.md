@@ -3,7 +3,7 @@ title: '[독서] 쏙쏙 들어오는 함수형 코딩'
 description: '(읽는 중) 쏙쏙 들어오는 함수형 코딩을 읽고 기억할 부분을 메모하는 글'
 date: 2022-05-31
 lastUpdated: 2022-05-31
-tags: [Javascript]
+tags: [Javascript, Book]
 ---
 
 > 아직 읽는 중!
