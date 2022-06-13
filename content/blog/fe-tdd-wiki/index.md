@@ -1,12 +1,21 @@
 ---
-title: '프론트엔드 TDD 스터디 위키'
+title: '프론트엔드 테스트코드 위키'
 date: 2021-12-15
-lastUpdated: 2021-12-27
-description: '프론트엔드 TDD를 공부하며 새롭게 알게된 것들을 짧막하게 기록하는 위키'
+lastUpdated: 2022-06-13
+description: '프론트엔드에서의 테스트를 공부하며 필요한 아티클이나 새롭게 알게된 것들을 짧막하게 기록하는 위키'
 tags: [Javascript, TestCode]
 ---
 
 > 이 글의 내용은 짧막하게 토막글 기록용으로, 내용은 계속 추가 혹은 삭제될 수 있습니다.
+
+## 읽을 아티클들
+- [프런트엔드에서 의존성을 제어하는 법](https://twinstae.github.io/testing-with-dependency-injection/)
+- [1. 테스트하기 좋은 코드 - 테스트하기 어려운 코드](https://jojoldu.tistory.com/674)
+- [[번역] 초보자를 위한 React 어플리케이션 테스트 심층 가이드 (2)](https://blog.rhostem.com/posts/2020-10-15-beginners-guide-to-testing-react-2)
+- [Inside a dev's mind - Refactoring and debugging a React test](https://jkettmann.com/refactoring-and-debugging-a-react-test)
+- [Common mistakes with React Testing Library](https://kentcdodds.com/blog/common-mistakes-with-react-testing-library)
+- [jest mock 초기화](https://haeguri.github.io/2020/12/21/clean-up-jest-mock/)
+
 
 ## 컴포넌트 테스트
 
@@ -139,9 +148,3 @@ Reference. [React Hook VS Container Component](https://yujonglee.com/socwithhook
 
 presenter 컴포넌트에서 다루는 것이 좋다. 이벤트 객체를 이용해서 상태를 업데이트하기 때문에 상태를 다루는 이벤트 핸들러를 container 컴포넌트에 작성하고, 이벤트 객체도 거기서 다루게 했었다. 하지만 의존성 관리 측면에서, 이벤트 객체는 presenter 컴포넌트에서 처리하는 것이 더 적절하다.
 
-### 읽을 아티클들
-
-- [[번역] 초보자를 위한 React 어플리케이션 테스트 심층 가이드 (2)](https://blog.rhostem.com/posts/2020-10-15-beginners-guide-to-testing-react-2)
-- [Inside a dev's mind - Refactoring and debugging a React test](https://jkettmann.com/refactoring-and-debugging-a-react-test)
-- [Common mistakes with React Testing Library](https://kentcdodds.com/blog/common-mistakes-with-react-testing-library)
-- [jest mock 초기화](https://haeguri.github.io/2020/12/21/clean-up-jest-mock/)
