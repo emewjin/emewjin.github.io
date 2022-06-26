@@ -5,6 +5,8 @@ export const globalStyles = globalCss({
     fontFamily:
       '"Pretendard", apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
     textRendering: 'optimizeLegibility',
+    '-webkit-font-smoothing': 'antialiased',
+    '-moz-osx-font-smoothing': 'grayscale',
   },
   '*': {
     boxSizing: 'border-box',
@@ -104,12 +106,22 @@ export const globalStyles = globalCss({
 
       li: {
         lineHeight: 1.8,
-        marginTop: '0.375rem',
-        marginBottom: '0.375rem',
 
         p: {
           margin: 0,
         },
+      },
+    },
+
+    ul: {
+      li: {
+        margin: '0.375rem 0',
+      },
+    },
+
+    ol: {
+      li: {
+        margin: '1rem 0',
       },
     },
 

@@ -76,6 +76,7 @@ export const ArticleDates = styled('div', {
 
 export const Content = styled('section', {
   wordBreak: 'break-all',
+  fontWeight: 500,
   h1: {
     marginTop: '2rem',
     marginBottom: '1.25rem',
@@ -129,10 +130,12 @@ export const Content = styled('section', {
     fontVariantLigatures: 'none',
   },
   li: {
-    strong: {
+    'p:first-of-type strong:first-of-type': {
       color: '$primary300',
     },
-    // margin: '1rem 0',
+  },
+  blockquote: {
+    margin: '1.5rem 0',
   },
 });
 
