@@ -22,8 +22,7 @@ tags: [Typescript]
 import something from '@libs/server/handler';
 ```
 
-**프로젝트 구성
-**
+**프로젝트 구성**
 
 - 모노레포
   - 별도 환경설정에 소모하는 시간을 줄일 수 있음
