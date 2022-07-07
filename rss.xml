@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Lavendar RSS Feed]]></title><description><![CDATA[Frontend Dev]]></description><link>https://emewjin.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 05 Jul 2022 13:55:04 GMT</lastBuildDate><item><title><![CDATA[No title]]></title><link>https://emewjin.github.io/storybook/</link><guid isPermaLink="false">https://emewjin.github.io/storybook/</guid><content:encoded></content:encoded></item><item><title><![CDATA[Today I Learned]]></title><description><![CDATA[220705 import path 단축하기 **프로젝트 구성
-** 모노레포 별도 환경설정에 소모하는 시간을 줄일 수 있음 디자인 시스템과 같이 실시간으로 보면서 개발해야하는 특수한 경우 훨씬 간편하게 watch…]]></description><link>https://emewjin.github.io/til/</link><guid isPermaLink="false">https://emewjin.github.io/til/</guid><pubDate>Tue, 05 Jul 2022 00:00:00 GMT</pubDate><content:encoded>&lt;h2 id=&quot;220705&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#220705&quot; aria-label=&quot;220705 permalink&quot; class=&quot;heading-anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;220705&lt;/h2&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Lavendar RSS Feed]]></title><description><![CDATA[Frontend Dev]]></description><link>https://emewjin.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Thu, 07 Jul 2022 13:58:25 GMT</lastBuildDate><item><title><![CDATA[No title]]></title><link>https://emewjin.github.io/storybook/</link><guid isPermaLink="false">https://emewjin.github.io/storybook/</guid><content:encoded></content:encoded></item><item><title><![CDATA[Today I Learned]]></title><description><![CDATA[220705 import path 단축하기 프로젝트 구성 모노레포 별도 환경설정에 소모하는 시간을 줄일 수 있음 디자인 시스템과 같이 실시간으로 보면서 개발해야하는 특수한 경우 훨씬 간편하게 watch…]]></description><link>https://emewjin.github.io/til/</link><guid isPermaLink="false">https://emewjin.github.io/til/</guid><pubDate>Tue, 05 Jul 2022 00:00:00 GMT</pubDate><content:encoded>&lt;h2 id=&quot;220705&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#220705&quot; aria-label=&quot;220705 permalink&quot; class=&quot;heading-anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;220705&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;import path 단축하기&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;ts&quot;&gt;&lt;pre class=&quot;language-ts&quot;&gt;&lt;code class=&quot;language-ts&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// package.json&lt;/span&gt;
 
@@ -10,8 +9,7 @@
 
 &lt;span class=&quot;token comment&quot;&gt;// usage&lt;/span&gt;
 &lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; something &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;@libs/server/handler&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;**프로젝트 구성
-**&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;프로젝트 구성&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;모노레포
 &lt;ul&gt;
@@ -33,6 +31,54 @@
 &lt;li&gt;다른 팀의 현황에 관심을 갖기 힘들 수 있음 (눈에서 멀어지므로)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;220707&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#220707&quot; aria-label=&quot;220707 permalink&quot; class=&quot;heading-anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;220707&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;써드파티 라이브러리에 대해 인터페이스를 만들자는 의견&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;인터페이스 자체가 변화가 적고 표준이 확실한 경우, 매우 유용할 것 같다.
+&lt;ul&gt;
+&lt;li&gt;예시: http client, api interface 등&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;하지만 그렇지 않은 경우 인터페이스를 만드는 것이 오히려 독이 될 수 있을 것 같다.
+&lt;ul&gt;
+&lt;li&gt;변화가 잦고 인터페이스의 공통화가 쉽지 않은 라이브러리&lt;/li&gt;
+&lt;li&gt;해결하고 싶은 문제는 같지만 해결방법이 각기 다른 라이브러리&lt;/li&gt;
+&lt;li&gt;승리한 해결방법이 명확히 없는 영역&lt;/li&gt;
+&lt;li&gt;예시 : 상태관리, 폼 관리 등등&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// get.js&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; first &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;first&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; get &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; first&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;get&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; get &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;// usage&lt;/span&gt;
+&lt;span class=&quot;token function&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;successFn&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; objectData&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;// 몇 달 뒤...&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;// get.js&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; something &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;something&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;// 의도: 라이브러리 교체를 위해 인터페이스에서만 변경 발생하게 하는 것.&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; get &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; something&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;get&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; get &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;// usage&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;// 근데 교체한 라이브러리의 함수가 받는 인자가 완전히 달라진다면?&lt;/span&gt;
+&lt;span class=&quot;token function&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;FailFn&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; arrayData&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;이렇게 인터페이스를 만들어둔다 해도 인자 같은 것이 완전히 변하면, 결국 get 사용처를 수정해야 하는 것 아닌가? 즉, 인터페이스가 무의미해지는 것 아닌가?&lt;br&gt;
+이럴땐 어떻게 하는걸까?&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Kent C의 테스트 코드 스터디 : 테스트 코드에 있어 리버스 엔지니어링&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;통합 테스트를 한다는 건 내부의 로직을 모르는 상황에서 테스트를 하는 것인데, 이 과정을 리버스 엔지니어링이라고 본걸까?&lt;/li&gt;
+&lt;li&gt;내부 로직이 어떻게 동작하는지 알고 있기 때문에 작성할 수 있는 테스트 방식이 아닐까?&lt;/li&gt;
+&lt;li&gt;특별한 장점은 없는 것 같다.&lt;/li&gt;
+&lt;li&gt;감추고 싶은 부분(private)을 테스트하는 것이라 오히려 별로인듯.&lt;/li&gt;
 &lt;/ul&gt;</content:encoded></item><item><title><![CDATA[프론트엔드 개발자의 UX/UI 위키]]></title><description><![CDATA[💡 이 위키에서는 프론트엔드 개발자 입장에서의 UX/UI에 대한 모든것 - 공부, 생각, 참고한 아티클들을 기록합니다. Frontend Designer https://blog.jhaemin.com/frontend-designer#kor…]]></description><link>https://emewjin.github.io/uxui/</link><guid isPermaLink="false">https://emewjin.github.io/uxui/</guid><pubDate>Sat, 02 Jul 2022 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;💡 이 위키에서는 프론트엔드 개발자 입장에서의 UX/UI에 대한 모든것 - 공부, 생각, 참고한 아티클들을 기록합니다.&lt;/p&gt;
 &lt;h2 id=&quot;frontend-designer&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#frontend-designer&quot; aria-label=&quot;frontend designer permalink&quot; class=&quot;heading-anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Frontend Designer&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&quot;https://blog.jhaemin.com/frontend-designer#kor&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;https://blog.jhaemin.com/frontend-designer#kor&lt;/a&gt;&lt;/p&gt;
