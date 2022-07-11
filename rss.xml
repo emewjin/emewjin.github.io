@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Lavendar RSS Feed]]></title><description><![CDATA[Frontend Dev]]></description><link>https://emewjin.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Thu, 07 Jul 2022 13:58:25 GMT</lastBuildDate><item><title><![CDATA[No title]]></title><link>https://emewjin.github.io/storybook/</link><guid isPermaLink="false">https://emewjin.github.io/storybook/</guid><content:encoded></content:encoded></item><item><title><![CDATA[Today I Learned]]></title><description><![CDATA[220705 import path 단축하기 프로젝트 구성 모노레포 별도 환경설정에 소모하는 시간을 줄일 수 있음 디자인 시스템과 같이 실시간으로 보면서 개발해야하는 특수한 경우 훨씬 간편하게 watch…]]></description><link>https://emewjin.github.io/til/</link><guid isPermaLink="false">https://emewjin.github.io/til/</guid><pubDate>Tue, 05 Jul 2022 00:00:00 GMT</pubDate><content:encoded>&lt;h2 id=&quot;220705&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#220705&quot; aria-label=&quot;220705 permalink&quot; class=&quot;heading-anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;220705&lt;/h2&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Lavendar RSS Feed]]></title><description><![CDATA[Frontend Dev]]></description><link>https://emewjin.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Mon, 11 Jul 2022 12:47:19 GMT</lastBuildDate><item><title><![CDATA[No title]]></title><link>https://emewjin.github.io/storybook/</link><guid isPermaLink="false">https://emewjin.github.io/storybook/</guid><content:encoded></content:encoded></item><item><title><![CDATA[Today I Learned]]></title><description><![CDATA[220705 import path 단축하기 프로젝트 구성 모노레포 별도 환경설정에 소모하는 시간을 줄일 수 있음 디자인 시스템과 같이 실시간으로 보면서 개발해야하는 특수한 경우 훨씬 간편하게 watch…]]></description><link>https://emewjin.github.io/til/</link><guid isPermaLink="false">https://emewjin.github.io/til/</guid><pubDate>Tue, 05 Jul 2022 00:00:00 GMT</pubDate><content:encoded>&lt;h2 id=&quot;220705&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#220705&quot; aria-label=&quot;220705 permalink&quot; class=&quot;heading-anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;220705&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;import path 단축하기&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;ts&quot;&gt;&lt;pre class=&quot;language-ts&quot;&gt;&lt;code class=&quot;language-ts&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// package.json&lt;/span&gt;
 
@@ -79,7 +79,71 @@
 &lt;li&gt;내부 로직이 어떻게 동작하는지 알고 있기 때문에 작성할 수 있는 테스트 방식이 아닐까?&lt;/li&gt;
 &lt;li&gt;특별한 장점은 없는 것 같다.&lt;/li&gt;
 &lt;li&gt;감추고 싶은 부분(private)을 테스트하는 것이라 오히려 별로인듯.&lt;/li&gt;
-&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[프론트엔드 개발자의 UX/UI 위키]]></title><description><![CDATA[💡 이 위키에서는 프론트엔드 개발자 입장에서의 UX/UI에 대한 모든것 - 공부, 생각, 참고한 아티클들을 기록합니다. Frontend Designer https://blog.jhaemin.com/frontend-designer#kor…]]></description><link>https://emewjin.github.io/uxui/</link><guid isPermaLink="false">https://emewjin.github.io/uxui/</guid><pubDate>Sat, 02 Jul 2022 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;💡 이 위키에서는 프론트엔드 개발자 입장에서의 UX/UI에 대한 모든것 - 공부, 생각, 참고한 아티클들을 기록합니다.&lt;/p&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;220711&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#220711&quot; aria-label=&quot;220711 permalink&quot; class=&quot;heading-anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;220711&lt;/h2&gt;
+&lt;p&gt;프로젝트 설계 &amp;#x26; 구성을 시작했다.&lt;br&gt;
+모노레포 vs 멀티레포 중 당장의 빠른 개발을 위해 모노레포를 선택했는데 git 전략이 문제였다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Git 브랜치 전략&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;conflict는 문제가 되지 않는다. 왜냐하면 turborepo로 filter 할 거라서.&lt;br&gt;
+그런데, turborepo는 git이 아니다.&lt;br&gt;
+모노레포를 위한 도구가 git과 배포에 밀접하게 연관되는 게 과연 괜찮은가?&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;main, dev, feature, release, hotfix 로 구성된 전략
+&lt;ul&gt;
+&lt;li&gt;가장 익숙한 모델이다&lt;/li&gt;
+&lt;li&gt;main에 반영되는 커밋은 곧바로 운영에 배포되고, dev에 반영되는 커밋은 곧바로 개발 서버에 배포된다.&lt;/li&gt;
+&lt;li&gt;dev를 main에 넣을 땐 release를 따서 버저닝 하여 넣는다.&lt;/li&gt;
+&lt;li&gt;hotfix가 필요할 땐 main에서 따서 pr merge 후 로컬에선 dev에 리베이스하여 반영한다.&lt;/li&gt;
+&lt;li&gt;한 레포에 한 프로젝트 (팀)일 때 적용하기 쉬운 전략이다&lt;/li&gt;
+&lt;li&gt;한 레포에 여러 프로젝트 (팀)이라면, 5개의 브랜치를 관리하는 것이 어려울 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;main, feature로만 구성된 전략
+&lt;ul&gt;
+&lt;li&gt;사실 내게는 낯선 모델이다&lt;/li&gt;
+&lt;li&gt;빠른 배포를 목적으로 한다&lt;/li&gt;
+&lt;li&gt;main에서 feature를 따서 개발, qa 후 곧바로 main에 넣어 운영배포한다.&lt;/li&gt;
+&lt;li&gt;feature가 나와있는 기간이 길수록 conflict가 발생할 확률이 높아지므로 빠르게 머지하는 것이 중요하다.&lt;/li&gt;
+&lt;li&gt;qa를 하려면 개발 서버가 필요한데 (dev 또는 test) 해당 브랜치가 main과 완전히 동기화 되지 않음이 걱정된다.&lt;/li&gt;
+&lt;li&gt;관리해야하는 브랜치의 수가 적어 모노레포 환경에서 덜 혼란스러울 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;현재 우리 팀의 상황을 살펴보면&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;운영 오픈된 프로젝트 1개, 이제 막 새롭게 개발 시작하는 프로젝트 3개.&lt;/li&gt;
+&lt;li&gt;3개는 초기 단계라 모든 것이 빠르게 변하고 진행되기 때문에 버저닝이 필요하지 않다. (기획단의 요구도 없음)&lt;/li&gt;
+&lt;li&gt;총 3팀, 6명이 한 레포 안에서 (모노레포) 작업을 진행한다.&lt;/li&gt;
+&lt;li&gt;이전 서비스 개발시 여러 작업자가 존재할 경우 dev에서의 qa와 main으로의 배포 과정에서 고초를 겪었던 경험이 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;결론: 빠르게 시도하고 실패하고 개선하자.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Git merge 전략&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;현재의 github에서는 세 가지의 merge를 제공하고 있다.&lt;br&gt;
+우리 팀에서는 어떤 전략을 채택할지에 대해 논의했는데, 전제는 “1. merge 전 rebase 수행 2. 커밋 메세지를 상세히 작성할 것”이다.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;merge commit
+&lt;ul&gt;
+&lt;li&gt;일반적으로 아는 그 머지이다.&lt;/li&gt;
+&lt;li&gt;머지 커밋이 생성된다. 이 점이 지저분해지기에 맘에 안듦.&lt;/li&gt;
+&lt;li&gt;모든 커밋을 보존한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;squash merge
+&lt;ul&gt;
+&lt;li&gt;여러 커밋이 하나의 대왕 커밋으로 퉁쳐지기 때문에 히스토리가 보존되지 않는다는 단점이 있다.&lt;/li&gt;
+&lt;li&gt;commit revert 할 때 하나의 커밋만 하면 된다는 장점이 있다.&lt;/li&gt;
+&lt;li&gt;커밋 내역이 commit body로 남고, 상세 커밋별 파일 체인지를 보고 싶다면 해당 피알 링크를 눌러 이동해 보면 되긴 하지만 모든 pr마다 다 이동해서 봐야한다는 귀찮은 단점이 있다.&lt;/li&gt;
+&lt;li&gt;github의 스쿼시 머지는 머지 커밋이 남지 않아 깔끔하다.&lt;/li&gt;
+&lt;li&gt;dev(또는 main) 기준에서 jira의 한 티켓 당 하나의 커밋만이 쌓이는 것이기 때문에 그래프가 깔끔할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;rebase merge
+&lt;ul&gt;
+&lt;li&gt;커밋을 squash 하지 않으면서도 머지 커밋이 생성되지 않는다.&lt;/li&gt;
+&lt;li&gt;머지 커밋 없이 티켓 번호 prefix만 보고 구분해야 한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</content:encoded></item><item><title><![CDATA[프론트엔드 개발자의 UX/UI 위키]]></title><description><![CDATA[💡 이 위키에서는 프론트엔드 개발자 입장에서의 UX/UI에 대한 모든것 - 공부, 생각, 참고한 아티클들을 기록합니다. Frontend Designer https://blog.jhaemin.com/frontend-designer#kor…]]></description><link>https://emewjin.github.io/uxui/</link><guid isPermaLink="false">https://emewjin.github.io/uxui/</guid><pubDate>Sat, 02 Jul 2022 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;💡 이 위키에서는 프론트엔드 개발자 입장에서의 UX/UI에 대한 모든것 - 공부, 생각, 참고한 아티클들을 기록합니다.&lt;/p&gt;
 &lt;h2 id=&quot;frontend-designer&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#frontend-designer&quot; aria-label=&quot;frontend designer permalink&quot; class=&quot;heading-anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Frontend Designer&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&quot;https://blog.jhaemin.com/frontend-designer#kor&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;https://blog.jhaemin.com/frontend-designer#kor&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;얼마 전 한 오픈소스 디스코드 채널에서 외국인으로부터 잡 오퍼를 받은 일이 있다. 이게 기억에 남은 이유는 그분이 ‘frontend designer’ 라는 표현을 썼기 때문이다.&lt;/p&gt;
