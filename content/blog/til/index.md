@@ -1,7 +1,7 @@
 ---
 title: 'Today I Learned'
 date: 2022-07-05
-lastUpdated: 2022-07-07
+lastUpdated: 2022-07-11
 description: '작고 사소한 개발 지식'
 tags: [Typescript]
 ---
