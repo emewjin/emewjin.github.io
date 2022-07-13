@@ -1,7 +1,7 @@
 ---
 title: 'Today I Learned'
 date: 2022-07-05
-lastUpdated: 2022-07-11
+lastUpdated: 2022-07-13
 description: '작고 사소한 개발 지식'
 tags: [Typescript]
 ---
@@ -139,3 +139,29 @@ conflict는 문제가 되지 않는다. 왜냐하면 turborepo로 filter 할 거
 3. rebase merge
    - 커밋을 squash 하지 않으면서도 머지 커밋이 생성되지 않는다.
    - 머지 커밋 없이 티켓 번호 prefix만 보고 구분해야 한다.
+
+## 220712
+
+[타입가드](https://emewjin.github.io/typeguard/#타입가드-사례-2)
+
+## 220713
+
+vite로 react-ts 프로젝트를 생성해서 개발하고 있는데, 환경변수에 따라 특정 모듈을 import할지 결정할 수 있어야 했다.  
+왜냐하면 local 이외의 환경에선 번들에 특정 모듈을 포함하고 싶지 않았기 때문임. 단순히 rollup의 설정으로 특정 디렉토리의 특정 파일을 번들링시 제외하는 옵션만으로는 해당 모듈을 import하는 곳에서 에러가 발생할 수도 있기 때문에, 아예 조건에 따라 import하지 않음으로 해결하고자 했다.  
+그러기 위해서 이걸 이렇게 쓰는게 맞는지는 모르겠으나 `React.lazy`를 이용해 환경변수를 조건으로 import하는 코드를 작성했다.
+
+```ts
+const OnlyDevComponent = (importPath: string) =>
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  React.lazy(() => {
+    const isLocalhost = import.meta.env.MODE === 'localhost';
+
+    if (isLocalhost) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+      return import(importPath);
+    }
+  });
+```
+
+ts-ignore부터 린트룰 비활성화까지... 좋은 형태는 아닌 것 같지만 일단 목적하는 바는 달성했다.
