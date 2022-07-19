@@ -1,7 +1,7 @@
 ---
 title: 'Today I Learned'
 date: 2022-07-05
-lastUpdated: 2022-07-13
+lastUpdated: 2022-07-19
 description: '작고 사소한 개발 지식'
 tags: [Typescript]
 ---
@@ -161,7 +161,22 @@ const OnlyDevComponent = (importPath: string) =>
       // eslint-disable-next-line @typescript-eslint/no-unsafe-return
       return import(importPath);
     }
+
+    return import(빈 컴포넌트 path);
   });
 ```
 
 ts-ignore부터 린트룰 비활성화까지... 좋은 형태는 아닌 것 같지만 일단 목적하는 바는 달성했다.
+
+## 220718
+
+맨땅에 헤딩해서 0부터 만들어나가는 것은 때때로 좋은 선택이 아닐 수도 있다
+
+- shadow dom, shadow root
+- svgo
+- 현재의 아키텍쳐에서 권한을 얻는 방법
+
+## 220719
+
+- 스토리북에서 Theme Provider 사용하기
+- 계정 관련 토큰은 private repo에서도 env로 숨겨야 할까?
