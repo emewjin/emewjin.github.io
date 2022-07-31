@@ -28,14 +28,20 @@ export const Wrapper = styled('div', {
 });
 
 export const Name = styled('p', {
-  marginTop: 0,
-  marginBottom: '0.5rem',
+  margin: 0,
 
   fontSize: '1.25rem',
 });
 
+export const Job = styled('p', {
+  marginTop: 0,
+  marginBottom: '0.5rem',
+
+  fontWeight: 500,
+});
+
 export const Description = styled('p', {
-  lineHeight: 1.2,
+  lineHeight: 1.3,
   wordBreak: 'keep-all',
   whiteSpace: 'pre-line',
 });

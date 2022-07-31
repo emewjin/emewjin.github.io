@@ -11,6 +11,7 @@ import {
   Name,
   Description,
   Wrapper,
+  Job,
 } from './styles';
 
 interface SocialLinkProps {
@@ -87,6 +88,7 @@ const Profile = () => {
             <strong>{author}</strong>
           </Link>
         </Name>
+        <Job>Frontend Developer</Job>
 
         <Description>{description}</Description>
 

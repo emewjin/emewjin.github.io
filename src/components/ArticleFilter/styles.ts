@@ -47,6 +47,8 @@ export const TagListWrapper = styled('div', {
   flexWrap: 'wrap',
   gap: '0.5rem',
   marginTop: '1rem',
+  maxHeight: '4.5rem',
+  overflow: 'scroll',
 });
 
 export const Tag = styled('button', {
