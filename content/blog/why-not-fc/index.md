@@ -1,10 +1,12 @@
 ---
 title: 리액트에서 FC를 사용하지 말아야 하는 이유
 date: 2022-07-31
-lastUpdated: 2022-07-31
+lastUpdated: 2022-08-09
 description: '무지성 FC 사용에서 벗어나기'
 tags: [Typescript, React]
 ---
+
+> ⚠️ 리액트 17 이하 버전에서 유효한 내용입니다.
 
 개인적으로 타입스크립트로 리액트 컴포넌트를 작성할 때 가장 많이 사용하는 방법은 다음과 같습니다.
 
@@ -28,7 +30,7 @@ const MyComponent: FC<MyComponentProps> = () => {
 
 React Typescript에서 `FC`는 비기너라면 몰라도, 그다지 좋은 방법(best practice)이 아닙니다.  
 가장 큰 이유는 props에 children이 암시적으로 들어가 있기 때문이라고 생각합니다.  
-CRA에서는 기본 템플릿에 `FC`를 빼야한다는 PR(https://github.com/facebook/create-react-app/pull/8177)이 올라왔었고, 반영되었습니다.
+CRA에서는 기본 템플릿에 `FC`를 빼야한다는 PR(https://github.com/facebook/create-react-app/pull/8177) 이 올라왔었고, 반영되었습니다.
 
 지금부터 작성할 내용은 위 PR에서 주장한 내용들을 번역(의역)한 것입니다.
 
@@ -118,6 +120,14 @@ Select.Item = (props: ItemProps) => {
 const C1: React.FC<CProps> = (props) => {};
 const C2 = (props: CProps) => {};
 ```
+
+## 결국 리액트 18 이상에서 없어졌습니다.
+
+> 친절하신 댓글 제보로 내용을 추가합니다.
+
+리액트 18 업데이트로, FC의 암시적인 children이 삭제되었습니다. 해당 변경 사항은 [이 PR](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/56210)에서 확인할 수 있습니다.
+
+아직 리액트 17을 쓰고 있지만 라이브러리 몇 가지만 업데이트 되면 18로 업데이트할 예정이라, 지금부터 틈틈이 FC의 암시적인 children을 사용하는 코드들을 정리해야겠습니다. 🤧
 
 ## 참고문서
 
