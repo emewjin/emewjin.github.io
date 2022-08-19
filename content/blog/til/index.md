@@ -1,7 +1,7 @@
 ---
 title: 'Today I Learned'
 date: 2022-07-05
-lastUpdated: 2022-07-19
+lastUpdated: 2022-08-19
 description: '작고 사소한 개발 지식'
 tags: [Typescript]
 ---
@@ -180,3 +180,40 @@ ts-ignore부터 린트룰 비활성화까지... 좋은 형태는 아닌 것 같�
 
 - 스토리북에서 Theme Provider 사용하기
 - 계정 관련 토큰은 private repo에서도 env로 숨겨야 할까?
+
+## 220726
+
+클라이언트에서 시간을 다룬다는 것...
+- 클라이언트에서 안전한 시간 데이터란 없다
+- 클라이언트에서 시간을 다룰 때에 반드시 고려해야 하는 점
+  - 서버 시간 : 사용자 기기의 location을 조작한다거나 하는 것으로부터 보호
+    - 그러나 모든 것을 서버 시간으로 해결하려 하면 즉각적인 인터랙션이 불가능함.
+  - 타임존, UTC : 우리 서비스는 글로벌 서비스가 아닐지라도 이용자는 글로벌할 수 있다. 언제 어디서든 동일한 기준으로 시간 데이터를 운영해야 한다. 기준 맞추기가 중요하다.
+
+## 220801
+- 회사에서도 맨날 TIL 같은 데일리 회고를 쓰니까 개인 블로그를 잘 안 찾아오게 된다
+- 그래도 써봄. **yarn berry**
+  - 요즘 모노레포로 프로젝트를 구성하면서 유령 참조도 겪어보고, A 패키지에서 export한 모듈이 B에서만 접근이 가능하고 C에서는 불가능하게 하고 싶은 욕구가 막 샘솟는데, 이런걸 yarn berry로 해결할 수 있다고 한다.
+  - 유령 참조가 발생하는 이유를 완전 러프하게 이야기하면, 패키지별로 오픈소스를 설치해도 결국 root의 node module로 끌어올려지기 때문인데, yarn berry는 node module이 없게 만들어주기 때문에 해결이 가능하다고 함.
+  - 국내에서 가장 유명한 글은 https://toss.tech/article/node-modules-and-yarn-berry 인 것 같다.
+  - 물론 트레이드 오프가 있겠지?? 내가 사용하고자 하는 오픈소스가 잘 지원되지 않을 수도 있는거고... 트레이드 오프는 뭐가 있을지 여러모로 찾아봐야 한다.
+  - 팀에 도입하기 위해선 언제나 POC가 선행되어야 하고 그걸 기반으로 설득이 필요하기 때문에 시간이 좀 나면 작은 프로젝트에서 POC를 진행해볼 예정.
+
+## 220802
+- Chunk 전략의 트레이드오프
+  - Vite 버전 업데이트를 했더니 빌드시 vendor가 생기지 않았다.
+  - vendor를 만들려면 별도 플러그인 설치 필요 (이전엔 기본값)
+  - 그럼 vendor가 꼭 필요할까?
+    - http가 한 번에 요청할 수 있는 횟수 최대 6~8개
+    - "고용량의 js를 한 번에 받을거냐" vs "잘게 쪼개 여러번의 요청으로 받을 거냐"는 트레이드오프
+    - 우리의 상황에서는 vendor.js가 큰거라서 index.js와 vendor.js로 쪼개서 요청을 여러 번 했을 때의 이점이 없음. 어차피 이러나 저러나 클거면 한 번만 요청하는게 낫지.
+    - 그리고 요청이란건 한 번 한 번마다 three shake 가 걸리기 때문에 이것도 비용으로 고려해야 함.
+
+## 220819
+- import, export시 type annoations과 declarations을 위해 사용되는 정의를 구분하기
+  - 왜 구분해야 할까? [공식문서](https://devblogs.microsoft.com/typescript/announcing-typescript-3-8/#type-only-imports-exports) 
+    - 요약하자면 컴파일 할 때 타입만 더 잘 지우기 위해서. 그리고 개인적으로 느끼기엔 팀 문화적으로 이게 타입인지 아닌지 더 쉽게 구분하기 위해서.
+
+- IDE에서 auto import할 때 type only import를 구분할 수는 없을까? 
+  - 있길래 적용해봄. https://emewjin.github.io/vsc-react-ts-tips/#3-auto-all-missing-import-이용하기
+
