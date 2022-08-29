@@ -1,4 +1,4 @@
 module.exports = {
-  'src/**/*.{ts,tsx}': () => 'npm run typecheck',
+  'src/**/*.{ts,tsx}': () => 'yarn typecheck',
   'src/**/*.{js,jsx,ts,tsx}': ['eslint --fix'],
 };
