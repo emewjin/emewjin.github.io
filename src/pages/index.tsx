@@ -1,5 +1,5 @@
 import { PageProps, graphql } from 'gatsby';
-import React, { useCallback, useRef } from 'react';
+import React, { ChangeEventHandler, useCallback, useRef } from 'react';
 
 import ArticleFilter from '~/components/ArticleFilter';
 import ArticleList from '~/components/ArticleList';
@@ -36,9 +36,12 @@ const BlogIndex = ({
   const articlePerPage = 5;
   const totalPage = Math.ceil(posts.length / articlePerPage);
 
-  const onTitleFilterChange = useCallback((event) => {
-    setTitleFilter(event.target.value);
-  }, []);
+  const onTitleFilterChange: ChangeEventHandler<HTMLInputElement> = useCallback(
+    (event) => {
+      setTitleFilter(event.target.value);
+    },
+    []
+  );
 
   const resetFilter = () => {
     setTitleFilter('');
