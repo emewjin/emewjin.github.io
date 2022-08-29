@@ -137,6 +137,12 @@ export const Content = styled('section', {
   blockquote: {
     margin: '1.5rem 0',
   },
+  figcaption: {
+    textAlign: 'center',
+    marginTop: '0.5rem',
+    color: '$text200',
+    fontSize: '0.875rem',
+  },
 });
 
 export const Footer = styled('footer', {
