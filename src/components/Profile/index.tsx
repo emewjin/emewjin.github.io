@@ -12,6 +12,7 @@ import {
   Description,
   Wrapper,
   Job,
+  Header
 } from './styles';
 
 interface SocialLinkProps {
@@ -83,30 +84,32 @@ const Profile = () => {
         alt='Profile picture'
       />
       <Wrapper>
-        <Name>
-          <Link to={'/'}>
-            <strong>{author}</strong>
-          </Link>
-        </Name>
-        <Job>Frontend Developer</Job>
+        <Header>
+          <div>
+            <Name>
+              <Link to={'/'}>
+                <strong>{author}</strong>
+              </Link>
+            </Name>
+            <Job>Frontend Developer</Job>
+          </div>
+          <ExternalLinks>
+            {Object.entries(social ?? {}).map(([key, username]) => {
+              const serviceName = key as keyof GatsbyTypes.Social;
 
+              return (
+                <ExternalLink
+                  key={serviceName}
+                  username={username}
+                  urlPrefix={socialLinks[serviceName].url}
+                >
+                  {socialLinks[serviceName].text}
+                </ExternalLink>
+              );
+            })}
+          </ExternalLinks>
+        </Header>
         <Description>{description}</Description>
-
-        <ExternalLinks>
-          {Object.entries(social ?? {}).map(([key, username]) => {
-            const serviceName = key as keyof GatsbyTypes.Social;
-
-            return (
-              <ExternalLink
-                key={serviceName}
-                username={username}
-                urlPrefix={socialLinks[serviceName].url}
-              >
-                {socialLinks[serviceName].text}
-              </ExternalLink>
-            );
-          })}
-        </ExternalLinks>
       </Wrapper>
     </Container>
   );

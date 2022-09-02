@@ -27,6 +27,11 @@ export const Wrapper = styled('div', {
   transition: 'color $transitionDuration $transitionTiming',
 });
 
+export const Header = styled('div', {
+  display: 'flex',
+  justifyContent: 'space-between',
+});
+
 export const Name = styled('p', {
   margin: 0,
 
