@@ -2,7 +2,7 @@
 title: 2022 인프콘 데브챗 후기
 description: 미련과 아쉬움이 덕지덕지 붙어있음 주의
 date: 2022-08-29
-lastUpdated: 2022-08-29
+lastUpdated: 2022-09-03
 tags: [Conference]
 ---
 
