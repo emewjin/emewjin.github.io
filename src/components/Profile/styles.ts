@@ -46,9 +46,9 @@ export const Job = styled('p', {
 });
 
 export const Description = styled('p', {
-  lineHeight: 1.3,
-  wordBreak: 'keep-all',
+  lineHeight: 1.5,
   whiteSpace: 'pre-line',
+  margin: 0
 });
 
 export const ExternalLinks = styled('ul', {
