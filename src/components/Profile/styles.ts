@@ -56,6 +56,10 @@ export const ExternalLinks = styled('ul', {
   gap: '1em',
   marginTop: '1em',
   marginLeft: 0,
+  '.fa-github':{
+    color: '$text300',
+    fontSize:'20px'
+  }
 });
 
 export const LinkItem = styled('li', {

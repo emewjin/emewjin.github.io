@@ -103,7 +103,7 @@ const Profile = () => {
                   username={username}
                   urlPrefix={socialLinks[serviceName].url}
                 >
-                  {socialLinks[serviceName].text}
+                  {serviceName === 'github' ? <i className='fa-brands fa-github'/> : socialLinks[serviceName].text}
                 </ExternalLink>
               );
             })}
