@@ -134,7 +134,7 @@ const generateOGImage = (slug: string, postTitle: string) => {
   const WIDTH = 800;
   const PADDING = 20;
 
-  registerFont('src/fonts/Pretendard/woff/Pretendard-Black.woff', {
+  registerFont('src/fonts/Pretendard/Pretendard-Black.ttf', {
     family: 'Pretendard',
   });
 
