@@ -1,5 +1,8 @@
+import { existsSync, mkdirSync, writeFileSync } from 'fs';
 import * as path from 'path';
 
+import { createCanvas, registerFont } from 'canvas';
+import type { CanvasRenderingContext2D } from 'canvas';
 import type {
   CreateNodeArgs,
   CreatePagesArgs,
@@ -29,6 +32,9 @@ export const createPages = async ({
       ) {
         nodes {
           id
+          frontmatter {
+            title
+          }
           fields {
             slug
           }
@@ -53,6 +59,10 @@ export const createPages = async ({
       const nextPostId =
         index === posts.length - 1 ? null : posts[index + 1].id;
 
+      post.fields?.slug &&
+        post.frontmatter?.title &&
+        generateOGImage(post.fields.slug, post.frontmatter.title);
+
       actions.createPage({
         path: post.fields?.slug || '',
         component: blogPost,
@@ -60,6 +70,7 @@ export const createPages = async ({
           id: post.id,
           previousPostId,
           nextPostId,
+          ogImage: `public/og-image${post.fields?.slug || '/'}index.jpeg`,
         },
       });
     });
@@ -116,4 +127,61 @@ export const createSchemaCustomization = ({
       slug: String
     }
   `);
+};
+
+const generateOGImage = (slug: string, postTitle: string) => {
+  const height = 400;
+  const width = 800;
+
+  registerFont('src/fonts/Pretendard/woff/Pretendard-ExtraBold.woff', {
+    family: 'Pretendard',
+  });
+
+  const canvas = createCanvas(width, height);
+  const context = canvas.getContext('2d');
+
+  context.fillStyle = '#fff';
+  context.fillRect(0, 0, width, height);
+
+  context.fillStyle = '#000';
+  context.font = '50px Pretendard';
+  context.textAlign = 'left';
+  context.textBaseline = 'bottom';
+
+  function wrapPostTitle(
+    ctx: CanvasRenderingContext2D,
+    text: string,
+    maxWidth: number
+  ) {
+    const words = text.split(' ');
+    const lines = [];
+    let currentLine = words[0];
+
+    for (let i = 1; i < words.length; i++) {
+      const word = words[i];
+      const currentWidth = ctx.measureText(currentLine + ' ' + word).width;
+      if (currentWidth < maxWidth) {
+        currentLine += ' ' + word;
+      } else {
+        lines.push(currentLine);
+        currentLine = word;
+      }
+    }
+    lines.push(currentLine);
+    return lines;
+  }
+
+  const wrappedPostTitleLines = wrapPostTitle(context, postTitle, width * 0.7);
+
+  wrappedPostTitleLines.forEach((line, index) => {
+    context.fillText(line, 10, height * 0.3 + index * 60);
+  });
+
+  const buffer = canvas.toBuffer('image/jpeg', { quality: 1 });
+
+  if (!existsSync(`public/og-image${slug.slice(0, -1)}`)) {
+    mkdirSync(`public/og-image${slug.slice(0, -1)}`, { recursive: true });
+  }
+
+  writeFileSync(`public/og-image${slug}index.jpeg`, buffer);
 };
