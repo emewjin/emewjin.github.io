@@ -33,7 +33,7 @@ const BlogPostTemplate = ({
   const { previous, next } = data;
   const { title, description, date, lastUpdated, tags } = post.frontmatter!;
   const ogImage = post.fields?.slug
-    ? `${siteUrl}/og-image${post.fields.slug}index.jpeg`
+    ? `${siteUrl}/og-image${post.fields.slug}index.png`
     : '';
 
   const commentConfig = useComment().site?.siteMetadata?.comment;

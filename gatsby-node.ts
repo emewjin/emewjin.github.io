@@ -70,7 +70,7 @@ export const createPages = async ({
           id: post.id,
           previousPostId,
           nextPostId,
-          ogImage: `public/og-image${post.fields?.slug || '/'}index.jpeg`,
+          ogImage: `public/og-image${post.fields?.slug || '/'}index.png`,
         },
       });
     });
@@ -133,17 +133,25 @@ const generateOGImage = (slug: string, postTitle: string) => {
   const height = 400;
   const width = 800;
 
-  registerFont('src/fonts/Pretendard/woff/Pretendard-ExtraBold.woff', {
+  registerFont('src/fonts/Pretendard/woff/Pretendard-Black.woff', {
     family: 'Pretendard',
   });
 
   const canvas = createCanvas(width, height);
   const context = canvas.getContext('2d');
 
+  // 배경 색상
   context.fillStyle = '#fff';
   context.fillRect(0, 0, width, height);
 
-  context.fillStyle = '#000';
+  // 폰트 스타일
+  const angle = (45 * Math.PI) / 180;
+  const x2 = 300 * Math.cos(angle);
+  const y2 = 300 * Math.sin(angle);
+  const gradient = context.createLinearGradient(0, 0, x2, y2);
+  gradient.addColorStop(0, '#b597f6');
+  gradient.addColorStop(1, '#96c6ea');
+  context.fillStyle = gradient;
   context.font = '50px Pretendard';
   context.textAlign = 'left';
   context.textBaseline = 'bottom';
@@ -174,14 +182,14 @@ const generateOGImage = (slug: string, postTitle: string) => {
   const wrappedPostTitleLines = wrapPostTitle(context, postTitle, width * 0.7);
 
   wrappedPostTitleLines.forEach((line, index) => {
-    context.fillText(line, 10, height * 0.3 + index * 60);
+    context.fillText(line, 20, height * 0.3 + index * 60);
   });
 
-  const buffer = canvas.toBuffer('image/jpeg', { quality: 1 });
+  const buffer = canvas.toBuffer('image/png');
 
   if (!existsSync(`public/og-image${slug.slice(0, -1)}`)) {
     mkdirSync(`public/og-image${slug.slice(0, -1)}`, { recursive: true });
   }
 
-  writeFileSync(`public/og-image${slug}index.jpeg`, buffer);
+  writeFileSync(`public/og-image${slug}index.png`, buffer);
 };
