@@ -30,10 +30,12 @@ const BlogPostTemplate = ({
   const post = data.markdownRemark!;
   const siteUrl = data.site?.siteMetadata?.siteUrl ?? '';
   const siteTitle = data.site?.siteMetadata?.title ?? '';
-  const siteThumbnail = data.site?.siteMetadata?.thumbnail;
   const { previous, next } = data;
-  const { title, description, date, lastUpdated, tags, thumbnail } =
-    post.frontmatter!;
+  const { title, description, date, lastUpdated, tags } = post.frontmatter!;
+  const ogImage = post.fields?.slug
+    ? `${siteUrl}/og-image${post.fields.slug}index.png`
+    : '';
+
   const commentConfig = useComment().site?.siteMetadata?.comment;
 
   const disqusConfig = {
@@ -42,13 +44,13 @@ const BlogPostTemplate = ({
   };
   const meta: Metadata[] = [];
 
-  if (siteThumbnail || thumbnail) {
+  if (!!ogImage) {
     const properties = ['og:image', 'twitter:image'];
 
     for (const property of properties) {
       meta.push({
         property,
-        content: `${siteUrl}${thumbnail ?? siteThumbnail}`,
+        content: ogImage,
       });
     }
   }
@@ -109,7 +111,6 @@ export const pageQuery = graphql`
       siteMetadata {
         title
         siteUrl
-        thumbnail
       }
     }
     markdownRemark(id: { eq: $id }) {
@@ -126,7 +127,6 @@ export const pageQuery = graphql`
         lastUpdated(formatString: "YYYY-MM-DD")
         description
         tags
-        thumbnail
       }
     }
     previous: markdownRemark(id: { eq: $previousPostId }) {
