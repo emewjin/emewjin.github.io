@@ -1,8 +1,8 @@
 import { existsSync, mkdirSync, writeFileSync } from 'fs';
 import * as path from 'path';
 
-import { createCanvas, registerFont } from 'canvas';
 import type { CanvasRenderingContext2D } from 'canvas';
+import { createCanvas, registerFont } from 'canvas';
 import type {
   CreateNodeArgs,
   CreatePagesArgs,
@@ -130,27 +130,46 @@ export const createSchemaCustomization = ({
 };
 
 const generateOGImage = (slug: string, postTitle: string) => {
-  const height = 400;
-  const width = 800;
+  const HEIGHT = 400;
+  const WIDTH = 800;
+  const PADDING = 20;
 
   registerFont('src/fonts/Pretendard/woff/Pretendard-Black.woff', {
     family: 'Pretendard',
   });
 
-  const canvas = createCanvas(width, height);
+  const canvas = createCanvas(WIDTH, HEIGHT);
   const context = canvas.getContext('2d');
 
   // 배경 색상
   context.fillStyle = '#fff';
-  context.fillRect(0, 0, width, height);
+  context.fillRect(0, 0, WIDTH, HEIGHT);
+
+  // 블로그 로고
+  const LOGO_TEXT_WIDTH = 189;
+  const LOGO_HEIGHT = 40;
+
+  context.setTransform(1, 0, 0, 1, WIDTH - PADDING, HEIGHT - PADDING);
+
+  context.beginPath();
+  context.arc(-LOGO_TEXT_WIDTH, -LOGO_HEIGHT, LOGO_HEIGHT, 0, 2 * Math.PI);
+  context.fillStyle = '#bcb2f5';
+  context.fill();
+
+  context.fillStyle = '#2d3748';
+  context.font = '32px Pretendard';
+  context.textAlign = 'right';
+  context.textBaseline = 'bottom';
+  context.fillText('emewjin.log', 0, -LOGO_HEIGHT / 2);
 
   // 폰트 스타일
-  const angle = (45 * Math.PI) / 180;
+  context.setTransform(1, 0, 0, 1, 0, 0);
+  const angle = (315 * Math.PI) / 180;
   const x2 = 300 * Math.cos(angle);
   const y2 = 300 * Math.sin(angle);
   const gradient = context.createLinearGradient(0, 0, x2, y2);
-  gradient.addColorStop(0, '#b597f6');
-  gradient.addColorStop(1, '#96c6ea');
+  gradient.addColorStop(0, '#bcb2f5');
+  gradient.addColorStop(1, '#40c9ff');
   context.fillStyle = gradient;
   context.font = '50px Pretendard';
   context.textAlign = 'left';
@@ -179,10 +198,10 @@ const generateOGImage = (slug: string, postTitle: string) => {
     return lines;
   }
 
-  const wrappedPostTitleLines = wrapPostTitle(context, postTitle, width * 0.7);
+  const wrappedPostTitleLines = wrapPostTitle(context, postTitle, WIDTH * 0.7);
 
   wrappedPostTitleLines.forEach((line, index) => {
-    context.fillText(line, 20, height * 0.3 + index * 60);
+    context.fillText(line, PADDING, HEIGHT * 0.3 + index * 60);
   });
 
   const buffer = canvas.toBuffer('image/png');
