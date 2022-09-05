@@ -4,7 +4,7 @@ to: content/blog/<%= name %>/index.md
 ---
 title: <%= title %>
 description: <%= description %>
-date:
-lastUpdated:
+date: <%= date %>
+lastUpdated: <%= date %>
 tags: [<%= tag %>]
 ---
