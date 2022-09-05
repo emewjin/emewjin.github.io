@@ -15,7 +15,7 @@
     "typecheck": "tsc --noEmit --skipLibCheck",
     "prepare": "husky install",
     "deploy": "gatsby clean && gatsby build && cp content/blog/google2885a4a9e03f5486.html public/ && gh-pages -d public -b deploy",
-    "hygen": "hygen"
+    "hygen": "hygen generator post"
   },
   "repository": {
     "type": "git",
