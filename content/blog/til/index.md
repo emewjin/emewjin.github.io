@@ -272,6 +272,9 @@ ts-ignore부터 린트룰 비활성화까지... 좋은 형태는 아닌 것 같�
 
       //이변성: 위의 모든 OK 특성을 허용함
       ```
+## 220904
+- 디자인 시스템 관련해서 어도비의 디자인 시스템이 공부할 것이 진짜 많다고 한다. ~~근데 언제 보지~~
+  - https://spectrum.adobe.com/
 ## 220905
 - 콜백에서의 타입 추론 문제
   - 문제 : [타입스크립트 플레이그라운드](https://www.typescriptlang.org/play?#code/JYWwDg9gTgLgBAKjgQwM5wEoFNkGN4BmUEIcA5FDvmQNwBQwAdjFlAXlnAKqqtwDedOMLiNkILAC44qGFCYBzegF8GzVu1ycAIshjIBQkQFdeUaTz4AfUcYA2duDeOMAJlgJMsrlXQIv8YAhGTCw3VgAhCFcATwAKVz1kaV19ABoUKHMURhiAbQBdAEpDEThgAjgEpIA6Uz4AXibbBycbRP06szgmhrgXd09GbxLBMrLKGGMoEPY7Xnoy1TojYUnpkIAeV2AANwA+VfH+DuQu1hqxCVVxkX5kLJqQZDA44BZSBv3S2-GKqveWBANTQrlGR1+43WMzgAEYIb8bpCRP9qp16lBLuIsODkb9oSEAEwI25IvEEuCnc6Yq5YElwZRFMlwTYAeh2BzoqiAA)
