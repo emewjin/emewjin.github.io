@@ -1,8 +1,8 @@
 ---
 title: 'Today I Learned'
 date: 2022-07-05
-lastUpdated: 2022-08-19
-description: '작고 사소한 개발 지식'
+lastUpdated: 2022-09-06
+description: '작고 사소한 개발 지식. 경험한 이야기, 여기저기서 들은 이야기, 읽거나 추천받은 아티클 등등을 간단하게 기록합니다.'
 tags: [Typescript]
 ---
 
@@ -217,3 +217,80 @@ ts-ignore부터 린트룰 비활성화까지... 좋은 형태는 아닌 것 같�
 - IDE에서 auto import할 때 type only import를 구분할 수는 없을까? 
   - 있길래 적용해봄. https://emewjin.github.io/vsc-react-ts-tips/#3-auto-all-missing-import-이용하기
 
+## 220824
+- 거대한 레거시 프로젝트를 성공적으로 분리하기
+  - https://www.bucketplace.com/post/2021-12-03-%EC%98%A4%EB%8A%98%EC%9D%98%EC%A7%91-msa-phase-1-%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C-%EB%B6%84%EB%A6%AC%EC%9E%91%EC%97%85/
+  - **fe도 인프라 공부가 꼭 필요하다**
+
+## 220825
+- CI 스텝이 완료되기 전에 머지할 수 없게 하자
+  - 리베이스 전 빌드 스탭 통과, 리베이스 후 빌드 스탭이 다시 돌자 '괜찮겠지'하고 머지했다가 배포 실패한 케이스가 팀에서 종종 발생
+  - CI가 의미와 역할을 다 할 수 있게, 무시하지 못하도록 branch protection rule 설정
+
+## 220830
+- 모달 개발시 고려해야할 점들
+  - https://www.w3.org/WAI/ARIA/apg/patterns/dialogmodal/
+- [playwright랑 cypress랑 한 판 붙는다고 한다.](https://applitools.com/cypress-vs-playwright-rematch-webinar/?utm_source=marketo&utm_medium=email&utm_content=webinar&utm_term=220908-dbinvite1&utm_campaign=220908-cypress-vs-playwright-rematch-webinar&mkt_tok=Njg3LVRFUi02MTIAAAGGjahlT30AifbC00a_C0_YPVDLVVefp7-1dLUHZmjfkkKaNPf3fOghh_TbWKUJKjc2dfKzCzL4wl8RkI7LjuQvKZah2os5EjZYBFlvnzgiSQ)
+
+## 220831
+- 컴포넌트를 잘 설계하기
+  - 어떻게 하면 비즈니스 로직 (스타일 로직 포함 pd & po가 정한 정책)과 ui 템플릿을 구분할 수 있을까
+  - 어떻게 하면 재사용성이 높을까
+  - 어떻게 하면 출처를 한 곳으로 통일할 수 있을까
+  - 어떻게 하면 수정을 한 곳에서만 할 수 있을까 == 부수효과 최소화하기
+  - 어떻게 하면 내부 로직을 안 보고도 이해가 될까
+  - https://www.youtube.com/watch?v=aAs36UeLnTg 도 좋다
+
+## 220901
+- 우리 서비스의 네트워크 구조
+  - Fe(브라우저) <-> ALB <-> node 여러 대 <-> DB
+  - 통신은 모두 소켓을 통해 이루어진다
+  - 네트워크 스텝별로 소켈의 통신을 기다려주는 시간, request time out 값 확인해야 한다. 
+    - 스텝별로 시간을 맞추어주어야 하는데 맞추기 어렵다면 수신하는 쪽에서의 시간을 조금이라도 늘려야 한다.
+    - 그렇지 않으면 사용자가 요청을 끊은 것인지, 서버가 끊은 것인지 구분할 수 없다. 전부 500으로 내려오기 때문.
+    - cpu, memory 등등 지표가 다 괜찮은데 요청이 원활하지 않으면 소켓을 의심해보아야 한다. 아니면 모듈간 네트워크를 확인하거나. 기본 리눅스에서 소켓을 재사용하지 않는다.
+    - 데브옵스가 존재하는 조직에서는 이런 걸 데브옵스가 챙겨주지만 데브옵스가 없으면 직접 할 줄 알아야 한다. 
+      - 물론 서버리스, 클라우드 환경에서는 몰라도 됨
+- 타입스크립트 공변성, 반공변성
+  - https://seob.dev/posts/%EA%B3%B5%EB%B3%80%EC%84%B1%EC%9D%B4%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80/
+  - https://wiki.lucashan.space/programming/phantom-type/
+  - 멤버 변수로 함수 작성시, 이변적으로 타입 추론됨
+      ```ts
+      // 공변성
+      let array: Array<string | number> = []
+      let stringArray: Array<string> = []
+
+      array = stringArray // OK
+      stringArray = array // error
+
+      // 반공변
+      let logger = (message: string | number) => {}
+      let stringLogger = (message: string) => {}
+
+      logger = stringLogger // error
+      stringLogger = logger // OK
+
+      //이변성: 위의 모든 OK 특성을 허용함
+      ```
+## 220905
+- 콜백에서의 타입 추론 문제
+  - 문제 : [타입스크립트 플레이그라운드](https://www.typescriptlang.org/play?#code/JYWwDg9gTgLgBAKjgQwM5wEoFNkGN4BmUEIcA5FDvmQNwBQwAdjFlAXlnAKqqtwDedOMLiNkILAC44qGFCYBzegF8GzVu1ycAIshjIBQkQFdeUaTz4AfUcYA2duDeOMAJlgJMsrlXQIv8YAhGTCw3VgAhCFcATwAKVz1kaV19ABoUKHMURhiAbQBdAEpDEThgAjgEpIA6Uz4AXibbBycbRP06szgmhrgXd09GbxLBMrLKGGMoEPY7Xnoy1TojYUnpkIAeV2AANwA+VfH+DuQu1hqxCVVxkX5kLJqQZDA44BZSBv3S2-GKqveWBANTQrlGR1+43WMzgAEYIb8bpCRP9qp16lBLuIsODkb9oSEAEwI25IvEEuCnc6Yq5YElwZRFMlwTYAeh2BzoqiAA)
+  - 원인 : **TS cannot know when the callback will execute** https://github.com/microsoft/TypeScript/issues/7719
+## 220906
+- 좋은 코드란?
+  - 목적을 달성하는 코드 = 개개인의 우선순위에 따라 다 다르다. 보통 충돌하는 2가지 중에 하나를 골라야 하는 일이 많은듯.
+    - 선언적으로 작성하고 싶어요
+    - 나중에 코드 수정시 한 파일만 수정하고 싶어요
+    - context switching이 너무 많지 않았으면 좋겠어요
+    - 등등
+
+- 이전 프로젝트에서의 경험이 다음 프로젝트에서 개선으로 잘 이어지지 않는 이유
+  - 이전 프로젝트에서 같은 경험을 나눈 사람과 다른 팀이 됨
+
+- ts 프론트엔드 애플리케이션에서의 클린 아키텍쳐 적용 - 의존성 주입을 중심으로 : https://velog.io/@lky5697/how-to-implement-a-typescript-web-app-with-clean-architecture#%EB%AA%A9%EC%B0%A8
+  - 앵귤러가 예시인게 아쉽긴하다 (앵귤러가 별로라는 뜻이 아님)
+
+- Record와 Tuple은 뭘까 : https://kofearticle.substack.com/p/korean-fe-article-record-and-tuple
+- React Children의 타입은?
+  - class 컴포넌트일 땐 ReactNode
+  - 함수 컴포넌트에선 ReactElement
