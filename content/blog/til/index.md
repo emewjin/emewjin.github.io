@@ -1,7 +1,7 @@
 ---
 title: 'Today I Learned'
 date: 2022-07-05
-lastUpdated: 2022-09-06
+lastUpdated: 2022-10-14
 description: '작고 사소한 개발 지식. 경험한 이야기, 여기저기서 들은 이야기, 읽거나 추천받은 아티클 등등을 간단하게 기록합니다.'
 tags: [Typescript]
 ---
@@ -184,6 +184,7 @@ ts-ignore부터 린트룰 비활성화까지... 좋은 형태는 아닌 것 같�
 ## 220726
 
 클라이언트에서 시간을 다룬다는 것...
+
 - 클라이언트에서 안전한 시간 데이터란 없다
 - 클라이언트에서 시간을 다룰 때에 반드시 고려해야 하는 점
   - 서버 시간 : 사용자 기기의 location을 조작한다거나 하는 것으로부터 보호
@@ -191,6 +192,7 @@ ts-ignore부터 린트룰 비활성화까지... 좋은 형태는 아닌 것 같�
   - 타임존, UTC : 우리 서비스는 글로벌 서비스가 아닐지라도 이용자는 글로벌할 수 있다. 언제 어디서든 동일한 기준으로 시간 데이터를 운영해야 한다. 기준 맞추기가 중요하다.
 
 ## 220801
+
 - 회사에서도 맨날 TIL 같은 데일리 회고를 쓰니까 개인 블로그를 잘 안 찾아오게 된다
 - 그래도 써봄. **yarn berry**
   - 요즘 모노레포로 프로젝트를 구성하면서 유령 참조도 겪어보고, A 패키지에서 export한 모듈이 B에서만 접근이 가능하고 C에서는 불가능하게 하고 싶은 욕구가 막 샘솟는데, 이런걸 yarn berry로 해결할 수 있다고 한다.
@@ -200,6 +202,7 @@ ts-ignore부터 린트룰 비활성화까지... 좋은 형태는 아닌 것 같�
   - 팀에 도입하기 위해선 언제나 POC가 선행되어야 하고 그걸 기반으로 설득이 필요하기 때문에 시간이 좀 나면 작은 프로젝트에서 POC를 진행해볼 예정.
 
 ## 220802
+
 - Chunk 전략의 트레이드오프
   - Vite 버전 업데이트를 했더니 빌드시 vendor가 생기지 않았다.
   - vendor를 만들려면 별도 플러그인 설치 필요 (이전엔 기본값)
@@ -210,29 +213,35 @@ ts-ignore부터 린트룰 비활성화까지... 좋은 형태는 아닌 것 같�
     - 그리고 요청이란건 한 번 한 번마다 3way Handshake 가 걸리기 때문에 이것도 비용으로 고려해야 함.
 
 ## 220819
+
 - import, export시 type annoations과 declarations을 위해 사용되는 정의를 구분하기
-  - 왜 구분해야 할까? [공식문서](https://devblogs.microsoft.com/typescript/announcing-typescript-3-8/#type-only-imports-exports) 
+
+  - 왜 구분해야 할까? [공식문서](https://devblogs.microsoft.com/typescript/announcing-typescript-3-8/#type-only-imports-exports)
     - 요약하자면 컴파일 할 때 타입만 더 잘 지우기 위해서. 그리고 개인적으로 느끼기엔 팀 문화적으로 이게 타입인지 아닌지 더 쉽게 구분하기 위해서.
 
-- IDE에서 auto import할 때 type only import를 구분할 수는 없을까? 
+- IDE에서 auto import할 때 type only import를 구분할 수는 없을까?
   - 있길래 적용해봄. https://emewjin.github.io/vsc-react-ts-tips/#3-auto-all-missing-import-이용하기
 
 ## 220824
+
 - 거대한 레거시 프로젝트를 성공적으로 분리하기
   - https://www.bucketplace.com/post/2021-12-03-%EC%98%A4%EB%8A%98%EC%9D%98%EC%A7%91-msa-phase-1-%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C-%EB%B6%84%EB%A6%AC%EC%9E%91%EC%97%85/
   - **fe도 인프라 공부가 꼭 필요하다**
 
 ## 220825
+
 - CI 스텝이 완료되기 전에 머지할 수 없게 하자
   - 리베이스 전 빌드 스탭 통과, 리베이스 후 빌드 스탭이 다시 돌자 '괜찮겠지'하고 머지했다가 배포 실패한 케이스가 팀에서 종종 발생
   - CI가 의미와 역할을 다 할 수 있게, 무시하지 못하도록 branch protection rule 설정
 
 ## 220830
+
 - 모달 개발시 고려해야할 점들
   - https://www.w3.org/WAI/ARIA/apg/patterns/dialogmodal/
 - [playwright랑 cypress랑 한 판 붙는다고 한다.](https://applitools.com/cypress-vs-playwright-rematch-webinar/?utm_source=marketo&utm_medium=email&utm_content=webinar&utm_term=220908-dbinvite1&utm_campaign=220908-cypress-vs-playwright-rematch-webinar&mkt_tok=Njg3LVRFUi02MTIAAAGGjahlT30AifbC00a_C0_YPVDLVVefp7-1dLUHZmjfkkKaNPf3fOghh_TbWKUJKjc2dfKzCzL4wl8RkI7LjuQvKZah2os5EjZYBFlvnzgiSQ)
 
 ## 220831
+
 - 컴포넌트를 잘 설계하기
   - 어떻게 하면 비즈니스 로직 (스타일 로직 포함 pd & po가 정한 정책)과 ui 템플릿을 구분할 수 있을까
   - 어떻게 하면 재사용성이 높을까
@@ -242,45 +251,55 @@ ts-ignore부터 린트룰 비활성화까지... 좋은 형태는 아닌 것 같�
   - https://www.youtube.com/watch?v=aAs36UeLnTg 도 좋다
 
 ## 220901
+
 - 우리 서비스의 네트워크 구조
   - Fe(브라우저) <-> ALB <-> node 여러 대 <-> DB
   - 통신은 모두 소켓을 통해 이루어진다
-  - 네트워크 스텝별로 소켈의 통신을 기다려주는 시간, request time out 값 확인해야 한다. 
+  - 네트워크 스텝별로 소켈의 통신을 기다려주는 시간, request time out 값 확인해야 한다.
     - 스텝별로 시간을 맞추어주어야 하는데 맞추기 어렵다면 수신하는 쪽에서의 시간을 조금이라도 늘려야 한다.
     - 그렇지 않으면 사용자가 요청을 끊은 것인지, 서버가 끊은 것인지 구분할 수 없다. 전부 500으로 내려오기 때문.
     - cpu, memory 등등 지표가 다 괜찮은데 요청이 원활하지 않으면 소켓을 의심해보아야 한다. 아니면 모듈간 네트워크를 확인하거나. 기본 리눅스에서 소켓을 재사용하지 않는다.
-    - 데브옵스가 존재하는 조직에서는 이런 걸 데브옵스가 챙겨주지만 데브옵스가 없으면 직접 할 줄 알아야 한다. 
+    - 데브옵스가 존재하는 조직에서는 이런 걸 데브옵스가 챙겨주지만 데브옵스가 없으면 직접 할 줄 알아야 한다.
       - 물론 서버리스, 클라우드 환경에서는 몰라도 됨
 - 타입스크립트 공변성, 반공변성
+
   - https://seob.dev/posts/%EA%B3%B5%EB%B3%80%EC%84%B1%EC%9D%B4%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80/
   - https://wiki.lucashan.space/programming/phantom-type/
   - 멤버 변수로 함수 작성시, 이변적으로 타입 추론됨
-      ```ts
-      // 공변성
-      let array: Array<string | number> = []
-      let stringArray: Array<string> = []
 
-      array = stringArray // OK
-      stringArray = array // error
+    ```ts
+    // 공변성
+    let array: Array<string | number> = [];
+    let stringArray: Array<string> = [];
 
-      // 반공변
-      let logger = (message: string | number) => {}
-      let stringLogger = (message: string) => {}
+    array = stringArray; // OK
+    stringArray = array; // error
 
-      logger = stringLogger // error
-      stringLogger = logger // OK
+    // 반공변
+    let logger = (message: string | number) => {};
+    let stringLogger = (message: string) => {};
 
-      //이변성: 위의 모든 OK 특성을 허용함
-      ```
+    logger = stringLogger; // error
+    stringLogger = logger; // OK
+
+    //이변성: 위의 모든 OK 특성을 허용함
+    ```
+
 ## 220904
+
 - 디자인 시스템 관련해서 어도비의 디자인 시스템이 공부할 것이 진짜 많다고 한다. ~~근데 언제 보지~~
   - https://spectrum.adobe.com/
+
 ## 220905
+
 - 콜백에서의 타입 추론 문제
   - 문제 : [타입스크립트 플레이그라운드](https://www.typescriptlang.org/play?#code/JYWwDg9gTgLgBAKjgQwM5wEoFNkGN4BmUEIcA5FDvmQNwBQwAdjFlAXlnAKqqtwDedOMLiNkILAC44qGFCYBzegF8GzVu1ycAIshjIBQkQFdeUaTz4AfUcYA2duDeOMAJlgJMsrlXQIv8YAhGTCw3VgAhCFcATwAKVz1kaV19ABoUKHMURhiAbQBdAEpDEThgAjgEpIA6Uz4AXibbBycbRP06szgmhrgXd09GbxLBMrLKGGMoEPY7Xnoy1TojYUnpkIAeV2AANwA+VfH+DuQu1hqxCVVxkX5kLJqQZDA44BZSBv3S2-GKqveWBANTQrlGR1+43WMzgAEYIb8bpCRP9qp16lBLuIsODkb9oSEAEwI25IvEEuCnc6Yq5YElwZRFMlwTYAeh2BzoqiAA)
   - 원인 : **TS cannot know when the callback will execute** https://github.com/microsoft/TypeScript/issues/7719
+
 ## 220906
+
 - 좋은 코드란?
+
   - 목적을 달성하는 코드 = 개개인의 우선순위에 따라 다 다르다. 보통 충돌하는 2가지 중에 하나를 골라야 하는 일이 많은듯.
     - 선언적으로 작성하고 싶어요
     - 나중에 코드 수정시 한 파일만 수정하고 싶어요
@@ -288,12 +307,47 @@ ts-ignore부터 린트룰 비활성화까지... 좋은 형태는 아닌 것 같�
     - 등등
 
 - 이전 프로젝트에서의 경험이 다음 프로젝트에서 개선으로 잘 이어지지 않는 이유
+
   - 이전 프로젝트에서 같은 경험을 나눈 사람과 다른 팀이 됨
 
 - ts 프론트엔드 애플리케이션에서의 클린 아키텍쳐 적용 - 의존성 주입을 중심으로 : https://velog.io/@lky5697/how-to-implement-a-typescript-web-app-with-clean-architecture#%EB%AA%A9%EC%B0%A8
+
   - 앵귤러가 예시인게 아쉽긴하다 (앵귤러가 별로라는 뜻이 아님)
 
 - Record와 Tuple은 뭘까 : https://kofearticle.substack.com/p/korean-fe-article-record-and-tuple
 - React Children의 타입은?
   - class 컴포넌트일 땐 ReactNode
   - 함수 컴포넌트에선 ReactElement
+
+## 221014
+
+그동안 바쁘다는 핑계로 한 달 동안 업로드가 없었는데 오늘 아주 재밌는 일이 있어서 간단하게 기록한다.
+
+- vite 메모리 이슈
+
+  - vite가 초기버전이라 걱정하는 사람들은 많이 봤는데 그래서 어떤 리스크가 있을까?는 잘 몰랐었다가 **오늘 확실히 알았다.**
+  - 스토리북 배포를 위해 빌드를 하는데 자꾸 메모리가 터져서 보니까 vite 자체에 메모리 이슈가 있었다.
+  - vite 측에선 더 중요한 이슈들이 있어서 메모리 이슈를 해결할 수 없다고 한다. contributor 구함 상태인데 그게 벌써 거의 반년째.
+  - [[Bug] JavaScript heap out of memory (Vite build works, Storybook w/WebPack 4 works) #409](https://github.com/storybookjs/builder-vite/issues/409)
+  - [vite build error: out of memory #2433](https://github.com/vitejs/vite/issues/2433)
+  - 우선은 스토리북 배포에 소스맵, minify는 필요없다고 판단하여 두 옵션을 꺼서 메모리 이슈를 해결했다.
+  - 하드웨어의 메모리를 늘려도 되지만 (2배 늘리면 해결됨) 다른 방법으로도 해결이 가능하기 때문에 하지 않았다.
+    - 하드웨어의 메모리를 늘리는 것은 최후의 수단으로 고려되는 듯 하다.
+      > 음 젠킨스쪽에서 메모리 늘리면 당장 해결은 되긴하는데요 벌써 하드웨어 스펙을 늘리는것이 해결책이 되면 이후에 사이즈가 더 커지면 어떻게 되는건가? 하는 고민도 있을것같아요!
+
+- 라이브러리 빌드시 devDependency가 번들에 포함되는 이슈
+  - 개발중인 사내 디자인 시스템 라이브러리 빌드시 devDependency가 번들에 포함되어 사이즈가 크게 나오는 이슈가 있어서 옆자리에 계신 분이 "오늘 이걸 해결하지 못하면 나는 유사개발자다" 라고 선언하시고는 디깅하셨는데 결과가 나왔다.
+  - 알고보니 devDependency로 걸었더라도 peerDependency에 명시를 안해주면 프로덕션 빌드시 번들에 포함하여 빌드가 되고 있었다.
+- 디자인 시스템으로 디자인 파트와 소통할 때 이슈
+
+  - 사내 디자인 시스템의 단독 패키지화가 거의 막바지이고, 각 컴포넌트 별로 구축 상황도 거의 완료인 것 같아서 1.0.0 버전의 출시를 문의했다.
+  - 여기서 버전은 semver를 기준으로 하는 것이었는데 당연히 프론트엔드 파트에서 디자인 파트에게 이에 대해 공유한 적이 없어 미스 커뮤니케이션이 발생했다.
+
+- 타입스크립트 Record타입에 대한 Unsafe member access 린트 에러 문제
+  - 디자인 시스템에서 export한 컬러 변수를 사용시 아래와 같은 unsafe member access 린트 에러가 발생한다는 제보를 받았다.
+    ![image](https://user-images.githubusercontent.com/76927618/195638492-998efef8-0724-4b7c-b653-f5d586d3c770.png)
+  - 해당 린트 룰은 any 타입의 변수의 member에 접근하지 못한다는 룰인데 이해가 안되는 점은 컬러 변수 객체는 any 타입이 아니라 Record로 정상적으로 타입이 존재하는데 왜 에러가 발생하냐는 것이다. 에러가 발생하지 않는 것이 맞는데?
+  - [타입스크립트 린트 룰 플레이그라운드](https://typescript-eslint.io/play/#ts=4.8.4&sourceType=module&code=CYUwxgNghgTiAEYD2A7AzgF3gYQPIBlcAlAfQDkBBAWQFEBlALnjimFQgE94BtAIgEsUAMwDmcECl4AaeL2CwA1tNlioHZbzjANAB0FKZvVTpAaAbvyQQQGDYOD8RSDQCMIAV1OGwHKJMMYIFAQGmIgEhoQ-AC2XrIcIBAQSADuGkgwfiKmALoA3ABQoJCwCBgcJjhWGWRQsWjwALzw5SZIQjgExOTU9Nwo7tEuIDD5ReDQcIiomJ2EpAAKFPg0ACqrNExE4BnAADzY1TC19TLcmDCCIjIXVzcYlyjX8LdP94-Pr58Pdy8-b38Pu8rjkAHyFAD0EPgxUmCGQ6CweHmJCWK3Wm3gfg4hQKyO6aLWGwAdG5PNwACw5ApAA&eslintrc=N4KABGBEBOCuA2BTAzpAXGUEKQAIBcBPABxQGNoBLY-AWhXkoDt8B6Jge1tieQEMAZoloBbRCIBGiaLT5kyKVBkjToHaJHBgAviG1A&tsconfig=N4KABGBEDGD2C2AHAlgGwKYCcDyiAuysAdgM6QBcYoEEkJemy0eAcgK6qoDCAFutAGsylBm3TgwAXxCSgA)에서도 재현이 되지 않는다.
+  - vsc의 문제라기엔 webstorm에서도 동일하게 발생했다.
+  - 뭘까 뭘까 하다가 ide를 몇 번 껐다 켰더니 린트에러가 발생하지 않았다. 아까까지는 "왜 안되지?" 를 고민했다면 여기서부턴 "왜 되지?"를 고민하기 시작했다.
+  - 아직도 원인을 모른다.

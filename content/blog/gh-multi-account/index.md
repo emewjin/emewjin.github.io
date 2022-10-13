@@ -32,8 +32,8 @@ tags: [gh, dx]
 4. 아래 내용을 작성한다.
    ```sh
    github.com:
-       oauth_token: ghp_[…]
-       git_protocol: ssh 또는 https
+       oauth_token: [your token]
+       git_protocol: [ssh 또는 https]
        user: [github username]
    ```
 5. 그리고 `gh`의 alias를 설정한다.
