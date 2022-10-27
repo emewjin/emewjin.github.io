@@ -29,20 +29,24 @@ Icon 컴포넌트라면 무조건 props에 icon이 undefined일 수 없으므로
 ![image](https://user-images.githubusercontent.com/76927618/185615864-a90a41a8-7a97-48da-919e-952e37f09daf.png)
 
 기본적으로 name이 있지만, 빌드시 난독화가 되기 때문에 사용할 수 없다.  
-따로 displayName을 사용해야 한다. 이 displayName으로 Icon 인지 아닌지로 판별하면 되겠다.
+그래서 난독화 되지 않는 displayName을 사용해야 한다. 이 displayName으로 Icon 인지 아닌지로 판별하면 되겠다.
 
 ```tsx
 function Icon() {}
 Icon.displayName = 'Icon';
 ```
 
-> ## displayName은 뭘까?
->
-> [공식 문서](https://reactjs.org/docs/react-component.html#displayname)에서 Class Properties 하위에 설명이 작성되어 있어서 Function component에서는 해당이 안되는 내용인지 좀 헷갈리는데 어쨌든 설명을 읽어보면 다음과 같다.
->
+displayName은 [공식 문서](https://reactjs.org/docs/react-component.html#displayname)에서 Class Properties 하위에 설명이 작성되어 있어서 Function component에서는 해당이 안되는 내용인지 좀 헷갈리는데 어쨌든 설명을 읽어보면 다음과 같다.
+
 > The displayName string is used in debugging messages. Usually, you don’t need to set it explicitly because it’s inferred from the name of the function or class that defines the component. You might want to set it explicitly if you want to display a different name for debugging purposes or when you create a higher-order component, see Wrap the Display Name for Easy Debugging for details.
->
-> 요약하면 디버깅을 쉽게 하기 위해 디버깅 메세지에 어떤 컴포넌트인지 정확하게 표시해주는 역할을 한다. 단, 굳이 명시해줄 필요는 없는데 함수 또는 클래스에서 알아서 name을 뽑아내기 때문이다. 만약 다른 이름을 표시하고 싶다면 displayName으로 명시하면 된다고 함.
+
+요약하면 디버깅을 쉽게 하기 위해 디버깅 메세지에 어떤 컴포넌트인지 정확하게 표시해주는 역할을 한다.  
+단, 굳이 명시해줄 필요는 없는데 함수 또는 클래스에서 알아서 name을 뽑아내기 때문이다. 만약 다른 이름을 표시하고 싶다면 displayName으로 명시하면 된다고 함.
+
+즉 빌드된 앱에서 리액트 데브 툴로 컴포넌트 트리를 보면, displayName을 지정해주지 않은 컴포넌트들은 함수 컴포넌트의 name을 이용하기 때문에 난독화된 문자열이 보여 이게 어떤 컴포넌트인지 구분하기 어렵다.  
+반면 displayName을 지정해준 컴포넌트들은 문자열이 유지되어 어떤 컴포넌트인지 알아차리기 쉽다.
+
+![image-20221027-065615](https://user-images.githubusercontent.com/76927618/198322864-d5ad2aea-8d70-42e6-b49a-e3b2a78ba94e.png)
 
 ```tsx
 import { isValidElement, ReactElement } from 'react';
