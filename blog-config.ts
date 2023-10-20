@@ -1,7 +1,7 @@
 const config = {
   title: 'emewjin.log', // Blog name
   description:
-    '최근에는 비즈니스를 멈추지 않으면서 바퀴를 갈아끼우는 방법과 디자인 시스템에 관심을 갖고 있습니다.',
+    '잘못된 내용 혹은 더 좋은 방법이 있으면 언제든지 알려주세요 XD',
   author: 'emewjin', // Your name
   introduction: 'Product Engineer, Web Frontend Engineer',
   siteUrl: 'https://emewjin.github.io',

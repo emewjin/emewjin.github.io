@@ -1,8 +1,8 @@
 ---
-title: 'graphQL 위키'
+title: 'GraphQL 위키'
 date: 2022-05-29
 lastUpdated: 2022-05-29
-tags: [graphQL]
+tags: [GraphQL]
 ---
 
 회사에서 레거시 어드민을 개편하면서 프론트선에서 기존 ORM 들을 `res.json` 으로 간단하게 API로 만들고 거기에 graphQL을 활용하기로 했다. 그래서 공부하는 graphQL.

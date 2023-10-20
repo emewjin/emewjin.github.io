@@ -5,8 +5,9 @@ date: 2023-10-20
 lastUpdated: 2023-10-20
 tags: [React, GraphQL]
 ---
-> 원문: https://alan.norbauer.com/articles/relay-style-graphql
-> 이 글은 원작자의 동의를 받고 한국어로 번역되었습니다.
+> 원문: https://alan.norbauer.com/articles/relay-style-graphql   
+> 이 글은 원작자의 동의를 받고 한국어로 번역되었습니다.  
+> 오역 또는 더 정확한 표현에 대한 코멘트는 항상 환영입니다!
 -------------------
 
 > ”~~미래형~~ Relay-style GraphQL은 이미 존재한다 - 다만 고르게 퍼져있지 않을 뿐이다.”  
