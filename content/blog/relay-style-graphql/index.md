@@ -245,7 +245,7 @@ function IssueTitle(props: { issue: IssueTitleFragment$key }) {
 
 이것에 대한 schema documentation를 보고싶으신가요? 마우스를 필드 위에 올리기만 하면 됩니다:
 
-![alt_text](https://api.media.atlassian.com/file/b4877d02-99ed-49b2-9f52-850f2b8ca6c4/image?allowAnimated=true&client=bec59423-5465-4f78-ac69-35ce5361d63f&collection=contentId-1095958532&height=306&max-age=2592000&mode=full-fit&token=eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiZWM1OTQyMy01NDY1LTRmNzgtYWM2OS0zNWNlNTM2MWQ2M2YiLCJhY2Nlc3MiOnsidXJuOmZpbGVzdG9yZTpjb2xsZWN0aW9uOmNvbnRlbnRJZC0xMDk1OTU4NTMyIjpbInJlYWQiXX0sImV4cCI6MTY5Nzc4NzcwNCwibmJmIjoxNjk3Nzg0ODI0fQ.hMG7WIgCKiM4uLHkwR_PS_2MXKTA-M_HfgSBrE4KSIU&width=760)
+![alt_text](https://github.com/emewjin/emewjin.github.io/assets/76927618/7903d18a-b420-4956-a07a-14645cdcb3ae)
 
 schema로 이동하고 연관된 필드들을 보고 싶으신가요? 필드를 Cmd-click 하세요.
 
@@ -536,16 +536,16 @@ GraphQL을 컴포넌트로 이동하면 언어-서버 프로토콜의 이점을 
 
 1.  npm에서 Apollo는 Relay보다 [19배 더 많이 다운로드 됩니다.](https://npmtrends.com/@apollo/client-vs-react-relay "https://npmtrends.com/@apollo/client-vs-react-relay"):
     
-    ![](https://api.media.atlassian.com/file/a630528f-8433-4f4b-a6db-9fbc6fe265a9/image?allowAnimated=true&client=bec59423-5465-4f78-ac69-35ce5361d63f&collection=contentId-1095958532&height=556&max-age=2592000&mode=full-fit&token=eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiZWM1OTQyMy01NDY1LTRmNzgtYWM2OS0zNWNlNTM2MWQ2M2YiLCJhY2Nlc3MiOnsidXJuOmZpbGVzdG9yZTpjb2xsZWN0aW9uOmNvbnRlbnRJZC0xMDk1OTU4NTMyIjpbInJlYWQiXX0sImV4cCI6MTY5Nzc4NzcwNCwibmJmIjoxNjk3Nzg0ODI0fQ.hMG7WIgCKiM4uLHkwR_PS_2MXKTA-M_HfgSBrE4KSIU&width=760)
+    ![](https://github.com/emewjin/emewjin.github.io/assets/76927618/d99ad946-bba1-4eda-9159-5b4915022140)
     
 
     만약 엔지니어링 조직이 주니어에 치우쳐 있고 Relay보다 Apollo에 대한 글이 얼마나 더 많은지가 중요하다면 Apollo를 고수해야 할 수도 있습니다. 아니면 위험을 싫어하고 다른 사람들이 많이 사용하는 제품을 더 좋아할 수도 있습니다. 또는 인터넷 블로그 게시물에서 추천하는 제품 대신 다른 사람들이 사용하는 제품을 사용하는 것에 위안을 삼을 수도 있습니다. 그것도 아니면 그냥 큰 막대기를 좋아하실 수도 있습니다.
 
-1.  Relay-style GraphQL은 컴파일러 단계가 필요합니다. 예를들어 Relay는 컴파일러^[Don’t worry, Relay’s compiler [is written in Rust](https://relay.dev/blog/2021/12/08/introducing-the-new-relay-compiler/ "https://relay.dev/blog/2021/12/08/introducing-the-new-relay-compiler/").]가 있는데 개발할 때 watch mode에서 실행되고 있도록 해야 합니다.
+2.  Relay-style GraphQL은 컴파일러 단계가 필요합니다. 예를들어 Relay는 컴파일러^[Don’t worry, Relay’s compiler [is written in Rust](https://relay.dev/blog/2021/12/08/introducing-the-new-relay-compiler/ "https://relay.dev/blog/2021/12/08/introducing-the-new-relay-compiler/").]가 있는데 개발할 때 watch mode에서 실행되고 있도록 해야 합니다.
     
-2.  Relay의 문서는 꽤 훌륭하지만 완벽하지는 않습니다. 특히 메타만 사용하는 고급 기능으로 갈수록 문서화가 심하게 부족한 영역이 있습니다.
+3.  Relay의 문서는 꽤 훌륭하지만 완벽하지는 않습니다. 특히 메타만 사용하는 고급 기능으로 갈수록 문서화가 심하게 부족한 영역이 있습니다.
     
-3.  Relay는 GraphQL 서버와 통합될 때 가장 잘 동작합니다. 이를 [GraphQL Server Specification](https://relay.dev/docs/guides/graphql-server-specification/ "https://relay.dev/docs/guides/graphql-server-specification/") 이라고 하며 이 명세는 전역적으로 고유한 ID 사용, `@connection` directive 지원, 그리고 `Node` 인터페이스 제공 등을 설명합니다. 이는 좋은 기능이며 사용자의 편의를 높여주지만, 일부 조직에서는 UI 엔지니어가 GraphQL 서버 구현을 거의 제어할 수 없기 때문에 Relay의 잠재력을 최대한 발휘할 수 없을지도 모릅니다.
+4.  Relay는 GraphQL 서버와 통합될 때 가장 잘 동작합니다. 이를 [GraphQL Server Specification](https://relay.dev/docs/guides/graphql-server-specification/ "https://relay.dev/docs/guides/graphql-server-specification/") 이라고 하며 이 명세는 전역적으로 고유한 ID 사용, `@connection` directive 지원, 그리고 `Node` 인터페이스 제공 등을 설명합니다. 이는 좋은 기능이며 사용자의 편의를 높여주지만, 일부 조직에서는 UI 엔지니어가 GraphQL 서버 구현을 거의 제어할 수 없기 때문에 Relay의 잠재력을 최대한 발휘할 수 없을지도 모릅니다.
     
 
 ## FAQ
