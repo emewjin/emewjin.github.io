@@ -41,7 +41,7 @@ export const globalStyles = globalCss({
   },
   h4: {
     fontSize: '1rem',
-    margin: '1rem 0',
+    margin: '1.5rem 0 1rem 0',
   },
   h5: {
     fontSize: '0.875rem',
