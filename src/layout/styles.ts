@@ -72,12 +72,10 @@ export const globalStyles = globalCss({
     borderBottom: '1px solid $borderGray',
   },
   th: {
-    paddingTop: '0.75rem',
-    paddingBottom: '0.75rem',
+    padding: '0.75rem',
   },
   td: {
-    paddingTop: '0.75rem',
-    paddingBottom: '0.75rem',
+    padding: '0.75rem',
   },
   p: {
     marginTop: '0.75rem',
