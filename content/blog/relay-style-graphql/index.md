@@ -13,26 +13,27 @@ tags: [React, GraphQL]
 > ”~~미래형~~ Relay-style GraphQL은 이미 존재한다 - 다만 고르게 퍼져있지 않을 뿐이다.”  
 > – William Gibson, probably
 
-“Relay-style GraphQL”은 React 어플리케이션에서 GraphQL을 사용하는 한 가지 방법이며, _아마도_ 현재 사용하고 있는 방법보다 더 나은 방법일 것입니다. 이 방법은 Meta의 GraphQL 오픈소스 라이브러리, [Relay](https://relay.dev/ "https://relay.dev/")의 아이디어를 따릅니다.
+“Relay-style GraphQL”은 React 애플리케이션에서 GraphQL을 사용하는 한 가지 방법이며, _아마도_ 현재 사용하고 있는 방법보다 더 나은 방법일 것입니다. 이 방법은 Meta의 GraphQL 오픈소스 라이브러리, [Relay](https://relay.dev/ "https://relay.dev/")의 아이디어를 따릅니다.
 
-Relay는 이러한 아이디어^[The Guild is [working on](https://the-guild.dev/blog/unleash-the-power-of-fragments-with-graphql-codegen "https://the-guild.dev/blog/unleash-the-power-of-fragments-with-graphql-codegen") bringing these ideas to other libraries.]를 독점하지 않으며, Apollo와 같은 프레임워크로도 충분히 Relay 스타일의 GraphQL을 작성할 수 있습니다. 반대로, Relay로도 충분히 구식 GraphQL을 작성할 수도 있습니다. 이 용어는 _기술적으로 가능한 것과는 관계없이_, 최신 버전의 Relay 스타일로 작성된 GraphQL 코드와 그렇지 않은 오늘날 대부분의 다른 GraphQL 코드의 스타일 차이를 설명하는 것으로 생각하면 됩니다.
+Relay는 이러한 아이디어^[The Guild is [working on](https://the-guild.dev/blog/unleash-the-power-of-fragments-with-graphql-codegen "https://the-guild.dev/blog/unleash-the-power-of-fragments-with-graphql-codegen") bringing these ideas to other libraries.]를 독점하지 않으며, Apollo와 같은 프레임워크로도 충분히 Relay-style의 GraphQL을 작성할 수 있습니다. 반대로, Relay로도 충분히 구식 GraphQL을 작성할 수도 있습니다. 이 용어는 _기술적으로 가능한 것과는 관계없이_, 최신 버전의 Relay-style로 작성된 GraphQL 코드와 그렇지 않은 오늘날 대부분의 다른 GraphQL 코드의 스타일 차이를 설명하는 것으로 생각하면 됩니다.
 
-## Shifting Goals
+## 목표 변경
 
 
 다음은 2015년에 우리가 가졌던 높은 수준의 목표와 오늘날 Relay-style의 GraphQL이 해결하고자 하는 목표를 비교한 것입니다:
 
 | **GraphQL in 2015** | **Relay-style GraphQL** |
 |---|---|
-| - 데이터 쿼리를 위한 선언적인 언어<br>- REST보다 유연하지만, BE이 더 많이 노출됨<br>- 일부 over-fetching 방지<br>- 퍼포먼스(성능)는 ????????????<br>- schemas 및 type 안정성 (REST가 제거한)을 되찾음<br>더 나은 개발자 경험(DX) | - UI components가 그들의 데이터 종속성을 선언할 수 있음<br>- REST보다 더 안전하고 빠르며 locked-down<br>- 절대 과소 또는 과잉 fetch 하지 않음<br>- 가능한한 최고의 퍼포먼스<br>- 컴포넌트에 맞게 더욱 향상된 type 안정성<br>- 놀라운 개발자 경험 |
+| - 데이터 쿼리를 위한 선언적인 언어<br>- REST보다 유연하지만, BE가 더 많이 노출됨<br>- 일부 over-fetching 방지<br>- 퍼포먼스(성능)는 ????????????<br>- schemas 및 type 안정성 (REST가 제거한)을 되찾음<br>- 더 나은 개발자 경험(DX) | - UI components가 그들의 데이터 종속성을 선언할 수 있음<br>- REST보다 더 안전하고 빠르며 locked-down<br>- 절대 과소 또는 과잉 fetch 하지 않음<br>- 가능한한 최고의 퍼포먼스<br>- 컴포넌트에 맞게 더욱 향상된 type 안정성<br>- 놀라운 개발자 경험 |
 
 이러한 목표를 달성할 수 있는 방법에 대해 설명해 드리겠습니다. 하지만 그 전에 먼저...
 
 ## Some (Optional) History
 
 
-Meta는 2012년에 GraphQL을 시작하여 2015년에 오픈소스로 공개했습니다. GraphQL 이전에는 REST가 있었고, 그 이전에는 SOAP가 있었습니다. GraphQL은 REST 백엔드보다 더 나은 무언가로 모바일 애플리케이션을 구축하고자 하는 열망에서 시작되었습니다.  
-2015년 이후 웹 UI 커뮤니티 내에서는 놀랍게도 교차 수분^[서로 다른 꽃의 화분이 벌이나 나비에 의해 옮겨져서 새로운 수정이 일어나는 걸 뜻한다. 전혀 다른 그룹이 만나 교류하고, 기존에 없던 결과물들을 만드는 것을 의미함.]이 거의 없는 두 개의 평행한 evolution 트랙이 존재했습니다:
+Meta는 2012년에 GraphQL을 시작하여 2015년에 오픈소스로 공개했습니다. GraphQL 이전에는 REST가 있었고, 그 이전에는 SOAP가 있었습니다. GraphQL은 REST 백엔드보다 더 나은 무언가로 모바일 애플리케이션을 구축하고자 하는 열망에서 시작되었습니다. 
+
+2015년 이후 웹 UI 커뮤니티 내에서는 놀랍게도 교차 수분^[(역)서로 다른 꽃의 화분이 벌이나 나비에 의해 옮겨져서 새로운 수정이 일어나는 걸 뜻합니다. 전혀 다른 그룹이 만나 교류하고, 기존에 없던 결과물들을 만드는 것을 의미합니다.]이 거의 없는 두 개의 평행한 evolution 트랙이 존재했습니다:
 
 - [Apollo](https://www.apollographql.com/ "https://www.apollographql.com/")가 주도하는 오픈소스 커뮤니티
     
@@ -41,11 +42,11 @@ Meta는 2012년에 GraphQL을 시작하여 2015년에 오픈소스로 공개했�
 
 오픈소스 커뮤니티는 [The Guild](https://the-guild.dev/ "https://the-guild.dev/")의 놀라운 작업과 같이 GraphQL을 개선했지만, 2016년 첫 출시 이후 Apollo를 사용하는 방식은 근본적으로 동일하게 유지되고 있습니다. 주요 발전은 더디게 진행되고 있으며(예: `useFragment` 는 아직 실험 중임), 일부 훌륭한 발전(예: [the VS Code Plugin](https://www.apollographql.com/docs/devtools/editor-plugins/ "https://www.apollographql.com/docs/devtools/editor-plugins/"))의 채택은 저에게는 불안정적으로 보입니다.   
 
-메타가 모바일에서 GraphQL을 채택한 것은 즉각적인 성공을 거두었지만, 웹에서 수용하는 데는 오픈소스에 비해 훨씬 못 미쳤으며, 페이스북에 도입하는 데 10년이 걸렸습니다. 여러 번의 시도가 실패로 돌아갔고, 실패할 때마다 기술 스택(예: Relay)을 다시 생각하게 되었으며, 결국에는 처음 시작했을 때와 오늘날 대부분의 업계와는 매우 다른 접근 방식으로 성공할 수 있었습니다.  
+메타가 모바일에서 GraphQL을 채택한 것은 즉각적인 성공을 거두었지만, 웹에서 수용하는 데는 오픈소스에 비해 훨씬 못 미쳤으며, 페이스북에 도입하는 데 10년이 걸렸습니다. 여러 번의 시도가 실패로 돌아갔고, 실패할 때마다 기술 스택(예: Relay)을 다시 생각하게 되었으며, 결국에는 처음 시작했을 때 및 오늘날 대부분의 업계와는 매우 다른 접근 방식으로 성공할 수 있었습니다.  
 
-Meta의 노력의 결실과 오픈 소스에서 얻은 교훈이 바로 "Relay-style GraphQL"이라고 부르는 것입니다. 모든 사람이 Relay-style GraphQL의 모든 부분을 필요로 하는 것은 아니며, 특히 최상의 성능과 이전 버전과의 호환성, 그리고 그에 수반되는 모든 인프라와 도구의 복잡성을 필요로 하는 것은 아니지만, 다른 대부분의 발전은 모든 애플리케이션과 매우 관련이 있습니다.
+Meta의 노력의 결실과 오픈 소스에서 얻은 교훈이 바로 "Relay-style GraphQL"이라고 부르는 것입니다. 모든 사람에게 Relay-style GraphQL의 모든 부분이 필요하지는 않습니다. 특히 최상의 성능과 하위호환성, 그리고 그에 수반되는 모든 인프라와 도구의 복잡성이 필요하지는 않을 것입니다. 하지만 대부분의 다른 발전은 모든 애플리케이션과 매우 밀접한 관련이 있습니다.
 
-## Highlights of Relay-style GraphQL
+## Relay-style GraphQL의 주요 특징
 
 Relay-style GraphQL은 많은 프레임워크 기능, 모범 사례 및 다른 사고방식을 결합한 접근 방식입니다. 그중 몇 가지를 강조하고 싶습니다:
 
@@ -55,11 +56,11 @@ Fragment collocation은 GraphQL fragment를 다른 별도의 파일이 아닌 �
 
 Apollo는 더 낮은 형태의 [collocated fragments](https://www.apollographql.com/blog/graphql/fragments/using-graphql-fragments-for-safer-cleaner-and-faster-code/ "https://www.apollographql.com/blog/graphql/fragments/using-graphql-fragments-for-safer-cleaner-and-faster-code/") 를 지원하며 [더 나은 collocated fragments](https://www.apollographql.com/docs/react/api/react/hooks-experimental/#usefragment "https://www.apollographql.com/docs/react/api/react/hooks-experimental/#usefragment") 는 아직 베타입니다.
 
-collocation of fragments를 잘 사용하는 두 가지 **중요한** 원칙은 다음과 같습니다.:
+collocation of fragments를 잘 사용하는 두 가지 **중요한** 원칙은 다음과 같습니다:
 
-- 컴포넌트는 절대 GraphQL 출처의 data를 props를 통해 받아선 안됩니다: 컴포넌트의 fragment(s)에서 선언한 데이터에만 접근 가능해야 합니다.
+1. 컴포넌트는 절대 GraphQL 출처의 data를 props를 통해 받아선 안됩니다: 컴포넌트의 fragment(s)에서 선언한 데이터에만 접근 가능해야 합니다.
     
-- 컴포넌트는 절대 fragments를 공유해선 안됩니다. Relay는 fragment의 이름이 컴포넌트 이름으로 시작하도록 강제합니다.
+2. 컴포넌트는 절대 fragments를 공유해선 안됩니다. Relay는 fragment의 이름이 컴포넌트 이름으로 시작하도록 강제합니다.
     
 
 #### An example Relay component
@@ -183,7 +184,7 @@ REST API는 이론적으로는 UI에 필요한 데이터를 정확히 가져오�
 
 GraphQL은 UI 작성자가 항상 필요한 데이터를 정확히 요청할 수 있도록하여 이론적으로 항상 완벽한 data-fetching 효율성을 달성하고 over-fetching을 방지함으로써 이 문제를 개선했습니다. 
 
-문제는 여러 컴포넌트에서 GraphQL queries/fragments를 공유할 때 발생합니다: 정적 분석으로는 `.graphql`파일 안의 어떤 필드가 사용되지 않았는지, 그러므로 제거해도 안전한지를 알 수 없습니다^[_Static_ analysis has a hard time with this because GraphQL has abstract types for many fields, and those references could theoretically be tracked across your codebase, but the leaf fields are always primitive types (like `string` and `number`) and tracking references to primitive values across an entire codebase, across all code boundaries, is not a problem anyone has solved (to my knowledge). That said, _runtime_ analysis using JS `Proxy` can be used to detect what fields go unused with some level of accuracy. [Reddit Engineering wrote about it here](https://www.reddit.com/r/RedditEng/comments/x0rasj/identifying_unused_fields_in_graphql/ "https://www.reddit.com/r/RedditEng/comments/x0rasj/identifying_unused_fields_in_graphql/"). Runtime analysis is better than nothing, but strictly worse than just getting it exactly right at compile time.].  
+문제는 여러 컴포넌트에서 GraphQL query들과 fragment들을 공유할 때 발생합니다: 정적 분석으로는 `.graphql`파일 안의 어떤 필드가 사용되지 않았는지 알 수 없으므로 안전하게 제거할 수 없습니다^[_Static_ analysis has a hard time with this because GraphQL has abstract types for many fields, and those references could theoretically be tracked across your codebase, but the leaf fields are always primitive types (like `string` and `number`) and tracking references to primitive values across an entire codebase, across all code boundaries, is not a problem anyone has solved (to my knowledge). That said, _runtime_ analysis using JS `Proxy` can be used to detect what fields go unused with some level of accuracy. [Reddit Engineering wrote about it here](https://www.reddit.com/r/RedditEng/comments/x0rasj/identifying_unused_fields_in_graphql/ "https://www.reddit.com/r/RedditEng/comments/x0rasj/identifying_unused_fields_in_graphql/"). Runtime analysis is better than nothing, but strictly worse than just getting it exactly right at compile time.].  
 
 Relay-style Fragment collocation 은 이러한 문제를 해결합니다: 컴포넌트의 Fragment에서 필드를 제거하거나 컴포넌트만 제거하고 다른 컴포넌트에서 해당 필드를 참조하지 않는 경우, 별도로 해줄 일 없이 쿼리에서 해당 필드가 제거됩니다.
 
@@ -203,8 +204,11 @@ Relay는 이 모든 작업을 용이하게 하는 도구를 구현합니다:
 
 Relay-style의 GraphQL 코드에는 쿼리되지 않은 데이터를 컴포넌트가 필요로 하는 버그가 없습니다.
 
-fragment collocation이 없으면 의존하는 데이터를 _항상_ 가져오지 않는 React 컴포넌트를 작성할 수 있습니다. 예를 들어, `firstName` , `lastName`  필드가 있는 `User` 객체가 필요한 컴포넌트가 있다고 가정해 봅시다. 컴포넌트는 이 필드가 nullable임을 알고 있고 적절한 `null` 검사를 수행하지만, 컴포넌트를 사용하는 모든 쿼리에 두 필드가 모두 포함된다고 보장할 수는 없습니다. 이로 인해 런타임에 컴포넌트가 예기치 않게 `null`을 반환하는 버그가 발생할 수 있습니다. UI는 이 오류 사례를 거의 기록하지 않습니다.  
-fragment collocation을 사용하면 querying 없이 컴포넌트를 렌더링할 수 없기 때문에 컴포넌트에 필요한 모든 데이터가 항상 쿼리된다는 것을 보장할 수 있습니다. 필드가 여전히 `null`이 될 수 있긴 하지만 그건 GraphQL 코드의 버그 때문이 아닙니다.
+fragment collocation이 없으면 의존하는 데이터를 _항상_ 가져오지 않는 React 컴포넌트를 작성할 수 있습니다. 
+
+예를 들어, `firstName` , `lastName`  필드가 있는 `User` 객체가 필요한 컴포넌트가 있다고 가정해 봅시다. 컴포넌트는 이 필드가 nullable임을 알고 있고 적절한 `null` 검사를 수행하지만, 컴포넌트를 사용하는 모든 쿼리에 두 필드가 모두 포함된다고 보장할 수는 없습니다. 이로 인해 런타임에 컴포넌트가 예기치 않게 `null`을 반환하는 버그가 발생할 수 있습니다. UI는 이 오류 사례를 거의 기록하지 않습니다.  
+
+fragment collocation을 사용하면 쿼리하지않고 컴포넌트를 렌더링할 수 없기 때문에 컴포넌트에 필요한 모든 데이터가 항상 쿼리된다는 것을 보장할 수 있습니다. 필드가 여전히 `null`이 될 수 있긴 하지만 그건 GraphQL 코드의 버그 때문이 아닙니다.
 
 #### 이점 #3: 컴포넌트를 더 쉽게 추론할 수 있습니다.
 
@@ -212,7 +216,7 @@ collocated fragments이 위에서 말했던 첫 번째 원칙(아래 인용구)�
 
 > “컴포넌트는 절대 GraphQL 출처의 data를 props를 통해 받아선 안됩니다: 컴포넌트의 fragment(s)에서 선언한 데이터에만 접근 가능해야 합니다.”
 
-추론하기가 훨씬 쉬워집니다. 이것은 제가 개인적으로 가장 좋아하는 collocated fragments의 이점이며, Relay 스타일 GraphQL의 이점이기도 합니다.
+추론하기가 훨씬 쉬워집니다. 이것은 제가 개인적으로 가장 좋아하는 collocated fragments의 이점이며, Relay-style GraphQL의 이점이기도 합니다.
 
 예를 들어, prop에서 GraphQL 데이터를 가져오는 React 컴포넌트를 생각해 봅시다:
 ```tsx
@@ -221,9 +225,8 @@ function IssueTitle(props: { issue: { title: string|null } }) {
   return <li>{props.issue.title}</li>;
 }
 ```
-이 컴포넌트는 매우 간단해 보이지만 컴포넌트를 렌더링하기 위해 title의 출처에 대한 정보가 필요한 경우 다른 곳에서 검색해야 합니다. 혹은 렌더링시 또 다른 필드를 사용하고 싶으신가요? prop에 추가한 다음 데이터의 출처를 찾아서 그곳에 필드를 추가해야 합니다.  
+이 컴포넌트는 매우 간단해 보이지만 컴포넌트를 렌더링하기 위해 `title`의 출처에 대한 정보가 필요한 경우 다른 곳에서 검색해야 합니다. 혹은 렌더링시 또 다른 필드를 사용하고 싶으신가요? prop에 추가한 다음 데이터의 출처를 찾아서 그곳에 필드를 추가해야 합니다.  
   
-
 collocated fragment를 사용하는 GraphQL component와 비교해 보세요:
 
 ```tsx
@@ -251,7 +254,7 @@ schema로 이동하고 연관된 필드들을 보고 싶으신가요? 필드를 
 
 다른 필드를 렌더링할 때 쓰고싶으신가요? 이 컴포넌트의 fragment에 추가하기만 하세요.
 
-#### 이점 #4: 향상된 타입스크립트 유형
+#### 이점 #4: 향상된 타입스크립트 types
 
 collocated fragments이 위에서 말한 두 번째 원칙을 준수하는 경우:
 
@@ -261,22 +264,22 @@ collocated fragments이 위에서 말한 두 번째 원칙을 준수하는 경�
 
 GraphQL 데이터의 TypeScript typing이 좋지 않은 코드베이스에서 작업할 가능성이 있죠. 이런 일이 발생할 수 있는 케이스는 여러 가지가 있습니다. 예를 들어:
 
-- 컴포넌트 prop의 definition에서 타입이 확장되는 경우. 예를 들어, GraphQL type은 string literal들의 union일 수 있지만 컴포넌트 prop은 이를 `string` 으로 확장합니다.
+- 컴포넌트 prop의 정의에서 타입이 확장되는 경우. 예를 들어, GraphQL type은 string literal들의 union일 수 있지만 컴포넌트 prop은 이를 `string` 으로 확장합니다.
     
 - GraphQL 데이터는 모든 GraphQL 타입을 유지하지 않는 변환 작업을 거치게 되며, 유지되는 type은 쿼리에 따라 특정 유형에서 degrade됩니다. 예를 들어, 한 필드에 대해 쿼리했지만 사용하게 되는 type은 abstract GraphQL type (쿼리하지 않았음에도 불구하고 모든 필드를 포함하고 모두 nullable한)입니다. 이 경우 사용하는 IDE의 자동 완성 기능은 잠재적으로 모든 필드에 액세스할 수 있다고 생각하므로 문제가 발생할 수 있습니다.
     
-- Field types은 엄격하지 않은 타이핑과 바닐라 자바스크립트를 통해 손실됩니다.
+- Field type들은 엄격하지 않은 타이핑과 바닐라 자바스크립트를 통해 손실됩니다.
     
 
-엄격하지 않고 엄격한 타입스크립트가 없는 코드베이스일지라도 Relay-style 컴포넌트에서의 GraphQL의 타입은 항상 완벽합니다. 왜냐하면 컴포넌트는 fragment를 기반으로 하는 자체 자동 생성된 custom type을 가져오기 때문입니다. 나머지 코드베이스는 중요하지 않습니다. 그리고 props로 GraphQL 데이터를 전달하지 않기 때문에 유형이 절대 degrade되지 않습니다.  
+엄격하지 않고 엄격한 타입스크립트가 없는 코드베이스일지라도 Relay-style 컴포넌트에서의 GraphQL의 타입은 항상 완벽합니다. 왜냐하면 컴포넌트는 fragment를 기반으로 하는 자체 자동 생성된 커스텀 type을 가져오기 때문입니다. 나머지 코드베이스는 중요하지 않습니다. 그리고 props로 GraphQL 데이터를 전달하지 않기 때문에 유형이 절대 degrade되지 않습니다.  
 
 fragment에 필드가 없으면 다른 컴포넌트가 해당 필드를 쿼리하는지 여부에 관계없이 TypeScript type에 해당 필드가 없습니다. TypeScript type은 컴포넌트를 완벽하게 나타냅니다.  
 
-각 fragment에 대해 custom TypeScript type을 사용하면 나중에 설명할 [다른 개발자 경험의 이점](#required-fields)도 얻을 수 있습니다.
+각 fragment에 대해 커스텀 TypeScript type을 사용하면 나중에 설명할 [다른 개발자 경험의 이점](#required-fields)도 얻을 수 있습니다.
 
 #### 이점 #5: 컴포넌트의 데이터만 손쉽게 다시 가져오기
 
-GraphQL을 fragment로 분리하면 전체 쿼리 대신 컴포넌트에 필요한 데이터만 쉽게 다시 refetch할 수 있도록 설정할 수도 있습니다. 예를 들어 Relay를 사용하면, 호출 시 fragment에 있는 데이터만 쿼리를 전송하는 함수를 자동으로 생성하는 re-fetchable fragment로 [간단하게 업그레이드](https://relay.dev/docs/guided-tour/refetching/refreshing-fragments/#using-userefetchablefragment "https://relay.dev/docs/guided-tour/refetching/refreshing-fragments/#using-userefetchablefragment")할 수 있습니다.
+GraphQL을 fragment로 분리하면 전체 쿼리 대신 컴포넌트에 필요한 데이터만 쉽게 다시 re-fetch할 수 있도록 설정할 수도 있습니다. 예를 들어 Relay를 사용하면, 호출 시 fragment에 있는 데이터만 쿼리를 전송하는 함수를 자동으로 생성하는 re-fetchable fragment로 [간단하게 업그레이드](https://relay.dev/docs/guided-tour/refetching/refreshing-fragments/#using-userefetchablefragment "https://relay.dev/docs/guided-tour/refetching/refreshing-fragments/#using-userefetchablefragment")할 수 있습니다.
 
 collocated fragments이 없으면 두 가지 선택지가 있습니다.
 
@@ -291,7 +294,11 @@ collocated fragments이 없으면 두 가지 선택지가 있습니다.
 
 ##### 실제 문제점 사례
 
-데이터를 두 단계로 렌더링하는 컴포넌트가 있습니다. 데이터를 미리 볼 때 한 번, 저장한 후에 한 번 더 렌더링합니다. 미리 보기 단계에서, 동일한 type을 가지고 있음에도 불구하고 백엔드에서 모든 필드를 사용할 수 있는 것은 아닙니다. `id` 필드가 그러합니다. 이 때문에 스키마에서 다르게 모델링 되었어야 하지만, 이 문제는 잠시 접어두겠습니다. 미리 보기 단계에서 사용할 수 없는 필드에 `@skip` 조건을 추가하여 이 문제를 해결했지만, `@skip` 변수를 넣을 수 있는 유일한 위치는 default parameter가 있는 query variable뿐입니다. 결국 다음과 같이 작성되었습니다:
+데이터를 두 단계에서 렌더링하는 컴포넌트가 있습니다: 미리 볼 때 한 번, 저장한 후에 한 번. 
+
+미리 보기 단계에서, 동일한 type을 가지고 있음에도 불구하고 백엔드에서 모든 필드를 사용할 수 있는 것은 아닙니다. `id` 필드가 그러합니다. 이 때문에 스키마에서 다르게 모델링 되었어야 하지만, 이 문제는 잠시 접어두겠습니다. 
+
+미리 보기 단계에서 사용할 수 없는 필드에 `@skip` 조건을 추가하여 이 문제를 해결했지만, `@skip` 변수를 넣을 수 있는 유일한 위치는 default parameter가 있는 query variable뿐입니다. 결국 다음과 같이 작성되었습니다:
 
 ```graphql
 # garbage.graphql
@@ -315,7 +322,7 @@ query variables는 전역 변수로 어떻게 사용될 것인지와 뚜렷한 �
 
 ##### The Solution
 
-어떻게 해야 할까요? 우선, 위의 문제를 컴파일러 오류로 처리할 수 있는 충분한 정적 분석을 수행하는 GraphQL 프레임워크를 사용하세요. 더 좋은 방법은 fragment arguments를 사용하는 것입니다! fragment arguments는 기본적으로 GraphQL fragment에 대한 함수 인자입니다. 다음은 Relay에서의 [fragment argument definition](https://relay.dev/docs/api-reference/graphql-and-directives/#argumentdefinitions "https://relay.dev/docs/api-reference/graphql-and-directives/#argumentdefinitions")입니다:
+어떻게 해야 할까요? 우선, 위의 문제를 컴파일러 오류로 처리할 수 있는 충분한 정적 분석을 수행하는 GraphQL 프레임워크를 사용하세요. 더 좋은 방법은 fragment arguments를 사용하는 것입니다! fragment arguments는 기본적으로 GraphQL fragment에 대한 함수 argument입니다. 다음은 Relay에서의 [fragment argument definition](https://relay.dev/docs/api-reference/graphql-and-directives/#argumentdefinitions "https://relay.dev/docs/api-reference/graphql-and-directives/#argumentdefinitions")입니다:
 
 ```tsx
 // previewItem.tsx
@@ -337,14 +344,14 @@ function PreviewItem(props: {
   // ...
 }
 ```
-그러면 컴파일 타임에 이 인수가 모든 spread된 fragment에 전달되도록 강제합니다:
+그러면 컴파일 타임에 이 argument가 모든 spread된 fragment에 전달되도록 강제합니다:
 
 ```tsx
 // preview.tsx
 ...PreviewItemFragment @arguments(isForPreview: true)
 ```
 
-또한 fragment를 정의, 사용, 호출할 때 인자가 collocated fragment 와 동일한 위치에 있으므로 해당 인자가 왜 존재하는지, 어떻게 사용되는지 추측할 필요가 없습니다.
+또한 fragment를 정의, 사용, 호출할 때 인자가 collocated fragment 와 동일한 위치에 있으므로 해당 argument가 왜 존재하는지, 어떻게 사용되는지 추측할 필요가 없습니다.
 
 #### 이점 #7: Better GraphQL APIs
 
@@ -394,9 +401,16 @@ Relay-style GraphQL 을 사용하면 매우 우수한 data-fetching 성능을 �
 
 #### High-effort, best-possible performance
 
-점점 더 큰 GraphQL chunk를 단일 쿼리로 batch한 후, 불균형적으로 느린 field resolver들이 전체 데이터 패칭을 지연시키는 문제를 만날 수도 있습니다. Relay는 `@defer` 와 `@stream` directive를 제공하여 개별 필드를 제어할 수 있게 함으로써 이 문제를 해결합니다.
+점점 더 큰 GraphQL chunk를 단일 쿼리로 batch한 후, 불균형적으로 느린 field resolver들이 전체 데이터 fetching을 지연시키는 문제를 만날 수도 있습니다. Relay는 `@defer` 와 `@stream` directive를 제공하여 개별 필드를 제어할 수 있게 함으로써 이 문제를 해결합니다.
 
-또, GraphQL에 의해 발생한 문제는 아니지만 GraphQL로 해결할 수 있는 틈새 문제도 있습니다. 예를들어, 사람들이 다양한 글을 작성할 수 있는 포럼이 있고, 그 다양한 글들은 단 하나의 리액트 컴포넌트로만 렌더링 된다고 해봅시다. 시간이 지남에 따라 1,000 종류의 글이 누적되어 번들 크기가 엄청나게 커졌다고 가정해봅시다. 글들의 98%는 다섯 개의 컴포넌트로 렌더링 할 수 있지만, 컴포넌트의 long tail^[상대적으로 적은 인기를 누리는 다양한 항목들의 집합]은 모두 소량만 사용됨을 관찰 할 수 있었습니다. 어떻게 해야 할까요? 한 가지 해결책은 클라이언트 렌더링을 중단하고 non-interactive하게 만드는 것입니다. 다른 방법도 있습니다: Relay의 [Data-Driven Dependencies (3D)](https://relay.dev/docs/glossary/#3d "https://relay.dev/docs/glossary/#3d")을 사용하면 서버에서 반환하려는 GraphQL 데이터를 기반으로 클라이언트로 전송할 JS를 결정할 수 있습니다. 따라서 가장 많이 사용되는 5개의 컴포넌트를 기본 번들에 포함시켜 항상 준비하고, 추가로 전송하려는 GraphQL 응답에서 게시물을 렌더링하는 데 필요한 React 컴포넌트만 전송할 수 있습니다.
+또, GraphQL에 의해 발생한 문제는 아니지만 GraphQL로 해결할 수 있는 틈새 문제도 있습니다.  
+예를들어, 사람들이 다양한 글을 작성할 수 있는 포럼이 있고, 그 다양한 글들은 단 하나의 리액트 컴포넌트로만 렌더링 된다고 해봅시다. 시간이 지남에 따라 1,000 종류의 글이 누적되어 번들 크기가 엄청나게 커졌다고 가정해봅시다.   
+글들의 98%는 다섯 개의 컴포넌트로 렌더링 할 수 있지만, 컴포넌트의 long tail^[상대적으로 적은 인기를 누리는 다양한 항목들의 집합]은 모두 소량만 사용됨을 관찰 할 수 있었습니다. 
+
+어떻게 해야 할까요?   
+한 가지 해결책은 클라이언트 렌더링을 중단하고 non-interactive하게 만드는 것입니다.   
+다른 방법도 있습니다: Relay의 [Data-Driven Dependencies (3D)](https://relay.dev/docs/glossary/#3d "https://relay.dev/docs/glossary/#3d")을 사용하면 서버에서 반환하려는 GraphQL 데이터를 기반으로 클라이언트로 전송할 JS를 결정할 수 있습니다.   
+따라서 가장 많이 사용되는 5개의 컴포넌트를 기본 번들에 포함시켜 항상 준비하고, 추가로 전송하려는 GraphQL 응답에서 게시물을 렌더링하는 데 필요한 React 컴포넌트만 전송할 수 있습니다.
 
 이런 문제는 일반적이진 않지만 Relay-style GraphQL 프레임워크는 _필요하다면_ 이런 수준의 제어도 가능합니다.
 
@@ -559,7 +573,7 @@ GraphQL을 컴포넌트로 이동하면 언어-서버 프로토콜의 이점을 
 
 ### Q: Will Relay fall apart …
 
-… Relay가 복잡한 실제 어플리케이션에서 문제를 발생시키진 않을까요? 예제들은 단순해보입니다.
+… Relay가 복잡한 실제 애플리케이션에서 문제를 발생시키진 않을까요? 예제들은 단순해보입니다.
 
 **A:** 아뇨.
 
