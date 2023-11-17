@@ -79,7 +79,7 @@
     "typescript": "^4.8.2"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=16"
   },
   "homepage": "https://github.com/emewjin/emewjin.github.io"
 }
