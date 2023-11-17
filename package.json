@@ -5,6 +5,7 @@
   "version": "1.0.0",
   "author": "emewjin <emewjin@gmail.com>",
   "scripts": {
+    "local-build": "gatsby clean && gatsby build",
     "build": "gatsby clean && gatsby build && cp content/blog/google2885a4a9e03f5486.html public/",
     "dev": "gatsby develop",
     "serve": "gatsby serve",
@@ -15,7 +16,7 @@
     "typecheck": "tsc --noEmit --skipLibCheck",
     "prepare": "husky install",
     "deploy": "gatsby clean && gatsby build && cp content/blog/google2885a4a9e03f5486.html public/ && gh-pages -d public -b deploy",
-    "hygen": "hygen generator post"
+    "new:post": "hygen generator post"
   },
   "repository": {
     "type": "git",
@@ -50,7 +51,6 @@
     "gatsby-source-filesystem": "^4.21.1",
     "gatsby-transformer-remark": "^5.21.0",
     "gatsby-transformer-sharp": "^4.21.0",
-    "hygen": "^6.2.8",
     "katex": "^0.16.1",
     "prismjs": "^1.29.0",
     "query-string": "^7.0.1",
@@ -73,6 +73,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "gh-pages": "^4.0.0",
     "husky": "^8.0.1",
+    "hygen": "^6.2.11",
     "lint-staged": "^13.0.3",
     "typescript": "^4.8.2"
   },
