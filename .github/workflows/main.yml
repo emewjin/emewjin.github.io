@@ -14,7 +14,21 @@ jobs:
         with:
           node-version: 16
 
+      - name: Cache dependencies
+        id: cache
+        uses: actions/cache@v3
+        with:
+          # node_modules 캐싱
+          path: '**/node_modules'
+          # lock file을 cache 무효화 기준으로 설정
+          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
+          # key가 유효하지 않은 경우
+          restore-keys: |
+            ${{ runner.os }}-node-
+
       - name: Install dependencies
+        # 캐시가 없다면 새로 설치
+        if: steps.cache.outputs.cache-hit != 'true'
         run: yarn install --frozen-lockfile
 
       - name: Build
