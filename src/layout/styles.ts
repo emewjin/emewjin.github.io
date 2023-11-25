@@ -31,23 +31,32 @@ export const globalStyles = globalCss({
   },
   h1: {
     fontSize: '1.75rem',
+    fontWeight: 800,
   },
   h2: {
     fontSize: '1.5rem',
+    fontWeight: 800,
   },
   h3: {
     fontSize: '1.25rem',
+    fontWeight: 800,
     margin: '1.5rem 0 0.5rem 0',
   },
   h4: {
     fontSize: '1rem',
+    fontWeight: 800,
     margin: '1.5rem 0 1rem 0',
   },
   h5: {
+    fontWeight: 800,
     fontSize: '0.875rem',
   },
   h6: {
+    fontWeight: 800,
     fontSize: '0.75rem',
+  },
+  strong: {
+    fontWeight: 800,
   },
   hr: {
     marginTop: '0.25rem',
