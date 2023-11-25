@@ -46,6 +46,7 @@ export const plugins = [
     resolve: 'gatsby-transformer-remark',
     options: {
       plugins: [
+        'gatsby-plugin-twitter',
         {
           resolve: 'gatsby-remark-images',
           options: {
