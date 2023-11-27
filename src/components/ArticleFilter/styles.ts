@@ -10,8 +10,10 @@ export const Container = styled('section', {
 
 export const Header = styled('div', {
   display: 'flex',
+  gap: '1rem',
   alignItems: 'center',
   justifyContent: 'space-between',
+  flexWrap: 'wrap',
 });
 
 export const Title = styled('h3', {
