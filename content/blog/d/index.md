@@ -1,6 +1,6 @@
 ---
 title: (번역) 왜 나는 Next.js를 사용하지 않을 것인가
-description: 한국에서도 인지도가 높은 Kent C. Dodds가 Next.js를 비판하는 글을 작성하여 화제가 되었습니다. 특히 Next.js를 사용하지 않는 이유와 Next.js 대신 Remix를 선택한 이유에 대해 자세히 설명합니다. 이에 대해 Vercel의 DX 부사장이 반박하는 게시글을 올린 점도 무척 흥미롭습니다.
+description: Next.js에 대해 한국에서도 인지도가 높은 Kent C. Dodds가 비판하는 글을 작성하여 화제가 되었습니다. Kent C. Dodds는 이 글에서 그가 Next.js를 사용하지 않는 이유와 Next.js 대신 Remix를 선택한 이유에 대해 자세히 설명합니다.
 date: 2023-11-27
 lastUpdated: 2023-11-27
 tags: [React, Next.js]
