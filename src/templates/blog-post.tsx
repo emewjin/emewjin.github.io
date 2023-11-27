@@ -21,6 +21,7 @@ import {
   ArticleMetadata,
   Title,
   ArticleDates,
+  ContentContainer,
 } from './styles';
 
 const BlogPostTemplate = ({
@@ -63,28 +64,32 @@ const BlogPostTemplate = ({
         description={description ?? post.excerpt ?? ''}
         meta={meta}
       />
+
       <Article itemScope itemType='http://schema.org/Article'>
         <Header>
           <Title itemProp='headline'>{title}</Title>
           <ArticleMetadata>
             <ArticleDates>
-              <span>{date}</span>
-              <span>{lastUpdated}</span>
+              <span title='최초 작성일'>{date}</span>
+              <span title='최신 수정일'>{lastUpdated}</span>
             </ArticleDates>
             <Tags tags={tags as string[]} />
           </ArticleMetadata>
         </Header>
-        <TableOfContents
-          dangerouslySetInnerHTML={{ __html: post.tableOfContents ?? '' }}
-        />
-        <Content
-          dangerouslySetInnerHTML={{ __html: post.html ?? '' }}
-          itemProp='articleBody'
-        />
-        <Footer>
-          <Profile />
-        </Footer>
+        <ContentContainer>
+          <Content
+            dangerouslySetInnerHTML={{ __html: post.html ?? '' }}
+            itemProp='articleBody'
+          />
+          <TableOfContents
+            dangerouslySetInnerHTML={{ __html: post.tableOfContents ?? '' }}
+          />
+        </ContentContainer>
       </Article>
+
+      <Footer>
+        <Profile />
+      </Footer>
       {commentConfig?.utterances && (
         <Utterances repo={commentConfig.utterances} />
       )}

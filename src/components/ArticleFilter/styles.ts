@@ -8,6 +8,12 @@ export const Container = styled('section', {
   transition: 'border-left-color $transitionDuration $transitionTiming',
 });
 
+export const Header = styled('div', {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+});
+
 export const Title = styled('h3', {
   display: 'block',
   color: '$text300',
@@ -25,8 +31,6 @@ export const Title = styled('h3', {
 export const Input = styled('input', {
   maxWidth: '18.75rem',
   width: '100%',
-  height: '2.5rem',
-  marginTop: '1rem',
   padding: '0.5rem 0.75rem',
   border: '1px solid $borderGray',
   borderRadius: '0.25rem',
@@ -44,14 +48,14 @@ export const Input = styled('input', {
 
 export const TagListWrapper = styled('div', {
   display: 'flex',
-  flexWrap: 'wrap',
   gap: '0.5rem',
   marginTop: '1rem',
-  maxHeight: '4.5rem',
-  overflow: 'scroll',
+  paddingBottom: '1rem',
+  overflowX: 'scroll',
 });
 
 export const Tag = styled('button', {
+  flexShrink: 0,
   padding: '0.5rem 1rem',
   border: 0,
   borderRadius: '0.25rem',

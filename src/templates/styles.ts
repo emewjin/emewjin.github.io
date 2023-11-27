@@ -1,5 +1,14 @@
 import { styled } from '~/stitches.config';
 
+export const ContentContainer = styled('div', {
+  display: 'flex',
+  position: 'relative',
+  flexDirection: 'column-reverse',
+  '@desktop': {
+    flexDirection: 'row',
+  },
+});
+
 export const Article = styled('article', {
   position: 'relative',
 
@@ -13,18 +22,25 @@ export const Article = styled('article', {
 });
 
 export const TableOfContents = styled('div', {
-  marginBottom: '1.5rem',
+  '@desktop': {
+    position: 'sticky',
+    minWidth: 'fit-content',
+    width: 180,
+    top: 128,
+    height: 'fit-content',
+    margin: '0 2rem 1.5rem 2rem',
+  },
 
   '> ul': {
     marginLeft: 0,
   },
 
   ul: {
+    width: 'inherit',
     listStyle: 'none',
 
     li: {
-      paddingTop: '0.125rem',
-      paddingBottom: '0.125rem',
+      padding: '0.125rem 0',
 
       color: '$text200',
       fontSize: '0.875rem',
@@ -39,7 +55,7 @@ export const TableOfContents = styled('div', {
 });
 
 export const Header = styled('header', {
-  marginBottom: '2rem',
+  // marginBottom: '2rem',
 });
 
 export const Title = styled('h1', {
@@ -75,6 +91,7 @@ export const ArticleDates = styled('div', {
 });
 
 export const Content = styled('section', {
+  minWidth: '100%',
   wordBreak: 'break-all',
   fontWeight: 500,
   h1: {

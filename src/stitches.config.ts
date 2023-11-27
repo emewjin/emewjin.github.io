@@ -60,6 +60,7 @@ export const { styled, css, getCssText, createTheme, globalCss } =
       },
     },
     media: {
+      desktop: '(min-width: 1240px)',
       md: '(min-width: 48em)',
     },
   });

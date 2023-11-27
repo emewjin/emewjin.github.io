@@ -7,7 +7,7 @@ import React, {
 
 import { TAG } from '~/constants';
 
-import { Container, Title, TagListWrapper, Tag, Input } from './styles';
+import { Container, Title, TagListWrapper, Tag, Input, Header } from './styles';
 
 interface Props {
   tags: string[];
@@ -35,13 +35,15 @@ const ArticleFilter = ({
 
   return (
     <Container>
-      <Title>Filter</Title>
-      <Input
-        type='text'
-        placeholder='Article name..'
-        value={titleFilter}
-        onChange={onTitleFilterChange}
-      />
+      <Header>
+        <Title>Filter</Title>
+        <Input
+          type='text'
+          placeholder='Article name..'
+          value={titleFilter}
+          onChange={onTitleFilterChange}
+        />
+      </Header>
       <TagListWrapper>
         <Tag
           type='button'
