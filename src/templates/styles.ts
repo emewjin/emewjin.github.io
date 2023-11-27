@@ -27,12 +27,26 @@ export const Article = styled('article', {
 
 export const TableOfContents = styled('div', {
   '@desktop': {
+    scrollbarWidth: 'thin',
+    scrollbarColor: '$gray200 transparent',
+    '&::-webkit-scrollbar': {
+      width: '10px',
+    },
+    '&::-webkit-scrollbar-thumb': {
+      background: '$gray200',
+      borderRadius: '20px',
+      border: '3px solid transparent',
+      backgroundClip: 'content-box',
+    },
+
     position: 'sticky',
     minWidth: 'fit-content',
-    width: 180,
+    width: 210,
     top: 128,
     height: 'fit-content',
+    maxHeight: 500,
     margin: '0 2rem 1.5rem 2rem',
+    overflowY: 'scroll',
   },
 
   '> ul': {
