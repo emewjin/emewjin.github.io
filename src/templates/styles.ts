@@ -19,6 +19,10 @@ export const Article = styled('article', {
       fill: '$text500',
     },
   },
+
+  '.twitter-tweet-rendered': {
+    margin: '0 auto',
+  },
 });
 
 export const TableOfContents = styled('div', {
