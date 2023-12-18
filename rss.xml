@@ -1,4 +1,58 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[emewjin.log RSS Feed]]></title><description><![CDATA[잘못된 내용 혹은 더 좋은 방법이 있으면 언제든지 알려주세요 XD]]></description><link>https://emewjin.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Mon, 18 Dec 2023 11:41:44 GMT</lastBuildDate><item><title><![CDATA[(번역) 내가 Next.js를 사용하지 않는 이유]]></title><description><![CDATA[원문 : https://www.epicweb.dev/why-i-wont-use-nextjs by Kent C. Dodds…]]></description><link>https://emewjin.github.io/why-wont-use-nextjs/</link><guid isPermaLink="false">https://emewjin.github.io/why-wont-use-nextjs/</guid><pubDate>Mon, 27 Nov 2023 00:00:00 GMT</pubDate><content:encoded>&lt;blockquote&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[emewjin.log RSS Feed]]></title><description><![CDATA[잘못된 내용 혹은 더 좋은 방법이 있으면 언제든지 알려주세요 XD]]></description><link>https://emewjin.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Mon, 18 Dec 2023 12:30:16 GMT</lastBuildDate><item><title><![CDATA[gh 여러 계정 사용하기]]></title><description><![CDATA[드 디 어 !!!!!!!!!!!!!!! 버전 2.40.0에서 공식적으로 multi account를 지원한다 끼얏호~~~~~~ 아주 간단하게 버전 업데이트를 하고 (나는 brew로 설치했어서 brew…]]></description><link>https://emewjin.github.io/gh-multi-account/</link><guid isPermaLink="false">https://emewjin.github.io/gh-multi-account/</guid><pubDate>Mon, 26 Sep 2022 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;드 디 어 !!!!!!!!!!!!!!!&lt;br&gt;
+&lt;a href=&quot;https://github.com/cli/cli/releases/tag/v2.40.0&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;버전 2.40.0&lt;/a&gt;에서 공식적으로 multi account를 지원한다 끼얏호~~~~~~&lt;/p&gt;
+&lt;p&gt;아주 간단하게&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;버전 업데이트를 하고 (나는 brew로 설치했어서 brew로 업데이트)&lt;/li&gt;
+&lt;li&gt;현재 로그인 되어있는 계정을 확인 후 (&lt;code class=&quot;language-text&quot;&gt;gh auth status&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;gh auth login&lt;/code&gt;으로 스위칭할 계정에 로그인하여 계정을 추가하고&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;gh auth status&lt;/code&gt;에 잘 추가되어있나 확인한 다음&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;gh auth switch&lt;/code&gt;를 실행시켜보면&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;짜자잔~
+&lt;img src=&quot;https://github.com/emewjin/emewjin.github.io/assets/76927618/cab04f95-f2d9-4eab-a632-5fc2da3fe4b5&quot; alt=&quot;gh multi account 성공 모습&quot;&gt;&lt;/p&gt;
+&lt;p&gt;그동안 커뮤니티에서 공유되던 방법들은 되다 안되다 했어서 너무 불편했는데, 정식으로 지원하는 기능이 되어서 너무너무 행복하다… 🫠&lt;/p&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;여기서부터는 multi account 정식 지원 전, 2022년에 작성된 글입니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;https://cli.github.com/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;github cli 툴인 &lt;code class=&quot;language-text&quot;&gt;gh&lt;/code&gt;&lt;/a&gt;는 아직 공식적으로 multi account를 지원하지 않는데, 니즈는 엄청나다.&lt;br&gt;
+&lt;a href=&quot;https://github.com/cli/cli/issues/326&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;&gt;&gt; 관련해서 오픈되어 있는 이슈&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;이슈의 쓰레드를 쭉 읽어보다가 &lt;code class=&quot;language-text&quot;&gt;gh&lt;/code&gt;의 alias를 이용한 &lt;a href=&quot;https://github.com/cli/cli/issues/326#issuecomment-1095018771&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;요 댓글&lt;/a&gt;의 솔루션이 가장 깔끔하고 간편하길래 써봤는데 아주 잘 됨. 이제 간단하게 회사 계정과 개인 계정을 &lt;code class=&quot;language-text&quot;&gt;gh&lt;/code&gt;로 왔다갔다 할 수 있다… 🥹&lt;/p&gt;
+&lt;p&gt;아래는 &lt;a href=&quot;https://gist.github.com/yermulnik/017837c01879ed3c7489cc7cf749ae47&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;yermulnik의 솔루션&lt;/a&gt; 한국어 버전쯤…?&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;먼저 gh config 디렉토리로 이동한다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;sh&quot;&gt;&lt;pre class=&quot;language-sh&quot;&gt;&lt;code class=&quot;language-sh&quot;&gt;~/.config/gh&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;해당 디렉토리에서 계정별 hosts.yml을 생성한다.
+yml뒤에 붙는 문자는 personal, work, 뭐든 어떤 계정인지 식별할 수 있는 이름을 붙이면 됨. 이 식별자는 밑에서 alias로 쓰일 것.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;sh&quot;&gt;&lt;pre class=&quot;language-sh&quot;&gt;&lt;code class=&quot;language-sh&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;# touch hosts.yml.{식별자}&lt;/span&gt;
+&lt;span class=&quot;token function&quot;&gt;touch&lt;/span&gt; hosts.yml.personal&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;생성한 hosts.yml을 열고&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;sh&quot;&gt;&lt;pre class=&quot;language-sh&quot;&gt;&lt;code class=&quot;language-sh&quot;&gt;&lt;span class=&quot;token function&quot;&gt;vi&lt;/span&gt; hosts.yml.personal&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;아래 내용을 작성한다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;sh&quot;&gt;&lt;pre class=&quot;language-sh&quot;&gt;&lt;code class=&quot;language-sh&quot;&gt;github.com:
+    oauth_token: &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;your token&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+    git_protocol: &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;ssh 또는 https&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+    user: &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;github username&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그리고 &lt;code class=&quot;language-text&quot;&gt;gh&lt;/code&gt;의 alias를 설정한다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;sh&quot;&gt;&lt;pre class=&quot;language-sh&quot;&gt;&lt;code class=&quot;language-sh&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;# gh alias set --shell {식별자} &apos;cp ~/.config/gh/hosts.yml.{식별자} ~/.config/gh/hosts.yml &amp;amp;&amp;amp; gh auth status&apos;&lt;/span&gt;
+gh &lt;span class=&quot;token builtin class-name&quot;&gt;alias&lt;/span&gt; &lt;span class=&quot;token builtin class-name&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;token parameter variable&quot;&gt;--shell&lt;/span&gt; personal &lt;span class=&quot;token string&quot;&gt;&apos;cp ~/.config/gh/hosts.yml.personal ~/.config/gh/hosts.yml &amp;amp;&amp;amp; gh auth status&apos;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;이제 필요할 때 alias를 입력하면 미리 설정해둔 계정으로 로그인된다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;sh&quot;&gt;&lt;pre class=&quot;language-sh&quot;&gt;&lt;code class=&quot;language-sh&quot;&gt;&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt; gh personal
+github.com
+  ✓ Logged &lt;span class=&quot;token keyword&quot;&gt;in&lt;/span&gt; to github.com as
+  ✓ Git operations &lt;span class=&quot;token keyword&quot;&gt;for&lt;/span&gt; github.com configured to use
+  ✓ Token:&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[(번역) 내가 Next.js를 사용하지 않는 이유]]></title><description><![CDATA[원문 : https://www.epicweb.dev/why-i-wont-use-nextjs by Kent C. Dodds…]]></description><link>https://emewjin.github.io/why-wont-use-nextjs/</link><guid isPermaLink="false">https://emewjin.github.io/why-wont-use-nextjs/</guid><pubDate>Mon, 27 Nov 2023 00:00:00 GMT</pubDate><content:encoded>&lt;blockquote&gt;
 &lt;p&gt;원문 : &lt;a href=&quot;https://www.epicweb.dev/why-i-wont-use-nextjs&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;https://www.epicweb.dev/why-i-wont-use-nextjs&lt;/a&gt; by &lt;a href=&quot;https://kentcdodds.com/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Kent C. Dodds&lt;/a&gt;.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;새로운 프로젝트가 주어졌습니다. 혹은 기존 프로젝트를 더 현대적인 접근법으로 업그레이드하려는 동기가 있을 수 있습니다. 아니면 아마도 현재 사용 중인 모던 프레임워크에 만족하지 못하고 있거나 자신에게 의문을 품고 대안을 조사 중일 수도 있습니다. 뭐든 간에, 결정을 내려야 합니다.&lt;/p&gt;
@@ -1109,44 +1163,7 @@ stringLogger &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; logger&
 &lt;li&gt;아직도 원인을 모른다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[gh 여러 계정 사용하기]]></title><description><![CDATA[github cli 툴인 는 아직 공식적으로 multi account를 지원하지 않는데, 니즈는 엄청나다. >> 관련해서 오픈되어 있는 이슈 이슈의 쓰레드를 쭉 읽어보다가 의 alias…]]></description><link>https://emewjin.github.io/gh-multi-account/</link><guid isPermaLink="false">https://emewjin.github.io/gh-multi-account/</guid><pubDate>Mon, 26 Sep 2022 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;&lt;a href=&quot;https://cli.github.com/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;github cli 툴인 &lt;code class=&quot;language-text&quot;&gt;gh&lt;/code&gt;&lt;/a&gt;는 아직 공식적으로 multi account를 지원하지 않는데, 니즈는 엄청나다.&lt;br&gt;
-&lt;a href=&quot;https://github.com/cli/cli/issues/326&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;&gt;&gt; 관련해서 오픈되어 있는 이슈&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;이슈의 쓰레드를 쭉 읽어보다가 &lt;code class=&quot;language-text&quot;&gt;gh&lt;/code&gt;의 alias를 이용한 &lt;a href=&quot;https://github.com/cli/cli/issues/326#issuecomment-1095018771&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;요 댓글&lt;/a&gt;의 솔루션이 가장 깔끔하고 간편하길래 써봤는데 아주 잘 됨. 이제 간단하게 회사 계정과 개인 계정을 &lt;code class=&quot;language-text&quot;&gt;gh&lt;/code&gt;로 왔다갔다 할 수 있다… 🥹&lt;/p&gt;
-&lt;p&gt;아래는 &lt;a href=&quot;https://gist.github.com/yermulnik/017837c01879ed3c7489cc7cf749ae47&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;yermulnik의 솔루션&lt;/a&gt; 한국어 버전쯤…?&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;먼저 gh config 디렉토리로 이동한다.&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;sh&quot;&gt;&lt;pre class=&quot;language-sh&quot;&gt;&lt;code class=&quot;language-sh&quot;&gt;~/.config/gh&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;해당 디렉토리에서 계정별 hosts.yml을 생성한다.
-yml뒤에 붙는 문자는 personal, work, 뭐든 어떤 계정인지 식별할 수 있는 이름을 붙이면 됨. 이 식별자는 밑에서 alias로 쓰일 것.&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;sh&quot;&gt;&lt;pre class=&quot;language-sh&quot;&gt;&lt;code class=&quot;language-sh&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;# touch hosts.yml.{식별자}&lt;/span&gt;
-&lt;span class=&quot;token function&quot;&gt;touch&lt;/span&gt; hosts.yml.personal&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;생성한 hosts.yml을 열고&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;sh&quot;&gt;&lt;pre class=&quot;language-sh&quot;&gt;&lt;code class=&quot;language-sh&quot;&gt;&lt;span class=&quot;token function&quot;&gt;vi&lt;/span&gt; hosts.yml.personal&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;아래 내용을 작성한다.&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;sh&quot;&gt;&lt;pre class=&quot;language-sh&quot;&gt;&lt;code class=&quot;language-sh&quot;&gt;github.com:
-    oauth_token: &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;your token&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
-    git_protocol: &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;ssh 또는 https&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
-    user: &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;github username&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;그리고 &lt;code class=&quot;language-text&quot;&gt;gh&lt;/code&gt;의 alias를 설정한다.&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;sh&quot;&gt;&lt;pre class=&quot;language-sh&quot;&gt;&lt;code class=&quot;language-sh&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;# gh alias set --shell {식별자} &apos;cp ~/.config/gh/hosts.yml.{식별자} ~/.config/gh/hosts.yml &amp;amp;&amp;amp; gh auth status&apos;&lt;/span&gt;
-gh &lt;span class=&quot;token builtin class-name&quot;&gt;alias&lt;/span&gt; &lt;span class=&quot;token builtin class-name&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;token parameter variable&quot;&gt;--shell&lt;/span&gt; personal &lt;span class=&quot;token string&quot;&gt;&apos;cp ~/.config/gh/hosts.yml.personal ~/.config/gh/hosts.yml &amp;amp;&amp;amp; gh auth status&apos;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;이제 필요할 때 alias를 입력하면 미리 설정해둔 계정으로 로그인된다.&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;sh&quot;&gt;&lt;pre class=&quot;language-sh&quot;&gt;&lt;code class=&quot;language-sh&quot;&gt;&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt; gh personal
-github.com
-  ✓ Logged &lt;span class=&quot;token keyword&quot;&gt;in&lt;/span&gt; to github.com as
-  ✓ Git operations &lt;span class=&quot;token keyword&quot;&gt;for&lt;/span&gt; github.com configured to use
-  ✓ Token:&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[2022 인프콘 데브챗 후기]]></title><description><![CDATA[분에 넘치게도 2022 인프콘에서 인프런 부스의 데브챗 Frontend 파트 상담자로 참여하게 되었다. 기억이 가장 선명할 때 기억을 기록해두려고 한다. 인프콘 세션에 대한 후기가 없는 이유는… 한 개도 못 들어서…🥹 D-N…]]></description><link>https://emewjin.github.io/infcon-devchat/</link><guid isPermaLink="false">https://emewjin.github.io/infcon-devchat/</guid><pubDate>Mon, 29 Aug 2022 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;분에 넘치게도 2022 인프콘에서 인프런 부스의 데브챗 Frontend 파트 상담자로 참여하게 되었다. 기억이 가장 선명할 때 기억을 기록해두려고 한다.&lt;/p&gt;
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[2022 인프콘 데브챗 후기]]></title><description><![CDATA[분에 넘치게도 2022 인프콘에서 인프런 부스의 데브챗 Frontend 파트 상담자로 참여하게 되었다. 기억이 가장 선명할 때 기억을 기록해두려고 한다. 인프콘 세션에 대한 후기가 없는 이유는… 한 개도 못 들어서…🥹 D-N…]]></description><link>https://emewjin.github.io/infcon-devchat/</link><guid isPermaLink="false">https://emewjin.github.io/infcon-devchat/</guid><pubDate>Mon, 29 Aug 2022 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;분에 넘치게도 2022 인프콘에서 인프런 부스의 데브챗 Frontend 파트 상담자로 참여하게 되었다. 기억이 가장 선명할 때 기억을 기록해두려고 한다.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;인프콘 세션에 대한 후기가 없는 이유는… 한 개도 못 들어서…🥹&lt;/p&gt;
 &lt;/blockquote&gt;
