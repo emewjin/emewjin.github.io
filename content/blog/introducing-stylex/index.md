@@ -94,4 +94,4 @@ StyleX는 메타 내의 모든 웹 플랫폼에서 컴포넌트를 스타일링�
 
 여러분도 저희만큼이나 StyleX를 사랑해 주시길 바랍니다. ❤️
 
-> 🚀 한국어로 된 프런트엔드 아티클을 빠르게 받아보고 싶다면 Korean FE Article을 구독해주세요!
+> 🚀 한국어로 된 프런트엔드 아티클을 빠르게 받아보고 싶다면 [Korean FE Article](https://kofearticle.substack.com/)을 구독해주세요!
