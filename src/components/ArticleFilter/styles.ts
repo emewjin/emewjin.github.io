@@ -78,7 +78,7 @@ export const Tag = styled('button', {
       true: {
         color: '$primary500',
 
-        backgroundColor: '$primary200',
+        backgroundColor: '$primary100',
       },
     },
   },

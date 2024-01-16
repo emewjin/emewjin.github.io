@@ -61,7 +61,7 @@ tags: [Refactoring]
 
 리팩토링의 범위는 당연히 메이저 업데이트로 계획했다. 이번 리팩토링 결과물이 릴리즈 되면 에디터를 사용하던 곳에서는 전부 breaking change를 감수해야 할 것이다.
 
-기존에 [changeset](https://github.com/changesets/changesets)을 이용해 버전 릴리즈를 하고 있었기 때문에, 새로운 메이저 버전의 브랜치를 생성하고 [prerelease](https://github.com/changesets/changesets/blob/main/docs/prereleases.md) 액션을 작성했다. 어느 정도 준비가 되면 changeset의 prerelease를 통해 next 버전을 생성하고 <구텐베르크>에 설치하여 테스트를 해본 뒤 문제가 없으면 정식으로 릴리즈를 할 생각이었다.
+기존에 [changesets](https://github.com/changesets/changesets)을 이용해 버전 릴리즈를 하고 있었기 때문에, 새로운 메이저 버전의 브랜치를 생성하고 [prerelease](https://github.com/changesets/changesets/blob/main/docs/prereleases.md) 액션을 작성했다. 어느 정도 준비가 되면 changesets의 prerelease를 통해 next 버전을 생성하고 <구텐베르크>에 설치하여 테스트를 해본 뒤 문제가 없으면 정식으로 릴리즈를 할 생각이었다.
 
 ```yaml
 name: Prerelease
@@ -105,7 +105,7 @@ jobs:
 
 prerelease를 새 브랜치에서만 진행하는 이유는 리팩토링을 진행하는 동안 기존 에디터의 배포 파이프라인에 영향을 주지 않기 위함이다. 새 버전을 준비하는 동안 기존 에디터에 버그 수정과 같은 patch 업데이트가 발생하지 않으리란 보장이 없기 때문이다. 물론 가장 이상적인 방법은 현재의 최신 버전에서 코드 프리징을 하는 것일 테지만, 빠르게 비즈니스 로직 업데이트가 이루어지고 배포가 빈번한 회사의 사정상 자투리 시간에 하는 리팩토링을 이유로 한 달 이상 코드 프리징을 할 수는 없었다.
 
-만약 코드 프리징을 해서 main 브랜치에 리팩토링 코드를 바로바로 병합할 수 있다고 해도 prerelease를 위한 브랜치를 따로 두는 것이 합리적이다. 왜냐하면 에디터 코드가 위치한 디자인 시스템 레포지토리 특성상 다른 패키지의 배포에 영향을 줄 수 있기 때문이다. changeset은 prerelease를 하려면 pre 모드에 진입하는데, 이때 pre.json이 생성된다. 이 파일이 존재하면 changeset이 새 패키지 버전을 배포할 때 next 버전으로 (beta, alpha 등 명칭은 붙이기 나름이다) 배포하기 때문에 main 브랜치에 코드를 바로바로 병합할 수 없었다.
+만약 코드 프리징을 해서 main 브랜치에 리팩토링 코드를 바로바로 병합할 수 있다고 해도 prerelease를 위한 브랜치를 따로 두는 것이 합리적이다. 왜냐하면 에디터 코드가 위치한 디자인 시스템 레포지토리 특성상 다른 패키지의 배포에 영향을 줄 수 있기 때문이다. changesets은 prerelease를 하려면 pre 모드에 진입하는데, 이때 pre.json이 생성된다. 이 파일이 존재하면 changesets이 새 패키지 버전을 배포할 때 next 버전으로 (beta, alpha 등 명칭은 붙이기 나름이다) 배포하기 때문에 main 브랜치에 코드를 바로바로 병합할 수 없었다.
 
 ### 목표
 
@@ -821,7 +821,7 @@ export class RemoveElementControlOption
 
 ## 리팩토링 결과 배포
 
-changeset의 prerelease를 이용해 next 버전을 출시했다.
+changesets의 prerelease를 이용해 next 버전을 출시했다.
 
 ![image](https://github.com/emewjin/emewjin.github.io/assets/76927618/404f1593-c847-4c0d-a651-d8e17468a6d4)
 

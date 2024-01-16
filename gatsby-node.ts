@@ -153,7 +153,7 @@ const generateOGImage = (slug: string, postTitle: string) => {
 
   context.beginPath();
   context.arc(-LOGO_TEXT_WIDTH, -LOGO_HEIGHT, LOGO_HEIGHT, 0, 2 * Math.PI);
-  context.fillStyle = '#bcb2f5';
+  context.fillStyle = '#a4c3db';
   context.fill();
 
   context.fillStyle = '#2d3748';
@@ -168,8 +168,8 @@ const generateOGImage = (slug: string, postTitle: string) => {
   const x2 = 300 * Math.cos(angle);
   const y2 = 300 * Math.sin(angle);
   const gradient = context.createLinearGradient(0, 0, x2, y2);
-  gradient.addColorStop(0, '#bcb2f5');
-  gradient.addColorStop(1, '#40c9ff');
+  gradient.addColorStop(0, '#a4c3db');
+  gradient.addColorStop(1, '#dec4ab');
   context.fillStyle = gradient;
   context.font = '50px Pretendard';
   context.textAlign = 'left';

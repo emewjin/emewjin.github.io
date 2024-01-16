@@ -171,6 +171,7 @@ export const Content = styled('section', {
   },
   blockquote: {
     margin: '1.5rem 0',
+    fontStyle: 'italic',
   },
   figcaption: {
     textAlign: 'center',

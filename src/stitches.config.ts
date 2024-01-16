@@ -1,5 +1,13 @@
 import { createStitches } from '@stitches/react';
 
+const primaryColors = {
+  primary100: '#c8dbe9',
+  primary200: '#a4c3db',
+  primary300: '#7fabcc',
+  primary400: '#5b93be',
+  primary500: '#4179a4',
+};
+
 export const { styled, css, getCssText, createTheme, globalCss } =
   createStitches({
     prefix: '',
@@ -17,11 +25,7 @@ export const { styled, css, getCssText, createTheme, globalCss } =
         yellow: '#ffd75e',
         yellowAccent: '#ffa659',
 
-        primary100: '#edeafc',
-        primary200: '#bcb2f5',
-        primary300: '#816eec',
-        primary400: '#3b1de2',
-        primary500: '#24128a',
+        ...primaryColors,
 
         text100: '$gray300',
         text200: '$gray400',
@@ -35,13 +39,13 @@ export const { styled, css, getCssText, createTheme, globalCss } =
         borderPrimary: '$primary200',
 
         inlineCodeBackground: '#f8f8f8',
-        inlineCodeColor: '#816eec',
+        inlineCodeColor: '$primary500',
         inlineCodeBorderColor: '#f1f3f5',
         link: '$primary400',
 
         titleFilterBackground: '$gray100',
         tagColor: '$primary400',
-        tagFilterBackground: '$primary100',
+        tagFilterBackground: '$gray100',
 
         headerCircleColor: '$primary200',
 
@@ -76,11 +80,7 @@ export const darkTheme = createTheme('dark-theme', {
     gray700: '#f6f1ea',
     black: '#222425',
 
-    primary100: '#edeafc',
-    primary200: '#b9acff',
-    primary300: '#816eec',
-    primary400: '#3b1de2',
-    primary500: '#221182',
+    ...primaryColors,
 
     text100: '$gray300',
     text200: '$gray400',
@@ -94,7 +94,7 @@ export const darkTheme = createTheme('dark-theme', {
     borderPrimary: '$primary200',
 
     inlineCodeBackground: '#3d4144',
-    inlineCodeColor: '#edeafc',
+    inlineCodeColor: '$primary100',
     inlineCodeBorderColor: '#3d4144',
 
     link: '$primary200',

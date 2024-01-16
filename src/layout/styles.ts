@@ -56,7 +56,7 @@ export const globalStyles = globalCss({
     fontSize: '0.75rem',
   },
   strong: {
-    fontWeight: 800,
+    fontWeight: 700,
   },
   hr: {
     marginTop: '0.25rem',
@@ -99,7 +99,7 @@ export const globalStyles = globalCss({
   blockquote: {
     paddingLeft: '1rem',
     borderLeft: '0.25rem solid $borderPrimary',
-    color: '$text100',
+    color: '$text200',
   },
   article: {
     overflowWrap: 'break-word',
