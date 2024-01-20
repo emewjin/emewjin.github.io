@@ -128,7 +128,7 @@ export const globalStyles = globalCss({
 
     ol: {
       li: {
-        margin: '1rem 0',
+        margin: '0.5rem 0',
       },
     },
 
