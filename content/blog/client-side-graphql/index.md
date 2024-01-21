@@ -1,14 +1,14 @@
 ---
 title: Client side GraphQL로 어드민 만들기 1부 - 환경 구축
-description: 레거시 프로젝트 마이그레이션 시 백엔드 리소스를 최소화 하기 위해 Client side GraphQL을 사용하기로 선택하고, 그 환경을 구축했던 내용에 대해 설명한다.
+description: 레거시 프로젝트 마이그레이션 시 백엔드 리소스를 최소화하기 위해 Client side GraphQL을 사용하기로 선택하고, 그 환경을 구축했던 내용에 대해 설명한다.
 date: 2024-01-21
 lastUpdated: 2024-01-21
 tags: [React, GraphQL]
 ---
 
-이 글은 회사에서 어드민 제품의 프론트엔드를 레거시 프로젝트에서 모던한 프로젝트로 마이그레이션 할 때, 백엔드 리소스를 최소화 하기 위해 Client side GraphQL을 사용하기로 선택하고, 그 환경을 구축했던 내용에 대해 설명한다.
+이 글은 회사에서 어드민 제품의 프론트엔드를 레거시 프로젝트에서 모던한 프로젝트로 마이그레이션 할 때, 백엔드 리소스를 최소화하기 위해 Client side GraphQL을 사용하기로 선택하고, 그 환경을 구축했던 내용에 대해 설명한다.
 
-글이 너무 길어져서 GraphQL로 실질적인 개발 과정은 어떻게 이루어지고 있느냐에 대해 이야기는 2부에서 하려고 한다.
+글이 너무 길어져서 (~~글 작성을 작년부터 시작했는데 배포를 미루고 미뤘던 이유가 있었다~~) GraphQL로 실질적인 개발 과정은 어떻게 이루어지고 있느냐에 대해 이야기는 2부에서 하려고 한다.
 
 ## 배경
 
@@ -16,16 +16,16 @@ tags: [React, GraphQL]
 
 없는 API를 개발해야 한다면, 간단한 것은 이미 만들어져 있는 ORM을 이용해 프론트엔드 개발자가 직접 개발할 수 있었고 (물론 이 경우에도 백엔드 개발자의 코드리뷰가 필요함) ORM을 수정한다거나 조금 복잡한 API 개발은 백엔드 개발자의 도움을 받았다.
 
-대부분은 이미 존재하는 API를 가지고 개발이 가능했어서 백엔드 리소스가 크게 필요하지 않았는데, 개발팀의 모던 컨벤션으로 개발한 API가 아니다보니 다음과 같은 문제점들이 있었다.
+대부분은 이미 존재하는 API를 가지고 개발이 가능했어서 백엔드 리소스가 크게 필요하지 않았는데, 개발팀의 모던 컨벤션으로 개발한 API가 아니다 보니 다음과 같은 문제점들이 있었다.
 
 1. **API의 응답에는 필요하지 않은 데이터도 포함되어 있다.**  
-   예를 들어 프론트엔드에서 유저에 대한 다섯가지 정보만 필요한데 유저에 대한 모든 정보가 응답으로 내려오고 또 그 응답값 중에 연관있는 정보(예를들면 유저가 수강하는 강의에 대한 정보)도 추가로 엮여서 내려오는 그런 상황이었다. 그래서 이 화면에서 필요한 정보가 정확히 무엇인지 응답만 보고 알기 어려웠다.
+   예를 들어 프론트엔드에서 유저에 대한 다섯 가지 정보만 필요한데 유저에 대한 모든 정보가 응답으로 내려오고 또 그 응답값 중에 연관 있는 정보(예를 들면 유저가 수강하는 강의에 대한 정보)도 추가로 엮여서 내려오는 그런 상황이었다. 그래서 이 화면에서 필요한 정보가 정확히 무엇인지 응답만 보고 알기 어려웠다.
 2. **API의 응답에는 알아볼 수 없는 의미의 이름이 포함되어 있다.** (ex. `_`)
 3. **API의 응답은 모두 스네이크 케이스이고, 개발팀의 모던 컨벤션은 카멜 케이스이다.**
 4. **프론트엔드가 먼저 모던 스택으로 마이그레이션 되었지만, 백엔드 코드도 마이그레이션 될 예정이다.**  
    레거시 API 스펙에 맞춰 프론트엔드를 다 개발해두었는데 추후 백엔드 마이그레이션이 완료되면 그에 맞춰 프론트엔드 코드를 다시 전면적으로 수정하는 미래가 (스네이크 케이스 -> 카멜 케이스 등) 상상되었다.
 
-이 모든 문제점을 해결하기 위해서는 레거시 API 응답을 모던 컨벤션에 맞게 한 번 가공해주는 단계가 필요하다고 판단했다.
+이 모든 문제점을 해결하기 위해서는 레거시 API 응답을 모던 컨벤션에 맞게 한 번 가공해 주는 단계가 필요하다고 판단했다.
 
 그럼 그 단계는 어떻게 개발할 수 있을까?
 
@@ -33,7 +33,7 @@ tags: [React, GraphQL]
 
 ![repository pattern](https://github.com/emewjin/emewjin.github.io/assets/76927618/ba3121a9-d92f-4b96-a1df-fd29cf313e9f)
 
-디자인 패턴 중 하나인 레포지토리 패턴은 데이터 소스 레이어와 비즈니스 레이어 사이를 중재한다고 알려져있다. 프론트엔드 입장에서 데이터 소스는 보통 백엔드 API 응답이 될 것이고, 비즈니스 레이어 (혹은 클라이언트)는 리액트 컴포넌트가 될 것이다. 레포지토리라는 구성 요소는 그 사이에서 중앙 집중식으로 API 응답을 관리하여 클라이언트 친화적으로 데이터를 클라이언트에게 제공한다.
+디자인 패턴 중 하나인 레포지토리 패턴은 데이터 소스 레이어와 비즈니스 레이어 사이를 중재한다고 알려져 있다. 프론트엔드 입장에서 데이터 소스는 보통 백엔드 API 응답이 될 것이고, 비즈니스 레이어 (혹은 클라이언트)는 리액트 컴포넌트가 될 것이다. 레포지토리라는 구성 요소는 그 사이에서 중앙 집중식으로 API 응답을 관리하여 클라이언트 친화적으로 데이터를 클라이언트에게 제공한다.
 
 이를 통해 얻을 수 있는 이점은 다음과 같다.
 
@@ -127,7 +127,7 @@ export const apolloClient = new ApolloClient({
 });
 ```
 
-`SchemaLink`는 GraphQL 서버 없이도 GraphQL 스키마만 있으면 GraphQL API를 사용할 수 있게 해준다. 사용시, 반드시 실행 가능한 (executable) 스키마를 넘겨주어야 한다. `@graphql-tools/schema`에서 제공하는 [`makeExecutableSchema` 함수](https://the-guild.dev/graphql/tools/docs/generate-schema#makeexecutableschema)를 사용하면 손쉽게 `SchemaLink`에서 요구하는 실행 가능한 스키마를 생성할 수 있다.
+`SchemaLink`는 GraphQL 서버 없이도 GraphQL 스키마만 있으면 GraphQL API를 사용할 수 있게 해준다. 사용할 때, 반드시 실행 가능한 (executable) 스키마를 넘겨주어야 한다. `@graphql-tools/schema`에서 제공하는 [`makeExecutableSchema` 함수](https://the-guild.dev/graphql/tools/docs/generate-schema#makeexecutableschema)를 사용하면 손쉽게 `SchemaLink`에서 요구하는 실행 가능한 스키마를 생성할 수 있다.
 
 > 스키마와 실행 가능한 스키마의 차이가 궁금해서 찾아보았는데 아직도 정확히는 모르겠지만 apollo client를 사용하기 위한 개념이며 typeDef와 resolver를 갖춘 스키마라는 것 같다 🤔
 
@@ -173,7 +173,7 @@ const resolvers = {
 
 적절한 위치에 `*.graphql` 파일을 생성하고, 필요한 type과 fragment 등 클라이언트에서 쿼리할 데이터를 정의한다. (후술할테지만 `src` 내부에 선언된 모든 `*.graphql`은 하나의 스키마로 합쳐질 것이다.) 스키마는 향후 백엔드 API 명세로도 쓰일 것을 목표로 하기 때문에 백엔드 개발자와 프론트엔드 개발자가 함께 작성한다.
 
-마이그레이션 해야하는 페이지에서 호출하는 API들을 확인하여 필요한 데이터들을 GraphQL 명세에 맞게 작성한다. 이때, 기존의 API 응답 결과에는 실제 코드에서 사용하지 않는 데이터도 포함되어 있기 때문에 레거시 프론트엔드 코드를 반드시 같이 확인해야 했다. 또한 이해하기 어려운 축약어로 된 변수명이 있으면 적절한 이름으로 수정하여 작성하고, 무슨 타입인지 알 수 없다면 ORM 코드나 DB테이블을 백엔드 개발자와 함께 확인하기도 했다.
+마이그레이션 해야 하는 페이지에서 호출하는 API들을 확인하여 필요한 데이터들을 GraphQL 명세에 맞게 작성한다. 이때, 기존의 API 응답 결과에는 실제 코드에서 사용하지 않는 데이터도 포함되어 있기 때문에 레거시 프론트엔드 코드를 반드시 같이 확인해야 했다. 또한 이해하기 어려운 축약어로 된 변수명이 있으면 적절한 이름으로 수정하여 작성하고, 무슨 타입인지 알 수 없다면 ORM 코드나 DB테이블을 백엔드 개발자와 함께 확인하기도 했다.
 
 아래 예시 코드는 실제 프로덕트 코드의 축약된 버전이다.
 
@@ -460,7 +460,7 @@ GraphQL 스키마에서 선언한 객체 key와 다른 이름의 property가 API
 
 예를 들어, 레거시 API의 응답값 중 가장 이해가 안되는 부분으로 `_` 라는 프로퍼티가 있었다. 이 값은 중첩된 객체로 존재할 수 있었는데 이름만 봐서는 무슨 데이터인지 상위 객체와 무슨 관계인지 알기 어려웠다.
 
-때문에 마이그레이션 할 때에는 무슨 관계인지, 어떤 값인지 파악하여 `_` 안의 프로퍼티들의 이름을 수정하고 `_`를 해체하여 1depth의 객체로 수정했다.
+때문에 마이그레이션 할 때에는 무슨 관계인지, 어떤 값인지 파악하여 `_` 안의 프로퍼티들의 이름을 수정하고 `_`를 해체하여 1 depth의 객체로 수정했다.
 
 ```tsx
 Instructor: {
@@ -541,11 +541,11 @@ export const apolloClient = new ApolloClient({
 
 이렇게 아폴로 클라이언트를 이용한 Client side GraphQL 구축이 마무리되었다.
 
-이제 실제 어드민 개발을 시작하여 컴포넌트를 작성하고 아폴로의 `useQuery` 등을 이용해서 컴포넌트에 필요한 데이터를 요청할 차례이다. 이를 위한 커스텀 훅이나 타입을 작성하는 등의 작업이 필요한데, GraphQL code generator를 사용하면 이 과정을 자동화 할 수 있다. 다음 단계로 GraphQL code generator를 사용하기 위한 설정을 살펴보겠다.
+이제 실제 어드민 개발을 시작하여 컴포넌트를 작성하고 아폴로의 `useQuery` 등을 이용해서 컴포넌트에 필요한 데이터를 요청할 차례이다. 이를 위한 커스텀 훅이나 타입을 작성하는 등의 작업이 필요한데, GraphQL code generator를 사용하면 이 과정을 자동화할 수 있다. 다음 단계로 GraphQL code generator를 사용하기 위한 설정을 살펴보겠다.
 
 ## GraphQL code generator 설정
 
-[GraphQL code generator](https://github.com/dotansimha/graphql-code-generator)는 스키마를 기반으로 여러 코드를 자동으로 만들어 준다. 실제 컴포넌트 개발시에는 코드 제너레이터가 만들어준 여러 코드를 가지고 개발하면 된다. 수동으로 뭔가를 작성할 일은 스키마를 작성하는 것 말고는 거의 없었다.
+[GraphQL code generator](https://github.com/dotansimha/graphql-code-generator)는 스키마를 기반으로 여러 코드를 자동으로 만들어 준다. 실제 컴포넌트 개발 시에는 코드 제너레이터가 만들어준 여러 코드를 가지고 개발하면 된다. 수동으로 뭔가를 작성할 일은 스키마를 작성하는 것 말고는 거의 없었다.
 
 ![코드 제너레이터로 생성된 파일들](https://github.com/emewjin/emewjin.github.io/assets/76927618/c56c3002-95e0-4c34-ab18-5bbe6d13c95c)
 
@@ -606,13 +606,13 @@ export const defaultConfig: CodegenConfig = {
     ```
 
 - plugins
-  - [**fragment-matcher**](https://the-guild.dev/graphql/codegen/plugins/other/fragment-matcher): 아폴로 클라이언트를 사용하고 있고 스키마가 `interface` 혹은 `union` 선언을 포함하고 있는 경우 아폴로의 [possibleTypes](https://www.apollographql.com/docs/react/data/fragments/#defining-possibletypes-manually)를 사용하여 결과에 대한 유효성 검증 및 정확한 fragment 일치 여부를 검증하는 것이 권장된다. 이 작업을 하기 위해 필요한 json 파일을 자동으로 생성해주는 플러그인이다.
+  - [**fragment-matcher**](https://the-guild.dev/graphql/codegen/plugins/other/fragment-matcher): 아폴로 클라이언트를 사용하고 있고 스키마가 `interface` 혹은 `union` 선언을 포함하고 있는 경우 아폴로의 [possibleTypes](https://www.apollographql.com/docs/react/data/fragments/#defining-possibletypes-manually)를 사용하여 결과에 대한 유효성 검증 및 정확한 fragment 일치 여부를 검증하는 것이 권장된다. 이 작업을 하기 위해 필요한 json 파일을 자동으로 생성해 주는 플러그인이다.
     ```ts
     'src/@types/generated/possibleTypes.json': {
       plugins: ['fragment-matcher'],
     },
     ```
-  - [**typescript-apollo-client-helpers**](https://the-guild.dev/graphql/codegen/plugins/typescript/typescript-apollo-client-helpers): Local cache 관리를 위한 [type policies](https://www.apollographql.com/docs/react/caching/cache-configuration/#typepolicy-fields)에 대한 타입을 자동으로 생성해주는 플러그인이다.
+  - [**typescript-apollo-client-helpers**](https://the-guild.dev/graphql/codegen/plugins/typescript/typescript-apollo-client-helpers): Local cache 관리를 위한 [type policies](https://www.apollographql.com/docs/react/caching/cache-configuration/#typepolicy-fields)에 대한 타입을 자동으로 생성해 주는 플러그인이다.
     ```ts
     'src/@types/generated/typePolicies-helper.ts': {
       plugins: ['typescript-apollo-client-helpers'],
@@ -621,7 +621,7 @@ export const defaultConfig: CodegenConfig = {
       },
     },
     ```
-  - [**typescript-resolvers**](https://the-guild.dev/graphql/codegen/plugins/typescript/typescript-resolvers): resolver를 선언할 때 필요한 타입을 자동으로 생성해주는 플러그인이다.
+  - [**typescript-resolvers**](https://the-guild.dev/graphql/codegen/plugins/typescript/typescript-resolvers): resolver를 선언할 때 필요한 타입을 자동으로 생성해 주는 플러그인이다.
     ```ts
     plugins: ['typescript-resolvers'],
       config: {
@@ -650,8 +650,8 @@ GraphQL을 사용하기 위한 모든 준비를 마쳤다. 마지막으로 소�
   1.  페이지의 첫 렌더링에 필요한 data fetching은 각 컴포넌트 트리의 root에서만 한다
   2.  fragment의 이름은 컴포넌트 이름을 접두사로 붙인다
   3.  같은 타입이라도 컴포넌트마다 fragment를 각각 둔다.
-  4.  각 컴포넌트는 graphql data를 prop으로 받지 않는다.
-- Relay 스타일에서는 fragment를 컴포넌트 파일 안에 같이 작성해야 한다. 그러나 node graphql 패키지의 스키마 병합 함수를 사용하기 위해서는 그렇게 작성할 수 없어서 fragment는 컴포넌트와 분리된 별도의 파일에 작성해주어야 했다.
+  4.  각 컴포넌트는 GraphQL data를 prop으로 받지 않는다.
+- Relay 스타일에서는 fragment를 컴포넌트 파일 안에 같이 작성해야 한다. 그러나 node GraphQL 패키지의 스키마 병합 함수를 사용하기 위해서는 그렇게 작성할 수 없어서 fragment는 컴포넌트와 분리된 별도의 파일에 작성해주어야 했다.
 
 ### 이점
 
@@ -671,7 +671,7 @@ GraphQL을 사용하기 위한 모든 준비를 마쳤다. 마지막으로 소�
 
 `{ ok: boolean }`
 
-이것만으로는 실제 mutation에 성공한 것인지 알 수가 없다. 실제로 업데이트는 실패했지만, 응답은 성공 했다는 의미의 `ok: true`가 내려온 사례가 있었다.
+이것만으로는 실제 mutation에 성공한 것인지 알 수가 없다. 실제로 업데이트는 실패했지만, 응답은 성공했다는 의미의 `ok: true`가 내려온 사례가 있었다.
 GraphQL 명세를 따르자면 mutation에 성공한 값을 함께 반환해야 하므로 개선이 필요한 부분이다.
 
 ## 참고문서
@@ -679,3 +679,4 @@ GraphQL 명세를 따르자면 mutation에 성공한 값을 함께 반환해야 
 - [[GraphQL] SchemaLink 사용법 - 서버없는 클라이언트](https://www.daleseo.com/graphql-apollo-link-schema/)
 - [React에서 GraphQL Code Generator 활용하기](https://medium.com/sixshop/react%EC%97%90%EC%84%9C-graphql-code-generator-%ED%99%9C%EC%9A%A9%ED%95%98%EA%B8%B0-a16e3235b60)
 - [GraphQL without a server](https://github.com/hasura/client-side-graphql)
+- [Apollo Client (React)](https://www.apollographql.com/docs/react)
