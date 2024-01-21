@@ -1,12 +1,12 @@
 ---
 title: Client side GraphQL로 어드민 만들기
-description:
-date: 2023-12-31
-lastUpdated: 2023-12-31
-tags: [React, graphQL]
+description: 레거시 프로젝트 마이그레이션 시 백엔드 리소스를 최소화 하기 위해 Client side GraphQL을 사용하기로 선택하고, 그 환경을 구축했던 내용에 대해 설명한다.
+date: 2024-01-21
+lastUpdated: 2024-01-21
+tags: [React, GraphQL]
 ---
 
-이 글은 회사에서 어드민 제품을 레거시 프로젝트에서 모던한 프로젝트로 마이그레이션 할 때 백엔드 리소스를 최소화 하기 위해 Client side GraphQL을 사용하기로 선택하고, 환경을 구축한 내용에 대해 설명한다.
+이 글은 회사에서 어드민 제품의 프론트엔드를 레거시 프로젝트에서 모던한 프로젝트로 마이그레이션 할 때, 백엔드 리소스를 최소화 하기 위해 Client side GraphQL을 사용하기로 선택하고, 그 환경을 구축했던 내용에 대해 설명한다.
 
 글이 너무 길어져서 GraphQL로 실질적인 개발 과정은 어떻게 이루어지고 있느냐에 대해 이야기는 2부에서 하려고 한다.
 
@@ -14,18 +14,16 @@ tags: [React, graphQL]
 
 레거시 어드민을 리액트 앱으로 마이그레이션 하기로 했다. 이때 백엔드 리소스가 없어서 프론트엔드 리소스만 가지고 개발하기 위해 레거시 프로젝트의 API를 최대한 사용해야 하는 상황이었다.
 
-없는 API를 개발해야 한다면, 간단한 것은 이미 만들어져 있는 ORM을 이용해 프론트엔드 개발자가 직접 개발할 수 있었고 (물론 백엔드 개발자의 코드리뷰가 필요함) ORM을 수정한다거나 조금 복잡한 API 개발은 백엔드 개발자의 도움을 받았다.
+없는 API를 개발해야 한다면, 간단한 것은 이미 만들어져 있는 ORM을 이용해 프론트엔드 개발자가 직접 개발할 수 있었고 (물론 이 경우에도 백엔드 개발자의 코드리뷰가 필요함) ORM을 수정한다거나 조금 복잡한 API 개발은 백엔드 개발자의 도움을 받았다.
 
-대부분은 이미 존재하는 API를 가지고 개발이 가능했어서 백엔드 리소스가 크게 필요하지 않았는데, 개발팀의 모던 컨벤션으로 개발한 API가 아니고 레거시 API를 사용하다보니 다음과 같은 문제점들이 있었다.
+대부분은 이미 존재하는 API를 가지고 개발이 가능했어서 백엔드 리소스가 크게 필요하지 않았는데, 개발팀의 모던 컨벤션으로 개발한 API가 아니다보니 다음과 같은 문제점들이 있었다.
 
-1. API의 응답에는 필요하지 않은 데이터도 포함되어 있다.
-2. API의 응답에는 알아볼 수 없는 의미의 이름이 포함되어 있다. (ex. `_`)
-3. API의 응답은 모두 스네이크 케이스이고, 개발팀의 모던 컨벤션은 카멜 케이스이다.
-4. 프론트엔드가 먼저 모던 스택으로 마이그레이션 되었지만, 백엔드 코드도 마이그레이션 될 예정이다.
-
-가장 크게 문제였던 점은 4번인데, 레거시 API 스펙에 맞춰 프론트엔드를 다 개발해두었는데 추후 백엔드 마이그레이션 완료되었다고 하면 프론트엔드 코드를 다시 전면적으로 수정하는 미래가 상상되었다.
-
-그렇다고 백엔드도 이번에 같이 마이그레이션 하자고 하기엔 리소스가 없는 상황이다.
+1. **API의 응답에는 필요하지 않은 데이터도 포함되어 있다.**  
+   예를 들어 프론트엔드에서 유저에 대한 다섯가지 정보만 필요한데 유저에 대한 모든 정보가 응답으로 내려오고 또 그 응답값 중에 연관있는 정보(예를들면 유저가 수강하는 강의에 대한 정보)도 추가로 엮여서 내려오는 그런 상황이었다. 그래서 이 화면에서 필요한 정보가 정확히 무엇인지 응답만 보고 알기 어려웠다.
+2. **API의 응답에는 알아볼 수 없는 의미의 이름이 포함되어 있다.** (ex. `_`)
+3. **API의 응답은 모두 스네이크 케이스이고, 개발팀의 모던 컨벤션은 카멜 케이스이다.**
+4. **프론트엔드가 먼저 모던 스택으로 마이그레이션 되었지만, 백엔드 코드도 마이그레이션 될 예정이다.**  
+   레거시 API 스펙에 맞춰 프론트엔드를 다 개발해두었는데 추후 백엔드 마이그레이션이 완료되면 그에 맞춰 프론트엔드 코드를 다시 전면적으로 수정하는 미래가 (스네이크 케이스 -> 카멜 케이스 등) 상상되었다.
 
 이 모든 문제점을 해결하기 위해서는 레거시 API 응답을 모던 컨벤션에 맞게 한 번 가공해주는 단계가 필요하다고 판단했다.
 
@@ -35,7 +33,7 @@ tags: [React, graphQL]
 
 ![repository pattern](https://github.com/emewjin/emewjin.github.io/assets/76927618/ba3121a9-d92f-4b96-a1df-fd29cf313e9f)
 
-레포지토리 패턴은 데이터 소스 레이어와 비즈니스 레이어 사이를 중재한다고 알려져있다. 프론트엔드 입장에서 데이터 소스는 보통 백엔드 API 응답이 될 것이고, 비즈니스 레이어 (혹은 클라이언트)는 리액트 컴포넌트가 될 것이다. 레포지토리라는 구성 요소는 중앙 집중식으로 API 응답을 관리하여 클라이언트 친화적으로 데이터를 클라이언트에게 제공한다.
+디자인 패턴 중 하나인 레포지토리 패턴은 데이터 소스 레이어와 비즈니스 레이어 사이를 중재한다고 알려져있다. 프론트엔드 입장에서 데이터 소스는 보통 백엔드 API 응답이 될 것이고, 비즈니스 레이어 (혹은 클라이언트)는 리액트 컴포넌트가 될 것이다. 레포지토리라는 구성 요소는 그 사이에서 중앙 집중식으로 API 응답을 관리하여 클라이언트 친화적으로 데이터를 클라이언트에게 제공한다.
 
 이를 통해 얻을 수 있는 이점은 다음과 같다.
 
@@ -60,7 +58,7 @@ tags: [React, graphQL]
 
 ### 1. 레포지토리 레이어로서의 역할
 
-GraphQL의 [resolver](https://graphql.org/learn/execution/#root-fields-resolvers)가 레포지토리 레이어의 역할을 할 수 있겠다고 생각했다. resolver가 어떻게 레포지토리 레이어의 역할을 수행하는지는 뒤에서 자세하게 설명하겠다.
+GraphQL의 [resolver](https://graphql.org/learn/execution/#root-fields-resolvers)가 레포지토리 레이어의 역할을 할 수 있겠다고 생각했다. resolver에 대해서는 [뒤에서](#3-resolver-작성) 자세하게 설명하겠다.
 
 > GraphQL의 resolver란 클라이언트에서 온 요청에 따라 쿼리의 각 필드에 대한 데이터를 제공하는 과정을 담당하는 함수를 말한다.
 >
@@ -69,9 +67,9 @@ GraphQL의 [resolver](https://graphql.org/learn/execution/#root-fields-resolvers
 
 ### 2. 여러 endpoint 처리
 
-사실 지금까지 회사에서는 여러 엔드포인트의 API를 한 번에 호출하여 필요한 데이터를 가공할 일이 거의 없었다. 대부분 하나의 API에 응답값을 추가하는 방식으로 다 처리가 되었다.
+사실 지금까지 여러 엔드포인트의 API를 한 번에 호출하여 필요한 데이터를 가공할 일이 거의 없었다. 대부분 한 페이지와 하나의 API가 정확히 맵핑되었고, 필요시 하나의 API에 응답값을 추가하는 방식으로 다 처리 가능했다.
 
-그러나 프로덕트 조직은 목적 단위 조직으로 나뉘어져 있어 앞으로 레거시 API는 언제든지 담당하는 셀에 따라 플랫폼 성격의 API로 쪼개어질 수 있다. 그리고 그게 멀지 않은 미래라고 판단했다.
+그러나 프로덕트 조직은 목적 단위 조직인 셀(Cell)로 나뉘어져 있어 앞으로 레거시 API는 언제든지 담당하는 셀에 따라 플랫폼 성격의 API로 쪼개어질 수 있다. 그리고 그게 멀지 않은 미래라고 판단했다.
 
 물론 셀 별로 쪼개진 API를 통합하는 건 백엔드에서 해줘도 된다. 하지만 이번처럼 백엔드 리소스가 없는 상황이라면 충분히 여러 엔드포인트의 API를 사용해서 2개 이상의 데이터를 요청해야 할 수도 있다.
 
@@ -81,14 +79,12 @@ GraphQL을 사용한다면 resolver 쪽에서 여러 엔드포인트를 처리�
 
 백엔드 리소스를 최소화 하는 것과 관련은 없지만 GraphQL을 사용한다면 얻을 수 있는 추가적인 이점들은 다음과 같다.
 
-- Component에서의 type safety 보장
-- FE에서 선언한 GraphQL schema를 보고 BE 팀에서 API를 분리할 때 그대로 만든다면, FE에서 별다른 코드 수정이 필요하지 않음
-- Query와 component를 co-location 할 수 있음
-- Fragment를 통해 data masking 지원, component에 필요한 데이터 캡슐화
+- 백엔드에서 API를 분리할 때 프론트엔드에서 선언한 GraphQL 스키마를 보고 그대로 만든다면, 별다른 프론트엔드 코드 수정이 필요하지 않음
+- GraphQL Fragment를 통해 data masking, 컴포넌트에 필요한 데이터 캡슐화
 
 ## Client side GraphQL
 
-GraphQL은 언어, 명세, 형식이기 때문에 이를 가지고 요청/응답할 수 있는 구현체가 필요하다. 이 구현체는 server 사이드도 있고 client 사이드도 있는데, 우리는 (다시 이야기하지만) 백엔드 리소스가 없는 상황이었다. 그래서 선택한 것이 GraphQL의 스키마와 리졸버를 클라이언트 코드에 포함하는 **Client side GraphQL**이다.
+GraphQL은 언어, 명세, 형식이기 때문에 이 스펙을 준수하며 요청/응답할 수 있는 구현체가 필요하다. 이 구현체는 서버 측도 있고 클라이언트 측도 있는데, 우리는 (다시 이야기하지만) 백엔드 리소스가 없는 상황이었다. 그래서 선택한 것이 GraphQL의 스키마와 resolver를 클라이언트 코드에 포함하는 **Client side GraphQL**이다.
 
  <!-- 필요했고 Apollo는 그런 구현체를 제공하는 라이브러리 중 하나이다.
 그러나 일반적으로 GraphQL은 API 서버를 연상시킨다.
@@ -98,21 +94,21 @@ GraphQL은 언어, 명세, 형식이기 때문에 이를 가지고 요청/응답
 
 Client side GraphQL은 서버와 통신하는 클라이언트 측 인프라 개념이다.
 
-전통적인 방식은 아래 그림과 같이 GraphQL 서버가 따로 있는 방식이라면,
+전통적인 방식은 아래 그림과 같이 GraphQL 서버가 따로 있어 스키마와 resolver가 서버에 선언되어 있고 클라이언트에서는 http 통신을 통해 스키마를 받아오는 방식이라면,
 ![전통적인 graphQL](https://github.com/emewjin/emewjin.github.io/assets/76927618/1f28a0d8-1d69-41f2-82fc-f7b46850c42f)
 
-Client side GraphQL은 GraphQL API를 이용하기 위해 별도로 GraphQL 서버를 구축하지 않아도 된다.
+Client side GraphQL은 클라이언트에 스키마와 resolver를 선언하기 때문에 별도로 GraphQL 서버를 구축하지 않아도 된다.
 ![클라이언트 사이드 graphQL](https://github.com/emewjin/emewjin.github.io/assets/76927618/d03edea8-0eab-4c78-8381-baccdb84d865)
 
 > 이미지 출처: [GraphQL without a server](https://github.com/hasura/client-side-graphql)
 
-GraphQL 클라이언트는 [Apollo client](https://www.apollographql.com/docs/react/)를 이용했다. 개발팀 내에서 다들 Apollo 경험만 있었기 때문에 Apollo가 채택되었다.
+GraphQL 클라이언트는 [아폴로 클라이언트(Apollo client)](https://www.apollographql.com/docs/react/)를 선택했다. 개발팀 내에서 다들 Apollo 경험만 있었기 때문이다.
 
 > [공식문서](https://graphql.org/code/#javascript-client)에서 아폴로 외에도 client에서 사용할 수 있는 GraphQL 라이브러리를 찾아볼 수 있다.
 
 ## Client side GraphQL 구현
 
-팀에서 아폴로 클라이언트로 Client side GraphQL을 구현한 과정을 소개하겠다. 모든 환경 설정은 [킹갓제네럴](https://wiki.lucashan.space/)께서 진행하셨고 내가 한 것은 그 설정을 잘 이해하기 위해 노력한 것이 다임을 먼저 밝힌다.
+이제부터는 팀에서 아폴로 클라이언트로 Client side GraphQL을 구현한 과정을 소개하겠다. 모든 환경 설정은 [킹갓제네럴](https://wiki.lucashan.space/)께서 진행하셨고 내가 한 것은 그 설정을 잘 이해하기 위해 노력한 것이 다임을 먼저 밝힌다.
 
 ### 1. 아폴로 클라이언트 설정
 
@@ -120,7 +116,7 @@ GraphQL 클라이언트는 [Apollo client](https://www.apollographql.com/docs/re
 
 아폴로 클라이언트는 기본적으로 이 `uri`로 `HttpLink`를 만들어서 GraphQL operation^[클라이언트에서 서버로 전송되는 GraphQL 요청의 유형을 말하며 query, mutation, subscription이 있다.]을 HTTP 요청으로 GraphQL 서버에 전송한다. 그러나 우리는 GraphQL 서버가 없으므로 이를 사용할 수 없다.
 
-이를 수정하려면 아폴로 클라이언트의 `link`에 대해 알아야 한다. [공식문서](https://www.apollographql.com/docs/react/api/link/introduction)에 의하면 `link`는 아폴로 클라이언트와 서버 사이의 데이터 흐름을 정의한다. GraphQL 서버가 없어 `HttpLink`를 사용할 수 없다면 [`SchemaLink`](https://www.apollographql.com/docs/react/api/link/apollo-link-schema/#overview)를 사용할 수 있다.
+이를 수정하려면 아폴로 클라이언트의 `link`에 대해 알아야 한다. [공식문서](https://www.apollographql.com/docs/react/API/link/introduction)에 의하면 `link`는 아폴로 클라이언트와 서버 사이의 데이터 흐름을 정의한다. GraphQL 서버가 없어 `HttpLink`를 사용할 수 없다면 [`SchemaLink`](https://www.apollographql.com/docs/react/API/link/apollo-link-schema/#overview)를 사용할 수 있다.
 
 > 그 외에도 다양한 링크들이 존재하여, 에러/로딩 처리를 link를 통해서 할 수도 있다고 함...
 
@@ -131,9 +127,9 @@ export const apolloClient = new ApolloClient({
 });
 ```
 
-`SchemaLink`는 GraphQL 서버 없이도 GraphQL 스키마만 있으면 GraphQL API를 사용할 수 있게 해준다. 사용시, 반드시 스키마를 넘겨주어야 한다.
+`SchemaLink`는 GraphQL 서버 없이도 GraphQL 스키마만 있으면 GraphQL API를 사용할 수 있게 해준다. 사용시, 반드시 실행 가능한 (executable) 스키마를 넘겨주어야 한다. `@graphql-tools/schema`에서 제공하는 [`makeExecutableSchema` 함수](https://the-guild.dev/graphql/tools/docs/generate-schema#makeexecutableschema)를 사용하면 손쉽게 `SchemaLink`에서 요구하는 실행 가능한 스키마를 생성할 수 있다.
 
-`@graphql-tools/schema`에서 제공하는 `makeExecutableSchema` 함수를 사용하면 손쉽게 [스키마](https://graphql-kr.github.io/learn/schema/)를 생성할 수 있다.
+> 스키마와 실행 가능한 스키마의 차이가 궁금해서 찾아보았는데 아직도 정확히는 모르겠지만 apollo client를 사용하기 위한 개념이며 typeDef와 resolver를 갖춘 스키마라는 것 같다 🤔
 
 ```ts
 const schema = makeExecutableSchema({
@@ -146,7 +142,7 @@ export const apolloClient = new ApolloClient({
 });
 ```
 
-스키마를 생성하기 위해서 [typeDef](https://www.apollographql.com/docs/apollo-server/api/apollo-server/#typedefs)와 resolver가 필요하다. typeDef는 `gql` 템플릿 리터럴 태그로 작성된, 사용할 데이터들의 구조와 타입이다. resolver는 어떻게 API를 호출해서 그 응답값을 다룰 것인지를 정의한 함수이다.
+이 함수로 스키마를 생성하기 위해서 [typeDef](https://www.apollographql.com/docs/apollo-server/API/apollo-server/#typedefs)와 resolver가 필요하다. typeDef는 `gql` 템플릿 리터럴 태그로 작성된, 사용할 데이터들의 구조와 타입이다.
 
 ```ts
 const typeDefs = gql`
@@ -167,21 +163,17 @@ const resolvers = {
 };
 ```
 
-따라서 다음 단계에서는 스키마를 생성하는 데 필요한 typeDef를 어떻게 생성하고 resolver를 어떻게 작성했는지에 대해 설명하겠다.
+따라서 다음 단계에서는 `makeExecutableSchema` 함수로 스키마를 생성하는 데 필요한 typeDef를 어떻게 생성하고 resolver를 어떻게 작성했는지에 대해 설명하겠다.
 
 ### 2. typeDef 생성
 
-먼저 말하자면 typeDef는 자동으로 만들어지게 할 것이다. 그러려면 각 페이지에서 필요한 데이터의 스키마를 작성해야 한다.
+먼저 말하자면 typeDef는 자동으로 만들어지게 할 것이다. 그러기 위해 각 페이지 단위로 필요한 데이터의 [스키마](https://graphql-kr.github.io/learn/schema/)를 작성한다.
 
 #### 2-1. 스키마 수동 작성
 
-적절한 위치에 `*.graphql` 파일을 생성하고, 필요한 type과 fragment 등 스키마를 작성한다. (후술할테지만 `src` 내부에 선언된 모든 `*.graphql`은 하나의 스키마로 합쳐질 것이다.)
+적절한 위치에 `*.graphql` 파일을 생성하고, 필요한 type과 fragment 등 클라이언트에서 쿼리할 데이터를 정의한다. (후술할테지만 `src` 내부에 선언된 모든 `*.graphql`은 하나의 스키마로 합쳐질 것이다.) 스키마는 향후 백엔드 API 명세로도 쓰일 것을 목표로 하기 때문에 백엔드 개발자와 프론트엔드 개발자가 함께 작성한다.
 
-[스키마](https://graphql-kr.github.io/learn/schema/)는 향후 백엔드 API 명세로도 쓰일 것을 목표로 하기 때문에 백엔드 개발자와 프론트엔드 개발자가 함께 작성한다.
-
-마이그레이션 해야하는 페이지에서 호출하는 api들을 확인하여 필요한 데이터들을 GraphQL 명세에 맞게 `type`, `enum` 등을 활용해 작성했다.
-
-이때, 기존의 api 응답 결과에는 실제 코드에서 사용하지 않는 데이터도 포함되어 있기 때문에 레거시 프론트엔드 코드를 반드시 같이 확인해야 했다. 또한 이해하기 어려운 축약어로 된 변수명이 있으면 적절한 이름으로 수정하여 작성하고, 무슨 타입인지 알 수 없다면 ORM 코드나 DB테이블을 백엔드 개발자와 함께 확인하기도 했다.
+마이그레이션 해야하는 페이지에서 호출하는 API들을 확인하여 필요한 데이터들을 GraphQL 명세에 맞게 작성한다. 이때, 기존의 API 응답 결과에는 실제 코드에서 사용하지 않는 데이터도 포함되어 있기 때문에 레거시 프론트엔드 코드를 반드시 같이 확인해야 했다. 또한 이해하기 어려운 축약어로 된 변수명이 있으면 적절한 이름으로 수정하여 작성하고, 무슨 타입인지 알 수 없다면 ORM 코드나 DB테이블을 백엔드 개발자와 함께 확인하기도 했다.
 
 아래 예시 코드는 실제 프로덕트 코드의 축약된 버전이다.
 
@@ -239,52 +231,58 @@ query UsersPage_Users(
 
 #### 2-2. prepare-graphql 실행
 
-`prepare-graphql`은 GraphQL을 편하게 사용하기 위한 설정이나 유틸을 제공하는 패키지로, 이를 실행하여 [위에서](#2-1-스키마-수동-작성) 작성한 스키마를 기반으로 typeDef를 생성한다.
+스키마 작성이 끝났다면 `prepare-graphql`을 실행하여 typeDef를 생성한다. `prepare-graphql`은 GraphQL을 편하게 사용하기 위한 설정이나 유틸을 제공하기 위해 개발된 패키지로, src 디렉토리 내부에 선언된 `*.graphql`을 모두 찾아 typeDef를 생성하고 하나의 스키마로 병합한다.
 
-```ts
-export const makeTypeDefs = (filePath: string, mergedSchema: DocumentNode) => {
+- 하나의 스키마로 병합: 후술할 code generator를 위한 준비물이다.
+
+  ```ts
+  // This loader loads documents and type definitions from .graphql files.
+  import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader';
+  // Synchronously loads a schema from the provided pointers.
+  import { loadSchemaSync } from '@graphql-tools/load';
+  // Merges multiple type definitions into a single DocumentNode
+  import { mergeTypeDefs } from '@graphql-tools/merge';
+  // Converts an AST into a string, using one set of reasonable formatting rules.
+  import { print } from 'graphql';
+
+  // src 내부에 선언된 *.graphql을 모두 찾아
+  const result = loadSchemaSync(path.join(srcPath, './**/*{.page,}.graphql'), {
+    loaders: [new GraphQLFileLoader()],
+  });
+  // 하나로 합친뒤
+  const mergedSchema = mergeTypeDefs(result);
+  const graphqlSchema = print(mergedSchema);
+  // 스크립트를 실행한 패키지에 schema.graphql라는 이름의 파일로 생성한다.
   fs.writeFileSync(
-    filePath,
-    `import type { DocumentNode } from 'graphql';\n\nexport const typeDefs = JSON.parse('${JSON.stringify(
-      mergedSchema
-    )}') as unknown as DocumentNode;\n`
+    path.join(executeRootPath, './schema.graphql'),
+    graphqlSchema
   );
-};
+  ```
 
-makeTypeDefs(
-  path.join(srcPath, './@types/generated/typeDefs.graphql.ts'),
-  mergedSchema
-);
-```
+- typeDef 생성
 
-`prepare-graphql`은 typeDef 생성 외에도 src 내부에 선언된 `*.graphql`을 모두 찾아 하나의 스키마로 만들고 스크립트를 실행한 패키지 내부에 `schema.graphql`을 생성한다. 후술할 code generator를 위한 준비물이다.
+  ```ts
+  export const makeTypeDefs = (
+    filePath: string,
+    mergedSchema: DocumentNode
+  ) => {
+    fs.writeFileSync(
+      filePath,
+      `import type { DocumentNode } from 'graphql';\n\nexport const typeDefs = JSON.parse('${JSON.stringify(
+        mergedSchema
+      )}') as unknown as DocumentNode;\n`
+    );
+  };
 
-```ts
-// This loader loads documents and type definitions from .graphql files.
-import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader';
-// Synchronously loads a schema from the provided pointers.
-import { loadSchemaSync } from '@graphql-tools/load';
-// Merges multiple type definitions into a single DocumentNode
-import { mergeTypeDefs } from '@graphql-tools/merge';
-// Converts an AST into a string, using one set of reasonable formatting rules.
-import { print } from 'graphql';
+  makeTypeDefs(
+    path.join(srcPath, './@types/generated/typeDefs.graphql.ts'),
+    mergedSchema
+  );
+  ```
 
-// src 내부에 선언된 *.graphql을 모두 찾아
-const result = loadSchemaSync(path.join(srcPath, './**/*{.page,}.graphql'), {
-  loaders: [new GraphQLFileLoader()],
-});
-// 하나로 합친뒤
-const mergedSchema = mergeTypeDefs(result);
-const graphqlSchema = print(mergedSchema);
-// 스크립트를 실행한 패키지에 schema.graphql라는 이름의 파일로 생성한다.
-fs.writeFileSync(path.join(executeRootPath, './schema.graphql'), graphqlSchema);
-```
-
-스키마를 생성하기 위한 준비물 중 typeDef의 생성이 완료되었다. 다음으로 resolver를 작성하는 방법에 대해 살펴보겠다.
+이렇게 실행 가능한 스키마를 생성하기 위한 준비물 중 typeDef의 생성이 완료되었다. 다음으로 resolver를 작성하는 방법에 대해 살펴보겠다.
 
 ### 3. resolver 작성
-
-GraphQL의 resolver는 크게 `queryResolver`, `schemaResolver`, `mutationResolver`가 있다.
 
 각 페이지별로 resolver를 작성한 다음, 한 번에 모아서 스키마를 만들 때 넘겨주고 있다.
 
@@ -327,9 +325,11 @@ const schema = makeExecutableSchema({
 });
 ```
 
+[아폴로 클라이언트의 resolver](https://www.apollographql.com/docs/apollo-server/data/resolvers)는 크게 Query Resolver, Mutation Resolver, Schema Resolver로 나누어 작성하고 있는데, 각각에 대해 살펴보겠다.
+
 #### 4-1. Query Resolver
 
-기본적으로 클라이언트가 특정 필드 쿼리를 요청할 때의 처리를 담당한다. 구체적으로는 아폴로 클라이언트 초기화시 선언한 link에 context로 넘겨준 fetcher를 이용해서 실제 query 요청 (GET 요청)을 보내는 역할을 한다.
+기본적으로 클라이언트가 특정 필드에 대한 쿼리를 요청할 때의 처리를 담당한다. RESTful API의 GET 요청을 담당하는 곳이라고 생각하면 되는데 구체적으로는 아폴로 클라이언트 초기화시 선언한 link에 context로 넘겨준 fetcher를 이용해서 실제 query 요청을 보내는 역할을 한다.
 
 그외에도 다음의 역할들을 수행한다.
 
@@ -339,7 +339,7 @@ const schema = makeExecutableSchema({
 export const usersQueryResolvers: Partial<QueryResolvers> = {
   users: async (_, args, context) => {
     const { page = 1, limit = 15, searchType, keyword, userTypes } = args;
-    // queryString을 레거시 api 스펙에 맞게 조정한다.
+    // queryString을 레거시 API 스펙에 맞게 조정한다.
     const queryString = stringifyQueryObject({
       page,
       limit,
@@ -422,13 +422,45 @@ export const usersQueryResolvers: Partial<QueryResolvers> = {
   return <View />;
   ```
 
-#### 4-2. Schema Resolver
+#### 4-2. Mutation Resolver
 
-GraphQL `type` 에서 선언한 객체 key와 다른 이름의 property가 API 응답으로 올 경우, 해당 부분을 맵핑하는 역할을 한다.
+RESTful API의 POST, PUT 등을 떠올리면 된다. Mutation 요청을 보내는 역할을 한다. 개발 팀의 모던 컨벤션 camel case 값들을 레거시 API 스펙인 snake case로 맵핑하거나 새로운 프론트엔드 코드에서 좀 더 인지하기 쉬운 이름으로 사용했던 변수들을 API 스펙에 맞게 할당하는 역할도 한다.
+
+```ts
+import type {
+  RemoveUserPayload,
+  User,
+} from '../../../@types/generated/graphql';
+import type { MutationResolvers } from '../../../@types/generated/resolversTypes';
+
+export const usersMutationResolvers: Partial<MutationResolvers> = {
+  updateUserPoint: async (_, args, context) => {
+    const { userId, initialPoint, willUpdatePoint } = args.input;
+    const apiResponse = await context.graphqlFetcherForV1.post<{
+      result: { userId: number; point: number };
+    }>('/admin/points', {
+      // 의미를 명확히 알 수 있는 이름의 변수로 사용했던 것을 레거시 API 스펙에 맞게 할당
+      cur_point: initialPoint,
+      // 카멜 케이스를 스네이크 케이스로 변환
+      user_id: userId,
+      value: willUpdatePoint,
+    });
+
+    return {
+      userId: apiResponse.result.userId,
+      point: apiResponse.result.point,
+    };
+  },
+};
+```
+
+#### 4-3. Schema Resolver
+
+GraphQL 스키마에서 선언한 객체 key와 다른 이름의 property가 API 응답으로 올 경우, 해당 부분을 맵핑하는 역할을 한다.
 
 예를 들어, 레거시 API의 응답값 중 가장 이해가 안되는 부분으로 `_` 라는 프로퍼티가 있었다. 이 값은 중첩된 객체로 존재할 수 있었는데 이름만 봐서는 무슨 데이터인지 상위 객체와 무슨 관계인지 알기 어려웠다.
 
-때문에 리액트 앱 개발시에는 무슨 관계인지, 어떤 값인지 파악하여 `_` 안의 프로퍼티들의 이름을 수정하고 `_`를 해체하여 1depth의 객체로 수정했다.
+때문에 마이그레이션 할 때에는 무슨 관계인지, 어떤 값인지 파악하여 `_` 안의 프로퍼티들의 이름을 수정하고 `_`를 해체하여 1depth의 객체로 수정했다.
 
 ```tsx
 Instructor: {
@@ -494,38 +526,6 @@ User: {
 }
 ```
 
-#### 4-3. Mutation Resolver
-
-POST, PUT 등 mutation 요청을 보내는 역할을 한다. 개발 팀의 모던 컨벤션 camel case 값들을 레거시 API 스펙인 snake case로 맵핑하거나 새로운 프론트엔드 코드에서 좀 더 인지하기 쉬운 이름으로 사용했던 변수들을 API 스펙에 맞게 할당하는 역할도 한다.
-
-```ts
-import type {
-  RemoveUserPayload,
-  User,
-} from '../../../@types/generated/graphql';
-import type { MutationResolvers } from '../../../@types/generated/resolversTypes';
-
-export const usersMutationResolvers: Partial<MutationResolvers> = {
-  updateUserPoint: async (_, args, context) => {
-    const { userId, initialPoint, willUpdatePoint } = args.input;
-    const apiResponse = await context.graphqlFetcherForV1.post<{
-      result: { userId: number; point: number };
-    }>('/admin/points', {
-      // 의미를 명확히 알 수 있는 이름의 변수로 사용했던 것을 레거시 API 스펙에 맞게 할당
-      cur_point: initialPoint,
-      // 카멜 케이스를 스네이크 케이스로 변환
-      user_id: userId,
-      value: willUpdatePoint,
-    });
-
-    return {
-      userId: apiResponse.result.userId,
-      point: apiResponse.result.point,
-    };
-  },
-};
-```
-
 여기까지 하면 [위에서](#1-아폴로-클라이언트-설정) 얘기했던 SchemaLink에 넘겨줄 스키마를 생성하기 위한 준비를 모두 마치게 된다.
 
 ```ts
@@ -539,13 +539,13 @@ export const apolloClient = new ApolloClient({
 });
 ```
 
-이렇게 아폴로 클라이언트 설정 및 Client side GraphQL 구축이 마무리되었다.
+이렇게 아폴로 클라이언트를 이용한 Client side GraphQL 구축이 마무리되었다.
 
-이제 컴포넌트를 작성하고 아폴로의 `useQuery` 등을 이용해서 컴포넌트에 필요한 데이터를 요청할 차례이다. 이를 위한 커스텀 훅이나 타입을 작성하는 등의 작업이 필요한데, 이를 code generator를 사용해서 자동화 할 수 있다. 다음 단계로 code generator를 사용하기 위한 설정을 살펴보겠다.
+이제 실제 어드민 개발을 시작하여 컴포넌트를 작성하고 아폴로의 `useQuery` 등을 이용해서 컴포넌트에 필요한 데이터를 요청할 차례이다. 이를 위한 커스텀 훅이나 타입을 작성하는 등의 작업이 필요한데, GraphQL code generator를 사용하면 이 과정을 자동화 할 수 있다. 다음 단계로 GraphQL code generator를 사용하기 위한 설정을 살펴보겠다.
 
 ## GraphQL code generator 설정
 
-[GraphQL code generator](https://github.com/dotansimha/graphql-code-generator)는 스키마를 기반으로 여러 코드를 자동으로 만들어 준다. 실제 컴포넌트 개발시에는 코드 제너레이터가 만들어준 여러 코드를 가지고 개발하면 된다.
+[GraphQL code generator](https://github.com/dotansimha/graphql-code-generator)는 스키마를 기반으로 여러 코드를 자동으로 만들어 준다. 실제 컴포넌트 개발시에는 코드 제너레이터가 만들어준 여러 코드를 가지고 개발하면 된다. 수동으로 뭔가를 작성할 일은 스키마를 작성하는 것 말고는 거의 없었다.
 
 ![코드 제너레이터로 생성된 파일들](https://github.com/emewjin/emewjin.github.io/assets/76927618/c56c3002-95e0-4c34-ab18-5bbe6d13c95c)
 
@@ -606,13 +606,13 @@ export const defaultConfig: CodegenConfig = {
     ```
 
 - plugins
-  - [**fragment-matcher**](https://www.npmjs.com/package/@graphql-codegen/fragment-matcher): fragment를 사용할 경우 union, 혹은 interface에 대한 쿼리를 할 때 결과에 대한 유효성 검증 및 정확한 fragment 일치 여부를 검증하기 위해 필요한 json 파일 생성.
+  - [**fragment-matcher**](https://the-guild.dev/graphql/codegen/plugins/other/fragment-matcher): 아폴로 클라이언트를 사용하고 있고 스키마가 `interface` 혹은 `union` 선언을 포함하고 있는 경우 아폴로의 [possibleTypes](https://www.apollographql.com/docs/react/data/fragments/#defining-possibletypes-manually)를 사용하여 결과에 대한 유효성 검증 및 정확한 fragment 일치 여부를 검증하는 것이 권장된다. 이 작업을 하기 위해 필요한 json 파일을 자동으로 생성해주는 플러그인이다.
     ```ts
     'src/@types/generated/possibleTypes.json': {
       plugins: ['fragment-matcher'],
     },
     ```
-  - [**typescript-apollo-client-helpers**](https://www.npmjs.com/package/@graphql-codegen/typescript-apollo-client-helpers): Local cache 관리를 위한 type policies에 대한 타입 생성.
+  - [**typescript-apollo-client-helpers**](https://the-guild.dev/graphql/codegen/plugins/typescript/typescript-apollo-client-helpers): Local cache 관리를 위한 [type policies](https://www.apollographql.com/docs/react/caching/cache-configuration/#typepolicy-fields)에 대한 타입을 자동으로 생성해주는 플러그인이다.
     ```ts
     'src/@types/generated/typePolicies-helper.ts': {
       plugins: ['typescript-apollo-client-helpers'],
@@ -621,7 +621,7 @@ export const defaultConfig: CodegenConfig = {
       },
     },
     ```
-  - [**typescript-resolvers**](https://www.npmjs.com/package/@graphql-codegen/typescript-resolvers): Resolver를 선언할 때 필요한 type 생성.
+  - [**typescript-resolvers**](https://the-guild.dev/graphql/codegen/plugins/typescript/typescript-resolvers): resolver를 선언할 때 필요한 타입을 자동으로 생성해주는 플러그인이다.
     ```ts
     plugins: ['typescript-resolvers'],
       config: {
@@ -642,7 +642,7 @@ export const defaultConfig: CodegenConfig = {
 
 ## Relay 스타일 지향하기
 
-GraphQL을 사용하기 위한 모든 준비를 마쳤다. 마지막으로 소개할 내용은 어드민 프로젝트가 Relay 스타일을 지향하며 환경이 구성되었다는 점이다. Relay가 아닌 Apollo를 사용하기 때문에 엄격하게 Relay 스타일을 구현할 수는 없었지만 최대한 지향하고자 했다.
+GraphQL을 사용하기 위한 모든 준비를 마쳤다. 마지막으로 소개할 내용은 어드민 프로젝트가 Relay 스타일을 지향하고자 했다는 점이다. Relay가 아닌 Apollo를 사용하기 때문에 엄격하게 Relay 스타일을 구현할 수는 없었지만 최대한 지향하고자 했다.
 
 ### 한계: 진짜(?) Relay 스타일과 다른 점
 
