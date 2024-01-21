@@ -1,5 +1,5 @@
 ---
-title: Client side GraphQL로 어드민 만들기
+title: Client side GraphQL로 어드민 만들기 1부 - 환경 구축
 description: 레거시 프로젝트 마이그레이션 시 백엔드 리소스를 최소화 하기 위해 Client side GraphQL을 사용하기로 선택하고, 그 환경을 구축했던 내용에 대해 설명한다.
 date: 2024-01-21
 lastUpdated: 2024-01-21
