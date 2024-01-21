@@ -112,6 +112,12 @@ export const Content = styled('section', {
   minWidth: '100%',
   wordBreak: 'break-all',
   fontWeight: 500,
+  '@desktop': {
+    fontWeight: 400,
+    'h1, h2, h3, h4, h5, h6': {
+      fontWeight: 700,
+    },
+  },
   h1: {
     marginTop: '2rem',
     marginBottom: '1.25rem',
