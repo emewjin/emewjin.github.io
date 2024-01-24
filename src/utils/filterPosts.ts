@@ -6,7 +6,11 @@ export const filterPostsByTitle = (posts: Posts, title: string): Posts => {
   if (title === '') {
     return posts;
   }
-  return posts.filter((post) => post.frontmatter?.title?.toLocaleLowerCase().includes(title));
+  return posts.filter((post) =>
+    post.frontmatter?.title
+      ?.toLocaleLowerCase()
+      .includes(title.toLocaleLowerCase())
+  );
 };
 
 export const filterPostsByTag = (posts: Posts, tag: string): Posts => {
