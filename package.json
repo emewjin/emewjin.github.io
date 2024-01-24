@@ -26,7 +26,6 @@
   "dependencies": {
     "@stitches/react": "^1.2.7",
     "canvas": "2.10.0",
-    "disqus-react": "^1.1.1",
     "gatsby": "^4.21.1",
     "gatsby-plugin-advanced-sitemap": "^2.1.0",
     "gatsby-plugin-feed": "^4.21.0",

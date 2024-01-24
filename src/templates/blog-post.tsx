@@ -1,4 +1,3 @@
-import { DiscussionEmbed } from 'disqus-react';
 import { PageProps, graphql } from 'gatsby';
 import React from 'react';
 
@@ -6,22 +5,20 @@ import ArticleNavigator from '~/components/ArticleNavigator';
 import Profile from '~/components/Profile';
 import Seo from '~/components/Seo';
 import Tags from '~/components/Tags';
-import Utterances from '~/components/Utterances';
-import { useComment } from '~/hooks/useComment';
 import Layout from '~/layout';
 
 import 'katex/dist/katex.min.css';
 
 import {
   Article,
-  TableOfContents,
+  ArticleDates,
+  ArticleMetadata,
   Content,
+  ContentContainer,
   Footer,
   Header,
-  ArticleMetadata,
+  TableOfContents,
   Title,
-  ArticleDates,
-  ContentContainer,
 } from './styles';
 
 const BlogPostTemplate = ({
@@ -37,12 +34,6 @@ const BlogPostTemplate = ({
     ? `${siteUrl}/og-image${post.fields.slug}index.png`
     : '';
 
-  const commentConfig = useComment().site?.siteMetadata?.comment;
-
-  const disqusConfig = {
-    title,
-    identifier: post.fields?.slug,
-  };
   const meta: Metadata[] = [];
 
   if (!!ogImage) {
@@ -88,18 +79,10 @@ const BlogPostTemplate = ({
       </Article>
 
       <Footer>
+        <ArticleNavigator previousArticle={previous} nextArticle={next} />
         <Profile />
+        <div className='giscus'></div>
       </Footer>
-      {commentConfig?.utterances && (
-        <Utterances repo={commentConfig.utterances} />
-      )}
-      {commentConfig?.disqusShortName && (
-        <DiscussionEmbed
-          shortname={commentConfig?.disqusShortName}
-          config={disqusConfig}
-        />
-      )}
-      <ArticleNavigator previousArticle={previous} nextArticle={next} />
     </Layout>
   );
 };
