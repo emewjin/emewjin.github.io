@@ -1,4 +1,4 @@
-import { Script, type PageProps } from 'gatsby';
+import type { PageProps } from 'gatsby';
 import React, { ComponentProps } from 'react';
 
 import Footer from '~/components/Footer';
@@ -19,22 +19,6 @@ const Layout = ({ title, children, resetFilter }: Props) => {
         <main>{children}</main>
         <Footer />
       </Container>
-      <Script
-        src='https://giscus.app/client.js'
-        data-repo='emewjin/comments'
-        data-repo-id='R_kgDOGiptZg'
-        data-category='Comments'
-        data-category-id='DIC_kwDOGiptZs4CcqJV'
-        data-mapping='pathname'
-        data-strict='0'
-        data-reactions-enabled='1'
-        data-emit-metadata='1'
-        data-input-position='top'
-        data-theme='preferred_color_scheme'
-        data-lang='ko'
-        crossOrigin='anonymous'
-        async
-      />
     </Root>
   );
 };

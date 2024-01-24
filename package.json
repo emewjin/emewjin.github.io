@@ -24,6 +24,7 @@
     "url": "git+https://github.com/emewjin/emewjin.github.io.git"
   },
   "dependencies": {
+    "@giscus/react": "^2.4.0",
     "@stitches/react": "^1.2.7",
     "canvas": "2.10.0",
     "gatsby": "^4.21.1",

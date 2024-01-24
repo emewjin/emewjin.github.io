@@ -1,3 +1,4 @@
+import Giscus from '@giscus/react';
 import { PageProps, graphql } from 'gatsby';
 import React from 'react';
 
@@ -81,7 +82,21 @@ const BlogPostTemplate = ({
       <Footer>
         <ArticleNavigator previousArticle={previous} nextArticle={next} />
         <Profile />
-        <div className='giscus'></div>
+        <Giscus
+          id='comments'
+          repo='emewjin/comments'
+          repoId='R_kgDOGiptZg'
+          category='Comments'
+          categoryId='DIC_kwDOGiptZs4CcqJV'
+          mapping='pathname'
+          term='Welcome to @giscus/react component!'
+          strict='0'
+          reactionsEnabled='1'
+          emitMetadata='1'
+          inputPosition='top'
+          theme='preferred_color_scheme'
+          lang='ko'
+        />
       </Footer>
     </Layout>
   );
