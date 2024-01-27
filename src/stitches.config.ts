@@ -38,8 +38,8 @@ export const { styled, css, getCssText, createTheme, globalCss } =
         borderGray: '$gray200',
         borderPrimary: '$primary200',
 
-        inlineCodeBackground: '#f8f8f8',
-        inlineCodeColor: '$primary500',
+        inlineCodeBackground: 'AliceBlue',
+        inlineCodeColor: '$gray700',
         inlineCodeBorderColor: '#f1f3f5',
         link: '$primary400',
 
