@@ -138,9 +138,8 @@ export const globalStyles = globalCss({
   },
   ':not(pre) > code[class*="language-"]': {
     color: '$inlineCodeColor',
-    background: '$inlineCodeBackground',
-    border: 'solid 1px $inlineCodeBorderColor',
-    borderRadius: '2px',
+    backgroundColor: '$inlineCodeBackground',
+    fontWeight: 600,
     fontSize: '0.9rem',
   },
 });
