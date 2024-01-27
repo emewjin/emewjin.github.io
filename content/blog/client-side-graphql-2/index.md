@@ -54,7 +54,7 @@ export const SettlementInfoEditor = ({
 ```
 
 - **Point 1. 캐시에서 데이터를 꺼내오기**:  
-  모달을 여는 트리거를 제공하는 테이블은 유저 정보가 있어야 그려질 수 있다. 때문에 위의 구조도에서처럼, 유저(`instructor`) 정보를 조회하는 쿼리가 페이지의 최상단에 위치한다.  
+  모달을 여는 트리거를 제공하는 테이블은 유저 정보가 있어야 그려질 수 있는데 이미 유저(`instructor`) 정보를 조회하는 쿼리가 페이지의 최상단에 위치해있었다.  
   그런데 모달 안에서도 해당 유저 정보 일부가 필요하므로, refetch를 하는 것이 아니라 최상위에서 조회했던 데이터를 캐시에서 꺼내와서 사용했다.
 - **Point 2. Fragment로 Data Masking하기**:  
   모달 안에서만 필요한 데이터를 쿼리할 때, 컴포넌트에서 필요한 데이터를 컴포넌트에서 직접 선언하여 캡슐화한다. 상위 컴포넌트에서는 구체적으로 무슨 데이터가 필요한지 알 필요가 없으며, `SettlementInfoEditor` 컴포넌트가 필요하다고 한 데이터를 Fragment로만 상위에 전달하여 최상위에서 합쳐서 쿼리한다.
@@ -118,7 +118,7 @@ fragment SettlementInfoEditor_ContractInformation on ContractInformation {
 
 ### Fragment의 중복
 
-그런가하면 Relay-style이 익숙하지 않을 때 (~그렇다고 지금도 익숙한건 아님~) Fragment를 사용하다가 Fragment가 필드까지 완벽하게 동일하게 생겼는데 선언하는 주체가 다른 경우, 중복을 감수해야 하는 것에 궁금증이 생겼다.
+그런가하면 Relay-style이 익숙하지 않을 때 (~그렇다고 지금도 익숙한건 아님~) Fragment를 사용하다가 Fragment가 필드까지 완벽하게 동일하게 생겼는데 선언하는 주체가 다른 경우, 중복을 감수해야 하는 이유에 대해 궁금증이 생겼다.
 
 예를 들어 `SettlementInfoTable` 컴포넌트와 `SettlementInfoEditModal` 컴포넌트에서 필요로 하는 데이터가 동일한 상황이었다. 때문에 다음과 같이 서로 다른 두 컴포넌트에서 Fragment가 선언되고 사용되었다.
 
