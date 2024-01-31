@@ -3,7 +3,7 @@ title: (번역) StyleX를 소개합니다
 description: 메타(Meta)에서 개발한 스타일링 라이브러리 StyleX가 정식으로 공개되었습니다. CSS-in-JS 라이브러리를 사용하며 런타임과 관련한 문제로 인해 제로 런타임(zero-runtime) CSS에 관심을 갖고 계시는 분들이라면 같이 살펴보시면 좋을 것 같습니다.
 date: 2023-12-18
 lastUpdated: 2023-12-18
-tags: [CSS]
+tags: [CSS, 번역]
 ---
 
 > 원문 : [Introducing StyleX](https://stylexjs.com/blog/introducing-stylex)
