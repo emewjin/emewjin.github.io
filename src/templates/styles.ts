@@ -192,10 +192,6 @@ export const Content = styled('section', {
   },
   '.gatsby-highlight': {
     fontSize: '16px',
-    code: {
-      display: 'block',
-      width: '700px',
-    },
   },
   '.gatsby-highlight-code-line': {
     backgroundColor: '#3d485a',
