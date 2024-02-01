@@ -32,6 +32,22 @@ const Seo = ({
       htmlAttributes={{
         lang,
       }}
+      link={[
+        {
+          rel: 'preconnect',
+          href: 'https://fonts.googleapis.com',
+        },
+        {
+          rel: 'preconnect',
+          href: 'https://fonts.gstatic.com',
+          crossOrigin: 'anonymous',
+          // crossOrigin: true,
+        },
+        {
+          href: 'https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&display=swap',
+          rel: 'stylesheet',
+        },
+      ]}
       title={title}
       titleTemplate={noSiteName ? undefined : `%s | ${defaultTitle}`}
       meta={[
