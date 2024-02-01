@@ -345,7 +345,7 @@ ts-ignore부터 린트룰 비활성화까지... 좋은 형태는 아닌 것 같�
 
 - 타입스크립트 Record타입에 대한 Unsafe member access 린트 에러 문제
   - 디자인 시스템에서 export한 컬러 변수를 사용시 아래와 같은 unsafe member access 린트 에러가 발생한다는 제보를 받았다.
-    ![image](https://user-images.githubusercontent.com/76927618/195638492-998efef8-0724-4b7c-b653-f5d586d3c770.png)
+    ![](https://user-images.githubusercontent.com/76927618/195638492-998efef8-0724-4b7c-b653-f5d586d3c770.png)
   - 해당 린트 룰은 any 타입의 변수의 member에 접근하지 못한다는 룰인데 이해가 안되는 점은 컬러 변수 객체는 any 타입이 아니라 Record로 정상적으로 타입이 존재하는데 왜 에러가 발생하냐는 것이다. 에러가 발생하지 않는 것이 맞는데?
   - [타입스크립트 린트 룰 플레이그라운드](https://typescript-eslint.io/play/#ts=4.8.4&sourceType=module&code=CYUwxgNghgTiAEYD2A7AzgF3gYQPIBlcAlAfQDkBBAWQFEBlALnjimFQgE94BtAIgEsUAMwDmcECl4AaeL2CwA1tNlioHZbzjANAB0FKZvVTpAaAbvyQQQGDYOD8RSDQCMIAV1OGwHKJMMYIFAQGmIgEhoQ-AC2XrIcIBAQSADuGkgwfiKmALoA3ABQoJCwCBgcJjhWGWRQsWjwALzw5SZIQjgExOTU9Nwo7tEuIDD5ReDQcIiomJ2EpAAKFPg0ACqrNExE4BnAADzY1TC19TLcmDCCIjIXVzcYlyjX8LdP94-Pr58Pdy8-b38Pu8rjkAHyFAD0EPgxUmCGQ6CweHmJCWK3Wm3gfg4hQKyO6aLWGwAdG5PNwACw5ApAA&eslintrc=N4KABGBEBOCuA2BTAzpAXGUEKQAIBcBPABxQGNoBLY-AWhXkoDt8B6Jge1tieQEMAZoloBbRCIBGiaLT5kyKVBkjToHaJHBgAviG1A&tsconfig=N4KABGBEDGD2C2AHAlgGwKYCcDyiAuysAdgM6QBcYoEEkJemy0eAcgK6qoDCAFutAGsylBm3TgwAXxCSgA)에서도 재현이 되지 않는다.
   - vsc의 문제라기엔 webstorm에서도 동일하게 발생했다.

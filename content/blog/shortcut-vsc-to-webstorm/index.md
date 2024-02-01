@@ -13,7 +13,7 @@ tags: [Webstorm, VSC, IDE]
 > 웹스톰에서 VSC 단축키 버전으로 쓸 수 있기도 한데, 팀원이나 구글링의 도움을 받기에는 웹스톰 기본 단축키맵이 유리할 것 같아서 도전...
 
 > VSC에서처럼 웹스톰에서도 단축키를 직접 입력해서 단축키를 검색할 수도 있다. 아래 이미지의 노란색 테두리 검색창에 단축키를 입력하면 된다.
-> ![image](https://user-images.githubusercontent.com/76927618/152672935-dc8c002a-9383-4b1c-b290-67e57c54e17c.png)
+> ![](https://user-images.githubusercontent.com/76927618/152672935-dc8c002a-9383-4b1c-b290-67e57c54e17c.png)
 
 ## 단축키 내용 기준
 
@@ -47,16 +47,16 @@ Command + S 때문에 좀 많이 헤맸는데, 웹스톰에서 파일 저장시 
 
 **import 한 번에 하기**  
 vsc에선 리팩토링 기능으로 하나하나 했었고, 이렇게 전체 한번에 해주는 단축키가 있는진 잘 모르겠다.
-![image](https://user-images.githubusercontent.com/76927618/152673414-a6a0cc4f-98f0-4a90-b066-f8b936b61ede.png)
+![](https://user-images.githubusercontent.com/76927618/152673414-a6a0cc4f-98f0-4a90-b066-f8b936b61ede.png)
 
 ## 기타 셋팅
 
 ### 자동 줄바꿈
 
 탭을 여러개 열어 두고 화면 분할해서 쓰는 편인데, 이때 화면 크기에 따라 자동으로 줄바꿈이 되어야 편리하다. 웹스톰에서도 코드 한 줄이 길어지면 가로 스크롤이 생기는 대신, 아래 설정창과 같이 설정하면 화면 크기에 맞게 라인 피드를 해줄 수 있다.  
-![image](https://user-images.githubusercontent.com/76927618/152682574-e1695442-7b37-44ef-9ed2-a27ee8bd96ac.png)
+![](https://user-images.githubusercontent.com/76927618/152682574-e1695442-7b37-44ef-9ed2-a27ee8bd96ac.png)
 
 ### 프로젝트 탭 설정
 
 현재 보고 있는 파일 위치로 따라가게 하기, 한 번 클릭으로 파일 열기
-![image](https://user-images.githubusercontent.com/76927618/153884437-7bd957fb-812e-49c2-bb40-a33c91d32c08.png)
+![](https://user-images.githubusercontent.com/76927618/153884437-7bd957fb-812e-49c2-bb40-a33c91d32c08.png)

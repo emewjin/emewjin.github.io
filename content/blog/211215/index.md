@@ -194,7 +194,7 @@ if (!match) {
 
 만약 기본값으로 되돌리는 게 아니라 없는 페이지에 접근하려 하는 것이니까 에러메세지를 보여주고 싶다하면 다음과 같이 할 수 있다. 위에 쓰다가 생각나서 실험해보고 왔는데 잘 된다.
 
-![404](https://user-images.githubusercontent.com/76927618/127302158-23798ac0-113f-414e-901a-3f223ed7ea6a.png)
+![](https://user-images.githubusercontent.com/76927618/127302158-23798ac0-113f-414e-901a-3f223ed7ea6a.png)
 
 ```js
   console.log(match.route.view());

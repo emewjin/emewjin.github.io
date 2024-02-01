@@ -21,12 +21,12 @@ children 배열을 map으로 순회하면서 children이 Icon 컴포넌트인지
 
 children을 콘솔에 찍어보면
 
-![image](https://user-images.githubusercontent.com/76927618/185615841-6822e220-baa3-48dd-a3f3-175b3f4ee13f.png)
+![](https://user-images.githubusercontent.com/76927618/185615841-6822e220-baa3-48dd-a3f3-175b3f4ee13f.png)
 
 이런 객체가 찍히는데 private임을 의미하는 \_ 를 제외하고 살펴보면 뭔가 건질만한 부분은 props와 type이다.  
 Icon 컴포넌트라면 무조건 props에 icon이 undefined일 수 없으므로, 이를 이용해도 되겠으나 좀 더 명시적으로 이용할 수 있는 부분은 type이다.
 
-![image](https://user-images.githubusercontent.com/76927618/185615864-a90a41a8-7a97-48da-919e-952e37f09daf.png)
+![](https://user-images.githubusercontent.com/76927618/185615864-a90a41a8-7a97-48da-919e-952e37f09daf.png)
 
 기본적으로 name이 있지만, 빌드시 난독화가 되기 때문에 사용할 수 없다.  
 그래서 난독화 되지 않는 displayName을 사용해야 한다. 이 displayName으로 Icon 인지 아닌지로 판별하면 되겠다.

@@ -186,8 +186,8 @@ export const Content = styled('section', {
   },
   figcaption: {
     textAlign: 'center',
-    marginTop: '0.5rem',
-    color: '$text200',
+    margin: '0.5rem 0 1rem 0',
+    color: '$text100',
     fontSize: '0.875rem',
   },
   '.gatsby-highlight': {

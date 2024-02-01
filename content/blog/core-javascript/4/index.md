@@ -54,10 +54,7 @@ btn.addEventListener('click', test.bind(obj));
 
 콜백 지옥. Callback Hell.
 
-<figure align="center">
-<img src="https://user-images.githubusercontent.com/76927618/129585419-29c4ab36-621e-42d2-a27b-b931c7d29154.png">
-<figcaption>구글에 검색만 해봐도 어마무시한 코드들이 보인다</figcaption>
-</figure>
+![구글에 검색만 해봐도 어마무시한 코드들이 보인다](https://user-images.githubusercontent.com/76927618/129585419-29c4ab36-621e-42d2-a27b-b931c7d29154.png)
 
 자바스크립트는 기본적으로 동기적으로 동작하지만 싱글 스레드 언어이기 때문에 수많은 비동기적 핸들링이 함께한다. 때문에 자바스크립트의 비동기 함수를 얼마나 잘 다루느냐가 관건인데, 가장 대표적으로 신경쓰는 부분이라고 한다면 역시 비동기 함수를 동기적으로 핸들링하는 것일테다.
 

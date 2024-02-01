@@ -96,7 +96,7 @@ await button.hover();
 ## 컴포넌트 테스트
 
 이제 playwright에서 컴포넌트 테스트를 지원한다는 소식을 접했다.
-![image](https://user-images.githubusercontent.com/76927618/170854817-ca21c54c-5d9a-4516-9a0b-6f409c588ab2.png)
+![](https://user-images.githubusercontent.com/76927618/170854817-ca21c54c-5d9a-4516-9a0b-6f409c588ab2.png)
 
 기존에 컴포넌트 테스트는 RTL로 작성했기 때문에 cypress와 비교할 건 아니다. RTL로 작성된 테스트와 비교했을 때 속도가 더 느리지만 않는다면 e2e도 컴포넌트 테스트도 모두 playwright 하나로 해결할 수 있다는 점이 끌렸다. playwright 문법에만 익숙해지면 되니까.
 

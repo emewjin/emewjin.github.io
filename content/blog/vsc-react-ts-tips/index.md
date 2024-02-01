@@ -17,11 +17,11 @@ vsc extension 검색창에 'react snippet'으로 검색해보면 여러 extensio
 
 스니펫의 종류를 다 외울 수는 없기 때문에 `커맨드+shift+P` 로 액션을 열고 `Snippet Search`를 입력하거나, `커맨드+shift+R` 로 다음과 같이 스니펫 목록을 열어 필요한 걸 찾아 이용하면 됩니다.
 
-![image](https://user-images.githubusercontent.com/76927618/182015451-24dcb69c-a0d4-473c-984c-38e3e99c040f.png)
+![](https://user-images.githubusercontent.com/76927618/182015451-24dcb69c-a0d4-473c-984c-38e3e99c040f.png)
 
 주로 사용하는 것은 컴포넌트 보일러 플레이트를 위한 스니펫으로, `rfc` 를 가장 많이 사용합니다.
 
-![screencast 2022-07-31 16-46-44](https://user-images.githubusercontent.com/76927618/182015641-19a133d7-60b1-45e1-a95b-97e6911ddb49.gif)
+![](https://user-images.githubusercontent.com/76927618/182015641-19a133d7-60b1-45e1-a95b-97e6911ddb49.gif)
 
 props의 타입까지 같이 작성해주는 `tsrfc`도 있긴 한데 인터페이스를 더 좋아해서 쓰지 않고 있습니다. 대신 인터페이스 선언은 리팩토링 기능으로 작성하고 있습니다.
 
@@ -37,7 +37,7 @@ props의 타입까지 같이 작성해주는 `tsrfc`도 있긴 한데 인터페�
 
 컴포넌트 prop의 타입 인터페이스는 일단 그냥 작성하고, vsc의 리팩토링 기능인 `Extract to interface`로 추출하고 있습니다.
 
-![screencast 2022-07-31 16-50-32](https://user-images.githubusercontent.com/76927618/182015730-ef2c562f-444c-4f6d-b7c4-7831710047aa.gif)
+![](https://user-images.githubusercontent.com/76927618/182015730-ef2c562f-444c-4f6d-b7c4-7831710047aa.gif)
 
 ### 2-2. 컴포넌트 추출하기
 
@@ -61,18 +61,18 @@ function Test() {
 
 `Vscode react refactor` 라는 extension을 쓰면 그 약간의 불편함을 해소할 수 있습니다.
 
-![image](https://user-images.githubusercontent.com/76927618/182015992-3a957acc-11fa-4aa6-8df0-443d402655e4.png)
+![](https://user-images.githubusercontent.com/76927618/182015992-3a957acc-11fa-4aa6-8df0-443d402655e4.png)
 
-![screencast 2022-07-31 16-58-37](https://user-images.githubusercontent.com/76927618/182015978-83d4ae31-d19f-43af-a3a9-16c5eaf17988.gif)
+![](https://user-images.githubusercontent.com/76927618/182015978-83d4ae31-d19f-43af-a3a9-16c5eaf17988.gif)
 
 만약 분리한 컴포넌트를 새 파일로 만들고 싶다면 기본으로 제공하는 리팩토링 기능인 `move to a new file`을 이용하면 됩니다.
 
-![screencast 2022-07-31 17-01-52](https://user-images.githubusercontent.com/76927618/182016050-650186cb-98ef-40d6-9619-d8b01fde1831.gif)
+![](https://user-images.githubusercontent.com/76927618/182016050-650186cb-98ef-40d6-9619-d8b01fde1831.gif)
 
 ## 3. Auto all missing import 이용하기
 
 컴포넌트를 작성할 때 제일 많이 하는 일 중에 하나가 `import`일 것입니다.  
-이 귀찮은 작업을 쉽고 빠르게 대신해주기 위해 대부분의 IDE에는 missing import를 한 번에 다 해주는 기능이 있습니다.  
+이 귀찮은 작업을 쉽고 빠르게 대신해주기 위해 대부분의 IDE에는 missing import를 한 번에 다 해주는 기능이 있습니다.
 
 VSC의 경우에도 import 되지 않은 모듈은 에러 표시가 뜨는데, 거기서 `커맨드 + .` 리팩토링 단축키로 `Add all missing import`를 선택하면 모든 모듈에 대해 import 문이 작성됩니다.
 
@@ -86,6 +86,7 @@ VSC의 경우에도 import 되지 않은 모듈은 에러 표시가 뜨는데, �
 ```json
 "importsNotUsedAsValues": "error",
 ```
+
 위 설정(플래그)은 다음 세 가지 중 하나를 선택할 수 있는데, 저는 `"error"`를 이용했습니다.
 
 - **remove**: this is today’s behavior of dropping these imports. It’s going to continue to be the default, and is a non-breaking change.
@@ -95,12 +96,10 @@ VSC의 경우에도 import 되지 않은 모듈은 에러 표시가 뜨는데, �
 이 설정을 추가하면 두 가지를 기대할 수 있습니다.
 
 1. type이지만 type only import가 아닌 경우 타입 에러 발생
-    ![image](https://user-images.githubusercontent.com/76927618/185620308-1a95b98c-ebfc-47aa-bdca-acf34517552b.png)
-
+   ![](https://user-images.githubusercontent.com/76927618/185620308-1a95b98c-ebfc-47aa-bdca-acf34517552b.png)
 
 2. `Add all missing import`시 type이면 type only import로 적용됩니다. 이걸로 개발자가 신경써야 하는 영역이 줄어들 수 있습니다.
-   ![screencast 2022-08-19 21-43-17](https://user-images.githubusercontent.com/76927618/185621332-59dc3bb6-98c7-4654-8145-58a64d4030c8.gif)
-
+   ![](https://user-images.githubusercontent.com/76927618/185621332-59dc3bb6-98c7-4654-8145-58a64d4030c8.gif)
 
 조금 더 행복하게 코딩할 수 있어졌습니다.  
 위의 설정에 대한 내용은 [Typescript 깃허브 issue](https://github.com/microsoft/TypeScript/pull/36412#issuecomment-707221008)에서 찾았습니다.

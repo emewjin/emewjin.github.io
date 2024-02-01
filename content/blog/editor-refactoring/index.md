@@ -37,7 +37,7 @@ tags: [Refactoring]
 ### 어려워진 유지보수
 
 결과적으로 <구텐베르크> 작업으로 인해 에디터의 유지보수가 어려워졌다. 하위호환성을 고려하여 다른 팀에서 에디터를 사용할 때 장애가 발생하지 않고 업데이트 시 수정이 필요 없게끔 하기 위해, <구텐베르크> 프로젝트의 일정에 맞추기 위해, 에디터 내부 코드가 지저분해졌기 때문이다. <구텐베르크> 작업자가 아니면 코드를 이해하기 어려워졌고 특히 <구텐베르크> 이전에 에디터를 개발하던 사람도 코드를 수정하려고 하면 많이 헷갈려했다.
-![불타는 피자짤](https://github.com/emewjin/emewjin.github.io/assets/76927618/eed98f65-c6a9-4960-a53a-aa7412c7e62d)
+![](https://github.com/emewjin/emewjin.github.io/assets/76927618/eed98f65-c6a9-4960-a53a-aa7412c7e62d)
 
 에디터는 한 번만 쓰고 버릴 프로덕트가 아니었기 때문에 위기감을 느꼈다. 리팩토링을 통해 반드시 변경에 유연하고 유지보수가 어렵지 않은 코드로 개선해야 한다는 목표가 생겼다.
 
@@ -155,8 +155,8 @@ prerelease를 새 브랜치에서만 진행하는 이유는 리팩토링을 진�
 
 `<Editor>` 컴포넌트는 보통 아래와 같은 모습으로 렌더링 된다. 컨트롤(Control)은 에디터 툴바 내, 클릭해서 작성하는 콘텐츠에 관한 기능이 적용되게 하는 UI를 의미한다.
 
-![image](https://github.com/emewjin/emewjin.github.io/assets/76927618/408cfd9e-3122-4b26-969d-1b6a45dac336)
-![image](https://github.com/emewjin/emewjin.github.io/assets/76927618/404af803-978a-48dc-8aa2-b2e70296a356)
+![](https://github.com/emewjin/emewjin.github.io/assets/76927618/408cfd9e-3122-4b26-969d-1b6a45dac336)
+![](https://github.com/emewjin/emewjin.github.io/assets/76927618/404af803-978a-48dc-8aa2-b2e70296a356)
 
 ### 문제 1. 한곳에 뭉쳐있는 로직
 
@@ -174,7 +174,7 @@ prerelease를 새 브랜치에서만 진행하는 이유는 리팩토링을 진�
 
 이런 구조 때문에 특히 수정이 빈번했던 컨트롤에 대해 작업하려고 한다면 아래 흐름 속의 컴포넌트와 함수를 모두 들여다보아야 했다. 수정범위는 당연히 그만큼 넓어졌다.
 
-![image](https://github.com/emewjin/emewjin.github.io/assets/76927618/37b829ab-5c55-403d-a5d0-9c801a2a6a1f)
+![](https://github.com/emewjin/emewjin.github.io/assets/76927618/37b829ab-5c55-403d-a5d0-9c801a2a6a1f)
 
 자연스레 복잡도가 높아지고 휴먼 에러 발생 확률도 높아졌다. 게다가 기존에 사용하던 공통 타입 시그니처는 이를 고려하지 않았기 때문에 컨트롤에 대한 `onClick` 콜백의 타입 문제도 발생했다.
 
@@ -406,7 +406,7 @@ export function ToolbarContainer({
 
 **ToolbarFragment:**  
 `ToolbarControlsGroup` 을 여러 개 가질 수 있는 컨테이너. `ToolbarControlsGroup` 사이의 divider 렌더링을 관리하고, `ToolbarFragment`를 구분하는 것으로 기존에 `soleControl`로 처리하던 디자인을 충족할 수 있다.
-![image](https://github.com/emewjin/emewjin.github.io/assets/76927618/404af803-978a-48dc-8aa2-b2e70296a356)
+![](https://github.com/emewjin/emewjin.github.io/assets/76927618/404af803-978a-48dc-8aa2-b2e70296a356)
 
 ```tsx
 // UI만 관여
@@ -580,7 +580,7 @@ export function boldControlOption({
 ```
 
 기존에는 새로운 컨트롤을 추가할 때 `Editor`과 `Toolbar`까지 넘나들며 이 파일들을 다 봐야만 했다면, 지금은 흐름이 아래와 같이 정리되었다. `Control`을 직접 담당하는 부분 외에는 보지 않아도 된다.
-![image](https://github.com/emewjin/emewjin.github.io/assets/76927618/e011db10-3d28-407f-b09d-cde101f841e7)
+![](https://github.com/emewjin/emewjin.github.io/assets/76927618/e011db10-3d28-407f-b09d-cde101f841e7)
 
 ```
 Controls
@@ -823,12 +823,12 @@ export class RemoveElementControlOption
 
 changesets의 prerelease를 이용해 next 버전을 출시했다.
 
-![image](https://github.com/emewjin/emewjin.github.io/assets/76927618/404f1593-c847-4c0d-a651-d8e17468a6d4)
+![](https://github.com/emewjin/emewjin.github.io/assets/76927618/404f1593-c847-4c0d-a651-d8e17468a6d4)
 
 그리고 <구텐베르크>에 설치하여 개발서버에서 모니터링했다. 테스트코드를 통해 최소한의 기능 동작을 보장한 채로 리팩토링 했기 때문인지 리팩토링 과정으로 인해 발생한 버그는 거의 없었다.
 
 그렇게 운영 릴리즈를 해도 괜찮겠다는 판단이 들었을 때, 새로운 메이저 버전이 정식으로 출시되었다.
-![image](https://github.com/emewjin/emewjin.github.io/assets/76927618/53b1bf19-869c-4e30-a18a-cc45e388afba)
+![](https://github.com/emewjin/emewjin.github.io/assets/76927618/53b1bf19-869c-4e30-a18a-cc45e388afba)
 
 ### 문서화
 
@@ -838,10 +838,10 @@ changesets의 prerelease를 이용해 next 버전을 출시했다.
 
 어떤 변경점이 있는지를 안내하는 문서와 함께 각 breaking change마다 어떻게 대응하면 되는지를 마크다운으로 작성한 가이드 문서를 함께 배포했다. 깃허브에 접근할 수 없는 기획자와 프로덕트 디자이너도 필요하다면 보실 수 있도록 스토리북에도 함께 배포했다. 마크다운 문서가 스토리북에 임베딩되는 구조라서 md 파일만 수정하면 된다.
 
-![image](https://github.com/emewjin/emewjin.github.io/assets/76927618/fa097d57-ec41-4bdf-95f6-ceaf807a379f)
+![](https://github.com/emewjin/emewjin.github.io/assets/76927618/fa097d57-ec41-4bdf-95f6-ceaf807a379f)
 
 더불어, 에디터를 이루는 각 구조를 개념적으로 정의하고 달라진 사용방법을 정의한 README도 업데이트 했다. 이 역시 마찬가지로 스토리북에도 함께 배포했다.
-![image](https://github.com/emewjin/emewjin.github.io/assets/76927618/5ede9073-fff2-43d1-a017-7b9135a5b36c)
+![](https://github.com/emewjin/emewjin.github.io/assets/76927618/5ede9073-fff2-43d1-a017-7b9135a5b36c)
 
 사실 문서화 작업에 들인 시간이 코드를 작성하는 시간과 맞먹는 것 같다. 문서도 하나의 출처로 관리되는 것이 바람직하기 때문에 여러 번의 수정 끝에 README를 기반으로 breaking change 문서가 통합될 수 있게 작성했다.
 

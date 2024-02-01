@@ -236,7 +236,7 @@ function IssueTitle(props: { issue: IssueTitleFragment$key }) {
 
 이것에 대한 schema documentation를 보고싶으신가요? 마우스를 필드 위에 올리기만 하면 됩니다:
 
-![alt_text](https://github.com/emewjin/emewjin.github.io/assets/76927618/7903d18a-b420-4956-a07a-14645cdcb3ae)
+![](https://github.com/emewjin/emewjin.github.io/assets/76927618/7903d18a-b420-4956-a07a-14645cdcb3ae)
 
 schema로 이동하고 연관된 필드들을 보고 싶으신가요? 필드를 Cmd-click 하세요.
 

@@ -81,15 +81,15 @@ test('basic test', async ({ page }) => {
 });
 ```
 
-![e9f6cd4b-3dfe-42ad-bb7e-d370692f3623](https://user-images.githubusercontent.com/76927618/173226137-b21c9d02-a04f-454a-bcf5-6cc0434c6885.png)
+![](https://user-images.githubusercontent.com/76927618/173226137-b21c9d02-a04f-454a-bcf5-6cc0434c6885.png)
 
 config 파일에서 세 가지 브라우저 환경을 지정했기 때문에 한 번의 실행으로 여러 브라우저 환경을 동시에 테스트 할 수 있다. 서로 다른 브라우저 환경이기 때문에 병렬로 테스트를 수행해 총 10초가 아니라 5초 걸렸다.
 
-![onlyone](https://user-images.githubusercontent.com/76927618/173226227-1995f556-fb50-4a2d-8af4-3765eb1e1f77.gif)
+![](https://user-images.githubusercontent.com/76927618/173226227-1995f556-fb50-4a2d-8af4-3765eb1e1f77.gif)
 
 vsc 기준이지만 IDE에서도 테스트가 잘 돌아간다. IDE 속의 test runner GUI를 통해 spec 안에서 원하는 test만 돌릴 수도 있다.
 
-![감동짤방격한감동짤방,_대화_필수템_주워가세요](https://user-images.githubusercontent.com/76927618/173226140-9dfe0668-2318-43f1-88ca-5c64bfbe2bcb.gif)
+![](https://user-images.githubusercontent.com/76927618/173226140-9dfe0668-2318-43f1-88ca-5c64bfbe2bcb.gif)
 
 ## 문법
 
@@ -175,14 +175,14 @@ playwright는 무료로, 기본적으로 병렬 테스트 기능을 제공하지
 **playwright**
 
 - VSC와 같은 회사라 그런지 몰라도 제공하는 익스텐션 (Playwright Test for VSCode) 이 있다. 이를 이용해 코드 수정 없이 spec 안에서 원하는 테스트케이스 (test)만 손쉽게 돌릴 수 있다. cypress에는 이게 안되는데 정말 불편했던 점이었음...
-  ![onlyone](https://user-images.githubusercontent.com/76927618/173226227-1995f556-fb50-4a2d-8af4-3765eb1e1f77.gif)
+  ![](https://user-images.githubusercontent.com/76927618/173226227-1995f556-fb50-4a2d-8af4-3765eb1e1f77.gif)
 
 - 데스크탑, 모바일 등 다양한 기기를 한 번에 테스트할 수 있음
 - hover, drag 가능 : cypress는 자바스크립트를 이용한 hover 만 테스트할 수 있다.
 - 로그인 정보 저장 : 테스트 할 때 필요한 auth 정보를 json으로 저장해두었다가 테스트시 활용할 수 있다.
 - playwright 문법에 익숙해지고나면 component 테스트도 playwright로 할 수 있다. 지금 아직 실험적 단계이긴 하지만 테스트 속도 측면에서 jest와 크게 차이가 없었다.
 - test generator : cypress에서도 크롬 익스텐션을 설치하면 code gen을 이용할 수 있다고 하던데 playwright는 좀 더 공식적으로 지원하는 느낌이었다. code gen으로 테스트를 그냥 막 만들 수는 없지만, 요소를 선택한다거나 유저 인터랙션을 코드로 옮길 때 아주 용이했다. 특히 happy path 테스트를 작성할 때 굉장히 유용할 거 같다.
-  ![codegen](https://user-images.githubusercontent.com/76927618/173226030-3905f610-febf-4dc5-b1a7-018c9863a16e.gif)
+  ![](https://user-images.githubusercontent.com/76927618/173226030-3905f610-febf-4dc5-b1a7-018c9863a16e.gif)
 
 **cypress**
 

@@ -64,12 +64,12 @@ tags: [Storybook]
 Anima에 가입 후, [베타 테스터 신청 타입폼](https://form.typeform.com/to/eNOueDoh)를 작성해 제출하면 됩니다.
 
 타입폼을 제출하면 매주 화요일에 Anima 팀에서 베타 등록이 진행됩니다.
-![image](https://user-images.githubusercontent.com/89953090/175795780-33714b59-646c-4dd5-84d8-2f8b082b5245.png)
+![](https://user-images.githubusercontent.com/89953090/175795780-33714b59-646c-4dd5-84d8-2f8b082b5245.png)
 
 그리고 피그마에 [Anima 플러그인을 설치](https://www.figma.com/community/plugin/857346721138427857/Anima---Export-to-HTML%2C-React-%26-Vue-code)합니다.
 
 베타로 등록되고 나면 안내 메일이 오고, 플러그인에서 아래와 같이 보일 거예요.
-![image](https://user-images.githubusercontent.com/89953090/175795824-057bff9c-f6cb-43a6-aa2a-26b97903a7e9.png)
+![](https://user-images.githubusercontent.com/89953090/175795824-057bff9c-f6cb-43a6-aa2a-26b97903a7e9.png)
 
 이제는 스토리북과 플러그인을 연동할 차례입니다.  
 Anima 측에서 제공하는 [튜토리얼 영상](https://www.loom.com/share/9f93c49c33824773afdb0fc4658c69e0)을 보거나 [깃허브 README](https://github.com/AnimaApp/storybook-anima)를 보고 진행합니다.
@@ -95,7 +95,7 @@ Anima 측에서 제공하는 [튜토리얼 영상](https://www.loom.com/share/9f
 3. **Anima access token을 설정합니다.**
 
    아래 이미지 속의 버튼을 누르면 토큰을 확인할 수 있습니다. **현재는 토큰을 잊으면 직접 다시 확인할 방법이 없고** anima 측에 문의해야 하므로 반드시 기록해둡시다! (이 점은 리포팅을 했는데, 개선될 예정이라고 하네요!)
-   ![image](https://user-images.githubusercontent.com/89953090/175795824-057bff9c-f6cb-43a6-aa2a-26b97903a7e9.png)
+   ![](https://user-images.githubusercontent.com/89953090/175795824-057bff9c-f6cb-43a6-aa2a-26b97903a7e9.png)
 
    루트에 `env` 파일을 생성하고 다음과 같이 입력합니다.
 
@@ -119,9 +119,7 @@ Anima 측에서 제공하는 [튜토리얼 영상](https://www.loom.com/share/9f
 
     > 만약 argTypes 작성이 익숙하지 않다면 [공식문서](https://storybook.js.org/docs/react/essentials/controls#annotation)를 확인하세요
 
-    ![image](https://user-images.githubusercontent.com/89953090/175796811-978a8c87-95ae-41e7-86da-c7d6e28191f0.png)
-
-    <figcaption align = "center"><a href="https://storybook.js.org/addons/@storybook/addon-controls#my-controls-arent-being-auto-generated-what-should-i-do">출처</a></figcaption>
+    ![출처: https://storybook.js.org/addons/@storybook/addon-controls#my-controls-arent-being-auto-generated-what-should-i-do](https://user-images.githubusercontent.com/89953090/175796811-978a8c87-95ae-41e7-86da-c7d6e28191f0.png)
 
     저의 경우에는 후자였는데, 모든 props가 다 필요한 것은 아니었기 때문에 디자이너 분과 함께 확인해서 아래와 같이 필요한 props만 작성했습니다. 그렇게 오랜 시간이 걸리지는 않았습니다.
 
@@ -170,7 +168,7 @@ Anima 측에서 제공하는 [튜토리얼 영상](https://www.loom.com/share/9f
 
     피그마 컴포넌트 이름도 Basic이 되기 때문에 식별하기 어려워집니다.
 
-    ![image](https://user-images.githubusercontent.com/89953090/175797742-09e4a8a5-8ac7-40c0-980c-19cee5b3bfd8.png)
+    ![](https://user-images.githubusercontent.com/89953090/175797742-09e4a8a5-8ac7-40c0-980c-19cee5b3bfd8.png)
 
 2.  **anima 패키지가 설치된 스토리북을 배포하거나 로컬로 실행합니다.**  
     스토리북 컴포넌트가 피그마로 exported 되는 동안 로컬에서 변경점이 생겨 다시 빌드되면 **정상적으로 export되지 않기 때문에** 배포된 스토리북을 이용하는 것을 추천합니다.
@@ -182,20 +180,20 @@ Anima 측에서 제공하는 [튜토리얼 영상](https://www.loom.com/share/9f
 3.  **컴포넌트 스토리를 피그마로 export하기.**
 
     원하는 컴포넌트의 스토리 상단에서 anima 버튼을 찾아 클릭합니다. 이걸 클릭하면 export가 진행됩니다.
-    ![image](https://user-images.githubusercontent.com/89953090/175796059-9ff4a7ee-ce9e-45ec-982a-08f330878b4e.png)
+    ![](https://user-images.githubusercontent.com/89953090/175796059-9ff4a7ee-ce9e-45ec-982a-08f330878b4e.png)
 
     여러 스토리를 동시에 병렬로 export 할 수 있는 것 같은데, Anima에 의하면 여러 개 동시에 진행한다고 해서 속도가 더 느려지거나 하지 않는다고 합니다.  
     그런데 경험상 한 10개쯤부터 스토리북 웹이 응답이 없어지는 일이 발생했기 때문에, 10개 이상을 한꺼번에 진행하는 것은 별로 추천하지 않습니다 😅
 
     버튼을 클릭하고 살짝 기다리면, 피그마 내의 플러그인 인터페이스 안에서 스토리가 export 되고 있음을 확인할 수 있습니다.
 
-    ![image](https://user-images.githubusercontent.com/89953090/175800827-4971cf03-82e9-4a91-bc07-7133af6d45a8.png)
+    ![](https://user-images.githubusercontent.com/89953090/175800827-4971cf03-82e9-4a91-bc07-7133af6d45a8.png)
 
     컴포넌트가 가지는 경우의 수에 따라 export 속도가 결정되는 것 같습니다.  
     200-300개 수준이라면 4분정도 걸렸던 것 같은데 최대치를 넘어버리면 경험상 1시간 넘게 걸렸던 적도 있습니다 😅  
     [anima 측에서 제공하는 가이드 문서](https://support.animaapp.com/en/articles/6261185-storybook-guidelines)에 의하면 생성 가능한 최대 variants 가짓수는 1,024개라고 하니 주의하는 게 좋습니다.
 
-    ![image](https://user-images.githubusercontent.com/89953090/175796690-11f13d3e-c001-41bb-a414-4f3b966bbc8e.png)
+    ![](https://user-images.githubusercontent.com/89953090/175796690-11f13d3e-c001-41bb-a414-4f3b966bbc8e.png)
 
     1,024개가 넘는다고 해서 생성이 불가한 것은 아니지만 이거 끝나는건 맞나 싶을정도로 시간이 정말정말 오래걸리고 (anima 측에 의하면 timeout이 설정되어 있다곤 하네요),  
     플러그인이 임의로 일부 variant를 덜어내고 컴포넌트를 생성하기 때문에 예측가능하게, 정확하게 생성하기 위해서는 1,024개 미만이 될 수 있도록 `argTypes`를 구성하는 것을 추천합니다.  
@@ -204,7 +202,7 @@ Anima 측에서 제공하는 [튜토리얼 영상](https://www.loom.com/share/9f
 4.  **피그마 컴포넌트 generate하기.**  
     스토리 export가 완료되면 ready 상태로 바뀝니다. 아래 이미지와 같이 로딩 스피너 ui가 사라지고 보라색 박스가 나타납니다.
 
-    ![image](https://user-images.githubusercontent.com/89953090/175796282-f6b4805d-b0e8-4fa9-9327-8bd3da82da94.png)
+    ![](https://user-images.githubusercontent.com/89953090/175796282-f6b4805d-b0e8-4fa9-9327-8bd3da82da94.png)
 
     보라색 박스 안의 **'generate components'** 버튼을 클릭하면 피그마 컴포넌트 생성이 시작됩니다.  
     다른 스토리들이 export 중인데 generate 버튼을 클릭해도 되는지는 잘 모르겠지만 저는 모든 export가 완료될 때까지 기다리고 한 번에 generate 했습니다.  
@@ -217,7 +215,7 @@ Anima 측에서 제공하는 [튜토리얼 영상](https://www.loom.com/share/9f
 
 컴포넌트 파일에서 확인해도 되고, 컴포넌트를 불러와 variants를 바꿔보면서 정확하게 만들어졌는지 확인해도 됩니다.
 
-![screencast 2022-06-26 12-06-43](https://user-images.githubusercontent.com/89953090/175797701-45537d14-1e30-40ac-83c0-57873ae1adaa.gif)
+![](https://user-images.githubusercontent.com/89953090/175797701-45537d14-1e30-40ac-83c0-57873ae1adaa.gif)
 
 ## 버그와 단점
 
@@ -226,7 +224,7 @@ Anima 측에서 제공하는 [튜토리얼 영상](https://www.loom.com/share/9f
 구글 번역기의 힘을 빌려 짧은 영어 실력으로 anima 디스코드 채널에 리포팅을 했는데요, 22년 6월 26일 기준으로 발견된 버그는 다음과 같으니 혹시라도 이용하실 분이 계시다면 참고하시면 좋을 것 같습니다.
 
 1. **동그라미가 생성되지 않음**
-   ![image](https://user-images.githubusercontent.com/89953090/175797881-0bf89721-1b82-4091-b797-ffb463c9c50c.png)
+   ![](https://user-images.githubusercontent.com/89953090/175797881-0bf89721-1b82-4091-b797-ffb463c9c50c.png)
 
 2. **react portal 등을 이용해 root div 바깥에 생성되는 요소는 생성되지 않음**
 
@@ -252,14 +250,14 @@ Anima 측에서 제공하는 [튜토리얼 영상](https://www.loom.com/share/9f
 
 재밌었던 점은, 좋은 플러그인이다 보니 저 또한 피드백을 정성껏 써서 전달드렸는데 파트너 제안을 주셨던 것입니다.
 
-![image](https://user-images.githubusercontent.com/89953090/175798102-15d71f85-5792-4ba2-821e-720fa941f2ef.png)
+![](https://user-images.githubusercontent.com/89953090/175798102-15d71f85-5792-4ba2-821e-720fa941f2ef.png)
 
 짧은 영어 실력으로 이해한 바로는 약간 자문위원 같은 느낌인 것 같습니다. 좋게 봐주셔서 정말 감사했고 플러그인이 보다 더 발전하길 진심으로 바라지만, 무엇보다 제가 원활한 비즈니스 토킹이 가능할만큼 영어 실력이 좋지 못하고 지금 회사 업무와 개인 공부만으로도 시간이 부족한 상황이라, 아쉽게도 거절하게 되었네요 🤧
 
 ## 결론
 
 디자이너 분과 생성된 컴포넌트를 함께 비교해보니 기대보다 훨씬 잘만들어져 있어서 정말 좋았습니다. 완벽하진 않지만 0부터 컴포넌트를 만드는 것보단 디자이너 분들의 공수가 훨씬 줄어들 수 있을 것이라고 기대됩니다.
-![excited-minions-gif](https://user-images.githubusercontent.com/89953090/175798458-cd3e2f04-80a3-4e64-8dcc-b75379fe22fb.gif)
+![](https://user-images.githubusercontent.com/89953090/175798458-cd3e2f04-80a3-4e64-8dcc-b75379fe22fb.gif)
 
 또한 이런식으로 최초 컴포넌트 생성 뿐 아니라 추후 계속 있을 수정에 대해서도 디자인-개발 간 싱크를 맞출 수 있게 도와줄 수 있는 아주 유용한 툴이라고 생각됩니다.
 

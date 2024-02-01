@@ -75,7 +75,7 @@ mutation {
 
 거의 대부분의 graphQL 클라이언트들이 문서를 지원하고 있음.
 
-![image](https://user-images.githubusercontent.com/76927618/170818386-8c1df94c-f2f1-4594-b742-46158e8974f7.png)
+![](https://user-images.githubusercontent.com/76927618/170818386-8c1df94c-f2f1-4594-b742-46158e8974f7.png)
 
 ## REST -> GraphQL 래핑
 
@@ -96,7 +96,7 @@ type, field를 하나하나 다 선언해주어야 하는데 매우 귀찮아보
 ## Devtool
 
 apollo에서 크롬 익스텐션을 지원하기 때문에 다음과 같이 어떤 쿼리가 실행되었는지 추적할 수 있다.
-![image](https://user-images.githubusercontent.com/76927618/170827861-96c6582f-7c24-4101-b27b-f9438bb5b61d.png)
+![](https://user-images.githubusercontent.com/76927618/170827861-96c6582f-7c24-4101-b27b-f9438bb5b61d.png)
 
 ```gql
 const GET_ALL_MOVIES = gql`

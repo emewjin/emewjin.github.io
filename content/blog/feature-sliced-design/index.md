@@ -8,7 +8,7 @@ tags: [번역]
 
 > 원문: [Feature-Sliced Design: The Best Frontend Architecture](https://dev.to/m_midas/feature-sliced-design-the-best-frontend-architecture-4noj)
 
-![썸네일 이미지](https://github.com/emewjin/emewjin.github.io/assets/76927618/5942a3e4-20b4-49bd-a54b-25221d1a4185)
+![](https://github.com/emewjin/emewjin.github.io/assets/76927618/5942a3e4-20b4-49bd-a54b-25221d1a4185)
 
 ## 들어가며
 
@@ -18,13 +18,13 @@ tags: [번역]
 
 먼저 레이어(layer), 슬라이스(slice), 세그먼트(segment)의 세 가지 개념을 구분해 봅시다.
 
-![레이어,슬라이스,세그먼트](https://github.com/emewjin/emewjin.github.io/assets/76927618/53bcf7e8-c50b-4f25-b783-330aed6a3e93)
+![](https://github.com/emewjin/emewjin.github.io/assets/76927618/53bcf7e8-c50b-4f25-b783-330aed6a3e93)
 
 ## 레이어
 
 레이어는 최상위 디렉터리이자 애플리케이션 분해의 첫 번째 단계입니다. 레이어의 수는 최대 7개로 제한되어 있으며, 일부는 선택 사항이지만 표준화되어 있습니다. 현재 다음과 같이 레이어가 구분되어 있습니다.
 
-![폴더구조](https://github.com/emewjin/emewjin.github.io/assets/76927618/21cfeb8f-dc37-4fad-9c32-18c2fdbc6e8c)
+![](https://github.com/emewjin/emewjin.github.io/assets/76927618/21cfeb8f-dc37-4fad-9c32-18c2fdbc6e8c)
 
 각 레이어에는 고유한 책임 영역이 있으며 이는 비즈니스 지향적입니다.  
 각 레이어를 개별적으로 살펴 보겠습니다.
@@ -39,11 +39,11 @@ tags: [번역]
 
 이러한 레이어들은 코드베이스를 조직화하고, 모듈화되고 유지보수 용이한 확장 가능한 아키텍처를 촉진하는 데 도움이 됩니다.
 
-![각 계층](https://github.com/emewjin/emewjin.github.io/assets/76927618/6f90c8cd-cb9e-4b97-90bf-dcc919240a56)
+![](https://github.com/emewjin/emewjin.github.io/assets/76927618/6f90c8cd-cb9e-4b97-90bf-dcc919240a56)
 
 기능 분할 설계의 주요 특징 중 하나는 계층 구조입니다. 이 구조에서 features 레이어가 entities 레이어보다 더 위에 있기 때문에 entities 레이어는 features 레이어의 기능을 사용할 수 없습니다. 마찬가지로 features 레이어는 widgets 레이어나 processes 레이어의 컴포넌트를 사용할 수 없으며, 위 레이어는 아래 레이어만 활용할 수 있습니다. 이는 한 방향으로만 향하는 선형적인 흐름을 유지하기 위함입니다.
 
-![계층 관계도](https://github.com/emewjin/emewjin.github.io/assets/76927618/795e20fd-4729-468a-a734-9f0ac5ab3809)
+![](https://github.com/emewjin/emewjin.github.io/assets/76927618/795e20fd-4729-468a-a734-9f0ac5ab3809)
 
 계층 구조에서 레이어의 위치가 낮을수록 코드의 더 많은 곳에서 사용될 가능성이 높기 때문에, 레이어를 변경하는 것이 더 위험합니다. 예를 들어 shared 레이어의 UI 키트는 features, widgets, 심지어 pages 레이어에서도 사용됩니다.
 
@@ -55,7 +55,7 @@ tags: [번역]
 
 밀접하게 관련된 조각들은 구조적으로 디렉토리 내에 그룹지을 수 있지만 다른 슬라이스와 동일한 격리 규칙을 준수해야 하며, 이 디렉토리에 있는 코드는 직접적으로 공유되지 않아야 합니다.
 
-![슬라이스 디렉토리 구조](https://github.com/emewjin/emewjin.github.io/assets/76927618/55461265-c78b-4a1e-a387-9ea0edce6b07)
+![](https://github.com/emewjin/emewjin.github.io/assets/76927618/55461265-c78b-4a1e-a387-9ea0edce6b07)
 
 ## 세그먼트
 
@@ -79,7 +79,7 @@ tags: [번역]
 
 공개 API는 import 및 export로 단순하게 작동하므로 애플리케이션을 변경할 때 코드의 모든 곳에서 import를 변경할 필요가 없습니다.
 
-![image](https://github.com/emewjin/emewjin.github.io/assets/76927618/128d5c4e-ca50-4f4e-861d-7b6fa0996e7e)
+![](https://github.com/emewjin/emewjin.github.io/assets/76927618/128d5c4e-ca50-4f4e-861d-7b6fa0996e7e)
 
 ## 아키텍처에 대해 더 자세히 알아보기
 
@@ -87,7 +87,7 @@ tags: [번역]
 
 계층이 높은 레이어일수록 특정 비즈니스 노드에 더 많이 종속되고 더 많은 비즈니스 로직이 포함됩니다. 계층이 낮은 레이어일수록 추상화 수준이 높고 재사용성이 높으며 레이어 자체의 자율성이 적습니다.
 
-![레이어의 추상화 정도](https://github.com/emewjin/emewjin.github.io/assets/76927618/d6da9950-ff8a-42c1-8a0e-20bf2adde80e)
+![](https://github.com/emewjin/emewjin.github.io/assets/76927618/d6da9950-ff8a-42c1-8a0e-20bf2adde80e)
 
 ### FSD가 문제를 해결하는 방식
 
@@ -107,7 +107,7 @@ OOP에서는 **다형성(polymorphism), 캡슐화(encapsulation), 상속(inherit
 
 여러분은 고전적인 아키텍처를 여러 번 접해 보셨을 것입니다. 고전적인 소프트웨어 아키텍처에 대한 내용은 그 단순함 때문에 교육적인 글이나 유튜브 영상에서 자주 다루어집니다. 고전적인 아키텍처에는 명확한 표준은 없습니다. 그러나 일반적으로 다음과 같은 형식을 볼 수 있습니다.
 
-![고전적인 아키텍처](https://github.com/emewjin/emewjin.github.io/assets/76927618/2e68dbc9-ec39-456c-a4b6-08a40fd99cdc)
+![](https://github.com/emewjin/emewjin.github.io/assets/76927618/2e68dbc9-ec39-456c-a4b6-08a40fd99cdc)
 
 고전적인 아키텍처에는 눈에 띄는 단점이 있습니다. 가장 큰 단점은 컴포넌트 간의 암묵적인 연결과 모듈의 복잡성 때문에 프로젝트가 유지보수하기 어려워진다는 것입니다. 고전적인 아키텍처의 단점은 시간이 흐를수록 더욱 분명해집니다. 프로젝트가 진화할수록 애플리케이션 아키텍처는 엉망진창이 되어 버립니다.
 

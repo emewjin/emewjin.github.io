@@ -31,7 +31,7 @@ tags: [React, GraphQL]
 
 ## 레포지토리 패턴 (Repository Pattern)
 
-![repository pattern](https://github.com/emewjin/emewjin.github.io/assets/76927618/ba3121a9-d92f-4b96-a1df-fd29cf313e9f)
+![](https://github.com/emewjin/emewjin.github.io/assets/76927618/ba3121a9-d92f-4b96-a1df-fd29cf313e9f)
 
 디자인 패턴 중 하나인 레포지토리 패턴은 데이터 소스 레이어와 비즈니스 레이어 사이를 중재한다고 알려져 있다. 프론트엔드 입장에서 데이터 소스는 보통 백엔드 API 응답이 될 것이고, 비즈니스 레이어 (혹은 클라이언트)는 리액트 컴포넌트가 될 것이다. 레포지토리라는 구성 요소는 그 사이에서 중앙 집중식으로 API 응답을 관리하여 클라이언트 친화적으로 데이터를 클라이언트에게 제공한다.
 
@@ -95,12 +95,10 @@ GraphQL은 언어, 명세, 형식이기 때문에 이 스펙을 준수하며 요
 Client side GraphQL은 서버와 통신하는 클라이언트 측 인프라 개념이다.
 
 전통적인 방식은 아래 그림과 같이 GraphQL 서버가 따로 있어 스키마와 resolver가 서버에 선언되어 있고 클라이언트에서는 http 통신을 통해 스키마를 받아오는 방식이라면,
-![전통적인 graphQL](https://github.com/emewjin/emewjin.github.io/assets/76927618/1f28a0d8-1d69-41f2-82fc-f7b46850c42f)
+![전통적인 graphQL, 이미지 출처: GraphQL without a server https://github.com/hasura/client-side-graphql](https://github.com/emewjin/emewjin.github.io/assets/76927618/1f28a0d8-1d69-41f2-82fc-f7b46850c42f)
 
 Client side GraphQL은 클라이언트에 스키마와 resolver를 선언하기 때문에 별도로 GraphQL 서버를 구축하지 않아도 된다.
-![클라이언트 사이드 graphQL](https://github.com/emewjin/emewjin.github.io/assets/76927618/d03edea8-0eab-4c78-8381-baccdb84d865)
-
-> 이미지 출처: [GraphQL without a server](https://github.com/hasura/client-side-graphql)
+![클라이언트 사이드 graphQL, 이미지 출처: GraphQL without a server https://github.com/hasura/client-side-graphql](https://github.com/emewjin/emewjin.github.io/assets/76927618/d03edea8-0eab-4c78-8381-baccdb84d865)
 
 GraphQL 클라이언트는 [아폴로 클라이언트(Apollo client)](https://www.apollographql.com/docs/react/)를 선택했다. 개발팀 내에서 다들 Apollo 경험만 있었기 때문이다.
 
