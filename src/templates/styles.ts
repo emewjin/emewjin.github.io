@@ -191,7 +191,7 @@ export const Content = styled('section', {
     fontSize: '0.875rem',
   },
   '.gatsby-highlight': {
-    fontSize: '1rem',
+    fontSize: '16px',
     code: {
       display: 'block',
       width: '700px',
