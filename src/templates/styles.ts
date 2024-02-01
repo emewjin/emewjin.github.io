@@ -112,11 +112,12 @@ export const Content = styled('section', {
   minWidth: '100%',
   wordBreak: 'break-all',
   fontWeight: 500,
-  fontSize: '1.15rem',
+  fontSize: '1.1rem',
   '.footnotes': {
     fontSize: '0.9rem',
   },
   '@desktop': {
+    fontSize: '1.15rem',
     fontWeight: 400,
     'h1, h2, h3, h4, h5, h6': {
       fontWeight: 700,
@@ -189,13 +190,19 @@ export const Content = styled('section', {
     color: '$text200',
     fontSize: '0.875rem',
   },
+  '.gatsby-highlight': {
+    fontSize: '1rem',
+    code: {
+      display: 'block',
+      width: '700px',
+    },
+  },
   '.gatsby-highlight-code-line': {
-    backgroundColor: '#3d485a',
-    display: 'block',
-    marginRight: '-3em',
-    paddingRight: '1em',
+    display: 'table',
+    minWidth: 'calc(100% + 1.75em * 2)',
     marginLeft: '-1em',
-    paddingLeft: '0.75em',
+    paddingLeft: '1.75em',
+    backgroundColor: '#3d485a',
     borderLeft: '0.25em solid #aad5ff',
   },
 });
