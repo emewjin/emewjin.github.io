@@ -47,6 +47,7 @@ export const plugins = [
     options: {
       plugins: [
         'gatsby-plugin-twitter',
+        'gatsby-remark-images-grid',
         {
           resolve: 'gatsby-remark-figure-caption',
           options: { figureClassName: 'md-figure' },

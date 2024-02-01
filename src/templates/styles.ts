@@ -190,6 +190,11 @@ export const Content = styled('section', {
     color: '$text100',
     fontSize: '0.875rem',
   },
+  '.gatsbyRemarkImagesGrid-grid': {
+    img: {
+      height: '100%',
+    },
+  },
   '.gatsby-highlight': {
     fontSize: '16px',
   },

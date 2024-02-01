@@ -10,13 +10,10 @@ tags: [Conference]
 
 > 인프콘 세션에 대한 후기가 없는 이유는... 한 개도 못 들어서...🥹
 
-<figure>
-  <div style="display:flex;">
-    <img style="width:50%;" alt="디자이너와 개발자" src="https://user-images.githubusercontent.com/76927618/188186498-b3117768-748d-4603-9ba0-073263081539.jpeg"/>
-    <img style="width:50%;" alt="스티커 붙이기에 진심" src="https://user-images.githubusercontent.com/76927618/188186377-02416dcb-2544-4d63-90f3-537c108249ce.jpeg"/>
-  </div>
-  <figcaption>(좌)디자이너와 개발자 - (우)행사 참여 인증샷</figcaption>
-</figure>
+```grid|2|(좌)디자이너와 개발자 - (우)행사 참여 인증샷
+![](https://user-images.githubusercontent.com/76927618/188186498-b3117768-748d-4603-9ba0-073263081539.jpeg)
+![](https://user-images.githubusercontent.com/76927618/188186377-02416dcb-2544-4d63-90f3-537c108249ce.jpeg)
+```
 
 ## D-N 어쩌다 내가..
 
