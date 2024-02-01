@@ -8,18 +8,24 @@ export const Container = styled('nav', {
 
 export const NavigationList = styled('ul', {
   display: 'flex',
+  flexDirection: 'column',
   flexWrap: 'wrap',
-  justifyContent: 'space-between',
   margin: 0,
 
   listStyle: 'none',
+  li: {
+    width: 'fit-content',
+  },
+  'li:last-of-type': {
+    alignSelf: 'end',
+  },
 });
 
 export const PostLink = styled(Link, {
   display: 'block',
-  padding: '0.5rem 1rem',
+  padding: '0.5rem 0',
   borderRadius: '0.5rem',
 
   color: '$link',
-  fontSize: '0.875rem',
+  fontSize: '1rem',
 });

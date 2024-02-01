@@ -112,6 +112,10 @@ export const Content = styled('section', {
   minWidth: '100%',
   wordBreak: 'break-all',
   fontWeight: 500,
+  fontSize: '1.15rem',
+  '.footnotes': {
+    fontSize: '0.9rem',
+  },
   '@desktop': {
     fontWeight: 400,
     'h1, h2, h3, h4, h5, h6': {
