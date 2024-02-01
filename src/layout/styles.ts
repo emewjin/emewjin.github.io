@@ -18,7 +18,6 @@ export const globalStyles = globalCss({
   },
   body: {
     minHeight: '100vh',
-
     backgroundColor: '$backgroundColor',
   },
   '#___gatsby, #gatsby-focus-wrapper': {
@@ -38,12 +37,12 @@ export const globalStyles = globalCss({
     fontWeight: 800,
   },
   h3: {
-    fontSize: '1.25rem',
+    fontSize: '1.3rem',
     fontWeight: 800,
     margin: '1.5rem 0 0.5rem 0',
   },
   h4: {
-    fontSize: '1rem',
+    fontSize: '1.2rem',
     fontWeight: 800,
     margin: '1.5rem 0 1rem 0',
   },
@@ -140,7 +139,7 @@ export const globalStyles = globalCss({
     color: '$inlineCodeColor',
     backgroundColor: '$inlineCodeBackground',
     fontWeight: 600,
-    fontSize: '0.9rem',
+    fontSize: '1rem',
   },
 });
 export const Root = styled('div', {

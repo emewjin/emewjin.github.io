@@ -3,7 +3,7 @@ title: (번역) Relay-style GraphQL
 description: GraphQL을 Relay-style로 사용했을 때의 이점에 대해 상세하게 설명하는 글입니다. 원문 https://alan.norbauer.com/articles/relay-style-graphql 저자의 동의를 받고 한국어로 번역했습니다.
 date: 2023-10-20
 lastUpdated: 2023-11-17
-tags: [React, GraphQL]
+tags: [React, GraphQL, 번역]
 ---
 
 > 원문: https://alan.norbauer.com/articles/relay-style-graphql  
