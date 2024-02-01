@@ -198,11 +198,12 @@ export const Content = styled('section', {
     },
   },
   '.gatsby-highlight-code-line': {
-    display: 'table',
-    minWidth: 'calc(100% + 1.75em * 2)',
-    marginLeft: '-1em',
-    paddingLeft: '1.75em',
     backgroundColor: '#3d485a',
+    display: 'block',
+    marginRight: '-100%',
+    paddingRight: '1em',
+    marginLeft: '-1em',
+    paddingLeft: '0.75em',
     borderLeft: '0.25em solid #aad5ff',
   },
 });
