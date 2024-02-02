@@ -114,7 +114,20 @@ export const Content = styled('section', {
   fontWeight: 500,
   fontSize: '1.1rem',
   '.footnotes': {
+    hr: {
+      margin: '3rem 0',
+    },
+    ol: {
+      marginRight: '1rem',
+    },
+    li: {
+      wordBreak: 'break-word',
+    },
+    color: '$text200',
     fontSize: '0.9rem',
+    code: {
+      fontSize: '0.9rem',
+    },
   },
   '@desktop': {
     fontSize: '1.15rem',
