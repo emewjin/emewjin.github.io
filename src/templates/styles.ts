@@ -189,6 +189,17 @@ export const Content = styled('section', {
     margin: '0.5rem 0 1rem 0',
     color: '$text100',
     fontSize: '0.875rem',
+    p: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+    },
+    a: {
+      width: 'fit-content',
+      textDecoration: 'underline',
+      textUnderlinePosition: 'under',
+      border: 'none',
+    },
   },
   '.gatsbyRemarkImagesGrid-grid': {
     img: {

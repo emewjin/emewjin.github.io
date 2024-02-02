@@ -49,13 +49,11 @@ export const plugins = [
         'gatsby-plugin-twitter',
         'gatsby-remark-images-grid',
         {
-          resolve: 'gatsby-remark-figure-caption',
-          options: { figureClassName: 'md-figure' },
-        },
-        {
           resolve: 'gatsby-remark-images',
           options: {
-            maxWidth: 630,
+            maxWidth: 700,
+            showCaptions: ['title'],
+            markdownCaptions: true,
           },
         },
         {

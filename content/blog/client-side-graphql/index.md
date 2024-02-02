@@ -31,7 +31,7 @@ tags: [React, GraphQL]
 
 ## 레포지토리 패턴 (Repository Pattern)
 
-![](https://github.com/emewjin/emewjin.github.io/assets/76927618/ba3121a9-d92f-4b96-a1df-fd29cf313e9f)
+![레포지토리 패턴](repository.png)
 
 디자인 패턴 중 하나인 레포지토리 패턴은 데이터 소스 레이어와 비즈니스 레이어 사이를 중재한다고 알려져 있다. 프론트엔드 입장에서 데이터 소스는 보통 백엔드 API 응답이 될 것이고, 비즈니스 레이어 (혹은 클라이언트)는 리액트 컴포넌트가 될 것이다. 레포지토리라는 구성 요소는 그 사이에서 중앙 집중식으로 API 응답을 관리하여 클라이언트 친화적으로 데이터를 클라이언트에게 제공한다.
 
@@ -82,23 +82,19 @@ GraphQL을 사용한다면 resolver 쪽에서 여러 엔드포인트를 처리�
 - 백엔드에서 API를 분리할 때 프론트엔드에서 선언한 GraphQL 스키마를 보고 그대로 만든다면, 별다른 프론트엔드 코드 수정이 필요하지 않음
 - GraphQL Fragment를 통해 data masking, 컴포넌트에 필요한 데이터 캡슐화
 
-## Client side GraphQL
+## Client side GraphQL이란?
 
 GraphQL은 언어, 명세, 형식이기 때문에 이 스펙을 준수하며 요청/응답할 수 있는 구현체가 필요하다. 이 구현체는 서버 측도 있고 클라이언트 측도 있는데, 우리는 (다시 이야기하지만) 백엔드 리소스가 없는 상황이었다. 그래서 선택한 것이 GraphQL의 스키마와 resolver를 클라이언트 코드에 포함하는 **Client side GraphQL**이다.
-
- <!-- 필요했고 Apollo는 그런 구현체를 제공하는 라이브러리 중 하나이다.
-그러나 일반적으로 GraphQL은 API 서버를 연상시킨다.
-
-> GraphQL은 API를 위한 **쿼리 언어**이며 타입 시스템을 사용하여 쿼리를 실행하는 **서버사이드** 런타임입니다.
-> [출처](https://graphql-kr.github.io/learn/) -->
 
 Client side GraphQL은 서버와 통신하는 클라이언트 측 인프라 개념이다.
 
 전통적인 방식은 아래 그림과 같이 GraphQL 서버가 따로 있어 스키마와 resolver가 서버에 선언되어 있고 클라이언트에서는 http 통신을 통해 스키마를 받아오는 방식이라면,
-![전통적인 graphQL, 이미지 출처: GraphQL without a server https://github.com/hasura/client-side-graphql](https://github.com/emewjin/emewjin.github.io/assets/76927618/1f28a0d8-1d69-41f2-82fc-f7b46850c42f)
+
+![전통적인 GraphQL](graphql-traditional.png '전통적인 GraphQL [이미지 출처: GraphQL without a server](https://github.com/hasura/client-side-graphql)')
 
 Client side GraphQL은 클라이언트에 스키마와 resolver를 선언하기 때문에 별도로 GraphQL 서버를 구축하지 않아도 된다.
-![클라이언트 사이드 graphQL, 이미지 출처: GraphQL without a server https://github.com/hasura/client-side-graphql](https://github.com/emewjin/emewjin.github.io/assets/76927618/d03edea8-0eab-4c78-8381-baccdb84d865)
+
+![클라이언트 사이드 GraphQL](graphql-client.png '클라이언트 사이드 GraphQL [이미지 출처: GraphQL without a server](https://github.com/hasura/client-side-graphql)')
 
 GraphQL 클라이언트는 [아폴로 클라이언트(Apollo client)](https://www.apollographql.com/docs/react/)를 선택했다. 개발팀 내에서 다들 Apollo 경험만 있었기 때문이다.
 
@@ -545,7 +541,7 @@ export const apolloClient = new ApolloClient({
 
 [GraphQL code generator](https://github.com/dotansimha/graphql-code-generator)는 스키마를 기반으로 여러 코드를 자동으로 만들어 준다. 실제 컴포넌트 개발 시에는 코드 제너레이터가 만들어준 여러 코드를 가지고 개발하면 된다. 수동으로 뭔가를 작성할 일은 스키마를 작성하는 것 말고는 거의 없었다.
 
-![코드 제너레이터로 생성된 파일들](https://github.com/emewjin/emewjin.github.io/assets/76927618/c56c3002-95e0-4c34-ab18-5bbe6d13c95c)
+![코드 제너레이터로 생성된 파일들](codegen-results.png '코드 제너레이터로 생성된 파일들')
 
 [기본적인 설정](https://the-guild.dev/graphql/codegen/docs/config-reference/codegen-config)은 다음과 같다.
 

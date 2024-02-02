@@ -10,11 +10,6 @@ tags: [Conference]
 
 > 인프콘 세션에 대한 후기가 없는 이유는... 한 개도 못 들어서...🥹
 
-```grid|2|(좌)디자이너와 개발자 - (우)행사 참여 인증샷
-![](https://user-images.githubusercontent.com/76927618/188186498-b3117768-748d-4603-9ba0-073263081539.jpeg)
-![](https://user-images.githubusercontent.com/76927618/188186377-02416dcb-2544-4d63-90f3-537c108249ce.jpeg)
-```
-
 ## D-N 어쩌다 내가..
 
 일단 데브챗 상담자로 참여한 것이 자의는 아니었는데, 팀에서 [준프](https://github.com/LeeMoonki)와 [빠삐코](https://github.com/ocipap)가 참여하기로 했으나 준프가 발표자로 변경되면서 대신 내가 끼게 되었다. 퇴근길에 [향로](https://github.com/jojoldu)를 만났는데 "들으셨죠? 데브챗 하셔야 해요"라고 말씀하시는 걸 듣고 그대로 "안녕히 계세요" 하고 못 들은 척 튀었던 기억이 난다.
