@@ -183,6 +183,8 @@ export const Content = styled('section', {
     code: {
       wordBreak: 'break-all',
       overflowWrap: 'break-word',
+      float: 'left',
+      textSizeAdjust: '100%',
     },
   },
   'pre, code': {
@@ -225,7 +227,7 @@ export const Content = styled('section', {
   '.gatsby-highlight-code-line': {
     backgroundColor: '#3d485a',
     display: 'block',
-    marginRight: '-4em',
+    marginRight: '-1em',
     paddingRight: '1em',
     marginLeft: '-1em',
     paddingLeft: '0.75em',
