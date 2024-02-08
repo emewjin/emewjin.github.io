@@ -185,6 +185,7 @@ export const Content = styled('section', {
       overflowWrap: 'break-word',
       float: 'left',
       textSizeAdjust: '100%',
+      minWidth: '100%',
     },
   },
   'pre, code': {
