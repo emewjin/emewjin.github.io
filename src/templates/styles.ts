@@ -224,6 +224,10 @@ export const Content = styled('section', {
   },
   '.gatsby-highlight': {
     fontSize: '16px',
+    code: {
+      whiteSpace: 'pre-wrap',
+      wordBreak: 'break-word',
+    },
   },
   '.gatsby-highlight-code-line': {
     backgroundColor: '#3d485a',
