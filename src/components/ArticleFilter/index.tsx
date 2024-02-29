@@ -9,6 +9,15 @@ import { TAG } from '~/constants';
 
 import { Container, Title, TagListWrapper, Tag, Input, Header } from './styles';
 
+const FIXED_TAGS = ['번역'];
+
+function reorderTags(tags: string[]): string[] {
+  const fixedTags = tags.filter((tag) => FIXED_TAGS.includes(tag));
+  const otherTags = tags.filter((tag) => !FIXED_TAGS.includes(tag));
+
+  return fixedTags.concat(otherTags);
+}
+
 interface Props {
   tags: string[];
   titleFilter: string;
@@ -53,7 +62,7 @@ const ArticleFilter = ({
         >
           {TAG.ALL}
         </Tag>
-        {tags.map((tag) => (
+        {reorderTags(tags).map((tag) => (
           <Tag
             type='button'
             key={tag}
