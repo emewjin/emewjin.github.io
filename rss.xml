@@ -1,4 +1,373 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[emewjin.log RSS Feed]]></title><description><![CDATA[잘못된 내용 혹은 더 좋은 방법이 있으면 언제든지 알려주세요 XD]]></description><link>https://emewjin.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Wed, 14 Feb 2024 14:55:54 GMT</lastBuildDate><item><title><![CDATA[(번역) 기능 분할 설계 - 최고의 프런트엔드 아키텍처]]></title><description><![CDATA[원문: Feature-Sliced Design: The Best Frontend Architecture…]]></description><link>https://emewjin.github.io/feature-sliced-design/</link><guid isPermaLink="false">https://emewjin.github.io/feature-sliced-design/</guid><pubDate>Thu, 01 Feb 2024 00:00:00 GMT</pubDate><content:encoded>&lt;blockquote&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[emewjin.log RSS Feed]]></title><description><![CDATA[잘못된 내용 혹은 더 좋은 방법이 있으면 언제든지 알려주세요 XD]]></description><link>https://emewjin.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Thu, 29 Feb 2024 15:24:16 GMT</lastBuildDate><item><title><![CDATA[(번역) 크롬 개발자 도구로 INP를 개선하는 방법]]></title><description><![CDATA[원문 : How To Improve INP With Chrome DevTools INP(Interaction to Next Paint)는 2024년 3월에 세 가지 Google 핵심 웹 바이탈 중 하나가 될 성능 지표입니다. INP…]]></description><link>https://emewjin.github.io/chrome-dev-tool-inp-performance/</link><guid isPermaLink="false">https://emewjin.github.io/chrome-dev-tool-inp-performance/</guid><pubDate>Fri, 01 Mar 2024 00:00:00 GMT</pubDate><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;원문 : &lt;a href=&quot;https://www.debugbear.com/blog/inp-chrome-devtools&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;How To Improve INP With Chrome DevTools&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.debugbear.com/docs/metrics/interaction-to-next-paint&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;INP(Interaction to Next Paint)&lt;/a&gt;는 2024년 3월에 세 가지 Google 핵심 &lt;a href=&quot;https://www.debugbear.com/docs/metrics/core-web-vitals&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;웹 바이탈&lt;/a&gt; 중 하나가 될 성능 지표입니다.&lt;/p&gt;
+&lt;p&gt;INP는 다른 페이지 속도 지표들보다 개선하기 어려운 경향이 있습니다. 왜냐하면 측정을 위해 페이지 인터랙션이 필요하고, 이를 최적화하기 위해서는 종종 복잡한 자바스크립트 로직을 디버깅해야 하기 때문입니다.&lt;/p&gt;
+&lt;p&gt;이 글은 크롬 개발자 도구를 사용하여 페이지 인터랙션을 분석하고 사이트의 반응 속도를 더 빠르게 만드는 방법을 설명합니다.&lt;/p&gt;
+&lt;h2 id=&quot;크롬-개발자-도구에서-페이지-인터랙션의-inp를-측정하는-방법&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%ED%81%AC%EB%A1%AC-%EA%B0%9C%EB%B0%9C%EC%9E%90-%EB%8F%84%EA%B5%AC%EC%97%90%EC%84%9C-%ED%8E%98%EC%9D%B4%EC%A7%80-%EC%9D%B8%ED%84%B0%EB%9E%99%EC%85%98%EC%9D%98-inp%EB%A5%BC-%EC%B8%A1%EC%A0%95%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95&quot; aria-label=&quot;크롬 개발자 도구에서 페이지 인터랙션의 inp를 측정하는 방법 permalink&quot; class=&quot;heading-anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;크롬 개발자 도구에서 페이지 인터랙션의 INP를 측정하는 방법&lt;/h2&gt;
+&lt;p&gt;개발자 도구 성능(Performance) 탭을 사용하여 다음 페인트에 대한 인터랙션 지표를 측정할 수 있습니다.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;페이지를 마우스 오른쪽 버튼으로 클릭하고 &lt;strong&gt;검사(Inspect)&lt;/strong&gt; 를 선택하여 개발자 도구를 엽니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;성능(Performance)&lt;/strong&gt; 탭을 엽니다.&lt;/li&gt;
+&lt;li&gt;왼쪽 상단의 기록 버튼을 클릭하여 새 기록을 시작합니다.&lt;/li&gt;
+&lt;li&gt;버튼을 클릭하거나 텍스트 필드에 입력하는 등 페이지와 상호 작용합니다.&lt;/li&gt;
+&lt;li&gt;완료되면 개발자 도구에서 &lt;strong&gt;중지&lt;/strong&gt; 버튼을 클릭하고 기록이 처리될 때까지 기다립니다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 661px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/efa81c15f323bf5cb2f91ad247e08e75/0012b/1.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 96.57142857142857%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAATCAYAAACQjC21AAAACXBIWXMAAAsTAAALEwEAmpwYAAADTklEQVQ4y3WUXW/kNBSG8wO6pcwAV7s/ql/DNXu5pex0JpM4njhxnPgjTlKmywWiVbvVImAlUFm0LSskQIiLFfyqF9lJ21lpuXhybMfn9Tn2sQOlJGRVQs9nMKJAbWsYo/+XujbQWkGIAlJWKEvh4TyH0wrcTyUraJrAyAqmNvcCrv0enI8TcwK3VFUJYwwCt2LTWNiuhW1qWFvD1sZPcAvZquwphbe1KGC16n1s/Q4uiMCpF6KAKAqfhm+7FAqOPM/ABwoHzwfL+3ke4ef3EWoEzvHp0RTT2QzToxmOZnM8eXKAwy+eYhERRHHibTgQEYoopiDJEoSmoMsMCU1BSNKn7FYJwznCReiJogiHh5/j4OAAYUgQRdQTLhKEYYLFgiImTigHSRgSmoFlxSCoEUhZIs9S5DkDYxRLGoGxBIswxHQaetFwQTA9WmAeEsxmkRdPKMNsHg3iDFFMesGqqnyoq9WXOD5uURuF1eoYRVH4dLJMIM9LJEmGLBdIGQfLBMpKI2Vuvw0qaZBz3gsSEmN/fw+TycTbvb09TPb3sbOzg+3tbezu7mIy+dTjxm5x4+vW+fs6fPz4MzzY2MB4PMJo5PjwjvF4jM3NDXw02sInH4+wuflgbc4Io/HI+21tfYBHjx76MgtoyhATCuJOLyL+9Jx1Jzefh/j69AW+v/oDP776Hd3xif+fLjMsYwISEyQRQRwnIAlFWSkEF2fnEFygKCWqUkLrGkK4ylcQRYnLb3/Cd1d/4+Lln2i7E/CiRFUq8JShyDmMMlCqhjYWjHEEL559hcsogVAKQsnBKhRSotQaueBYZikoS/0eWWv9fa+9tWjaFu2A6wemrrEyBr/98BL/XP+Kt6+vB27w9rrn35s3+OvnV1idnHjHruvuRJqmucP1A/exXYery0u8eX6J64uB8wv8cnqG1+fPcXN2jqtvTmGbBkopjyu1e8F2oEHgQ24aSGOQFhw0y5BkDDTPQfMMy8GmPEdZlh53f6WUPt37CG8Fh1C7toXR2qNdBFqjNsbjx417trRHSvfkSbSN9X69xpDy+h5wzpGm6R2MMc96n1KK5ZL66xZT9+oodN19pMH6hroobvdonT4q6dvuqjqUKy9poYx953D+A92Pqgr6cbi5AAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;image&quot;
+        title=&quot;image&quot;
+        src=&quot;/static/efa81c15f323bf5cb2f91ad247e08e75/0012b/1.png&quot;
+        srcset=&quot;/static/efa81c15f323bf5cb2f91ad247e08e75/4edbd/1.png 175w,
+/static/efa81c15f323bf5cb2f91ad247e08e75/13ae7/1.png 350w,
+/static/efa81c15f323bf5cb2f91ad247e08e75/0012b/1.png 661w&quot;
+        sizes=&quot;(max-width: 661px) 100vw, 661px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;기록이 완료되면 개발자 도구에 많은 데이터가 표시됩니다. 왼쪽부터 기록이 시작되며 오른쪽에는 기록의 끝이 표시됩니다. 일단 지금은 다른값보다는 INP 값에 집중해보겠습니다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;상호작용(Interactions)&lt;/strong&gt; 항목을 찾아 확장한 다음 관심 있는 인터랙션 위로 마우스를 올려보세요. 그러면 인터랙션의 지속 시간과 인터랙션 유형(아래 이미지의 경우 마우스 포인터)이 표시됩니다. (요소를 클릭해도 개발자 도구가 포인터 인터랙션에 초점을 맞추는 것을 볼 수 있습니다.)&lt;/p&gt;
+&lt;p&gt;빨간색 빗금 영역은 인터랙션 지속 시간이 200 밀리초를 초과하는 경우를 나타냅니다. 200 밀리초 임계값을 초과하면 개발자 도구에 “긴 인터랙션은 페이지 응답성이 좋지 않음을 나타냅니다(Long interaction is indicating poor page responsiveness)“라는 메모도 표시됩니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 621px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/fe3e5f7e45079d2e2d7960e6a01e0603/3075e/2.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 46.28571428571429%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAJCAYAAAAywQxIAAAACXBIWXMAAAsTAAALEwEAmpwYAAACDklEQVQoz3WQu27TYACF/UTM7CylCDHzBIy8ABISCxULEpcBxIDE0nYtSG1piEXrppc097a5/EmcOL41iRMnthPbiT/UlqmCI3065yxnOJKqCoTIMxr+xh1ncMcKtrmFpW3gOMfo1gG6laKsbtKyd/AmRzT0H+TFOudagQtLo22beH6E4wdItj2g0agydsrEYZ1oViMOBYtrogbBoIqWaqLLDXrpJp1UDV2+7gJLmWEdgtj1UeUIQwHJ931cd8JyyX+1/EtyxxcLWERLkgUkMcRhgjQajen3+4xGDm6vgttSmFslQvOCsFUkVEvM24UbQrVI2C7eeqtAPB3fji+XJCxJkgRpPp8xm83xAp+pXSfQ87hGgZ7IoJf20bJp/NIBk5M93NMU3nU+S+MV95m2BYFtEpg9QqdPHEdIbdOl3zdw9QGTAIIQhi5odkTXjmj2fAwnIbhzSfKPa8IQpF/fv3G8vsvm+muU7ZeUN57TSb3Ayr/ByK5hnq3ROXyFfrrGpPqR8cV73Mt3eNUP5BoKQlUwC58ZlT8xyH5B6ubfYqtDcvYx2sFTmturDJQnzM9WmWUf3TDPPaa7t0Jt6wGmvMo0s4Kz+xBh5qiLr5xs36Oi3KdXe4ZUUQVBGBMGUD+9oiEP6B75tA89OhkfsT/mUr6isjektGNTTU9RT3yM9JTAW2BoDkc/c+TkCqLY4w9CSYdvxmk93QAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;image&quot;
+        title=&quot;image&quot;
+        src=&quot;/static/fe3e5f7e45079d2e2d7960e6a01e0603/3075e/2.png&quot;
+        srcset=&quot;/static/fe3e5f7e45079d2e2d7960e6a01e0603/4edbd/2.png 175w,
+/static/fe3e5f7e45079d2e2d7960e6a01e0603/13ae7/2.png 350w,
+/static/fe3e5f7e45079d2e2d7960e6a01e0603/3075e/2.png 621w&quot;
+        sizes=&quot;(max-width: 621px) 100vw, 621px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;또한 INP 지표를 세 가지 부분으로 나누어 확인할 수 있습니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;입력 지연(Input delay) 시간이 긴 것은 페이지의 백그라운드 활동이 페이지의 인터랙션 처리를 방해하고 있음을 나타냅니다.&lt;/li&gt;
+&lt;li&gt;처리 시간(Processing time)이 긴 것은 인터랙션을 위한 이벤트 핸들러를 실행하는 데 시간이 오래 걸린다는 것을 의미합니다.&lt;/li&gt;
+&lt;li&gt;표시 지연(Presentation delay) 시간이 긴 것은 업데이트된 UI의 스타일링, 레이아웃 및 페인팅이 다음 페인팅을 지연시키고 있음을 나타냅니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;회색 수염 같은 왼쪽과 오른쪽의 영역은 입력 및 표시 지연을 나타냅니다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;ℹ️ &lt;strong&gt;INFO&lt;/strong&gt;&lt;br&gt;
+2024년 1월부터 INP 분석은 곧 출시될 크롬 버전에서만 사용할 수 있습니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;cpu-스로틀링을-활성화-해보세요&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#cpu-%EC%8A%A4%EB%A1%9C%ED%8B%80%EB%A7%81%EC%9D%84-%ED%99%9C%EC%84%B1%ED%99%94-%ED%95%B4%EB%B3%B4%EC%84%B8%EC%9A%94&quot; aria-label=&quot;cpu 스로틀링을 활성화 해보세요 permalink&quot; class=&quot;heading-anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;CPU 스로틀링을 활성화 해보세요&lt;/h3&gt;
+&lt;p&gt;빠른 데스크톱 컴퓨터를 사용하는 경우 실제 사용자가 경험하는 느리고 지연되는 환경을 재현하는 데 어려움을 겪을 수 있습니다.&lt;/p&gt;
+&lt;p&gt;우리의 웹사이트에 접속하는 성능이 낮은 기기를 모방하기 위해 크롬 개발자 도구에서 CPU 스로틀링을 설정할 수 있습니다.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;개발자 도구에서 오른쪽 상단의 톱니바퀴 아이콘을 클릭하여 &lt;strong&gt;캡처 설정&lt;/strong&gt;을 엽니다.&lt;/li&gt;
+&lt;li&gt;드롭다운에서 ‘4배’ 또는 ‘6배’ CPU 스로틀링을 선택합니다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;이렇게 하면 CPU 처리 시간이 기존보다 4배 또는 6배 더 오래 걸리게 만들 수 있습니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 414px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/7fbf69ad563254eae1875df79fbd5d29/b910a/3.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 64%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAYAAACpUE5eAAAACXBIWXMAAAsTAAALEwEAmpwYAAADPklEQVQ4y13S6WscdQDG8fmX/CNEEEGQ1lZCsqYm2Ry7ye4mO7M71878Zmbn2DPHsjk2PRIQBVtQ0kisZpOYxDSNLamBQmmJYjxqQUVqUiP4lUbxhS8+PA88bx9J0wqMZXOYpkA1AxJjHinZI50rYhSKCNvD88vYch4zm8PK51ByOkLOYxccZFkll9exCg6WYSBpmo5hmChKDtVwUDRBMivoTgrSozkyYzL5vIbnFbEtG0M3EMKhULCIohJRVCYMQsrjk7y/9jWS63pUKlWWP15hbfUW2+1lPltZYumjD/nk5nW21m+xsLiIZQvMQgHdMLBtG03XsYXA931c36chPK7NXUd6Mbbm53n226/sPThi6uYhrZXHXFl5RHPpIcv3fmHvzh1M08SyrDOO4yCEOOuuEBTCgJVYL4sjI0iGYTA3f5mfn37PtU8f8ZJ1xCvlI16vH/Fy9C0dMz+ws7NNEEbU6uNUq1Uq1QqVF1mrUapWqYcRN0ZGiSpVpGTaRHiTfPXoGYff/MSPR4c8fHDAwf17HOx/ydMnT3jvxiq2oWOoBsNjDrIWkNeKqKpL1ggpDilEPSkyZglpcDCGqmRoTU/SmqnRnG0w2yyd9ZmZKaZnmtRKHhP2a1iZVxlKxhlIDJEc6GSkv4P4YB9RV4x8/3mGUkmk7qTM/fYq7N/leGON43abky+2OFlb42Rvj5ONdf7a3OT321u4kU/PsEw8YxBPm/RmbAZGdLy+UfqzFom0gnQxlkBWBLYRYKruP5l3cewyhl7EUD0s3UVJDJJIJLjQNUhvyuadpM6ltEV2IMdwXOZSymIgI5CUnIFh+WQUg/7EKClZQ9Et+oczJEbGzr45NdGk5odcbs7w7pUFWo1pmuMNFlpX+WD+KnMTDaYb03h+iBSFJrZToBhYuO4YukiR0eNoXoqgpFGv2Xy3vwN72zxvr/Dn/l1O2+uc7u7yx85tnm98zunGJse7u8y2mki+8yZF5wKedRFXPYejvYVQzyPUc7h6ByL/BqHdTdnroeTGqAQW9XKTamkSYQY4VkjZr1MLJ/BEiBSGIaVyhKOGKF0hubej/wmRYz7ZzuK/fLJdPvKZ4D/ZzgC1L+JvezGyIxDG1fUAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;image&quot;
+        title=&quot;image&quot;
+        src=&quot;/static/7fbf69ad563254eae1875df79fbd5d29/b910a/3.png&quot;
+        srcset=&quot;/static/7fbf69ad563254eae1875df79fbd5d29/4edbd/3.png 175w,
+/static/7fbf69ad563254eae1875df79fbd5d29/13ae7/3.png 350w,
+/static/7fbf69ad563254eae1875df79fbd5d29/b910a/3.png 414w&quot;
+        sizes=&quot;(max-width: 414px) 100vw, 414px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;h2 id=&quot;개발자-도구를-이용해-inp-분석하기&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EA%B0%9C%EB%B0%9C%EC%9E%90-%EB%8F%84%EA%B5%AC%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%B4-inp-%EB%B6%84%EC%84%9D%ED%95%98%EA%B8%B0&quot; aria-label=&quot;개발자 도구를 이용해 inp 분석하기 permalink&quot; class=&quot;heading-anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;개발자 도구를 이용해 INP 분석하기&lt;/h2&gt;
+&lt;p&gt;위에서 살펴본 성능 기록을 살펴보고 이것이 우리에게 알려주는 내용을 확인해 봅시다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;ℹ️ &lt;strong&gt;INFO&lt;/strong&gt;&lt;br&gt;
+실제 운영 환경에서는 &lt;code class=&quot;language-text&quot;&gt;aHg&lt;/code&gt;와 같은 의미 없는 함수 이름을 종종 볼 수 있습니다. 데이터를 더 쉽게 해석하려면 소스맵을 사용하거나 코드를 압축하지 않고 로컬 서버에서 테스트하는 것이 좋습니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;브라우저 메인 스레드는 페이지의 콘텐츠를 렌더링하고 인터랙션을 처리하는 역할을 담당합니다. “기본(Main)” 항목에서 메인 스레드가 어떤 작업을 수행하는지 확인할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;여기서 메인 스레드가 사용자 인터랙션 이전에도 사용 중이어서 입력 지연이 발생한다는 것을 알 수 있습니다. 여러 개의 “타이머 실행됨(Timer Fired)” 이벤트는 브라우저가 페이지에서 예약된 작업을 실행하고 있음을 보여줍니다. 이 백그라운드 작업이 진행되는 동안 사용자 인터랙션이 발생하면 브라우저는 입력 이벤트를 처리하기 전에 먼저 예약된 작업을 완료해야 합니다.&lt;/p&gt;
+&lt;p&gt;백그라운드에서 실행되는 예약된 작업의 양을 줄이면 입력 지연을 줄일 수 있습니다. 또한 이러한 작업의 속도를 높여 지연을 줄일 수도 있습니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 602px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/4359d4f6534de9bb30ac77f1362b9aba/32056/4.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 54.85714285714286%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAAAsTAAALEwEAmpwYAAACfUlEQVQoz2WSX2vbZhTG9Z12v9sG1kE/w272Fcr2CcrWbpDLDnYxxhiEtYSyNvWStI4dx27MXCeOZUe2bMmx/rySLFtWZMmv/BuKQ9nYAz9ezuHlOXDOo0RRhG3bxHFMoTzPkQVyjZQSKfO7t+ivs5RAq3KrV5CTGplxynpSY13U7SNks4Ry54IsrPivNvxfGzKvTya65EEP6avIQCUvaqONHLdRbGdGT7PQdRtHxIjgFtdP8P0E213gh4LQ90jcgMAO8aPtaClhfY/MYQ2sc1C09iuuqt8zOt2lU/6B/oefaL37jv67p/x9vMv5fpvmb3v88vszSvtP6NR/ZFh+gvPmMW7pW9zSN58Qfz5GcYa7XFY+Y9R6xM3HR3jqV3Rrn6M1d5h3via4XmGPryk7bQaD57jlh2gHDwlOvyBp7hCf73B7xwPi5pcoU12jXqqgXl5y4vexXJsPR2dcNZsIv3O/u3R7sKVErV7TOzYwzwQ3dY9pw7/DagTYDR9l1p0w+rlF2LApew5zPUL/9SPeWw3hq+QyZ5MXe9uQLVeYdQ31RQf70GR24m0pC6yyjXkqUOKRi/VSZXEhqAYWC2OO9arPvDJmthwiiwRstheXSYI4NzD2Lpgd6LjFv7dj5LGDe2QwODFRpBOR1X1mxowTz2JhLlhXBFl3RiQj5EZ+SlCepoQXE4wXHYZ7LUZ/XOK/GbI6nBL+ZSIODRS5SEnVOYsw4jycEpkhq6ogmy6JWSHzfxnKjHjgELwe0mvdMOjqqI0e78+m2LUJ1r6KkucbUmvJ8jZlHA1Z2QGptiQVCUuSreF9zjdIMpGwqtm4uodwTSbagKuGIOjYhAcG/wDq5B2ksUfeHQAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;image&quot;
+        title=&quot;image&quot;
+        src=&quot;/static/4359d4f6534de9bb30ac77f1362b9aba/32056/4.png&quot;
+        srcset=&quot;/static/4359d4f6534de9bb30ac77f1362b9aba/4edbd/4.png 175w,
+/static/4359d4f6534de9bb30ac77f1362b9aba/13ae7/4.png 350w,
+/static/4359d4f6534de9bb30ac77f1362b9aba/32056/4.png 602w&quot;
+        sizes=&quot;(max-width: 602px) 100vw, 602px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;이 경우에는 처리 시간이 INP 값의 대부분을 차지합니다. 자바스크립트 압축으로 인해 무슨 일이 일어나고 있는지 파악하기 어렵지만, 그래도 CPU 활동을 분석해 보겠습니다.&lt;/p&gt;
+&lt;p&gt;메인 스레드 항목 상단의 “작업(Task)“을 클릭하면 화면 하단에서 &lt;strong&gt;요약(Summary)&lt;/strong&gt; 탭을 볼 수 있습니다. 이 경우 작업의 지속 시간이 스타일 재계산과 같은 다른 유형의 처리보다는 대부분 자바스크립트 처리로 인한 것임을 알 수 있습니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 685px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/94c8fe6cce66cb126160541c4f3c256c/8ce22/5.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 86.28571428571429%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAARCAYAAADdRIy+AAAACXBIWXMAAAsTAAALEwEAmpwYAAAC90lEQVQ4y6WTy3LiVhCG9VDZZGtP3iLbPMPMKrs8Q7bZZlzxVDyemouBGMdgsIExHmMDNlcJhO5IIIGOLl8KEdd4kpRnkVP1qU//pf51TpdaWq0CFp6LCNfEcUwCLNRbnOsDRO+IsPeB6OMBUXmfqPKK6Gwfcbb/OW600h7RdYkkBWkdxriezzoUfLHSTR5vSSOII0g3ebKNabLlISfNyqTu7SXdZolW45xOuc5l8R1vi+fkizWKR2X+LFQ5PipznDvj4uyKZu2WZu2Gq/oNl7UtV41bGuc3DFUFaVL/nvvTb5hUX9AudHhZ+ZVS/gdqv31H+/AZcn4HObfDOLeDkt9lnH9G+80uNwe79N9v897v39I6fs4f/RbSSK7QrO5hGeeEf/fQvGvRzRWYXTQw6zWseg2nUUernqGdl2nnTmm9PUY5aWBd1dDeX+L3e4gEpFl3ifzqDkOb4K9TgjDF6Lt0DntMCjr26QKjtECpLLg/0RhUbYblgFHJp1fwkZtr7MqYxdDHFwmSfW9hvLnFsVRWMaxj8IYmo5dNzNd3WK/vsN8N6X64x7iYMe84DE4NhkWb3pGJ+slhMTgk0C1WAqR216N/7SJPDBTVQbcWyH2VwUeZq9MWyicVvWOhti3ssYc9dZn2Paa9BZOuhz5Z4XgpjrOJAqkvW8i6x2oVEiwDVsEafxmwFoJgtUJEMVGSIOI42wsRE220eIsQEWItEGGUIQW9Lv5wwGhgMuiMsMdD5opC4jjgeaTz+Ze4/5E/QvKXS4LlEtuymDsOaZL8LyTTdNBtH9uxCcMw+9+T9B9Dk2lppn8NyfdtjLsjlNGUKNmWJ0nCZsaDIMB1XYTYjmWappvHk0gYP7Mc/EK/N8TVS1mh7y/RdRPDMBmPx2ialn3kwfQppGj0nLl6wnKyRzL5KSvyXIfpTEXVZsxms+yEjw2fWlK6VkjGL4jlH0lCLRM317RnCqY2ZSwrn3v5FbPM8KHpj1/VdR1TdzA0C8M0/nXVpwz/Alwi9DBkpWQ4AAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;image&quot;
+        title=&quot;image&quot;
+        src=&quot;/static/94c8fe6cce66cb126160541c4f3c256c/8ce22/5.png&quot;
+        srcset=&quot;/static/94c8fe6cce66cb126160541c4f3c256c/4edbd/5.png 175w,
+/static/94c8fe6cce66cb126160541c4f3c256c/13ae7/5.png 350w,
+/static/94c8fe6cce66cb126160541c4f3c256c/8ce22/5.png 685w&quot;
+        sizes=&quot;(max-width: 685px) 100vw, 685px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;개별 자바스크립트 함수 또는 자바스크립트 코드 컴파일과 같은 작업에 얼마나 많은 시간이 소요되는지 보여주는 &lt;strong&gt;상향식(Bottom-Up)&lt;/strong&gt; 탭으로 전환해 봅시다. 이상적으로는 다른 함수보다 훨씬 더 시간이 많이 걸리는 함수를 찾는 것이 좋습니다. 이 경우 해당 함수를 최적화하는 데 집중하여 호출 횟수를 줄이거나 &lt;a href=&quot;https://www.debugbear.com/blog/front-end-javascript-performance&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;더 빠르게 실행되도록&lt;/a&gt; 만들 수 있습니다.&lt;/p&gt;
+&lt;p&gt;아쉽게도 지금의 경우는 이에 해당되지 않는 것으로 보입니다. 그렇지만 브라우저가 가장 많은 시간을 소비하는 함수가 &lt;code class=&quot;language-text&quot;&gt;writeCookie&lt;/code&gt; 함수임을 확인할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 693px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/64456081bf927a3d7598b23b0010220f/61c63/6.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 45.714285714285715%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAJCAYAAAAywQxIAAAACXBIWXMAAAsTAAALEwEAmpwYAAABwklEQVQoz3WR2W7bMBBF9f//1L70JWjqImgSR95trRQlUpRELdZ2CsktAhQogYvhJYE7Z0gnSxVK5exvhmNQo3K7eikVQSCwtqNte5q2X+v/dL9P5KbC2WwjthfDIajYXTPcsyBSLeew5OX9gCcMkeqQZiArR9J/tJzJYkDoO54ocDauz7efLk9vF1zfsL0o3Jtmey0I4wOvuyMv+5Q4H4nNRJxPj/pnL8yMl975dcw4+AbHmojw+AUrvtJWEVGUIJOEXKfUasNp94P3d5faWuYZpnFimuZPjTPzcrGsecIpqo7z+YSOnrCl4ObFRLEkzQylfCaJ9hRlR9+PDOPMMEz0w8Q4zmTFgOu3HKOOnd/ieg1OXbckicSmz9giIgxuaLmj0AG12aFTD51XNG23hiyBC9mC+yCbaboRoXsy0+PYuiUIQoz4TlMtdAIpPLTKqPUroe9yvgTrz48TDONEWY9I05OafqVU5UN51eMUpeV0uqDjDbYIuXlibZCmCaV8QgQfKG3XoL90Mu/XMU9Rx1V0XES3+nPcPkYWiaLS7kooU4NSGWUeU5sDdZU9yIbPwCC783pteLs26xt+eO3qXb/hN+NvqAcxLgxhAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;image&quot;
+        title=&quot;image&quot;
+        src=&quot;/static/64456081bf927a3d7598b23b0010220f/61c63/6.png&quot;
+        srcset=&quot;/static/64456081bf927a3d7598b23b0010220f/4edbd/6.png 175w,
+/static/64456081bf927a3d7598b23b0010220f/13ae7/6.png 350w,
+/static/64456081bf927a3d7598b23b0010220f/61c63/6.png 693w&quot;
+        sizes=&quot;(max-width: 693px) 100vw, 693px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;메인 스레드 항목에서 &lt;code class=&quot;language-text&quot;&gt;writeCookie&lt;/code&gt; 함수를 검색할 수 있습니다(ctrl+f 또는 cmd+f 를 사용하세요). 이를 통해 한 번 길게 호출된 것이 아니라 페이지가 이 함수를 여러 위치에서 24번 호출하고 있음을 알 수 있습니다. &lt;code class=&quot;language-text&quot;&gt;prepareAndWriteCookies&lt;/code&gt; 함수는 아마도 하나로 통합되어 한 번만 호출될 수 있을 것으로 보입니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 700px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/dc629e97b3cee6f5608ff75af782d1af/d2a60/7.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 39.42857142857142%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAICAYAAAD5nd/tAAAACXBIWXMAAAsTAAALEwEAmpwYAAABpElEQVQoz22Oa1PaYBCF8/9/R6efEbRSQIvTqr2qtRAaSJBLLuYGub5vQiBPB6q10+mHs+fMzu6zq6Q9i7i7JDu3kX0X8e6R4sIj6pm4LYPi3KXou5T7XmfBpDkgvQ6JL/2Dog8vHl36KMvWCOvoJ86RdgDnZw75qYX30WR+b6B/t/l0P+Nh6LO6ekB7/Q2roeK1JiRvF4iujejZyK5D0bZQzO4E+3iM3dUZv/qCdaLhvJ/iqyqreIw+d/l6c8NQv8Wy5syOb7GPxuTXPsu2xrKhEpxMCS4WqJ+nKImdkbgCme8I9RVrMyHMMrwwwvciRlOT/pXBUA9ZBivMO4P4zETMMh47Buv2jLBjstYMgmyCUmxBViBKKGqQWygKEAVsaxiMBI2mi6oVmEGK48yRqw1pVJHrKXKSIWY5nifZbGoUUdQIWfPHn3Iua8oKBmpGs2VyN4gwQ4HnR6QlrLOK/TOiglzsiJIKWYKyLwfYX5IFL8BRzpvTgB+jNXZo4fnJYTEVO+TTE3t/5vwfWP4Gbrag6ZJ2J0Y3YpJkjuOlh0P/zj/nX9p0UNxhI4GiAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;image&quot;
+        title=&quot;image&quot;
+        src=&quot;/static/dc629e97b3cee6f5608ff75af782d1af/8c557/7.png&quot;
+        srcset=&quot;/static/dc629e97b3cee6f5608ff75af782d1af/4edbd/7.png 175w,
+/static/dc629e97b3cee6f5608ff75af782d1af/13ae7/7.png 350w,
+/static/dc629e97b3cee6f5608ff75af782d1af/8c557/7.png 700w,
+/static/dc629e97b3cee6f5608ff75af782d1af/d2a60/7.png 807w&quot;
+        sizes=&quot;(max-width: 700px) 100vw, 700px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;분석 수준을 한 단계 올려보면 &lt;code class=&quot;language-text&quot;&gt;newUtagTriggerHandler&lt;/code&gt; 함수의 일부로 많은 시간이 소요되는 것을 알 수 있습니다. 이는 이 코드의 상당 부분이 UI를 업데이트하는 데 필요한 핵심 애플리케이션 코드가 아니라 추적 코드(예: &lt;code class=&quot;language-text&quot;&gt;window.gtag&lt;/code&gt;로 구글 태그를 호출하는 코드)임을 시사합니다.&lt;/p&gt;
+&lt;p&gt;이러한 작업은 새 페이지 콘텐츠를 표시하는 데 필요하지 않으므로 UI 업데이트가 완료된 이후로 연기할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 700px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/a75ba7af779111af574c113ac355606e/d2a60/8.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 31.428571428571427%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAGCAYAAADDl76dAAAACXBIWXMAAAsTAAALEwEAmpwYAAABcklEQVQY0yXF527aUACAUb//o1QqUpVQFTKAmFVKBAQC2GCMB/G+vmbYmBK+qu2Po6MYlQn+nU5YNcjqDtkPm2PNIVNdRMdGtB1S1SVuWCQNE9myyB8c8pqLrDvojxsc1SPoC7xejBK1NjiVOWblDf9ex77TWdWWuFrAbrLDe7eY90dYvzTWAxNr/IHfjghfAkTTwf62IKnZiLpN3ghQSu3AaSxIqiaHxx3S9HldbxnPTQItJEpcZqMe2uucL9UtX59CusOU940gNkK8ew2vquNXDZK6hZLLC8XHmbTvse/7nGXKVF/SmQwRMkHkktZKY2BvaM6e6Roqvel37HhBGscc+yFJfUv008beBCh5CXlx++/0SXGB5iCm1haIU0meXxiaKdNA8Bo88CZVuu4Thlwi9zf2a8GxG3EwE4rrFSU/38jLG38vSv7pdPa8tAXy+Juy+GTmZixiyWinMg66DJ0eq2jJoYDsdKGQV7Lsyul84w9LCLG0YwY91QAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;image&quot;
+        title=&quot;image&quot;
+        src=&quot;/static/a75ba7af779111af574c113ac355606e/8c557/8.png&quot;
+        srcset=&quot;/static/a75ba7af779111af574c113ac355606e/4edbd/8.png 175w,
+/static/a75ba7af779111af574c113ac355606e/13ae7/8.png 350w,
+/static/a75ba7af779111af574c113ac355606e/8c557/8.png 700w,
+/static/a75ba7af779111af574c113ac355606e/d2a60/8.png 807w&quot;
+        sizes=&quot;(max-width: 700px) 100vw, 700px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;표시 지연 시간 동안 메인 스레드에서 무슨 일이 일어나고 있는지 살펴보면 프리 페인트(Pre-Paint), 페인트(Paint), 레이어화(Layerize), 커밋(Commit)과 같은 다양한 렌더링 관련 작업을 볼 수 있습니다. 그러나 이러한 작업들은 적절한 시간 내에 완료되며 브라우저 렌더링 작업은 최적화하기 어려운 경우가 많습니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 700px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/5d07c3be4b49e59acfa5f28ad9ad9f43/a016c/9.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 24.571428571428573%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAFCAYAAABFA8wzAAAACXBIWXMAAAsTAAALEwEAmpwYAAAA1UlEQVQY06WQy0rDUBRF8/+f4kyISRVU2pmPhJin1GstCWltLNQ6aB733CyphjrI0A2Lddjs0bHko0R6EC2ImB+MOd56sEGLoEUj8rf57cZYjNLzn1jr6TnK9ikuQ3I3onpIeYtvUNEZq8WMRbHkKpnizG+5D2LUXck8K5kEPs6Thxv6uKF3wtotY4roQJU1bJKW/dawrzy2+YSv90eqzx2zPOB67ZO8rtgkHUV+wEkVdvrCxbPCztTJVmOgA9qBWkPdwbGvG6FpDRhAg+mHnQyfMWN/AxkEeXGd6mbYAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;image&quot;
+        title=&quot;image&quot;
+        src=&quot;/static/5d07c3be4b49e59acfa5f28ad9ad9f43/8c557/9.png&quot;
+        srcset=&quot;/static/5d07c3be4b49e59acfa5f28ad9ad9f43/4edbd/9.png 175w,
+/static/5d07c3be4b49e59acfa5f28ad9ad9f43/13ae7/9.png 350w,
+/static/5d07c3be4b49e59acfa5f28ad9ad9f43/8c557/9.png 700w,
+/static/5d07c3be4b49e59acfa5f28ad9ad9f43/a016c/9.png 762w&quot;
+        sizes=&quot;(max-width: 700px) 100vw, 700px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;h2 id=&quot;초기-페이지-로딩-중-입력-지연-개선하기&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%B4%88%EA%B8%B0-%ED%8E%98%EC%9D%B4%EC%A7%80-%EB%A1%9C%EB%94%A9-%EC%A4%91-%EC%9E%85%EB%A0%A5-%EC%A7%80%EC%97%B0-%EA%B0%9C%EC%84%A0%ED%95%98%EA%B8%B0&quot; aria-label=&quot;초기 페이지 로딩 중 입력 지연 개선하기 permalink&quot; class=&quot;heading-anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;초기 페이지 로딩 중 입력 지연 개선하기&lt;/h2&gt;
+&lt;p&gt;웹사이트의 인터랙션 대부분은 빠르지만, 가끔 초기 로딩 프로세스에는 주요한 오랜 CPU 차단 작업이 포함되어 있는 경우가 있습니다. 예를 들어 사용자가 페이지의 아무 곳이나 클릭하여 텍스트를 강조 표시하는 경우 높은 입력 지연과 함께 다음 페인트에 대한 인터랙션 점수가 높아집니다.&lt;/p&gt;
+&lt;p&gt;이를 테스트하려면 크롬 개발자 도구에서 &lt;strong&gt;프로파일링 시작 및 페이지 새로고침&lt;/strong&gt; 아이콘을 클릭하고 페이지를 몇 초에 한 번씩 클릭해 보세요. 그러면 이러한 인터랙션이 느린지 확인할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 700px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/a3a0d2f0f6c4ae69ae51da1bcae9f948/baaa6/10.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 64.57142857142857%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAYAAACpUE5eAAAACXBIWXMAAAsTAAALEwEAmpwYAAACz0lEQVQ4y02Ta2sbZxCF9VP7jxpoPxQKpYVCCoUY6l7iyG2T2nFulVWptmWvLrva+767++5Vu+/e9BQpJcmBwxyGw3yYMzOybIHrS2xHEIgU0/LRDRfX9jF0h81WsNACpsuMjRlhWf7R53oRUZQjwuzIrenjuCGjQAj8ICCMYqJYkuXFkbVqaAfIqp6yUqi2Y1crmrZDtYdeQ5JlqKbhU4zSNCUUIba5xbFNkigglTFJHNM3FQwDXVWhdsVRsx+QwiL21yRBQBpKiiKnaXcMtWKUVR0PRo2/mVJ6ZyTbczzrLfbqL2ztBc5qhTddcHczZjEf83B7ibl4jHX3OauX91xcbhnfvOH57S8kNzNGleqI8x2xjGiaHfuhI8kS/CggigPSMiMpdkw0Dd33WTk+86XOfGWh2SGTB5P5ymCi6UR5zkjfOkhfQ7UheV0Q5Sah1LEsEzdcI4IHTNdjpi8wPYeiKPFDgWZoOLlN2aWUKkfVNV3XMYrCgLcPgst//+Hp7A+czKOSPeZkh3Fm4N82OLMKb95gT0u8ucKbNeSyphlqVK9oh5a2ben7nlFZ5Bh+jun7GMKkPgRxxJ6+TI/1PYcPek/P/hjQ/62PhZFSir5TH2If9tD10O2h7T8aP8XBU9YdIhGIwKNKU5owoEkTRqHM0fWQ++lz7p5+iXX1Ldr8N1bnX6D//SvG8iXe5AR7eoq4+o5Qe4F9/SNifo4nIkzLZKuvyWXCcNhhUTXEkWK5nvBs8gOL+SOMzTfMXn3GevOEO+N3rhdfM754wsnZ92jLU97dfsW71WN8mSJlhmUv0dwlopDvz0aphk2ac5pIXrkVQbLhyvUwixhR3BOWr7nYpJwsFJt4R1C8wS3+pGpK6haiAvLaIK+Dw8A9lQJThvzk6Vx7AinXx5+O0y1JOiFJxlwuHX6+z9nGOdVuRiifkZcJdbMnyjrK2qJSAf8BCO/FZo1713gAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;image&quot;
+        title=&quot;image&quot;
+        src=&quot;/static/a3a0d2f0f6c4ae69ae51da1bcae9f948/8c557/10.png&quot;
+        srcset=&quot;/static/a3a0d2f0f6c4ae69ae51da1bcae9f948/4edbd/10.png 175w,
+/static/a3a0d2f0f6c4ae69ae51da1bcae9f948/13ae7/10.png 350w,
+/static/a3a0d2f0f6c4ae69ae51da1bcae9f948/8c557/10.png 700w,
+/static/a3a0d2f0f6c4ae69ae51da1bcae9f948/baaa6/10.png 813w&quot;
+        sizes=&quot;(max-width: 700px) 100vw, 700px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;기록의 맨 위를 보면 새 데이터가 로드되는 동안 CPU가 로딩 프로세스 내내 상당히 바쁘게 움직이며 UI의 비트를 렌더링 하는 것을 볼 수 있습니다.&lt;/p&gt;
+&lt;p&gt;이러한 지연을 줄이려면 &lt;code class=&quot;language-text&quot;&gt;requestIdleCallback&lt;/code&gt;을 사용하는 등 처리 과정을 더 작은 청크로 나눌 수 있습니다. 이렇게 하면 각 차단 작업이 더 짧아지므로, 브라우저가 이러한 작업 사이에 사용자 인터랙션을 처리할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;UI가 준비되기 전에 사용자가 UI와 상호 작용하려는 경우 페이지가 완료될 때까지 UI 컴포넌트가 비활성화되었음이 명확히 표시되도록 디자인을 변경할 수도 있습니다.&lt;/p&gt;
+&lt;h2 id=&quot;최적화를-위해-실제-사용자-데이터를-확보하세요&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%B5%9C%EC%A0%81%ED%99%94%EB%A5%BC-%EC%9C%84%ED%95%B4-%EC%8B%A4%EC%A0%9C-%EC%82%AC%EC%9A%A9%EC%9E%90-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%A5%BC-%ED%99%95%EB%B3%B4%ED%95%98%EC%84%B8%EC%9A%94&quot; aria-label=&quot;최적화를 위해 실제 사용자 데이터를 확보하세요 permalink&quot; class=&quot;heading-anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;최적화를 위해 실제 사용자 데이터를 확보하세요&lt;/h2&gt;
+&lt;p&gt;최적화의 효과를 극대화하려면 사용자 인터랙션 지연을 가장 자주 유발하는 요소를 파악해야 합니다. 이를 파악하려면 사람들이 웹사이트를 사용할 때 직접 데이터를 수집해야 합니다.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.debugbear.com/real-user-monitoring&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;DebugBear의 real user 모니터링&lt;/a&gt;을 통해 INP 요소를 포함한 핵심 웹 바이탈에 대한 인사이트를 얻고 INP를 입력 지연, 처리 시간, 표시 지연으로 세분화할 수 있습니다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;🚀 한국어로 된 프런트엔드 아티클을 빠르게 받아보고 싶다면 &lt;a href=&quot;https://kofearticle.substack.com/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Korean FE Article&lt;/a&gt;을 구독해주세요!&lt;/p&gt;
+&lt;/blockquote&gt;</content:encoded></item><item><title><![CDATA[(번역) 기능 분할 설계 - 최고의 프런트엔드 아키텍처]]></title><description><![CDATA[원문: Feature-Sliced Design: The Best Frontend Architecture…]]></description><link>https://emewjin.github.io/feature-sliced-design/</link><guid isPermaLink="false">https://emewjin.github.io/feature-sliced-design/</guid><pubDate>Thu, 01 Feb 2024 00:00:00 GMT</pubDate><content:encoded>&lt;blockquote&gt;
 &lt;p&gt;원문: &lt;a href=&quot;https://dev.to/m_midas/feature-sliced-design-the-best-frontend-architecture-4noj&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Feature-Sliced Design: The Best Frontend Architecture&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;&lt;span
