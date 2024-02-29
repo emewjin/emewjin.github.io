@@ -3,7 +3,7 @@ title: (번역) 크롬 개발자 도구로 INP를 개선하는 방법
 description: 크롬 개발자 도구의 성능(Performance) 탭으로 INP 지표를 확인하고 개선 방향을 도출하는 과정을 예시와 함께 소개합니다.
 date: 2024-03-01
 lastUpdated: 2024-03-01
-tags: [DevTools]
+tags: [DevTools, 번역]
 ---
 
 > 원문 : [How To Improve INP With Chrome DevTools](https://www.debugbear.com/blog/inp-chrome-devtools)
