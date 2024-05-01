@@ -3,7 +3,7 @@ title: (번역) HTML 속성 vs DOM 프로퍼티
 description: 더 낮은 수준에서 DOM을 파헤쳐야 하는 경우 알아두면 도움이 될, HTML 속성(attribute)과 DOM 프로퍼티(property)의 차이점에 대해 알아보아요.
 date: 2024-05-01
 lastUpdated: 2024-05-01
-tags: [HTML]
+tags: [HTML, 번역]
 ---
 
 > 원문: [HTML attributes vs DOM properties](https://jakearchibald.com/2024/attributes-vs-properties/)
