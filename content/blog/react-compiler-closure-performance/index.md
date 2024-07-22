@@ -13,7 +13,8 @@ tags: [React, 번역]
 
 당연히 많은 사람들이 제가 보여드린 메모리 누수가 새로운 리액트 컴파일러에서 어떻게 처리될지 궁금해했습니다. 리액트 팀의 답변은 아래와 같았습니다.
 
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">BTW is it safe to assume the react compiler would compile to something that&#39;s not leaking?<br><br>cc <a href="https://twitter.com/potetotes?ref_src=twsrc%5Etfw">@potetotes</a> <a href="https://twitter.com/_gsathya?ref_src=twsrc%5Etfw">@_gsathya</a></p>&mdash; Seb ⚛️ ThisWeekInReact.com (@sebastienlorber) <a href="https://twitter.com/sebastienlorber/status/1795747192029970858?ref_src=twsrc%5Etfw">May 29, 2024</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet" data-dnt="true" align="center"><p lang="en" dir="ltr">the compiler will cache these values so they won&#39;t keep getting re-allocated and memory won&#39;t grow infinitely</p>&mdash; Sathya Gunasekaran (@_gsathya) <a href="https://twitter.com/_gsathya/status/1795766442786218435?ref_src=twsrc%5Etfw">May 29, 2024</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 그럴듯하게 들리죠? 하지만 언제나 그렇듯이, 그 내면에 함정이 있습니다. 이 주제에 대해 자세히 알아보고 이전 글로부터 리액트 컴파일러가 코드를 어떻게 처리하는지 살펴보겠습니다.
 
@@ -31,11 +32,11 @@ tags: [React, 번역]
 
 이는 클로저 중 하나가 큰 배열과 같은 큰 객체를 참조하는 경우 특히 중요합니다. 아래 스크린샷에서 `handleClick`이 "Closure (App)" 스코프에 대해 액세스 권한을 가지고 있음을 명확하게 확인할 수 있습니다. 이 스코프에는 `logLength`에서만 사용되는 `bigData`도 포함됩니다.
 
-![형제 클로저에서 접근 가능한 큰 배열을 가진 공유된 클로저](./closure-scope.png)
+![형제 클로저에서 접근 가능한 큰 배열을 가진 공유된 클로저](./closure-scope.png '형제 클로저에서 접근 가능한 큰 배열을 가진 공유된 클로저')
 
 또한 깊게 중첩된 `useCallback` 참조 체인과 같은 흥미로운 부수 효과가 발생할 수 있습니다. 아래에서 안타까운 방식으로 상태를 변경하면 메모이제이션된 함수의 긴 `useCallback` 체인이 어떻게 생성되는지 확인할 수 있습니다.
 
-![`handleClicks` 입니다.](./call-chain-focused.png)
+![`handleClicks` 입니다.](./call-chain-focused.png '`handleClicks` 입니다.')
 
 이것은 대체로 함수형 자바스크립트의 근본적인 '문제'이지 리액트의 문제는 아닙니다. 다만 리액트는 클로저와 메모이제이션을 많이 사용하기 때문에 이 문제가 발생할 가능성이 훨씬 더 높습니다. 설계되지 않은 언어에 함수형 프로그래밍 패러다임을 적용하는 것은 단점일 수도 있습니다. (하지만 이는 또 다른 주제입니다.)
 
@@ -93,7 +94,7 @@ export const App = () => {
 
 이 코드를 리액트 컴파일러에서 실행하고 메모리 누수를 재현해 보면 메모리 사용량이 일정하게 유지되고 메모리 스냅샷에 `BigObject` 인스턴스가 하나만 할당되어 있는 것을 확인할 수 있습니다.
 
-![단 하나의 `BigObject`만 할당되고 메모리 사용량은 일정하게 유지됩니다.](./compiler-first-try.png)
+![단 하나의 `BigObject`만 할당되고 메모리 사용량은 일정하게 유지됩니다.](./compiler-first-try.png '단 하나의 `BigObject`만 할당되고 메모리 사용량은 일정하게 유지됩니다.')
 
 미래가 밝아 보이죠? 하지만 컴파일된 코드를 자세히 살펴보고 컴파일러가 무엇을 하고 있는지 살펴봅시다.
 
@@ -130,7 +131,7 @@ const App = () => {
 
 이것이 Sathya가 X에서 응답한 내용입니다. 리액트 컴파일러는 _다른 어느 것에도 의존하지 않는 값_ 을 캐싱하므로 계속 재할당되지 않습니다. 안타깝게도 이렇게 해도 문제는 해결되지 않고 제 예제가 더 이상 작동하지 않는다는 것을 보여줄 뿐입니다. 크롬 개발자 도구에서 가장 긴 거리를 가진 리테이너(retainer)를 보면 쉽게 확인할 수 있습니다.
 
-![여전히 다양한 콜백의 긴 참조 체인이 번갈아 가며 존재합니다.](./call-chain.png)
+![여전히 다양한 콜백의 긴 참조 체인이 번갈아 가며 존재합니다.](./call-chain.png '여전히 다양한 콜백의 긴 참조 체인이 번갈아 가며 존재합니다.')
 
 ## 코드를 변경하여 누수를 다시 발생시켜 보기
 
@@ -179,7 +180,7 @@ const App = () => {
 
 그리고 메모리 누수가 다시 발생했습니다. 이제 렌더링할 때마다 `BigObject`가 생성되며 가비지 컬렉터에 의해 수거되지 않습니다. 버튼을 클릭할 때마다 메모리 사용량이 증가합니다.
 
-![버튼을 클릭할 때마다 메모리 사용량이 증가합니다.](./still-leaking.png)
+![버튼을 클릭할 때마다 메모리 사용량이 증가합니다.](./still-leaking.png '버튼을 클릭할 때마다 메모리 사용량이 증가합니다.')
 
 ## 모든 메모이제이션을 제거하면 어떨까요?
 
@@ -230,7 +231,7 @@ export const App = () => {
 
 하지만 메모리 누수는 컴파일러의 메모이제이션 마법에 의해 다시 추가됩니다. 컴파일러가 기본값이 된 후 리액트를 처음 사용하는 개발자라면 이 문제를 인식하고 디버깅하고 수정하기가 매우 어려울 수 있습니다.
 
-![여전히 메모리 누수가 있지만 이제 컴파일러가 메모이제이션을 처리합니다.](./no-memoization.png)
+![여전히 메모리 누수가 있지만 이제 컴파일러가 메모이제이션을 처리합니다.](./no-memoization.png '여전히 메모리 누수가 있지만 이제 컴파일러가 메모이제이션을 처리합니다.')
 
 ## `bind(null, x)`를 사용한 실험적 해결 방법
 

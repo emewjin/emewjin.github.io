@@ -210,6 +210,9 @@ export const Content = styled('section', {
       flexDirection: 'column',
       alignItems: 'center',
     },
+    'p:has(code)': {
+      display: 'inline',
+    },
     a: {
       width: 'fit-content',
       textDecoration: 'underline',
