@@ -3,7 +3,7 @@ title: (번역) 대규모 SPA에서 유연하게 네트워크 데이터 미리 �
 description: 페이지 로드 시 네트워크 데이터를 미리 로딩하여 SPA 렌더링 성능을 개선하는 방법을 코드를 통해 설명하며 원글 저자의 경험을 나누어주는 글을 소개해드립니다.
 date: 2024-08-15
 lastUpdated: 2024-08-15
-tags: [React]
+tags: [React, 번역]
 ---
 
 > 원문 : [Flexible network data preloading in large SPAs](https://mmazzarolo.com/blog/2024-07-29-data-preloading-script/)
