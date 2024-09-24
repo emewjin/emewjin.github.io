@@ -1,4 +1,415 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[emewjin.log RSS Feed]]></title><description><![CDATA[잘못된 내용 혹은 더 좋은 방법이 있으면 언제든지 알려주세요 XD]]></description><link>https://emewjin.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Thu, 15 Aug 2024 11:24:55 GMT</lastBuildDate><item><title><![CDATA[(번역) 대규모 SPA에서 유연하게 네트워크 데이터 미리 로딩하기]]></title><description><![CDATA[원문 : Flexible network data preloading in large SPAs 주의: 이 글은 클라이언트 사이드에서 렌더링하는 SPA의 성능을 개선하기 위한 맞춤형 솔루션에 중점을 둡니다. Next.js, Remix…]]></description><link>https://emewjin.github.io/spa-preloading/</link><guid isPermaLink="false">https://emewjin.github.io/spa-preloading/</guid><pubDate>Thu, 15 Aug 2024 00:00:00 GMT</pubDate><content:encoded>&lt;blockquote&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[emewjin.log RSS Feed]]></title><description><![CDATA[잘못된 내용 혹은 더 좋은 방법이 있으면 언제든지 알려주세요 XD]]></description><link>https://emewjin.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 24 Sep 2024 13:03:41 GMT</lastBuildDate><item><title><![CDATA[(번역) SSR 성능 대결]]></title><description><![CDATA[원문 : An SSR Performance Showdown 💡 노트: 첫 번째 버전의 벤치마크에서 몇 가지 실수가 있었으며, 이는 Theo Browne의 이 트윗에 요약되어 있습니다. 먼저 이러한 오류에 대해 사과드리며, Rich Harris…]]></description><link>https://emewjin.github.io/ssr-performance-showdown/</link><guid isPermaLink="false">https://emewjin.github.io/ssr-performance-showdown/</guid><pubDate>Tue, 24 Sep 2024 00:00:00 GMT</pubDate><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;원문 : &lt;a href=&quot;https://blog.platformatic.dev/ssr-performance-showdown&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;An SSR Performance Showdown&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;💡 &lt;strong&gt;노트&lt;/strong&gt;: 첫 번째 버전의 벤치마크에서 몇 가지 실수가 있었으며, 이는 &lt;a href=&quot;https://x.com/t3dotgg/status/1828641333894095358&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Theo Browne의 이 트윗&lt;/a&gt;에 요약되어 있습니다. 먼저 이러한 오류에 대해 사과드리며, &lt;a href=&quot;https://github.com/Rich-Harris&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Rich Harris&lt;/a&gt;, &lt;a href=&quot;https://github.com/ryansolid&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Ryan Carniato&lt;/a&gt;, &lt;a href=&quot;https://github.com/gaearon&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Dan Abramov&lt;/a&gt;, &lt;a href=&quot;https://github.com/zsilbi&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Balázs Németh&lt;/a&gt;, &lt;a href=&quot;https://x.com/trueadm&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Dominic Gannaway&lt;/a&gt;의 수정에 대해 진심으로 감사의 말씀을 전합니다. 또한 Preact 버전에 기여해주신 &lt;a href=&quot;https://github.com/JoviDeCroock&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Jovi De Croock&lt;/a&gt;에게도 감사를 표합니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;서버 사이드 렌더링(SSR)은 Node.js로 고성능 웹 애플리케이션을 구축할 때 종종 간과되는 측면입니다.&lt;/p&gt;
+&lt;p&gt;컨설팅을 하면서 Node.js 성능 문제를 디버깅하는 데 중점을 두는 경우가 많았습니다. 이러한 상황에서 문제의 원인은 거의 항상 SSR이었습니다. SSR은 CPU에 큰 부담을 주는 작업으로, Node.js의 이벤트 루프를 차단하는 주요 원인이 될 수 있습니다. 따라서 프런트엔드 스택을 선택할 때 이 점을 반드시 고려해야 합니다.&lt;/p&gt;
+&lt;p&gt;저희는 오늘날 가장 인기 있는 라이브러리에서 SSR 성능이 어떤 상태인지 알아보기로 했습니다. 특히 Fastify와 깔끔하게 통합할 수 있는 라이브러리를 집중적으로 살펴보았습니다.&lt;/p&gt;
+&lt;p&gt;이를 위해 많은 요소를 포함한 복잡한 샘플 문서를 생성하여 테스트 페이지를 매우 크게 만들고, 각 라이브러리의 성능을 정확하게 측정할 수 있는 충분한 실행 시간을 확보해야 했습니다.&lt;/p&gt;
+&lt;p&gt;그래서 LLM에게 10x10px 타일로 된 div를 사용하여 컨테이너에 나선형을 그리는 코드를 작성해 달라고 요청했습니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;js&quot;&gt;&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;script&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; wrapper &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; document&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;wrapper&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; width &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;960&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; height &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;720&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; cellSize &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;5&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;drawSpiral&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; centerX &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; width &lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; centerY &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; height &lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; angle &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; radius &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; step &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; cellSize
+
+  &lt;span class=&quot;token keyword&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;radius &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt; Math&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;min&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;width&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; height&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; x &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; centerX &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; Math&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;cos&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;angle&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt; radius
+    &lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; y &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; centerY &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; Math&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;sin&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;angle&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt; radius
+
+    &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;x &lt;span class=&quot;token operator&quot;&gt;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; x &lt;span class=&quot;token operator&quot;&gt;&amp;lt;=&lt;/span&gt; width &lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt; cellSize &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; y &lt;span class=&quot;token operator&quot;&gt;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; y &lt;span class=&quot;token operator&quot;&gt;&amp;lt;=&lt;/span&gt; height &lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt; cellSize&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; tile &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; document&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;createElement&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;div&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+      tile&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;className &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;tile&apos;&lt;/span&gt;
+      tile&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;style&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;left &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token template-string&quot;&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;${&lt;/span&gt;x&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;px&lt;/span&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;/span&gt;
+      tile&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;style&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;top &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token template-string&quot;&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;${&lt;/span&gt;y&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;px&lt;/span&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;/span&gt;
+      wrapper&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;appendChild&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;tile&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+    angle &lt;span class=&quot;token operator&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0.2&lt;/span&gt;
+    radius &lt;span class=&quot;token operator&quot;&gt;+=&lt;/span&gt; step &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0.015&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token function&quot;&gt;drawSpiral&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;script&lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;이후, 테스트하려는 모든 라이브러리를 사용한 버전을 생성하도록 요청했으며, 원래 예제의 DOM 메서드에 의존하지 않고 각 라이브러리의 렌더링 엔진을 사용하도록 구현을 수정했습니다.&lt;/p&gt;
+&lt;p&gt;다음은 &lt;strong&gt;2398&lt;/strong&gt;개의 &lt;code class=&quot;language-text&quot;&gt;&amp;lt;div&gt;&lt;/code&gt; 요소를 포함한 샘플 문서의 모습입니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 700px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/39d1c5c9a7a27291590acdcc67c7d2a2/29007/1.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 78.85714285714285%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAQCAYAAAAWGF8bAAAACXBIWXMAAAsTAAALEwEAmpwYAAADBklEQVQ4y5WTz0sbQRTH59Re2n+h0P4HSlGQYpsWFHIQb+LBmyCKICie1L14EUHdlQRRIYoQNTFZTWI2KAkmoCDoRvHnmib1FyGIIpho1GR3vmWGKFZroQ++vGHmvc++N2+HKIryTtM081Pt7++b9/b2zIlEwpxMJs2np6dcqVTKfHh4+Hj+PE9RlPfEZrOVpdNp5HI53N3dcd3f3yOfzyOTySCRSGB7e5srFovh8vKSxz6NZ2sWOzY29oUMDAx8u729BQAdgAGAMh0dHdFIJEL9fj/1+XzU4/FwHwqFqKZpVNd1WohlOToDi6L4nUiS9DWbzTKgQQu2s7PDQbIsU4fDQe12O5fT6eR7s7OzdHV1leZyuUcoK2pwcND0B5AdJpNJ+Hw+zM3NYWJiAhaLBb29vejr6+Nrm80Gt9sNRVGgaRr+Cry5ueHAfD5PV1ZW4PF4OEwURbS2tqKmpgb19fVoa2tDT08PxsfHIcsygsEg0uk0B7KiXgCvrq7owsICZmZmMDw8jK6uLlRXV6OoqAhlZWWoqKhAc3MzS4TD4cD8/DxOTk5eB6ZSKcpacTqdvL2WlhaYTCYUFxdzMXBdXR36+/sxOTnJO4nFYq8Dz8/PaSAQ4F9nwIaGBpSUlHAQU3l5OZqamiBJEqampuD1enFwcPA6MJPJ0MXFRX4/o6OjEAQBtbW1qKysRGlpKaqqqtDR0QGr1QqXy8UHc3Z29hL4dMqqqvIps5ZYYnd3N9rb29HY2IjOzk4+bXbG/oJIJIJsNvtv4MXFBVjb7H5YIqt0aGiIw0dGRmC32/lZYSAvfxtRFB9a1nVdZ1Dj+PjY8Pv9htfrNVwulzE9Pc3ldrsNWZaNQCBg7O7usodgMAOQZ0VJkmQiFovFxN7ic7u+vsbGxgaWl5cRDoextLTEPdtjXTw39vatVusPIgjC5/X19UQ0Go1Ho9GfzKuqGt/c3OQ+HA7HQ6EQ98FgML62thbf2tqKP8QVcn6qqvpLEIQSQgh5Qwj5QAj5RAj5WPD/o4ccxnj7G8TUq+JFHXmNAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;1&quot;
+        title=&quot;1&quot;
+        src=&quot;/static/39d1c5c9a7a27291590acdcc67c7d2a2/8c557/1.png&quot;
+        srcset=&quot;/static/39d1c5c9a7a27291590acdcc67c7d2a2/4edbd/1.png 175w,
+/static/39d1c5c9a7a27291590acdcc67c7d2a2/13ae7/1.png 350w,
+/static/39d1c5c9a7a27291590acdcc67c7d2a2/8c557/1.png 700w,
+/static/39d1c5c9a7a27291590acdcc67c7d2a2/e996b/1.png 1050w,
+/static/39d1c5c9a7a27291590acdcc67c7d2a2/2cefc/1.png 1400w,
+/static/39d1c5c9a7a27291590acdcc67c7d2a2/29007/1.png 1600w&quot;
+        sizes=&quot;(max-width: 700px) 100vw, 700px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/fastify/fastify-vite&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Fastify의 Vite 통합 설정&lt;/a&gt;은 다양한 프레임워크의 SSR 성능을 조사하기 위한 완벽한 테스트 환경을 제공합니다.&lt;/p&gt;
+&lt;p&gt;이 글에서는 SSR을 수행하는 데 필요한 최소한의 보일러 플레이트를 살펴보고 5가지 주요 프런트엔드 라이브러리의(&lt;a href=&quot;https://react.dev/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;React&lt;/a&gt;, &lt;a href=&quot;https://vuejs.org/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Vue&lt;/a&gt;, &lt;a href=&quot;https://www.solidjs.com/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Solid&lt;/a&gt;, &lt;a href=&quot;https://svelte.dev/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Svelte&lt;/a&gt;, &lt;a href=&quot;https://preactjs.com/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Preact&lt;/a&gt;) 성능을 비교해 보았습니다. 또한 더 간단한 대안으로 &lt;a href=&quot;https://github.com/mcollina/fastify-html&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;fastify-html&lt;/a&gt;(&lt;a href=&quot;https://github.com/gurgunday/ghtml&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;ghtml&lt;/a&gt;을 Fastify로 랩핑한 버전) 및 &lt;a href=&quot;https://www.npmjs.com/package/@fastify/view&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;@fastify/view&lt;/a&gt;를 통한 &lt;a href=&quot;https://npmjs.com/package/ejs&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;ejs&lt;/a&gt;도 살펴봤습니다.&lt;/p&gt;
+&lt;p&gt;우리는 &lt;a href=&quot;http://next.js/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Next.js&lt;/a&gt;, &lt;a href=&quot;https://astro.build/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Astro&lt;/a&gt;, &lt;a href=&quot;https://qwik.dev/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Qwik&lt;/a&gt; 와 같은 도구들, 그리고 다른 완전한 프레임워크들을 고려하지 않기로 했습니다. 그 이유는 이들이 독립적인 렌더링 메서드를 제공하지 않기 때문입니다.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://fastify-vite.dev/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;@fastify/vite&lt;/a&gt; 기반 테스트의 경우 다음과 같은 보일러 플레이트를 사용했습니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;ts&quot;&gt;&lt;pre class=&quot;language-ts&quot;&gt;&lt;code class=&quot;language-ts&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; Fastify &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;fastify&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; FastifyVite &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;@fastify/vite&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; server &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;Fastify&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;await&lt;/span&gt; server&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;register&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;FastifyVite &lt;span class=&quot;token comment&quot;&gt;/* options */&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;await&lt;/span&gt; server&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;vite&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;ready&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;await&lt;/span&gt; server&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;listen&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; port&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;3000&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;모든 테스트는 프로덕션 빌드, 즉 &lt;code class=&quot;language-text&quot;&gt;vite build&lt;/code&gt;를 실행한 후에 실행되었습니다.&lt;/p&gt;
+&lt;p&gt;예외가 있다면 Vite가 필요하지 않은 &lt;strong&gt;fastify-html&lt;/strong&gt; 및 &lt;strong&gt;ejs&lt;/strong&gt; 테스트입니다.&lt;/p&gt;
+&lt;p&gt;모든 예제가 포함된 &lt;a href=&quot;https://github.com/platformatic/ssr-performance-showdown&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;저장소&lt;/a&gt;를 확인하세요.&lt;/p&gt;
+&lt;h2 id=&quot;일관성-보장&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%9D%BC%EA%B4%80%EC%84%B1-%EB%B3%B4%EC%9E%A5&quot; aria-label=&quot;일관성 보장 permalink&quot; class=&quot;heading-anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;일관성 보장&lt;/h2&gt;
+&lt;p&gt;모든 예시가 동일한 특성을 공유하도록 했습니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;클라이언트 측 반응성 기능을 사용하지 않습니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;React 및 Solid의 경우처럼 해당 프레임워크에 부적절한 경우를 제외하고 모든 스타일 바인딩은 템플릿 리터럴을 사용하여 수행됩니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;x&lt;/code&gt; 및 &lt;code class=&quot;language-text&quot;&gt;y&lt;/code&gt; 값은 &lt;code class=&quot;language-text&quot;&gt;toFixed(2)&lt;/code&gt;로 만들어집니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;&amp;lt;style&gt;&lt;/code&gt; 태그는 document 셀에만 존재합니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;테스트는 2020년형 맥북 에어 M1, 8GB RAM, 맥OS 벤츄라에서의 노드 v22에서 실행되었습니다.&lt;/p&gt;
+&lt;h2 id=&quot;fastify-html&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#fastify-html&quot; aria-label=&quot;fastify html permalink&quot; class=&quot;heading-anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;fastify-html&lt;/h2&gt;
+&lt;p&gt;이상값(outlier)부터 시작하겠습니다. &lt;a href=&quot;https://github.com/gurgunday/ghtml&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;ghtml&lt;/a&gt;를 래핑하는 Fastify 플러그인 &lt;a href=&quot;https://github.com/mcollina/fastify-html&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;fastify-html&lt;/a&gt;는 초당 1088개의 요청을 전달합니다. 앞서 언급했듯이 이 설정은 특별한 구문이나 변환이 필요하지 않으므로 Vite가 필요하지 않다는 점에서 다른 모든 설정과 다릅니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 700px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/fe9efa8d86f1c364d0a101fe6a1d6302/5dded/2.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 24%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAFCAYAAABFA8wzAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAwUlEQVQY002Pu67EIAxEA35hIEqXImWKvf//hXNlI1ZbRLaOZw7KUc1QSwGrooiAiUDuqMzg3hF3FkFxzwy1hlJrsjoGKHLu3+5RVFEjEMI4hrA1VCJwayDVJQxxCOOxyDOjui+h2RIy4/j7fDDPE0SE3ntCd4eIQFVxzrl2kZzdHXPOvPWdE8lOCu/7xnVdGQgYs7nDzFapd6gZWmvJ9hdl++G7e7zvi+d5EsTLMccYKTLTZFHaLPb9B7EH290Q/wMzG2x87DMOBQAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;2&quot;
+        title=&quot;2&quot;
+        src=&quot;/static/fe9efa8d86f1c364d0a101fe6a1d6302/8c557/2.png&quot;
+        srcset=&quot;/static/fe9efa8d86f1c364d0a101fe6a1d6302/4edbd/2.png 175w,
+/static/fe9efa8d86f1c364d0a101fe6a1d6302/13ae7/2.png 350w,
+/static/fe9efa8d86f1c364d0a101fe6a1d6302/8c557/2.png 700w,
+/static/fe9efa8d86f1c364d0a101fe6a1d6302/e996b/2.png 1050w,
+/static/fe9efa8d86f1c364d0a101fe6a1d6302/2cefc/2.png 1400w,
+/static/fe9efa8d86f1c364d0a101fe6a1d6302/5dded/2.png 1588w&quot;
+        sizes=&quot;(max-width: 700px) 100vw, 700px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;fastify-html이 이 테스트에 기준점으로 추가되었습니다. 이 라이브러리는 다른 라이브러리의 고급 기능이 없는 단순한 HTML 템플릿 라이브러리의 래퍼에 불과하기 때문에 다른 모든 라이브러리와 제대로 비교하기는 어렵습니다. 더 단순하기 때문에 이미 더 나은 성능을 발휘할 것으로 예상했고, 그저 다른 모든 기능을 갖춘 라이브러리들이 얼마나 뒤처지는지를 알아보고 싶었습니다.&lt;/p&gt;
+&lt;p&gt;사용된 보일러 플레이트는 아래에서 확인할 수 있습니다. document 셸을 렌더링하는 레이아웃 함수를 등록하는 데 &lt;code class=&quot;language-text&quot;&gt;createHtmlFunction&lt;/code&gt;(@fastify/vite 모방)가 사용되는 것을 주목하세요.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;ts&quot;&gt;&lt;pre class=&quot;language-ts&quot;&gt;&lt;code class=&quot;language-ts&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; Fastify &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;fastify&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; fastifyHtml &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;fastify-html&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; createHtmlFunction &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;./client/index.js&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; server &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;Fastify&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;await&lt;/span&gt; server&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;register&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;fastifyHtml&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+server&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;addLayout&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;createHtmlFunction&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;server&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;참고로, 구식 &lt;a href=&quot;https://npmjs.com/package/ejs&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;EJS&lt;/a&gt;(&lt;a href=&quot;https://www.npmjs.com/package/@fastify/view&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;@fastify/view&lt;/a&gt; 기반)를 사용한 테스트도 추가했습니다. &lt;strong&gt;초당 443개의 요청을 처리할 수 있었습니다.&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&quot;vue&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#vue&quot; aria-label=&quot;vue permalink&quot; class=&quot;heading-anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Vue&lt;/h2&gt;
+&lt;p&gt;2위를 차지한 Vue는 &lt;strong&gt;초당 1028건의 요청을 처리하며&lt;/strong&gt;, 뛰어난 SSR 성능과 완전한 라이브러리 생태계를 원하는 경우 최고의 선택일 것입니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 700px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/fc648388983619158f20f7a81d4eb77f/64639/3.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 24.571428571428573%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAFCAYAAABFA8wzAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAvUlEQVQY002Oyw6DMAwEQxLbecAFCSTaE+L/v3GrdUnLIYqZ9U4IuVZEEaQYkc0QU0IWQawVKWek3r93KYilfHfMkFNyNpGxf++HTMgChaqYhtAKEktDrIqoiqz2z8wwUX4/SBberxeu64KqotUKEfHTW0MIwVlrzfNaq5fn3p2ZKlTE/5bMheu6Yts2LMvipVIKzMxvfnMewmfGIzcbGR8Mx3HgPE/s++7LvXcPKeEC53mef+JnRsZsyDh/AIOxbPEXufctAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;3&quot;
+        title=&quot;3&quot;
+        src=&quot;/static/fc648388983619158f20f7a81d4eb77f/8c557/3.png&quot;
+        srcset=&quot;/static/fc648388983619158f20f7a81d4eb77f/4edbd/3.png 175w,
+/static/fc648388983619158f20f7a81d4eb77f/13ae7/3.png 350w,
+/static/fc648388983619158f20f7a81d4eb77f/8c557/3.png 700w,
+/static/fc648388983619158f20f7a81d4eb77f/e996b/3.png 1050w,
+/static/fc648388983619158f20f7a81d4eb77f/2cefc/3.png 1400w,
+/static/fc648388983619158f20f7a81d4eb77f/64639/3.png 1568w&quot;
+        sizes=&quot;(max-width: 700px) 100vw, 700px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;동기식 서버 사이드 렌더링을 위해 사용된 Vue API는 &lt;a href=&quot;https://vuejs.org/api/ssr#rendertostring&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;renderToString()&lt;/code&gt;&lt;/a&gt;입니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;ts&quot;&gt;&lt;pre class=&quot;language-ts&quot;&gt;&lt;code class=&quot;language-ts&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; renderToString &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;vue/server-renderer&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;// ...&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;await&lt;/span&gt; server&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;register&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;FastifyVite&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;createRenderFunction&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; createApp &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      element&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;renderToString&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;createApp&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;svelte&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#svelte&quot; aria-label=&quot;svelte permalink&quot; class=&quot;heading-anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Svelte&lt;/h2&gt;
+&lt;p&gt;3위는 &lt;strong&gt;Svelte 5&lt;/strong&gt;(아직 출시 전)로, &lt;strong&gt;초당 968건의 요청을 처리하여&lt;/strong&gt; 매우 인상적인 성능을 보여주었습니다. 특히 풍부한 기능을 고려했을 때 더욱 놀라운 결과입니다.&lt;/p&gt;
+&lt;p&gt;Svelte는 자체적인 non-JSX &lt;a href=&quot;https://svelte.dev/docs/logic-blocks&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;templating 구문&lt;/a&gt;이 있으며 엔진이 매우 효율적이어서 성숙한 라이브러리 에코시스템을 갖춘 프레임워크가 필요하고 SSR 성능 저하를 원하지 않는 경우 탁월한 선택이 될 수 있습니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 700px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/75e0f596002800b6b0e8e280f574bd8b/2215f/4.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 25.142857142857146%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAFCAYAAABFA8wzAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAw0lEQVQY0z1OS67EIAwDEhKgotLMouItK/X+V/ST004XUYh/OGlrKGaQUqDuKKrQWlFag6hCxoDUCjELTM1R3KEiwZVab587RARJ3JFEUXKGmiGL3IEUMLCPe5NjkHtsFngDybEUA//WwnVdcHf01lBVYWbovSHnjI0NRTB6h5sFv8+J1lroiXF4U58+3y+O48C+7xHEYA4FcdPYe7wDezhqflh4Hn1aa+E8T3ATGGPcv/f+zpwzTPNpRg2H2LZtL0btP1/DbMoXFXyFAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;4&quot;
+        title=&quot;4&quot;
+        src=&quot;/static/75e0f596002800b6b0e8e280f574bd8b/8c557/4.png&quot;
+        srcset=&quot;/static/75e0f596002800b6b0e8e280f574bd8b/4edbd/4.png 175w,
+/static/75e0f596002800b6b0e8e280f574bd8b/13ae7/4.png 350w,
+/static/75e0f596002800b6b0e8e280f574bd8b/8c557/4.png 700w,
+/static/75e0f596002800b6b0e8e280f574bd8b/e996b/4.png 1050w,
+/static/75e0f596002800b6b0e8e280f574bd8b/2cefc/4.png 1400w,
+/static/75e0f596002800b6b0e8e280f574bd8b/2215f/4.png 1548w&quot;
+        sizes=&quot;(max-width: 700px) 100vw, 700px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;서버 사이드 렌더링을 위해 사용된 Svelte API는 Svelte 5의 &lt;a href=&quot;https://svelte-5-preview.vercel.app/docs/imports#svelte-server-render&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;render()&lt;/code&gt;&lt;/a&gt;입니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;ts&quot;&gt;&lt;pre class=&quot;language-ts&quot;&gt;&lt;code class=&quot;language-ts&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;await&lt;/span&gt; server&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;register&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;FastifyVite&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  root&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;meta&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;url&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token function&quot;&gt;createRenderFunction&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; Page &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; body&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; element &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;render&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;Page&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; element &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;render()&lt;/code&gt; 함수는 head 및 body의 속성도 반환합니다.&lt;/p&gt;
+&lt;h2 id=&quot;solid&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#solid&quot; aria-label=&quot;solid permalink&quot; class=&quot;heading-anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Solid&lt;/h2&gt;
+&lt;p&gt;4위는 &lt;strong&gt;초당 907건의 요청을 처리하는&lt;/strong&gt; &lt;a href=&quot;https://www.solidjs.com/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;SolidJS&lt;/a&gt;가 차지했습니다. Svelte보다 매우 근소한 차이로 뒤처집니다. Solid는 &lt;a href=&quot;https://www.youtube.com/watch?v=hw3Bx5vxKl0&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;React의 매우 유망한 대안이지만, 아직 생태계가 성숙하지 않은 상태입니다.&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;우리가 주목한 한 가지는 SolidJS가 실제로 수화(Hydration) 과정의 일부로 ID를 사용하는 데 어려움을 겪고 있다는 것입니다. Vue와 Solid 각각에서 생성된 마크업을 비교해 보세요.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;&amp;lt;div class=&quot;tile&quot; style=&quot;left: 196.42px; top: 581.77px&quot;&gt;
+&amp;lt;div data-hk=1c2397 class=&quot;tile&quot; style=&quot;left: 196.42px; top: 581.77px&quot;&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;이는 성능 저하의 상당 부분이 유선으로 전송해야 하는 이 추가 조각에서 발생한다는 것을 의미합니다. 하지만 저희는 수화 등의 클라이언트 기능을 활성화한 정상적인 실제 상황에서 프레임워크가 어떻게 작동하는지 정확히 검증하고 싶었습니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 700px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/fcab300d7a2ec982decd0b0a6b42fc14/2215f/5.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 25.142857142857146%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAFCAYAAABFA8wzAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAwklEQVQY012OzXKEMAyDSfyfwIUDpEdm+/6vqB2HLdP2pESSP3vhCFRVUK1gM1RmsAiqO4gI1BpIBJSZO1h19vmTVZF7Tm32F3LHwoxaClgNhegvMALEDFJFMZvDJcH/gCWPSuDXGPh+vWBmsNzMDBGBm6KUgrX3WQx3CDNUZHqqihYxNb3UWiuWfd9xHAe2bbtB7jP80Vz0vN3vf8Tj/+6lLmMMXNeF8zynmeDUdV3RWnu8LPfeEREzS808vYSml/oGSyhsvJSda2EAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;5&quot;
+        title=&quot;5&quot;
+        src=&quot;/static/fcab300d7a2ec982decd0b0a6b42fc14/8c557/5.png&quot;
+        srcset=&quot;/static/fcab300d7a2ec982decd0b0a6b42fc14/4edbd/5.png 175w,
+/static/fcab300d7a2ec982decd0b0a6b42fc14/13ae7/5.png 350w,
+/static/fcab300d7a2ec982decd0b0a6b42fc14/8c557/5.png 700w,
+/static/fcab300d7a2ec982decd0b0a6b42fc14/e996b/5.png 1050w,
+/static/fcab300d7a2ec982decd0b0a6b42fc14/2cefc/5.png 1400w,
+/static/fcab300d7a2ec982decd0b0a6b42fc14/2215f/5.png 1548w&quot;
+        sizes=&quot;(max-width: 700px) 100vw, 700px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;보일러 플레이트의 경우, @fastify/vite의 &lt;code class=&quot;language-text&quot;&gt;createRenderFunction&lt;/code&gt; 훅을 사용하여 Solid 컴포넌트 함수(&lt;code class=&quot;language-text&quot;&gt;createApp&lt;/code&gt;)를 캡처했습니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;ts&quot;&gt;&lt;pre class=&quot;language-ts&quot;&gt;&lt;code class=&quot;language-ts&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; renderToString &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;solid-js/web&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;// ...&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;await&lt;/span&gt; server&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;register&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;FastifyVite&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  root&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;meta&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;url&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token function&quot;&gt;createRenderFunction&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; createApp &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        element&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;renderToString&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;createApp&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;preact&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#preact&quot; aria-label=&quot;preact permalink&quot; class=&quot;heading-anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Preact&lt;/h2&gt;
+&lt;p&gt;React의 인기 동생으로 5위를 차지한 Preact는 &lt;strong&gt;초당 717건의 요청을 처리합니다.&lt;/strong&gt; Preact는 React와 매우 유사하지만, 더 빠르고 가볍게 만드는 &lt;a href=&quot;https://preactjs.com/guide/v10/differences-to-react/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;많은 차이점&lt;/a&gt;이 있습니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 700px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/6538f0885c26290df1abcacd23500023/2215f/6.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 25.142857142857146%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAFCAYAAABFA8wzAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAuklEQVQY02WO0YrFMAhEm2iMSehLoYXefSr9/2+cZcwGLuzTqDMe3bQ15FIgOUNrRRaBloLcGkQVMsZUeu4zUytUJDzurhkZm7ojcYFAM6QFdIdw6Q8cnlloeDlDep9Azswm8Ofzwfu+MDM4r4hEXQlICZ3AnOH8jsdU0ViXgsZPVSNrpSAReBwHzvPEvu8T6o5aa+jqW2v/PKp91dGbYbvvG8/z4LquGI4xItR7DxCVx5a3ZlTmvvPUXzW+bI1Ix092AAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;6&quot;
+        title=&quot;6&quot;
+        src=&quot;/static/6538f0885c26290df1abcacd23500023/8c557/6.png&quot;
+        srcset=&quot;/static/6538f0885c26290df1abcacd23500023/4edbd/6.png 175w,
+/static/6538f0885c26290df1abcacd23500023/13ae7/6.png 350w,
+/static/6538f0885c26290df1abcacd23500023/8c557/6.png 700w,
+/static/6538f0885c26290df1abcacd23500023/e996b/6.png 1050w,
+/static/6538f0885c26290df1abcacd23500023/2cefc/6.png 1400w,
+/static/6538f0885c26290df1abcacd23500023/2215f/6.png 1548w&quot;
+        sizes=&quot;(max-width: 700px) 100vw, 700px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;동기식 서버 사이드 렌더링에 사용되는 Preact API는 &lt;a href=&quot;https://www.npmjs.com/package/preact-render-to-string&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;renderToString()&lt;/code&gt;&lt;/a&gt;입니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;ts&quot;&gt;&lt;pre class=&quot;language-ts&quot;&gt;&lt;code class=&quot;language-ts&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; renderToString &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;preact-render-to-string&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;// ...&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;await&lt;/span&gt; server&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;register&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;FastifyVite&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  root&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;meta&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;url&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token function&quot;&gt;createRenderFunction&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; createApp &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        element&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;renderToString&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;createApp&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;react&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#react&quot; aria-label=&quot;react permalink&quot; class=&quot;heading-anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;React&lt;/h2&gt;
+&lt;p&gt;React 19 RC는 초당 572건의 요청을 처리하며 6위를 차지했습니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 700px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/04b19c61c15bcfb6fcdcb65700967201/29007/7.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 23.428571428571427%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAFCAIAAADKYVtkAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAqUlEQVQY00WNSZIDQQgD2ywCAa5j+9ye//9xoryE8wSESB0CuJmTagZASQe8SjLdzGY0Apma6ap7zQS5Y2aHAKbqmWKGCCXN3UmJMLNtAfYzaapWrZEfl9nx93wiYmbs1TzdIlIk3FV13e9yu2VEkaraVcyMiK4SkeN8PNZaAEhWFSK6O79UVWbyy750kwTQ3cd1Xed57s6Z7o6ItdZb1D8+c2bOTFW9Y/8bIQne609BkQAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;7&quot;
+        title=&quot;7&quot;
+        src=&quot;/static/04b19c61c15bcfb6fcdcb65700967201/8c557/7.png&quot;
+        srcset=&quot;/static/04b19c61c15bcfb6fcdcb65700967201/4edbd/7.png 175w,
+/static/04b19c61c15bcfb6fcdcb65700967201/13ae7/7.png 350w,
+/static/04b19c61c15bcfb6fcdcb65700967201/8c557/7.png 700w,
+/static/04b19c61c15bcfb6fcdcb65700967201/e996b/7.png 1050w,
+/static/04b19c61c15bcfb6fcdcb65700967201/2cefc/7.png 1400w,
+/static/04b19c61c15bcfb6fcdcb65700967201/29007/7.png 1600w&quot;
+        sizes=&quot;(max-width: 700px) 100vw, 700px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;동기식 서버 사이드 렌더링에 사용되는 React API는 &lt;a href=&quot;https://react.dev/reference/react-dom/server/renderToString&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;renderToString()&lt;/code&gt;&lt;/a&gt;입니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;ts&quot;&gt;&lt;pre class=&quot;language-ts&quot;&gt;&lt;code class=&quot;language-ts&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; renderToString &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;react-dom/server&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;// ...&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;await&lt;/span&gt; server&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;register&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;FastifyVite&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  root&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;meta&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;url&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token function&quot;&gt;createRenderFunction&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; createApp &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        element&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;renderToString&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;createApp&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;마무리&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%A7%88%EB%AC%B4%EB%A6%AC&quot; aria-label=&quot;마무리 permalink&quot; class=&quot;heading-anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;마무리&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;/055e8470fbcdbfa2fcdb64c360348f17/8.avif&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;💡 그렇다면 이 결과는 무엇을 의미할까요?&lt;/p&gt;
+&lt;p&gt;맨 위에는 fastify-html과 Vue가 있고 그 뒤를 Svelte와 Solid가 바짝 뒤쫓고 있습니다. 아마도 Vue와 Svelte가 SSR 성능과 생태계 성숙도 사이에서 가장 좋은 절충안을 제시할 것입니다.&lt;/p&gt;
+&lt;p&gt;앞서 언급했듯이, 본격적인 프런트엔드 프레임워크를 없애고 최소한의 템플릿을 고수함으로써 성능에서 어떤 이점을 얻을 수 있는지 보여주기 위해 fastify-html 테스트가 기준선으로 추가되었습니다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;🚀 한국어로 된 프런트엔드 아티클을 빠르게 받아보고 싶다면 &lt;a href=&quot;https://kofearticle.substack.com/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Korean FE Article&lt;/a&gt;을 구독해주세요!&lt;/p&gt;
+&lt;/blockquote&gt;</content:encoded></item><item><title><![CDATA[(번역) 대규모 SPA에서 유연하게 네트워크 데이터 미리 로딩하기]]></title><description><![CDATA[원문 : Flexible network data preloading in large SPAs 주의: 이 글은 클라이언트 사이드에서 렌더링하는 SPA의 성능을 개선하기 위한 맞춤형 솔루션에 중점을 둡니다. Next.js, Remix…]]></description><link>https://emewjin.github.io/spa-preloading/</link><guid isPermaLink="false">https://emewjin.github.io/spa-preloading/</guid><pubDate>Thu, 15 Aug 2024 00:00:00 GMT</pubDate><content:encoded>&lt;blockquote&gt;
 &lt;p&gt;원문 : &lt;a href=&quot;https://mmazzarolo.com/blog/2024-07-29-data-preloading-script/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Flexible network data preloading in large SPAs&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;blockquote&gt;
