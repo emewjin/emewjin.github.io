@@ -342,7 +342,8 @@ SPA를 구축하고 있다면 (아마도 하고 있겠지만 ([그리고 아마�
 
 이렇게 하면 워터폴 차트에 멋진 변화가 생깁니다.
 
-![](20.webp '그림 12. [구글 폰트 로딩 속도를 높일 때](https://csswizardry.com/2020/05/the-fastest-google-fonts/) `preconnect`가 미치는 영향입니다.')
+![](anim-preconnect.gif)
+![](small.png '그림 12. [구글 폰트 로딩 속도를 높일 때](https://csswizardry.com/2020/05/the-fastest-google-fonts/) `preconnect`가 미치는 영향입니다.')
 
 일반적으로 페이지에 중요한 출처(구글 글꼴, 맞고요, 구글 애널리틱스, 아닙니다)와 `<head>` 내에서 사전에 참조되지 않은 출처에 대해서만 `preconnect`를 하고 싶을 것입니다. `preconnect`를 [HTTP 헤더](https://andydavies.me/blog/2019/03/22/improving-perceived-performance-with-a-link-rel-equals-preconnect-http-header/)나 Early Hint로 배포하면 추가 점수를 얻을 수 있습니다!
 
