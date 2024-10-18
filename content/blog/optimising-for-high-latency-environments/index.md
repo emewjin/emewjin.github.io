@@ -353,11 +353,11 @@ SPA를 구축하고 있다면 (아마도 하고 있겠지만 ([그리고 아마�
 
 [최근에 이에 대해 글을 썼지만](https://csswizardry.com/2024/08/cache-grab-how-much-are-you-leaving-on-the-table/#prerender) 다시 한 번 알려드리자면 신중하게 접근해야 한다는 점을 잊지 마세요. `preconnect`, `prefetch`, `preload`, `prerender`와 같은 것에서는 언제나 적게 사용하는 것이 더 좋습니다.
 
-## 모든 것을 캐시하기
+## 모든 것을 캐싱하기
 
 **무언가를 하려거든, 가능하면 한 번만 하도록 하세요.**
 
-관련 업그레이드를 할 수 없고, 지연 시간을 피할 수 없는 경우, 지연 시간이 발생하는 상호 작용의 결과를 캐시하는 것이 좋습니다.
+관련 업그레이드를 할 수 없고, 지연 시간을 피할 수 없는 경우, 지연 시간이 발생하는 상호 작용의 결과를 캐싱하는 것이 좋습니다.
 
 ### HTTP/브라우저 캐시
 
@@ -371,7 +371,7 @@ CDN은 요청이 거기서 종료될 때에만 지연을 해결하는 데 도움
 
 ### 엄격한 전송 보안
 
-처음에 누군가가 여러분의 사이트에 `http`를 통해 접속하면, (바라건대) `https`로 리다이렉트될 가능성이 높습니다. [HTTP Strict Transport Security](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security)(HSTS)를 사용하도록 설정하면, 브라우저가 이 리다이렉션을 캐시하도록 할 수 있습니다. 즉, 방문자가 다음에 사이트를 방문할 때, 지연 시간이 발생하는 `3xx` 리다이렉션 없이 바로 보안이 된 URL로 접근할 수 있습니다.
+처음에 누군가가 여러분의 사이트에 `http`를 통해 접속하면, (바라건대) `https`로 리다이렉트될 가능성이 높습니다. [HTTP Strict Transport Security](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security)(HSTS)를 사용하도록 설정하면, 브라우저가 이 리다이렉션을 캐싱하도록 할 수 있습니다. 즉, 방문자가 다음에 사이트를 방문할 때, 지연 시간이 발생하는 `3xx` 리다이렉션 없이 바로 보안이 된 URL로 접근할 수 있습니다.
 
 HSTS는 다음과 같은 `Strict-Transport-Security` 응답 헤더를 통해 배포됩니다.
 
