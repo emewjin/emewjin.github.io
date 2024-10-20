@@ -2,7 +2,7 @@
 title: (번역) 지연 시간이 긴 환경 최적화하기
 date: 2024-10-18
 lastUpdated: 2024-10-18
-tags: [Web]
+tags: [Web, 번역, 성능개선]
 ---
 
 > 원문: [Optimising for High Latency Environments](https://csswizardry.com/2024/09/optimising-for-high-latency-environments)
