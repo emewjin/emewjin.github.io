@@ -203,7 +203,7 @@ export const Content = styled('section', {
   figcaption: {
     textAlign: 'center',
     margin: '0.5rem 0 1rem 0',
-    color: '$text100',
+    color: '$text200',
     fontSize: '0.875rem',
     p: {
       display: 'flex',
