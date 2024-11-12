@@ -3,7 +3,7 @@ title: (번역) SSR 성능 대결
 description:
 date: 2024-09-24
 lastUpdated: 2024-09-24
-tags: [SSR]
+tags: [SSR, 번역]
 ---
 
 > 원문 : [An SSR Performance Showdown](https://blog.platformatic.dev/ssr-performance-showdown)
