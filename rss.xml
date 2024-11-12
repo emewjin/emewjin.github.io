@@ -1,4 +1,239 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[emewjin.log RSS Feed]]></title><description><![CDATA[잘못된 내용 혹은 더 좋은 방법이 있으면 언제든지 알려주세요 XD]]></description><link>https://emewjin.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Sun, 20 Oct 2024 01:55:50 GMT</lastBuildDate><item><title><![CDATA[(번역) 지연 시간이 긴 환경 최적화하기]]></title><description><![CDATA[원문: Optimising for High Latency Environments 지난주에 CrUX에 새롭게 포함된 RTT…]]></description><link>https://emewjin.github.io/optimising-for-high-latency-environments/</link><guid isPermaLink="false">https://emewjin.github.io/optimising-for-high-latency-environments/</guid><pubDate>Fri, 18 Oct 2024 00:00:00 GMT</pubDate><content:encoded>&lt;blockquote&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[emewjin.log RSS Feed]]></title><description><![CDATA[잘못된 내용 혹은 더 좋은 방법이 있으면 언제든지 알려주세요 XD]]></description><link>https://emewjin.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 12 Nov 2024 12:20:18 GMT</lastBuildDate><item><title><![CDATA[(번역) 자바스크립트 모노레포의 깃 용량을 94% 줄인 방법]]></title><description><![CDATA[원문: How we shrunk our Javascript monorepo git size by 94% 이건 낚시가 아닙니다. 진짜로 해냈습니다! 우리는 마이크로소프트에서 1JS…]]></description><link>https://emewjin.github.io/git-repo-size/</link><guid isPermaLink="false">https://emewjin.github.io/git-repo-size/</guid><pubDate>Tue, 12 Nov 2024 00:00:00 GMT</pubDate><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;원문: &lt;a href=&quot;https://www.jonathancreamer.com/how-we-shrunk-our-git-repo-size-by-94-percent/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;How we shrunk our Javascript monorepo git size by 94%&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;이건 낚시가 아닙니다. 진짜로 해냈습니다! 우리는 마이크로소프트에서 1JS라고 부르는 &lt;em&gt;대규모&lt;/em&gt; 자바스크립트 모노레포에서 작업하고 있습니다. 이는 단순한 GB 크기의 문제가 아니라, 코드의 양과 기여된 작업의 규모 면에서도 방대한 양을 자랑합니다. 최근에는 월간 활동 사용자가 1,000명을 넘었고, 약 2,500개의 패키지와 2천만 줄의 코드가 있습니다! 제가 최근에 저장소를 복제했을 때 크기가 무려 178GB였습니다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/c09ec298c088c044fe3c4be8fdb5b392/1.gif&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;이렇게 큰 저장소는 여러 문제가 있습니다. 유럽에 있는 팀원들 중에서는 이 크기 때문에 저장소를 복제조차 할 수 없는 경우도 있습니다.&lt;/p&gt;
+&lt;p&gt;도대체 어떻게 이런 일이 발생했을까요?&lt;/p&gt;
+&lt;h2 id=&quot;첫-번째-교훈&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%B2%AB-%EB%B2%88%EC%A7%B8-%EA%B5%90%ED%9B%88&quot; aria-label=&quot;첫 번째 교훈 permalink&quot; class=&quot;heading-anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;첫 번째 교훈&lt;/h2&gt;
+&lt;p&gt;몇 년 전 이 저장소에 처음 참여했을 때, 몇 개월 만에 저장소가 점점 커지고 있다는 것을 느꼈습니다. 처음 복제할 때는 1~2GB 정도였지만, 몇 달 후에는 이미 약 4GB에 도달했죠. 정확히 왜 그런지 알기 어려웠습니다.&lt;/p&gt;
+&lt;p&gt;그때 &lt;code class=&quot;language-text&quot;&gt;git-sizer&lt;/code&gt;라는 도구를 사용해 보니, 몇 가지 blob이 너무 크다는 것을 알 수 있었습니다. 대형 blob은 일반적으로 누군가 실수로 바이너리 파일을 커밋할 때 발생합니다. 이는 커밋 할 때 크기 제한을 설정하는 것 말고는 별다른 방법이 없습니다. 이를 방지하기 위해 Azure DevOps에서는 커밋 파일 크기를 제한하는 기능을 제공합니다. 하지만 파일이 이미 커밋된 후에는 기록에 남아있는 상태라 삭제하기 어려웠습니다.&lt;/p&gt;
+&lt;p&gt;두 번째로, 그 도구는 우리가 삭제하지 않았던 &lt;a href=&quot;https://github.com/microsoft/beachball/?ref=jonathancreamer.com&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Beachball 변경 파일&lt;/a&gt;에 대해 경고하였습니다.
+우리는 이 파일들을 &lt;a href=&quot;https://github.com/changesets/changesets?ref=jonathancreamer.com&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Changesets&lt;/a&gt;의 동작 방식과 유사하게 사용하여, 패키지의 semver 범위를 자동으로 업데이트 하는 &lt;a href=&quot;https://github.com/semantic-release/semantic-release?ref=jonathancreamer.com&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;semantic-release&lt;/a&gt;와 유사한 목적을 달성하고자 하였습니다.&lt;/p&gt;
+&lt;p&gt;한 폴더에 이런 파일들이 최대 4만 개까지 쌓이면서, 새 파일을 추가할 때마다 큰 트리 객체가 생성되는 문제가 발생했습니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 700px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/bad8f57060e380e8af80a8e6e6c091f2/9cab2/2.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 17.142857142857142%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAADCAIAAAAcOLh5AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAkElEQVQI1yWNXQvCMAwA977puqZJmrbp1xxuiCL+/x8n07c7OLjB+WxJ83rcH+9QbqFsxgVLiWMHSgtGJxlILSdLCj7DH1iBdLBnkbTv2/ES7V67cQEocWgcK/iMkkkqSkGpHBtKcadmwDQ4/p37fjw/2u4oZZwRpUhaOTZteygbhXpZeDI0zTQZGg1drQdKX6h0Ei3hzW9FAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;2&quot;
+        title=&quot;2&quot;
+        src=&quot;/static/bad8f57060e380e8af80a8e6e6c091f2/8c557/2.png&quot;
+        srcset=&quot;/static/bad8f57060e380e8af80a8e6e6c091f2/4edbd/2.png 175w,
+/static/bad8f57060e380e8af80a8e6e6c091f2/13ae7/2.png 350w,
+/static/bad8f57060e380e8af80a8e6e6c091f2/8c557/2.png 700w,
+/static/bad8f57060e380e8af80a8e6e6c091f2/9cab2/2.png 864w&quot;
+        sizes=&quot;(max-width: 700px) 100vw, 700px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;그래서 첫 번째로 배운 교훈은 바로…&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;하나의 폴더에 수천 개의 파일을 쌓아 두지 말자.&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;이를 위해 우리는 두 가지 방법을 직접 구현해 도입했습니다. 하나는 &lt;a href=&quot;https://github.com/microsoft/beachball/pull/584?ref=jonathancreamer.com&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Beachball에 대한 풀 리퀘스트&lt;/a&gt;를 제출한 것으로, 여러 패키지의 변경 사항을 하나의 변경 파일로 처리하는 것입니다.&lt;/p&gt;
+&lt;p&gt;두 번째로는 변경 파일을 주기적으로 자동 정리하는 파이프라인을 작성하여 이 폴더가 너무 커지지 않도록 했습니다.&lt;/p&gt;
+&lt;p&gt;하하! 이렇게 깃이 비대해진 문제를 해결했습니다!&lt;/p&gt;
+&lt;h2 id=&quot;두-번째-교훈&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%91%90-%EB%B2%88%EC%A7%B8-%EA%B5%90%ED%9B%88&quot; aria-label=&quot;두 번째 교훈 permalink&quot; class=&quot;heading-anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;두 번째 교훈&lt;/h2&gt;
+&lt;p&gt;&lt;figure class=&quot;gatsby-resp-image-figure&quot; style=&quot;&quot;&gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 500px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/1efdb176c1836446bff45b70109f1c03/0b533/3.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 116.00000000000001%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAXCAIAAACEf/j0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAFdElEQVQ4yxXCaUxTdwAA8P97LS0gLaWl1+vr63uvJ6UHLYVeA+RQB0JA5ZigIALlZkpFkaN1UFAOAVFcJx5RcRkiICrqHCJgvLcxon5AGFPnNRMXFrNsXxYWf/mBIDZGD0Crduw5d2agump3XZ2n97C3ra2rvb27amd9k6e9q6s3e1tpZ693x+7G5rbuI97jaZu2MrgyBhIKmAIl8BV4PO0Lz+Z72ru+Oey9dvXa5OStGzenT41MTNy+c27wQn5J9ezs3Pmh4clbU/fuP0hN3YwIFQiuA2wigsOXI3ypngy3axKiIjP1xlRUn2TPdEVkHdw7PF994gqGm0QKK0sVxVBGM+V2FA/DUTUfVQMUN7KEISy+isQ0iWHRJXFrm1LiKjZlx2/2xO+8WDn6r3t8SSK1sKR2uvQzP6k9gLRyJBF8VIuiGhDMkzI5YgFPSaJEVmJSzrqYLZHKfdlZlT3TJef/7n680nn7V1Rm50gMPMKI4Dql3KpTrybkNh4WBlSoSiVUKVA1myVWpdQmtT4s+HrJNbPiur2S0jWffuxNzfACV2plScJZqI6PGWSkWU6aVJroYIkOiHEDXxGDhK7nmHKZCbUW9721++cS3PdiGu+ry4dNtXej2ufh9D5a1jFqptcvqckvupxh2CBV2oLYQsBIcNLTOuAML5w7CAov853TqqIBWe5xZcmgvHTE5p4V7n8OGhconpdQ2x9w1zLcvUzxLNLzTlLNW4H/lu/gohs+zjnK7idQwwK9+bfQmkld9XVl1Vi4c9J8+D04+BrufAV1vIA7XsJd7+FDy3DvR7jnL7hpEfhu/RZ2jEOVU5DzIVz/FBx4x9/7SF85ovnyavz+BUHvMuj6QOn+AHW8hVpfQJ4lyLMINS9CrqfQrrsApHRAGf1QzhkobxAqGgeFV/gVo6bKwfj6qe0DLwR1k6BgDCq+DBxjn5aMg8oJyHkH2jkDOS4CiiGHYimjRNfCsQ3UNa10a7nCmq5LcCQUHcxp7I2paIUjC31tDh+7w8deTPusjBZTQY2rpsZVU2LKAIcID8TC/DGjL2FZRVqZhFkuM6uxECWhxyRhYjICQXVCsRHFjCJEI0S0XJGOi+h5Qh1PpAcIbuDgJjoeSScs/jL7KjxSSppCJboQiR7H9Fw8XGFIRFWxAixShGhEIg0iVIv4KkwUioo1IFgcxiQtNMLig5v9ZHZ/whyMm/iolkR1uNiQ6uw/+cvvcRtLcVQvJo0czMARaTgidZBYzUCUgC0xMjBjIGHi4QaWWCuRmUmZRaawySQGVWxJhndp7O1KdXkjKdKKcS1LpPLjyajBBGDjgEOAQGEISyAPEsiChXIxHqZU2NQKuyI0WiQNV2e3WVueFI8uF1W5EaFUgIQQpF5C6PlICFek5CAK4KdN89dv8tWm+svjguRRLFTHFIbghF5uTk/uebzl0IyvKpEqUDKDMQYXZ/KkTC7J4uICPoEKSABln4bzhuDCS5TtF2g5/bQcLy2thWXL12zryzj+qn7o2drsYgafDOSgASxkFRsN4GC+QYhfEBLIkwC4YAQu/x6ueQQ3PYfa/wQ9/4Cej6DjHbNhVlNzM7nz59gTT0H+KSjZDdY3UjI8tIwmWnqTz0a3zwYXgDf3wXkn4IIB4BhiVV/Sua7I3T/IW6Z09aPK7CZz2VFN3ZjafVVTe97aOMgsPQu2n4YLz0D5p6Bt/QDE7wJr6qjr3WD13nU1R/5bftN/dvDS+PXX83OujqPT0zMPpieezf348NFP7vYjspxmsKYO/rz+08QGwI5MZ1u/oBvTgWYjklBQ7DoUV7QvpuirXFefLd+dsac703kg29mSXN6sTK1ixJUBWwlkd0B2B2xz/A8ISrKtgt/JRwAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;3&quot;
+        title=&quot;깃이 비대한 문제를 해결했나 했더니… 아니었습니다.&quot;
+        src=&quot;/static/1efdb176c1836446bff45b70109f1c03/0b533/3.png&quot;
+        srcset=&quot;/static/1efdb176c1836446bff45b70109f1c03/4edbd/3.png 175w,
+/static/1efdb176c1836446bff45b70109f1c03/13ae7/3.png 350w,
+/static/1efdb176c1836446bff45b70109f1c03/0b533/3.png 500w&quot;
+        sizes=&quot;(max-width: 500px) 100vw, 500px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;
+    &lt;figcaption class=&quot;gatsby-resp-image-figcaption&quot;&gt;&lt;p&gt;깃이 비대한 문제를 해결했나 했더니… 아니었습니다.&lt;/p&gt;&lt;/figcaption&gt;
+  &lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;우리의 대규모 버전 관리 흐름에선 패키지의 실제 버전을 저장하는 &lt;code class=&quot;language-text&quot;&gt;main&lt;/code&gt;의 미러된 버전인 &lt;code class=&quot;language-text&quot;&gt;versioned&lt;/code&gt;이 유지됩니다. 이를 통해 &lt;code class=&quot;language-text&quot;&gt;main&lt;/code&gt;이 깃 충돌에서 자유로워지고, 어떤 깃 커밋이 NPM 패키지를 통해 배포하는 semver 버전과 일치하는지 정확히 볼 수 있습니다. (이것은 다른 블로그 게시물이 필요하지만, 넘어가겠습니다…)&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;versioned&lt;/code&gt; 브랜치의 크기가 점점 더 커지고 있기에 복제하기 어려워지고 있다는 것을 알게되었습니다. 그러나 이전에 언급한 변경 파일 문제는 이미 해결했었고, 그 &lt;code class=&quot;language-text&quot;&gt;versioned&lt;/code&gt; 브랜치에 들어가는 유일한 커밋은 &lt;code class=&quot;language-text&quot;&gt;CHANGELOG.md&lt;/code&gt;와 &lt;code class=&quot;language-text&quot;&gt;CHANGELOG.json&lt;/code&gt; 파일에 대한 추가뿐이었습니다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/33e1c891666ade886aabf1a49efc4d9e/4.gif&quot; alt=&quot;&quot; title=&quot;턱을 긁적이는 배트맨&quot;&gt;&lt;/p&gt;
+&lt;p&gt;시간이 지나면서, 우리의 저장소는 약간 느린 속도로 성장하긴 했지만 여전히 계속 성장했습니다. 그러나 이 성장이 단지 규모 때문인지, 아니면 완전히 다른 이유 때문인지 알기 어려웠습니다. 우리는 2021년 이후로 매년 수십만 줄의 코드를 추가하고 수백 명의 개발자를 추가했기 때문에 자연히 성장한 것이라고 주장 할 수 있었습니다. 그러나 우리가 마이크로소프트에서 가장 큰 모노레포 중 하나인 Office 모노레포의 성장 속도를 초과했다는 것을 깨달았을 때, 무언가가 잘못되었다는 것을 깨달았습니다!&lt;/p&gt;
+&lt;p&gt;그렇게 우리는 지원 요청을 했습니다…&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;./5&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Office 모노레포 크기 문제 때문에 &lt;a href=&quot;https://github.blog/open-source/git/bring-your-monorepo-down-to-size-with-sparse-checkout/?ref=jonathancreamer.com&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;git shallow checkout&lt;/a&gt;, &lt;a href=&quot;https://github.blog/open-source/git/make-your-monorepo-feel-small-with-gits-sparse-index/?ref=jonathancreamer.com&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;git sparse index&lt;/a&gt;와 같은 &lt;a href=&quot;https://devblogs.microsoft.com/devops/exploring-new-frontiers-for-git-push-performance/?ref=jonathancreamer.com&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;다양한 기능&lt;/a&gt;을 만든 사람이 잠시 깃허브에 머물면서 &lt;strong&gt;세계&lt;/strong&gt;에 그 기능을 선보인 후 우리 조직에 다시 합류했습니다.&lt;/p&gt;
+&lt;p&gt;그가 살펴보더니, 이 성장 속도에 뭔가 확실히 문제가 있다는 것을 바로 알아챘습니다. 버전 관리된 브랜치를 가져오면 CHANGELOG.md와 CHANGELOG.json 파일만 변경되었음에도, 125GB의 &lt;em&gt;추가&lt;/em&gt; 깃 데이터를 가져오고 있었습니다?! &lt;strong&gt;어떻게 이런 일이?!&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;자, 깃을 깊게 디깅한 끝에, 리눅스 토발즈(들어보신 적 있을거예요🤷‍♂️)가 커밋한 &lt;a href=&quot;https://github.com/git/git/commit/ce0bd64299ae148ef61a63edcac635de41254cb5?ref=jonathancreamer.com#diff-d3b31a15a4dfd94e1201658d9bfc496a8c606d1ae7083cdbbc05e55c615f89ddL495&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;오래된 패킹 코드&lt;/a&gt;가 파일을 압축하여 차이점을 푸시하기 전에 파일 이름의 마지막 16자만 검사하고 있었다는 사실이 밝혀졌습니다. 참고로, &lt;em&gt;보통&lt;/em&gt; 깃은 변경된 파일의 &lt;em&gt;차이점만&lt;/em&gt; 푸시하는데, 이 패킹 문제로 인해 깃은 두 개의 다른 패키지에서 CHANGELOG.md 파일을 비교하고 있었습니다! Stolee가 &lt;a href=&quot;https://lore.kernel.org/git/pull.1785.git.1725890210.gitgitgadget@gmail.com/?ref=jonathancreamer.com&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;여기서&lt;/a&gt; 이 문제를 잘 설명해줍니다.&lt;/p&gt;
+&lt;p&gt;예를 들어, &lt;code class=&quot;language-text&quot;&gt;repo/packages/foo/CHANGELOG.json&lt;/code&gt;을 변경하면, 깃이 푸시를 준비할 때 &lt;code class=&quot;language-text&quot;&gt;repo/packages/bar/CHANGELOG.json&lt;/code&gt;과의 차이점을 생성하고 있었습니다! 이런 경우 우리는 많은 경우에 파일 전체를 다시 푸시하고 있었고, 경우에 따라 파일 하나당 수십 MB의 크기를 차지할 수도 있었습니다. 우리 저장소의 규모를 생각해보면, 이게 얼마나 큰 문제인지 상상이 될 것입니다.&lt;/p&gt;
+&lt;p&gt;그래서 우리는 깃이 저장소의 패킹 파일을 더 잘 압축하여 저장소의 크기를 줄일 수 있도록 &lt;code class=&quot;language-text&quot;&gt;git repack -adf --window=250&lt;/code&gt; 명령어로 더 큰 window를 사용해 저장소를 다시 패킹하도록 했습니다. 이는 저장소의 크기를 상당히 줄여주었지만, 여전히 더 개선할 여지가 있습니다!&lt;/p&gt;
+&lt;p&gt;이 PR &lt;a href=&quot;https://github.com/git-for-windows/git/pull/5171&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;https://github.com/git-for-windows/git/pull/5171&lt;/a&gt; 은 커밋 이력을 추적하는 기본 방식 대신, 깃 경로를 직접 탐색하여 저장소를 패킹하는 새로운 방법을 추가했습니다.&lt;/p&gt;
+&lt;p&gt;결과는 놀라웠습니다…&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 678px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/5747a31fa93645f09c8dc957a3884fc5/38cea/6.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 32%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAGCAYAAADDl76dAAAACXBIWXMAAA7DAAAOwwHHb6hkAAABN0lEQVQY011Ry4rCQBDMv+RhQiIqa4zxhWGyeZCAlz3sxduKEiJ6UXwh6sEkkH8u6YYVdg9FV88U3VUzkm3bcBwHiqJA0zQ0Gg0YhsHQdZ3730r3xAmqqv7REqczqdls4nA44Ha7Ybfb4fl8oqoqrmVZMuq6xv1+x/V6ffPj8fjWFUWBx+OB0WgESZZlzOdzZHmOn8WCh+73e2w2G6xWK5xOJx6UZRm22y0ulwvyPGecz2es12ssl0u+HwwGkCiG73kYOg7sTgdD18VnEMAXAqZpYjKZIAgCtFottNtt5q7rgpIJIdDv9zkyaekpJFXTEAuB79kMX0mCNI4RxTHCMOQIURQhSRJMp1NGmqbwPA/j8Zi57/vsjLS0hB1+dLuwyWGvxxvpkwgkJDfEqVJPnDT/OcGyLLwAecPfo7u8DYsAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;6&quot;
+        title=&quot;6&quot;
+        src=&quot;/static/5747a31fa93645f09c8dc957a3884fc5/38cea/6.png&quot;
+        srcset=&quot;/static/5747a31fa93645f09c8dc957a3884fc5/4edbd/6.png 175w,
+/static/5747a31fa93645f09c8dc957a3884fc5/13ae7/6.png 350w,
+/static/5747a31fa93645f09c8dc957a3884fc5/38cea/6.png 678w&quot;
+        sizes=&quot;(max-width: 678px) 100vw, 678px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;어제 저의 컴퓨터에서 마이크로소프트의 깃 포크를 사용해 새로운 버전의 깃을 시도하기 위해 새로운 git clone을 실행했습니다(깃 버전 2.47.0.vfs.0.2)…&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 700px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/11d4fe17afb4387f372a784d78774334/cda19/7.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 8%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAACCAYAAABYBvyLAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAiElEQVQI1yWM2wqCQAAF/YMio5cuhA/d1KTcxU3ItDY0S8UQ6v9/ZMLtcc4Zxip3Gc1e04mSl5vxURWdfNIec75xTXvIzfYOCzr5dyr/xmUmSKYh8SQgnUu0Exu2muBOsTqb6HWpjNxz7WsT6H8TEyXaOfFYJ6QLiRhsiGwPOdwSjVzU2EfZHj+gV0L9gYws4wAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;7&quot;
+        title=&quot;7&quot;
+        src=&quot;/static/11d4fe17afb4387f372a784d78774334/8c557/7.png&quot;
+        srcset=&quot;/static/11d4fe17afb4387f372a784d78774334/4edbd/7.png 175w,
+/static/11d4fe17afb4387f372a784d78774334/13ae7/7.png 350w,
+/static/11d4fe17afb4387f372a784d78774334/8c557/7.png 700w,
+/static/11d4fe17afb4387f372a784d78774334/cda19/7.png 785w&quot;
+        sizes=&quot;(max-width: 700px) 100vw, 700px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;그리고 새로운 &lt;code class=&quot;language-text&quot;&gt;git repack -adf --path-walk&lt;/code&gt;를 실행한 후…&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 353px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/c7a3f46c29f681793b485a0be9b2fa10/6c115/8.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 22.285714285714285%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAECAYAAACOXx+WAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAA6klEQVQY03WObU+CYBSG+WL5klJba2s5CEQQEXkKkGRlJMwMlfWiW1v9/79xNZ4+tj5cH865d677KJ6rs9ITtt4T4nRMoI7wu2Pu+wmZlrDWZqy1mMKYE5953J37RKpLehEQdh0idcRST+T+5sRGsYaXlG7G9+MHcW/E9NhAtEzeb5/ZTXI2fk7pLammBVGdN02Jf2QQtAYETZNJ41re1bMSujZZP2Yfl+z8HK+hIzpDXsWKF2dB5ecc4lIK91FJYaZSKDoWov0XJTJsikHK18MbYc+RLXVb/XUt+JxXUnyYbVhchb+ytvUvP5T6eU9TZU1NAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;8&quot;
+        title=&quot;8&quot;
+        src=&quot;/static/c7a3f46c29f681793b485a0be9b2fa10/6c115/8.png&quot;
+        srcset=&quot;/static/c7a3f46c29f681793b485a0be9b2fa10/4edbd/8.png 175w,
+/static/c7a3f46c29f681793b485a0be9b2fa10/13ae7/8.png 350w,
+/static/c7a3f46c29f681793b485a0be9b2fa10/6c115/8.png 353w&quot;
+        sizes=&quot;(max-width: 353px) 100vw, 353px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;엄청났습니다. 178GB에서 5GB로 줄어들었습니다. 😱&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/e92677f0d91a98c1adef86a9c3357926/9.gif&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;다른 새로운 설정 옵션도 추가되어, &lt;code class=&quot;language-text&quot;&gt;git push&lt;/code&gt;시 올바른 유형의 델타가 생성되도록 보장할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;git config --global pack.usePathWalk true&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;이렇게 하면 &lt;code class=&quot;language-text&quot;&gt;git push&lt;/code&gt; 명령어가 정상적으로 압축하게 할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;이제 깃 2.47.0.vfs.0.2 버전을 사용하는 모든 개발자는 로컬에 복제된 저장소를 재패킹할 수 있고, 이 깃 경로를 직접 탐색하는 알고리즘을 사용하여 저장소의 크기 증가를 억제할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;깃허브에서는 주기적으로 리패킹(re-packing)과 깃 가비지 컬렉션이 자동으로 실행되지만, 깃허브의 기본 패킹 방식으로는 CHANGELOG.md나 CHANGELOG.json 같은 파일, 또는 16자 이상의 이름을 가지며 자주 수정되는 파일(예: i18n 대용량 문자열 파일 등)의 델타를 올바르게 계산하지 못할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;우리가 사용하는 Azure DevOps는 아직 이런 재패킹을 지원하지 않습니다. 그래서 서버 측에서도 저장소의 크기를 줄일 수 있게 작업 중입니다.&lt;/p&gt;
+&lt;p&gt;이러한 변경 사항들은 모두 깃의 업스트림 코드에도 반영될 예정입니다! 오픈소스 만세!&lt;/p&gt;
+&lt;h2 id=&quot;마무리&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%A7%88%EB%AC%B4%EB%A6%AC&quot; aria-label=&quot;마무리 permalink&quot; class=&quot;heading-anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;마무리&lt;/h2&gt;
+&lt;p&gt;대규모 모노레포에서 작업 중이고, 반복적으로 업데이트되는 CHANGELOG.md 파일이나 상대적으로 긴 이름(16자 이상)의 파일을 가지고 있다면, 이 경로 탐색 방식에 주목할 필요가 있습니다.&lt;/p&gt;
+&lt;p&gt;또한 새로운 &lt;code class=&quot;language-text&quot;&gt;git survey&lt;/code&gt; 커맨드를 사용하여 디스크 크기별 상위 파일, 압축되지 않은 크기별 상위 디렉터리 또는 압축되지 않은 크기별 상위 파일과 같은 다양한 새로운 휴리스틱을 확인할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 465px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/4920401c2fcfca4e66da9e0e66f9d453/9ff85/10.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 61.142857142857146%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAMCAYAAABiDJ37AAAACXBIWXMAAA7DAAAOwwHHb6hkAAAB+UlEQVQoz6WTaXfSUBCG+SQuR23V2haXslWEkpQlkIQsLAlLoexBCi1Vj/7/v/B63kkF9PjND3PuncydZ96ZexNRHyfxv3b5JIXC07SsEee0COe0BCdW2q42vz349l9x+x/nKwfZLTRSfpFB+XkGhWdpND5UMFI8Wa8vmminLLTiuuw7aQvdcxvuuzKGiodhvoV+toFO2oZ9UoQaTYZAJnsJE36yhvp7Dc2PVVn5vXWmI+ygKEA/aYoi67gAP2HCixtop2owXueldQGy2nf/Bj86awSVAZbmSFT0s3V80a+hvfwsKjf1ADe1MfRXF1JwU59L/M6dSXElmgiBk8s2bp0pNo0AY9XHtNQVYO+Tg1m5h8pBThJWtbHEqIbAQOtjbU/F6G+Bi+pAgF+bC0wKHVEpwIyLabGL6mFOEtbWBEGlL0BextIYirqVNf4TONf6ou6bt8Ss1JMkHuDAuecNUuF9cyEFCHRjJcmhOo6heabvgGyDgfvGAiPVFygHz5YJYMssQOBI8VE9DGe4sia4dWYyc55XfwMp+WfvTiqyZQLdWBmDXANz7UouofZWlfaYbLxRYB6pCEc1k1HxBeQfxUMgHb4z3jb3VMYEqmjFDbll2lXGhZcwRDF9vlGe5azNI2X3bPgg2T9t/1fa39MkHt356kMObf/X+wWPO31HQnwmYwAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;10&quot;
+        title=&quot;10&quot;
+        src=&quot;/static/4920401c2fcfca4e66da9e0e66f9d453/9ff85/10.png&quot;
+        srcset=&quot;/static/4920401c2fcfca4e66da9e0e66f9d453/4edbd/10.png 175w,
+/static/4920401c2fcfca4e66da9e0e66f9d453/13ae7/10.png 350w,
+/static/4920401c2fcfca4e66da9e0e66f9d453/9ff85/10.png 465w&quot;
+        sizes=&quot;(max-width: 465px) 100vw, 465px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;이러한 휴리스틱은 경로 탐색 방식이 여러분의 저장소 크기에 어떤 영향을 줄지 가늠하는 데 도움을 줄 것입니다.&lt;/p&gt;
+&lt;p&gt;무엇보다, 우리의 목표가 마이크로소프트에서 대규모 저장소를 효율적으로 관리하는 솔루션을 만드는 데 그치지 않고, 이 솔루션을 전 세계에 전한다는 점에 대해 정말 흥미롭고 기쁩니다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;🚀 한국어로 된 프런트엔드 아티클을 빠르게 받아보고 싶다면 &lt;a href=&quot;https://kofearticle.substack.com/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Korean FE Article&lt;/a&gt;을 구독해주세요!&lt;/p&gt;
+&lt;/blockquote&gt;</content:encoded></item><item><title><![CDATA[(번역) 지연 시간이 긴 환경 최적화하기]]></title><description><![CDATA[원문: Optimising for High Latency Environments 지난주에 CrUX에 새롭게 포함된 RTT…]]></description><link>https://emewjin.github.io/optimising-for-high-latency-environments/</link><guid isPermaLink="false">https://emewjin.github.io/optimising-for-high-latency-environments/</guid><pubDate>Fri, 18 Oct 2024 00:00:00 GMT</pubDate><content:encoded>&lt;blockquote&gt;
 &lt;p&gt;원문: &lt;a href=&quot;https://csswizardry.com/2024/09/optimising-for-high-latency-environments&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Optimising for High Latency Environments&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;지난주에 CrUX에 새롭게 포함된 RTT 데이터 항목에 대해 &lt;a href=&quot;https://www.linkedin.com/feed/update/urn:li:activity:7240018342948835328/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;링크드인에 짧은 업데이트&lt;/a&gt;를 게시했습니다. 간단히 읽어보시면 도움이 될 것입니다.&lt;/p&gt;
