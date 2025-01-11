@@ -1,4 +1,842 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[emewjin.log RSS Feed]]></title><description><![CDATA[잘못된 내용 혹은 더 좋은 방법이 있으면 언제든지 알려주세요 XD]]></description><link>https://emewjin.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 12 Nov 2024 12:20:18 GMT</lastBuildDate><item><title><![CDATA[(번역) 자바스크립트 모노레포의 깃 용량을 94% 줄인 방법]]></title><description><![CDATA[원문: How we shrunk our Javascript monorepo git size by 94% 이건 낚시가 아닙니다. 진짜로 해냈습니다! 우리는 마이크로소프트에서 1JS…]]></description><link>https://emewjin.github.io/git-repo-size/</link><guid isPermaLink="false">https://emewjin.github.io/git-repo-size/</guid><pubDate>Tue, 12 Nov 2024 00:00:00 GMT</pubDate><content:encoded>&lt;blockquote&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[emewjin.log RSS Feed]]></title><description><![CDATA[잘못된 내용 혹은 더 좋은 방법이 있으면 언제든지 알려주세요 XD]]></description><link>https://emewjin.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Sat, 11 Jan 2025 09:58:42 GMT</lastBuildDate><item><title><![CDATA[실제 코드에서 리액트 컴파일러의 성능]]></title><description><![CDATA[원문: How React Compiler Performs on Real Code 리액트 컴파일러가 초기 로드 및 인터랙션 성능에 미치는 영향을 수치와 함께 살펴봅니다. 이 글에서 사용된 수치는 실제 앱에서 측정되었습니다. 유튜브: How React…]]></description><link>https://emewjin.github.io/react-compiler-performs-on-real-code/</link><guid isPermaLink="false">https://emewjin.github.io/react-compiler-performs-on-real-code/</guid><pubDate>Sat, 11 Jan 2025 00:00:00 GMT</pubDate><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.developerway.com/posts/how-react-compiler-performs-on-real-code&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;원문: How React Compiler Performs on Real Code&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;리액트 컴파일러가 초기 로드 및 인터랙션 성능에 미치는 영향을 수치와 함께 살펴봅니다. 이 글에서 사용된 수치는 실제 앱에서 측정되었습니다.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=T-rHmWSZajc&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;유튜브: How React Compiler Performs On Real Code&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 700px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/c6469383341c5f30268e238fe39347e9/a5d4d/1.webp&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 64%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAABwAwCdASoUAA0APtFUo0uoJKMhsAgBABoJYwC/OB6P5MNAGAAA/vOWG6xUWyQfMKzV3QyDVhPW0P8L9aco/YHhITSWDOtgAAA=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;1&quot;
+        title=&quot;1&quot;
+        src=&quot;/static/c6469383341c5f30268e238fe39347e9/426ac/1.webp&quot;
+        srcset=&quot;/static/c6469383341c5f30268e238fe39347e9/c54d4/1.webp 175w,
+/static/c6469383341c5f30268e238fe39347e9/a3432/1.webp 350w,
+/static/c6469383341c5f30268e238fe39347e9/426ac/1.webp 700w,
+/static/c6469383341c5f30268e238fe39347e9/a5d4d/1.webp 1000w&quot;
+        sizes=&quot;(max-width: 700px) 100vw, 700px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;이 글은 제가 “React Advanced” 컨퍼런스에서 발표한 내용을 기반으로 구성되었습니다. 글보다 영상을 선호하신다면 &lt;a href=&quot;https://www.youtube.com/watch?v=T-rHmWSZajc&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;How React Compiler Performs On React Code&lt;/a&gt;을 확인해 보세요.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;지난 몇 년 동안 리액트 커뮤니티에서 가장 큰 흥분과 기대를 불러일으킨 것 중 하나는 리액트 컴파일러(이전의 리액트 Forget)로 알려진 도구였습니다. 그럴 만한 이유가 있습니다. 컴파일러의 핵심 전제는 리액트 앱의 전반적인 성능을 향상시킬 수 있다는 것입니다. 또 다른 긍정적인 결과로는 리렌더링, 메모이제이션, 그리고 &lt;code class=&quot;language-text&quot;&gt;useMemo&lt;/code&gt; 및 &lt;code class=&quot;language-text&quot;&gt;useCallback&lt;/code&gt; 훅에 대해 더 이상 신경 쓰지 않아도 된다는 점이 있습니다.&lt;/p&gt;
+&lt;p&gt;하지만 애초에 리액트의 성능에는 어떤 문제가 있었을까요? 그리고 왜 많은 개발자들이 필사적으로 메모이제이션과 그 훅들을 잊고 싶어할까요? 이 약속은 얼마나 현실적일까요?&lt;/p&gt;
+&lt;p&gt;이 글에서는 이러한 질문에 답해보려 합니다. 컴파일러가 해결하려는 문제, 컴파일러 없이 어떻게 해결되는지, 실제 코드에서 컴파일러가 어떻게 작동하는지를 요약합니다. 이를 위해 제가 한동안 작업해 온 앱에 컴파일러를 적용해 성능을 측정해 보았습니다.&lt;/p&gt;
+&lt;h2 id=&quot;리액트의-리렌더링과-메모이제이션-문제&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%A6%AC%EC%95%A1%ED%8A%B8%EC%9D%98-%EB%A6%AC%EB%A0%8C%EB%8D%94%EB%A7%81%EA%B3%BC-%EB%A9%94%EB%AA%A8%EC%9D%B4%EC%A0%9C%EC%9D%B4%EC%85%98-%EB%AC%B8%EC%A0%9C&quot; aria-label=&quot;리액트의 리렌더링과 메모이제이션 문제 permalink&quot; class=&quot;heading-anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;리액트의 리렌더링과 메모이제이션 문제&lt;/h2&gt;
+&lt;p&gt;우선, 정확히 어떤 문제가 있는지 살펴봅시다.&lt;/p&gt;
+&lt;p&gt;대부분의 리액트 앱은 사용자에게 상호작용 UI(사용자 인터페이스)를 표시하도록 작성되었습니다. 사용자가 UI와 상호작용할 때, 우리는 보통 그 상호작용에서 파생된 새로운 정보로 페이지를 업데이트하고 싶어 합니다. 리액트에서는 이를 위해 &lt;em&gt;리렌더&lt;/em&gt;를 호출합니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 700px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/e486ce25c41823020b2fe2c64033903b/8b70b/2.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 50.857142857142854%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAACXBIWXMAABYlAAAWJQFJUiTwAAACB0lEQVQoz3WSO28TURCFXeTp2Lve+9yHd+PYOH5JxJg4WRcksoAOiZJUVKmACgooKJEoANFRUEQpQEKCgoYOCYlfQMM/oKCDBonuQ3edWIhHcTX33pk5Z87MlLTW/OtIKdnY2KDb7dJqtRgMBvR6PcIwRCnF//JKc6exhT19B0FAv99nMpmwNRwynU7Z398njuOC7PdYcwLm3iV3EUIgq2WUFH+BaiGoa10c3/fnvrnVmqpUCHVaoRRk9ZjGpWvYrIkSwbx8l7Qex8ShLWzyh1x3N1pxpWnpRIbAVbjm1bj99Ig7Lz5QURFGzeRopQr2TpYhtaaRJDTiGHEi18msScXZ9YRP9w84nGyy4gWUbLPD6OZjDq5e4OLQpyYcu5oPJhI1lF8lDHy0CAqS0+oCIbn34CHv337k8PINyt4aJa0kXnmV2FRoZZosjLDGzBpvQ/qjnFG+x7l8j0ZnMOu3UoTGYLWmtzVkNJnSbY+QUlByjMZapDLUhKJuLZtpSqolrf6Qz1++8/XbD34CT45e462u0M5SztSTAtT3PKqVMrXAmw3FMbbbbfJ8l/F4zPntbeppihUBWavDo+cveXb8iuM377h+6y7Cq5JYS5pl5HnOeGeH3d282FWHVeyhMYYoikiSpNizon9KFbKXlxZZXlpicWGBylq56KH7d0NxOS7e5TkMt4e/AABEG05/lnaSAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;2&quot;
+        title=&quot;2&quot;
+        src=&quot;/static/e486ce25c41823020b2fe2c64033903b/8c557/2.png&quot;
+        srcset=&quot;/static/e486ce25c41823020b2fe2c64033903b/4edbd/2.png 175w,
+/static/e486ce25c41823020b2fe2c64033903b/13ae7/2.png 350w,
+/static/e486ce25c41823020b2fe2c64033903b/8c557/2.png 700w,
+/static/e486ce25c41823020b2fe2c64033903b/e996b/2.png 1050w,
+/static/e486ce25c41823020b2fe2c64033903b/8b70b/2.png 1266w&quot;
+        sizes=&quot;(max-width: 700px) 100vw, 700px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;리액트의 리렌더링은 일반적으로 &lt;em&gt;연쇄적&lt;/em&gt;입니다. 컴포넌트의 리렌더링이 트리거될 때마다 내부에 중첩된 모든 컴포넌트의 리렌더링이 트리거되고, 이는 다시 내부의 모든 컴포넌트의 리렌더링을 트리거하는 식으로 리액트 컴포넌트 트리의 끝에 도달할 때까지 반복됩니다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/d523cfa2d3dab0c55c2d751fca61b721/3.gif&quot; alt=&quot;re-renders-in-motion.gif&quot;&gt;&lt;/p&gt;
+&lt;p&gt;일반적으로 요즘 리액트는 충분히 빠르기 때문에 이 과정을 크게 걱정하지 않아도 됩니다. 그러나 이러한 다운스트림 리렌더링이 일부 무거운 컴포넌트나 너무 자주 리렌더링되는 컴포넌트에 영향을 미치는 경우 성능 문제가 발생할 수 있습니다. 앱이 느려지기 때문입니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 700px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/05191ff1e893ec6aaead87b39204e5d3/12c06/4.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 69.14285714285714%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAACXBIWXMAABYlAAAWJQFJUiTwAAACWklEQVQ4y5WTv29SURTHX1ITQB48eLzHrwfUVvqeQiWADKh1YHPQ2IQidhEYGZgg6iqGgcrUdiCxA4PtxKiJE0v9B3CuS2UQYbAJ1DSEfM09CaQoNPEmNyf3nnM+73vOPY+TJAmLtizLsNls8Hq98Pl8dL4qnm3uKpgoilAUBV+Oj/G13YaqqrBYLLDb7f8HZDCnwwGHwwGz2Yx2u43z898Ihe7AarXC5XItVMvNg7Ekg8FAasxmAQ/ux/Hk8SNIkgxBMJOPxcyDcv/ARJFK20puIRqJQnHbEVQV3PY74fM4EIlEyKep2lzoDJCVqNfrkc1mwNb+3j68LhHLXgUeRcGyR8Le7i758vk8xbKchUDWbBPPIx6/h19nZ3hTfovrRp7ueZMJHMchlUqh3+/j6eYmlb4QyBxOpxNW0YabN9yIhlQEb61AliUIgoBnySRSySRyuRyy2SxyLzI0SmwSLpc9BTL5S0vXsLbiRmR9BXdDqwhqPkTWV0nJ54+fMLq4wHg8xmAwwI/vHQSDQfrY5THiJqW+fvkK73Z2oKlrMBp5WAUDeN4EySYikUig97OHzukpev0+vp2cUB9LpRKNFcufqCQgkz0JCofDiMViOHh/gOfpNCWw4GazSf7RaES20+nA7/dPgVOF7GA0GlEoFNBoNKiP29vblHR0dEQJOp0OlUqF7obDIdlWq4V0Oo1AIEDzOqOQHXiep14xq2kaPhweIpPJ0L/M7svlMi6vbreLWq0Gt9tNMTPASR/ZSzPLWsAeicGnLyhLKBaLqNfrqFar2Hi4QXF/D/cfUJXYX2JiLfUAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;slow-app.png&quot;
+        title=&quot;slow-app.png&quot;
+        src=&quot;/static/05191ff1e893ec6aaead87b39204e5d3/8c557/4.png&quot;
+        srcset=&quot;/static/05191ff1e893ec6aaead87b39204e5d3/4edbd/4.png 175w,
+/static/05191ff1e893ec6aaead87b39204e5d3/13ae7/4.png 350w,
+/static/05191ff1e893ec6aaead87b39204e5d3/8c557/4.png 700w,
+/static/05191ff1e893ec6aaead87b39204e5d3/e996b/4.png 1050w,
+/static/05191ff1e893ec6aaead87b39204e5d3/2cefc/4.png 1400w,
+/static/05191ff1e893ec6aaead87b39204e5d3/12c06/4.png 2418w&quot;
+        sizes=&quot;(max-width: 700px) 100vw, 700px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;이 속도 저하를 해결하는 한 가지 방법은 리렌더링의 연쇄적인 발생을 막는 것입니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 700px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/694be6c5cd435fd7a502f46aee4c5562/12c06/5.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 69.14285714285714%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAACXBIWXMAABYlAAAWJQFJUiTwAAAB6UlEQVQ4y5WSy47aQBBFkZJIgDQGGxvcxnZsDDZ+YF6bYPMITBYsklVmw47VzOck802THyAfQ5Y3qoocMYpBiqVSq1Xdp6/vrYqqqrhWmqah1WrBsizYts37W+epKrdgiqKg2+3ix8sLfp5O8H0fzWYT7Xb7P4HaHyBdlCQJp9MJ5/MvpOkIsixDCHFV7VWFpE7TVNxJDeTZB3z5vIeqamg0JNRqNQaXQUuBuq7DcRxWYps6Yt9A2Ndhmx1Mp1M8fH1A4Ael0EqZb71eD5/u7xHHMQY9A5YpYAgBy1Dw/P0b6Ht6fES1WkWn07kNpFSFMJDnS/jBEE1Z+dt78/YdjscjzuczDocD6vX6dSCHoGmQlRb6bhdx8B7DvsU+0iOu47ANnuchiiL0Pa807cplCI2mDN8zMYkdzEYuosBGGjncm01n2KzXWK/XyPMcWZaxx/TYpY+VQl3g+wjDCGZXMIACUJQW9I7Gg11AlsslskWGj5sNz2UpkGqxWHAQuhAwDANJMoLrugyl/mQywW63Y4Xb7Zbh5N8/wCKIwWCANE25SaD9fo/xeMw9UhyGIYNWqxWv8/mcPaURK/7ylcLiIq10iGA0PoW/w+GQFRKMVrKAwrk6h9QoqoAQ/PIweZYkCYNM03w1bgXwN6HIhD4whDLJAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;re-renders-stopped.png&quot;
+        title=&quot;re-renders-stopped.png&quot;
+        src=&quot;/static/694be6c5cd435fd7a502f46aee4c5562/8c557/5.png&quot;
+        srcset=&quot;/static/694be6c5cd435fd7a502f46aee4c5562/4edbd/5.png 175w,
+/static/694be6c5cd435fd7a502f46aee4c5562/13ae7/5.png 350w,
+/static/694be6c5cd435fd7a502f46aee4c5562/8c557/5.png 700w,
+/static/694be6c5cd435fd7a502f46aee4c5562/e996b/5.png 1050w,
+/static/694be6c5cd435fd7a502f46aee4c5562/2cefc/5.png 1400w,
+/static/694be6c5cd435fd7a502f46aee4c5562/12c06/5.png 2418w&quot;
+        sizes=&quot;(max-width: 700px) 100vw, 700px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.developerway.com/posts/react-re-renders-guide#part3.2&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;상태를 하위로 이동시키기&lt;/a&gt;, &lt;a href=&quot;https://www.developerway.com/posts/react-re-renders-guide#part3.3&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;컴포넌트를 prop으로 전달하기&lt;/a&gt;, 컨텍스트로 상태를 추출하여 prop drilling을 우회하는 솔루션 등 여러 가지 기법이 준비되어 있습니다. 물론 메모이제이션도 마찬가지입니다.&lt;/p&gt;
+&lt;p&gt;메모이제이션은 리액트 팀에서 제공한 고차 컴포넌트인 &lt;a href=&quot;https://react.dev/reference/react/memo&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;React.memo&lt;/a&gt;로 시작됩니다. 이를 작동시키기 위해서는 원래 컴포넌트를 이 컴포넌트로 감싸고 그 자리에 “메모이제이션된” 컴포넌트를 렌더링하기만 하면 됩니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;tsx&quot;&gt;&lt;pre class=&quot;language-tsx&quot;&gt;&lt;code class=&quot;language-tsx&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// 느린 컴포넌트를 메모합니다.&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; VerySlowComponentMemo &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; React&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;memo&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;VerySlowComponent&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token function-variable function&quot;&gt;Parent&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;// 어디선가 리렌더를 트리거 합니다.&lt;/span&gt;
+
+  &lt;span class=&quot;token comment&quot;&gt;// 원래의 컴포넌트 대신 메모된 컴포넌트를 렌더링합니다.&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;VerySlowComponentMemo&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;/&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;이제 리액트가 트리에서 이 컴포넌트에 도달하면 멈춰서 프로퍼티(props)가 변경되었는지 확인합니다. 만약 프로퍼티가 변경되지 않았다면 리렌더링이 중단됩니다. 그러나 단 하나의 프로퍼티라도 변경되면, 리액트는 메모이제이션이 발생하지 않았던 것처럼 리렌더링을 계속합니다.&lt;/p&gt;
+&lt;p&gt;즉, 메모가 제대로 작동하려면 리렌더링 사이에 모든 프로퍼티가 &lt;em&gt;정확히&lt;/em&gt; 동일하게 유지되도록 해야 합니다.&lt;/p&gt;
+&lt;p&gt;문자열이나 부울과 같은 원시 값의 경우 간단합니다. 값을 변경하지 않는 것 외에는 다른 작업을 할 필요가 없습니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;tsx&quot;&gt;&lt;pre class=&quot;language-tsx&quot;&gt;&lt;code class=&quot;language-tsx&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; VerySlowComponentMemo &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; React&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;memo&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;VerySlowComponent&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token function-variable function&quot;&gt;Parent&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;// 어디선가 리렌더를 트리거 합니다.&lt;/span&gt;
+
+  &lt;span class=&quot;token comment&quot;&gt;// &quot;data&quot; 문자열은 리렌더링하더라도 동일합니다.&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;// 그러므로 메모이제이션은 기대한대로 동작할 것입니다.&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;VerySlowComponentMemo&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation attr-equals&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&apos;&lt;/span&gt;123&lt;span class=&quot;token punctuation&quot;&gt;&apos;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;/&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;그러나 객체, 배열 및 함수와 같은 비원시값은 약간의 도움이 필요합니다.&lt;/p&gt;
+&lt;p&gt;리액트는 리렌더링 간에 참조 &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;동등성&lt;/a&gt;(referential equality)을 사용해 변경 여부를 확인합니다. 컴포넌트 내부에서 이러한 비원시값을 선언하면 리렌더링할 때마다 다시 생성되고 참조가 변경되며 메모이제이션이 작동하지 않습니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;tsx&quot;&gt;&lt;pre class=&quot;language-tsx&quot;&gt;&lt;code class=&quot;language-tsx&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; VerySlowComponentMemo &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; React&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;memo&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;VerySlowComponent&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token function-variable function&quot;&gt;Parent&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;// 어디선가 리렌더를 트리거 합니다.&lt;/span&gt;
+
+  &lt;span class=&quot;token comment&quot;&gt;// &quot;data&quot; 객체는 모든 리렌더링 때마다 다시 생성될 것입니다.&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;// 메모이제이션이 깨지게 됩니다.&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;VerySlowComponentMemo&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;token script language-javascript&quot;&gt;&lt;span class=&quot;token script-punctuation punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token literal-property property&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;123&apos;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;/&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;이 문제를 해결하기 위해 &lt;code class=&quot;language-text&quot;&gt;useMemo와&lt;/code&gt; &lt;code class=&quot;language-text&quot;&gt;useCallback&lt;/code&gt; 두 가지 훅을 사용합니다. 이 두 훅은 리렌더링 간에 참조를 유지해줍니다. &lt;code class=&quot;language-text&quot;&gt;useMemo&lt;/code&gt;는 보통 객체나 배열과 함께 사용되며, &lt;code class=&quot;language-text&quot;&gt;useCallback&lt;/code&gt;은 함수와 함께 사용됩니다. 이러한 훅으로 프로퍼티를 감싸는 것을 일반적으로 “프로퍼티 메모하기”라고 합니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;tsx&quot;&gt;&lt;pre class=&quot;language-tsx&quot;&gt;&lt;code class=&quot;language-tsx&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token function-variable function&quot;&gt;Parent&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;// { id:&quot;123&quot; } 객체의 참조가 지금은 보존됩니다.&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; data &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;useMemo&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; id&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;123&apos;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;// 함수에 대한 참조가 지금은 보존됩니다.&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; onClick &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;useCallback&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;token comment&quot;&gt;// 여기의 props는 더 이상 리렌더링 사이에서 변경되지 않습니다.&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;// 메모이제이션이 정확하게 동작할 것입니다.&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;VerySlowComponentMemo&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;token script language-javascript&quot;&gt;&lt;span class=&quot;token script-punctuation punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;data&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;onClick&lt;/span&gt;&lt;span class=&quot;token script language-javascript&quot;&gt;&lt;span class=&quot;token script-punctuation punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;onClick&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;/&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;이제 리액트가 렌더 트리에서 &lt;code class=&quot;language-text&quot;&gt;VerySlowComponentMemo&lt;/code&gt; 컴포넌트를 만나면 프로퍼티가 변경되었는지 확인하고 아무것도 변경되지 않았음을 알게 되므로 리렌더링을 건너뜁니다. 앱은 더 이상 느리지 않습니다.&lt;/p&gt;
+&lt;p&gt;이것은 매우 단순화된 설명이지만 이미 상당히 복잡합니다. 상황을 더 악화시키는 것은 메모한 프로퍼티를 연쇄적인 컴포넌트로 전달하는 경우입니다. 이 경우 더욱 복잡해집니다. 프로퍼티를 변경하려면 중간에 참조가 손실되지 않았는지 확인하기 위해 앞뒤로 추적해야 하기 때문입니다.&lt;/p&gt;
+&lt;p&gt;따라서 아예 메모하지 않거나 만일을 대비해 모든 곳에서 메모해 두는 것이 더 쉽습니다. 하지만 이렇게 하면 아름다웠던 코드가 &lt;code class=&quot;language-text&quot;&gt;useMemo&lt;/code&gt;와 &lt;code class=&quot;language-text&quot;&gt;useCallback&lt;/code&gt;으로 뒤덮여 이해하기 어려운 엉망진창이 되어버립니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 700px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/1548a6e7cb502c10e643f8c5ebe801cb/b1ffc/6.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 52.57142857142857%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAABYlAAAWJQFJUiTwAAABoUlEQVQoz4VSSYoCQRDsi3gQ9w1Rob244w4qKo1Mo7jhLqKe9T/OVwTnT84DvMUQCSXtiDMNSVdlRUZFRqUWDAbxLgKBwGMdCoUk/sIztP9IuPd6vXC5XHA6nbJ+h38hVIckYmGhUMByucR2u8VisUCz2UQ2m4Xf738itpJqKsEgEcFutxs+nw/VahXdbheZTAbtdhuz2QytVgupVEqCpMRZOTQrO9uKx+NSvN/vRZWu63A4HHIJyTabDabTKVarFXq9HqLR6KtC5VW9XsdkMkGj0RBVNpsN+XwexWJRlFMN81Q9Ho8xHA5RqVTk7EFIIprNJG/u9/tCWiqVhJgeEkiMx+NBuVzGYDCAYRjodDpPHkrLkUhECtni8XjEaDRCOp0WtVRBrz7PZ3xdrzA/TNjtdoTDYVFtmqaQU7XyUmMBFdVqNUnQL77kfD4XTwn+vt3A73Q6yRn92+12Urder8VbekzrpGVuWKxkJ5NJUDltYJuXywX3+x2HwwGxWEzaZhe5XE6wiUTi4aNmHWK15jgoXwjkS7JQDTkF8M/Lfo/OD4xDQbrIp2W/AAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;app-under-re-renders.png&quot;
+        title=&quot;app-under-re-renders.png&quot;
+        src=&quot;/static/1548a6e7cb502c10e643f8c5ebe801cb/8c557/6.png&quot;
+        srcset=&quot;/static/1548a6e7cb502c10e643f8c5ebe801cb/4edbd/6.png 175w,
+/static/1548a6e7cb502c10e643f8c5ebe801cb/13ae7/6.png 350w,
+/static/1548a6e7cb502c10e643f8c5ebe801cb/8c557/6.png 700w,
+/static/1548a6e7cb502c10e643f8c5ebe801cb/e996b/6.png 1050w,
+/static/1548a6e7cb502c10e643f8c5ebe801cb/2cefc/6.png 1400w,
+/static/1548a6e7cb502c10e643f8c5ebe801cb/b1ffc/6.png 1492w&quot;
+        sizes=&quot;(max-width: 700px) 100vw, 700px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;이 상황을 해결하는 것이 리액트 컴파일러의 주요 관심사입니다.&lt;/p&gt;
+&lt;h2 id=&quot;구원자-리액트-컴파일러-&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EA%B5%AC%EC%9B%90%EC%9E%90-%EB%A6%AC%EC%95%A1%ED%8A%B8-%EC%BB%B4%ED%8C%8C%EC%9D%BC%EB%9F%AC-&quot; aria-label=&quot;구원자 리액트 컴파일러  permalink&quot; class=&quot;heading-anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;구원자 리액트 컴파일러 🚀&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://react.dev/learn/react-compiler&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;리액트 컴파일러&lt;/a&gt;는 리액트 코어 팀에서 개발한 바벨 플러그인으로, 2024년 10월에 &lt;a href=&quot;https://react.dev/blog/2024/10/21/react-compiler-beta-release&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;베타 버전&lt;/a&gt;이 출시되었습니다.&lt;/p&gt;
+&lt;p&gt;빌드하는 동안 “일반적인” 리액트 코드를 컴포넌트, 프로퍼티, 그리고 훅의 의존성이 기본적으로 메모이제이션 되어있는 코드로 변환하려고 시도합니다. 최종 결과는 모든 것이 &lt;code class=&quot;language-text&quot;&gt;memo&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;useMemo&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;useCallback&lt;/code&gt;으로 감싸진 것처럼 동작하는 “일반적인” 리액트 코드가 됩니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 700px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/80032fd7c6f60d8c22f455acfb1154c2/fa60d/7.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 50.28571428571429%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAACXBIWXMAABYlAAAWJQFJUiTwAAABn0lEQVQoz32SvY4TMRSFp0MR2s2P7fH/eCaZJDvJahEU6aKEgnS0dDRUPAAdD8BD8LAfspONwrKiODqyfXzte86tvA207YqQemJsCCGiaoWQEiklSqmCFDpi1oVECA211uU841mbUWWxNgZjLFprjD1z5yy6rpFSoaTEu8h8sSKlxLBq6boO5zwxWFITcN5T1/W5YNf2hKZFB4/SGiEEwRh6qxGze6ZCEF2iSwuaJrHuHMMiMm9TWbdti7W2dFIJIWmXiafdI+vHgc3mAesco9EbPn/9zo9fv4nijmWaM188YGLAxIgJ/trmLarckvMWHzRWG7zzxR83m/D+0xc+fvuJVwJnDOunnu2Hd3SrFa6JyIu/t6jOnhnETBRztVIsvKfzjtn4nru3o7KfxaExxOiIORSlrqHdcpWNVK+8lIvUtS4B5XBK+qomW1Tau+huJ6H8UN6MR+bpdMp4PGaSMZlckYN6efnluhT861dCcDweORwOnE6nwrvdrvB+vyeEUDSvdfRPwefX+r5nGAa2223h5XLJZrMprC/D/L+CfwBOdAbjD18KNwAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;react-compiler-pic.png&quot;
+        title=&quot;react-compiler-pic.png&quot;
+        src=&quot;/static/80032fd7c6f60d8c22f455acfb1154c2/8c557/7.png&quot;
+        srcset=&quot;/static/80032fd7c6f60d8c22f455acfb1154c2/4edbd/7.png 175w,
+/static/80032fd7c6f60d8c22f455acfb1154c2/13ae7/7.png 350w,
+/static/80032fd7c6f60d8c22f455acfb1154c2/8c557/7.png 700w,
+/static/80032fd7c6f60d8c22f455acfb1154c2/e996b/7.png 1050w,
+/static/80032fd7c6f60d8c22f455acfb1154c2/2cefc/7.png 1400w,
+/static/80032fd7c6f60d8c22f455acfb1154c2/fa60d/7.png 1792w&quot;
+        sizes=&quot;(max-width: 700px) 100vw, 700px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;거의 다 끝났습니다! 실제로는 훨씬 더 복잡한 변환을 수행하며 가능한 한 효율적으로 코드에 맞게 조정됩니다. 예를 들어 다음과 같은 경우입니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;tsx&quot;&gt;&lt;pre class=&quot;language-tsx&quot;&gt;&lt;code class=&quot;language-tsx&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;Parent&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; data &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; id&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;123&apos;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token function-variable function&quot;&gt;onClick&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;Component&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;onClick&lt;/span&gt;&lt;span class=&quot;token script language-javascript&quot;&gt;&lt;span class=&quot;token script-punctuation punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;onClick&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;token script language-javascript&quot;&gt;&lt;span class=&quot;token script-punctuation punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;data&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;/&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;이 코드는 이렇게 변환됩니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;tsx&quot;&gt;&lt;pre class=&quot;language-tsx&quot;&gt;&lt;code class=&quot;language-tsx&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;Parent&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; $ &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;_c&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; t0&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;$&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; Symbol&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;react.memo_cache_sentinel&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; data &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      id&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;123&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; onClick &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; _temp&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    t0 &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;Component&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;onClick&lt;/span&gt;&lt;span class=&quot;token script language-javascript&quot;&gt;&lt;span class=&quot;token script-punctuation punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;onClick&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;token script language-javascript&quot;&gt;&lt;span class=&quot;token script-punctuation punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;data&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;/&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    $&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; t0&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    t0 &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; $&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; t0&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;_temp&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;onClick&lt;/code&gt;이 &lt;code class=&quot;language-text&quot;&gt;_temp&lt;/code&gt; 변수로 캐시되지만 &lt;code class=&quot;language-text&quot;&gt;data&lt;/code&gt;는 &lt;code class=&quot;language-text&quot;&gt;if&lt;/code&gt;문 안으로 이동하는 것을 볼 수 있습니다. &lt;a href=&quot;https://playground.react.dev/#N4Igzg9grgTgxgUxALhAMygOzgFwJYSYAEACgIYwKY4AUAlEcADqYtFFyFg5EAmZOMkQC8jInl7IiTEAEYATAGYZRAL4BuFmw5cehAMIAbPHADWIovREA+Rto1biRSjljEAPPogBbAA6EqPUwjE1NhYANjM1U+ATJw-kEYgHprFlUWEFUgA&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;컴파일러 플레이그라운드&lt;/a&gt;에서 컴파일러를 좀 더 사용해 볼 수 있습니다.&lt;/p&gt;
+&lt;p&gt;작동 원리는 매우 흥미롭기 때문에 더 자세히 알고 싶다면 &lt;a href=&quot;https://www.youtube.com/watch?v=0ckOUBiuxVY&amp;#x26;t=9309s&amp;#x26;ab_channel=ReactConf&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;컴파일러 심층 분석과 같은 리액트 코어 팀의 동영상&lt;/a&gt;도 있습니다.&lt;/p&gt;
+&lt;p&gt;하지만 이 글에서는 리액트 컴파일러에 대한 기대가 현실과 일치하는지, 저같은 일반 사용자가 사용할 준비가 되어 있는지에 더 관심이 있습니다.&lt;/p&gt;
+&lt;p&gt;“컴파일러가 모든 것을 메모이제이션한다”는 말을 들으면 대부분의 사람들은 아래 질문들을 떠올릴 겁니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;초기 로드 성능은 어떨까요?&lt;/strong&gt; “모든 것을 기본적으로 메모이제이션하는 것”에 반대하는 주요 주장 중 하나는 모든 것이 메모이제이션되면 리액트가 훨씬 더 많은 작업을 미리 해야 하기 때문에 초기 로드 성능에 부정적인 영향을 미칠 수 있다는 것입니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;성능에 긍정적인 영향을 미칠까요?&lt;/strong&gt; 리렌더링은 정말 그렇게 큰 문제일까요?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;정말 모든 리렌더링을 잡아낼 수 있을까요?&lt;/strong&gt; 자바스크립트는 유동적이고 모호한 것으로 악명이 높습니다. 컴파일러는 정말 모든 것을 잡아낼 만큼 똑똑할까요? 다시는 메모이제이션나 리렌더링에 대해 고민할 필요가 없다는 것이 사실일까요?&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;이 질문에 답하기 위해 몇 가지 예제에서 컴파일러를 실행해 실제로 작동하는지 확인하고, 작업 중인 앱의 몇몇 페이지에서 실행해 보았습니다.&lt;/p&gt;
+&lt;h2 id=&quot;리액트-컴파일러를-간단한-예제에-적용해보기&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%A6%AC%EC%95%A1%ED%8A%B8-%EC%BB%B4%ED%8C%8C%EC%9D%BC%EB%9F%AC%EB%A5%BC-%EA%B0%84%EB%8B%A8%ED%95%9C-%EC%98%88%EC%A0%9C%EC%97%90-%EC%A0%81%EC%9A%A9%ED%95%B4%EB%B3%B4%EA%B8%B0&quot; aria-label=&quot;리액트 컴파일러를 간단한 예제에 적용해보기 permalink&quot; class=&quot;heading-anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;리액트 컴파일러를 간단한 예제에 적용해보기&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;첫번째 예제&lt;/strong&gt;는 다음과 같습니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;tsx&quot;&gt;&lt;pre class=&quot;language-tsx&quot;&gt;&lt;code class=&quot;language-tsx&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token function-variable function&quot;&gt;SimpleCase&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;isOpen&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; setIsOpen&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;useState&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token boolean&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;div&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token plain-text&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;button&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;onClick&lt;/span&gt;&lt;span class=&quot;token script language-javascript&quot;&gt;&lt;span class=&quot;token script-punctuation punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;setIsOpen&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;!&lt;/span&gt;isOpen&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token plain-text&quot;&gt;toggle&lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;button&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token plain-text&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;isOpen &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;Dialog&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;/&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token plain-text&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;VerySlowComponent&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;/&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token plain-text&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;div&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;대화 상자, 이 대화 상자에 대한 상태, 대화 상자를 열 수 있는 버튼, 그 아래 어딘가에 &lt;code class=&quot;language-text&quot;&gt;VerySlowComponent&lt;/code&gt;가 있는 컴포넌트가 있습니다. 리렌더링하는 데 500ms가 걸린다고 가정해 봅시다.&lt;/p&gt;
+&lt;p&gt;일반적인 리액트 동작은 상태가 변경될 때 모든 것을 다시 렌더링하는 것입니다. 결과적으로 느린 컴포넌트로 인해 대화 상자가 느리게 열릴 것입니다. 메모이제이션을 사용하여 문제를 해결하려면 느린 컴포넌트를를 &lt;code class=&quot;language-text&quot;&gt;memo&lt;/code&gt;로 감싸야 합니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;tsx&quot;&gt;&lt;pre class=&quot;language-tsx&quot;&gt;&lt;code class=&quot;language-tsx&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; VerySlowComponentMemo &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; React&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;memo&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;VerySlowComponent&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token function-variable function&quot;&gt;SimpleCase&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;isOpen&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; setIsOpen&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;useState&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token boolean&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;div&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token plain-text&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;button&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;onClick&lt;/span&gt;&lt;span class=&quot;token script language-javascript&quot;&gt;&lt;span class=&quot;token script-punctuation punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;setIsOpen&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;!&lt;/span&gt;isOpen&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token plain-text&quot;&gt;toggle&lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;button&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token plain-text&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;isOpen &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;Dialog&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;/&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token plain-text&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;VerySlowComponentMemo&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;/&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token plain-text&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;div&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;대신 코드에 대해 컴파일러를 활성화해 보겠습니다. 우선, 리액트 개발자 도구에서 다음과 같은 것을 확인할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 558px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/0fa8d895365907cbb6208d2d038316c6/42a8d/8.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 58.85714285714286%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAMCAYAAABiDJ37AAAACXBIWXMAABYlAAAWJQFJUiTwAAACw0lEQVQoz4WTz28bVRDH98aBfwJx4A+oVBUIgr+g5YA4IYHEgSsghATcgAKtoJRDVEpBVZoSIiSaVEgttImStgk0TQh2aeykSerUXnsdr70/3nv7dr327vugjSsuCPGRRvM0mhnNvK/GyvMcYwzG5MgwIfRjtErxuppuJ8LvxXQcReDHeK5GyT6TdwTfLAs+v+7y4+o+eW4oCIIAq3ikaUrgaZy6pNNStArfVIiuxm0InF2fdkPQT4YHhb0oY1+OLNCjgQqEEFgYyPMMJfo4DUnblgeT2Lbij6pgtSL4/V7Ibk0yHGT8G0OxZUEYhlhZboqeaD1kbyeg1VR4jmJhM+LVaY9XpjyOnHrAtfvyoCgz/CdSRcXKjzJMRuxpsqhPGo7+q7wVUtmVlLcCeq5mKBNMkjJTVny3LPhirselksDvNLFr23SaD7E2XEOlayg7GdfWJb+uCW5sRFxfFyz8KZlfF1z9zWe+JLmyEnCjGvPadMCL533GTtu8/n2Ty0sVzs3c5PLyJpb10YDHTgx48kzGC1Nw+ILhyIWcZycNYxcNL8/C8z/A4QnDcxdznpnIOfTtkEPn4YmTLke/LPP08bs89e4tHv+ghvXxrZzjSzmf3hxyYi7ms7mYkwt93v8l4dik4uiEZOyMz5tXEr5eyxm/k3H6ds6pFcMni5rxRZfxxS5fzTt8eHUfK0kN6bBQaMjOVkijoWnXFYuViLdnPd6a8Xnp3B7zWyNRohTiFKK+oRA9yUCl0DfgegqrGRocCQ0v5962olrTVB9o7m5KbpdCVv8SrJRCypuK0kZItRbz3s8Bb0z3OHa2yTs/tWgL2FdwvymwZAJhnOPJjEZTU7c1diumYWtarRjb1tTrCqeTHMRdb8ClcsTUWsTZJZ/ZUoDsgx5AyxWjSxkMUty2ZGejx8Nt/x/bK/xOwP/y6FKkFPwNQ3tZriqt92AAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;react-compiler-working.png&quot;
+        title=&quot;react-compiler-working.png&quot;
+        src=&quot;/static/0fa8d895365907cbb6208d2d038316c6/42a8d/8.png&quot;
+        srcset=&quot;/static/0fa8d895365907cbb6208d2d038316c6/4edbd/8.png 175w,
+/static/0fa8d895365907cbb6208d2d038316c6/13ae7/8.png 350w,
+/static/0fa8d895365907cbb6208d2d038316c6/42a8d/8.png 558w&quot;
+        sizes=&quot;(max-width: 558px) 100vw, 558px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;즉, &lt;code class=&quot;language-text&quot;&gt;Button&lt;/code&gt;와 &lt;code class=&quot;language-text&quot;&gt;VerySlowComponent&lt;/code&gt;가 컴파일러에 의해 메모이제이션되었음을 의미합니다. 그리고 &lt;code class=&quot;language-text&quot;&gt;VerySlowComponent&lt;/code&gt; 내부에 &lt;code class=&quot;language-text&quot;&gt;console.log&lt;/code&gt;를 추가하면, 상태를 변경해도 실행되지 않습니다. 이는 메모이제이션이 실제로 작동하고 있으며, 성능 문제가 해결되었음을 의미합니다. 대화창을 트리거할 때 지연 없이 팝업됩니다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/3394208b644ea8798f4520669ca904aa/9.gif&quot; alt=&quot;compiler-in-motion.gif&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;두 번째 예시&lt;/strong&gt;에서는 느린 컴포넌트에 더 많은 프로퍼티를 추가했습니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;tsx&quot;&gt;&lt;pre class=&quot;language-tsx&quot;&gt;&lt;code class=&quot;language-tsx&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token function-variable function&quot;&gt;SimpleCase&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;isOpen&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; setIsOpen&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;useState&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token boolean&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;div&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token plain-text&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;button&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;onClick&lt;/span&gt;&lt;span class=&quot;token script language-javascript&quot;&gt;&lt;span class=&quot;token script-punctuation punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;setIsOpen&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;!&lt;/span&gt;isOpen&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token plain-text&quot;&gt;toggle&lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;button&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token plain-text&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;isOpen &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;Dialog&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;/&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token plain-text&quot;&gt;
+      // &quot;data&quot;와 &quot;onClick&quot; props를 전달합니다.
+      &lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;VerySlowComponent&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;token script language-javascript&quot;&gt;&lt;span class=&quot;token script-punctuation punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token literal-property property&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;123&apos;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;onClick&lt;/span&gt;&lt;span class=&quot;token script language-javascript&quot;&gt;&lt;span class=&quot;token script-punctuation punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;/&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token plain-text&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;div&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;수동으로는 &lt;code class=&quot;language-text&quot;&gt;memo&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;useMemo&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;useCallback&lt;/code&gt; 세 가지 도구를 모두 사용하여 메모해야 합니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;tsx&quot;&gt;&lt;pre class=&quot;language-tsx&quot;&gt;&lt;code class=&quot;language-tsx&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token function-variable function&quot;&gt;SimpleCase&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;isOpen&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; setIsOpen&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;useState&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token boolean&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; data &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;useMemo&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; id&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;123&apos;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; onClick &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;useCallback&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;div&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token plain-text&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;button&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;onClick&lt;/span&gt;&lt;span class=&quot;token script language-javascript&quot;&gt;&lt;span class=&quot;token script-punctuation punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;setIsOpen&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;!&lt;/span&gt;isOpen&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token plain-text&quot;&gt;toggle&lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;button&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token plain-text&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;isOpen &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;Dialog&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;/&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token plain-text&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;VerySlowComponentMemo&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;token script language-javascript&quot;&gt;&lt;span class=&quot;token script-punctuation punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;data&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;onClick&lt;/span&gt;&lt;span class=&quot;token script language-javascript&quot;&gt;&lt;span class=&quot;token script-punctuation punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;onClick&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;/&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token plain-text&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;div&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;컴파일러는 여기서도 완벽하게 작동했으며 결과는 첫 번째 예제와 동일했습니다. 모든 것이 정확하게 메모되고 &lt;code class=&quot;language-text&quot;&gt;Dialog&lt;/code&gt;가 지연 없이 열립니다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;세 번째 예제&lt;/strong&gt;에서는 다음과 같이 느린 컴포넌트에 다른 컴포넌트를 자식으로 전달했습니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;tsx&quot;&gt;&lt;pre class=&quot;language-tsx&quot;&gt;&lt;code class=&quot;language-tsx&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token function-variable function&quot;&gt;SimpleCase&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;isOpen&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; setIsOpen&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;useState&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token boolean&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;div&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token plain-text&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;button&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;onClick&lt;/span&gt;&lt;span class=&quot;token script language-javascript&quot;&gt;&lt;span class=&quot;token script-punctuation punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;setIsOpen&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;!&lt;/span&gt;isOpen&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token plain-text&quot;&gt;toggle&lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;button&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token plain-text&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;isOpen &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;Dialog&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;/&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token plain-text&quot;&gt;
+
+      &amp;lt;!-- Acceps Child now --&gt;
+      &lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;VerySlowComponent&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token plain-text&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;Child&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;/&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token plain-text&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;VerySlowComponent&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token plain-text&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;div&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;이 코드를 메모하는 방법을 바로 떠올릴 수 있나요?&lt;br&gt;
+대부분의 사람들은 다음과 같이 생각할 것입니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;tsx&quot;&gt;&lt;pre class=&quot;language-tsx&quot;&gt;&lt;code class=&quot;language-tsx&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; VerySlowComponentMemo &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; React&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;memo&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;VerySlowComponent&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; ChildMemo &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; React&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;memo&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;Child&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token function-variable function&quot;&gt;SimpleCase&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;div&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token plain-text&quot;&gt;
+      ...
+      &lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;VerySlowComponentMemo&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token plain-text&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;ChildMemo&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;/&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token plain-text&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;VerySlowComponentMemo&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token plain-text&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;div&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;안타깝게도 이는 잘못된 방법입니다. 이 트리 형태의 구문은 단순히 &lt;code class=&quot;language-text&quot;&gt;children&lt;/code&gt; 프로퍼티를 위한 문법적 설탕에 불과합니다. 위의 코드는 아래와 같이 쉽게 재작성될 수 있습니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;tsx&quot;&gt;&lt;pre class=&quot;language-tsx&quot;&gt;&lt;code class=&quot;language-tsx&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; VerySlowComponentMemo &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; React&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;memo&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;VerySlowComponent&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; ChildMemo &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; React&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;memo&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;Child&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token function-variable function&quot;&gt;SimpleCase&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;div&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token plain-text&quot;&gt;
+      ...
+      &lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;VerySlowComponentMemo&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;children&lt;/span&gt;&lt;span class=&quot;token script language-javascript&quot;&gt;&lt;span class=&quot;token script-punctuation punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;ChildMemo&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;/&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;/&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token plain-text&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;div&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;또한, 여기서 &lt;code class=&quot;language-text&quot;&gt;&amp;lt;ChildMemo /&gt;&lt;/code&gt;는 &lt;code class=&quot;language-text&quot;&gt;React.createElement&lt;/code&gt; 함수 호출의 결과로 생성된 요소에 대한 문법적 설탕에 불과합니다. 이는 &lt;code class=&quot;language-text&quot;&gt;type&lt;/code&gt; 속성이 &lt;code class=&quot;language-text&quot;&gt;ChildMemo&lt;/code&gt; 함수를 가리키는 객체입니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;tsx&quot;&gt;&lt;pre class=&quot;language-tsx&quot;&gt;&lt;code class=&quot;language-tsx&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; VerySlowComponentMemo &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; React&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;memo&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;VerySlowComponent&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; ChildMemo &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; React&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;memo&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;Child&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token function-variable function&quot;&gt;SimpleCase&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;div&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token plain-text&quot;&gt;
+      ...
+      &lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;VerySlowComponentMemo&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;children&lt;/span&gt;&lt;span class=&quot;token script language-javascript&quot;&gt;&lt;span class=&quot;token script-punctuation punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token literal-property property&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; ChildMemo &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;/&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token plain-text&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;div&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;안타깝게도 여기서 우리가 직면한 문제는, 메모이제이션된 컴포넌트에 메모이제이션되지 않은 객체가 프로퍼티로 전달된다는 점입니다. 메모이제이션은 작동하지 않으며, 상태가 변경될 때마다 &lt;code class=&quot;language-text&quot;&gt;VerySlowComponentMemo&lt;/code&gt;가 다시 렌더링됩니다.&lt;/p&gt;
+&lt;p&gt;이 예제를 메모이제이션하는 올바른 방법은 다른 객체와 동일하게 처리하는 것입니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;tsx&quot;&gt;&lt;pre class=&quot;language-tsx&quot;&gt;&lt;code class=&quot;language-tsx&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; VerySlowComponentMemo &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; React&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;memo&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;VerySlowComponent&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; ChildMemo &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; React&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;memo&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;Child&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token function-variable function&quot;&gt;SimpleCase1&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; children &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;useMemo&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;ChildMemo&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;/&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;div&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token plain-text&quot;&gt;
+      ...
+      &lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;VerySlowComponentMemo&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;children&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;VerySlowComponentMemo&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token plain-text&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;div&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;메모이제이션되지 않은 세 번째 예제에서 컴파일러를 활성화한 결과는 이전과 정확히 동일했습니다. 컴파일러는 이를 올바르게 메모이제이션했고, 성능 문제가 해결되었습니다.&lt;/p&gt;
+&lt;p&gt;현재까지 컴파일러는 3전 3승입니다. 🏆🏆🏆&lt;/p&gt;
+&lt;p&gt;하지만 이런 작은 예제는 “쉽습니다.” 컴파일러를 제대로 테스트하기 위해 한동안 작업해 온 &lt;a href=&quot;https://www.buckets-ui.com/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;실제 앱&lt;/a&gt;에서 실행해 보았습니다.&lt;/p&gt;
+&lt;h2 id=&quot;실제-앱에서의-리액트-컴파일러&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%8B%A4%EC%A0%9C-%EC%95%B1%EC%97%90%EC%84%9C%EC%9D%98-%EB%A6%AC%EC%95%A1%ED%8A%B8-%EC%BB%B4%ED%8C%8C%EC%9D%BC%EB%9F%AC&quot; aria-label=&quot;실제 앱에서의 리액트 컴파일러 permalink&quot; class=&quot;heading-anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;실제 앱에서의 리액트 컴파일러&lt;/h2&gt;
+&lt;p&gt;이 앱은 완전히 새롭게 만들어졌으며, 타입스크립트로 작성되어 있고, 레거시 코드가 전혀 없으며, 오직 훅만 사용됩니다. 그리고 모든 것이 (대체로) 최신의 모범 사례를 따릅니다. 랜딩 페이지와 몇 개의 내부 페이지가 있으며, 전체 코드는 약 15,000줄입니다. 아주 큰 앱은 아니지만 제대로 테스트하기에 충분하다고 생각합니다.&lt;/p&gt;
+&lt;p&gt;컴파일러를 활성화하기 전에 리액트 팀에서 제공한 &lt;a href=&quot;https://react.dev/learn/react-compiler&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;헬스 체크 및 eslint&lt;/a&gt;를 실행했습니다. 다음은 헬스 체크 결과입니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;Successfully compiled 361 out of 363 components.
+
+Found no usage of incompatible libraries.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;그리고 ESLint 규칙 위반은 0건이었습니다.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://developer.chrome.com/docs/lighthouse/overview&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Lighthouse&lt;/a&gt;를 사용해 초기 로드 및 상호작용 성능을 측정했습니다. 모든 측정은 프로덕션 빌드 상태에서 모바일 모드로 CPU를 4배 느리게 한 상태에서 수행되었습니다. 모든 테스트는 5회 반복한 후 평균 값을 추출했습니다.&lt;/p&gt;
+&lt;p&gt;이제 질문에 답할 시간입니다.&lt;/p&gt;
+&lt;h2 id=&quot;초기-로드-성능과-리액트-컴파일러&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%B4%88%EA%B8%B0-%EB%A1%9C%EB%93%9C-%EC%84%B1%EB%8A%A5%EA%B3%BC-%EB%A6%AC%EC%95%A1%ED%8A%B8-%EC%BB%B4%ED%8C%8C%EC%9D%BC%EB%9F%AC&quot; aria-label=&quot;초기 로드 성능과 리액트 컴파일러 permalink&quot; class=&quot;heading-anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;초기 로드 성능과 리액트 컴파일러&lt;/h2&gt;
+&lt;p&gt;가장 먼저 측정한 페이지는 앱의 “랜딩” 페이지였습니다. 컴파일러 활성화 전의 통계는 다음과 같습니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 700px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/52123611b8f2c78d46e33f111501245b/d6a46/10.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 34.285714285714285%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAHCAYAAAAIy204AAAACXBIWXMAABYlAAAWJQFJUiTwAAAAxUlEQVQoz42RUW/DIAyE8///3vaaLqvaSRPGUZsGCAbfBKoikUTKLN0D8GHfQUfhAWaGtRZEBOccSqkq1lJFXXmPB3Plyh1jDEIIDd/N0eHK36CJIFEgIivQqGxKwjwMeA0DlmWpSik1fBdzqo1iVUTOed+sTFfFogmpcN7XwUd89zMTPr8+0N96sOUKbSO//YFlwo3uILJr5OKyiaw5gQJhkudx1I1LLw7bahz+uhFsLEYed+9x2PTkvH7KhXqYyZzC/9EfWP0lQ/VoOnAAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;initial-load-stats-before.png&quot;
+        title=&quot;initial-load-stats-before.png&quot;
+        src=&quot;/static/52123611b8f2c78d46e33f111501245b/8c557/10.png&quot;
+        srcset=&quot;/static/52123611b8f2c78d46e33f111501245b/4edbd/10.png 175w,
+/static/52123611b8f2c78d46e33f111501245b/13ae7/10.png 350w,
+/static/52123611b8f2c78d46e33f111501245b/8c557/10.png 700w,
+/static/52123611b8f2c78d46e33f111501245b/d6a46/10.png 1008w&quot;
+        sizes=&quot;(max-width: 700px) 100vw, 700px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;컴파일러를 활성화하고 작동하는지 확인합니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 508px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/806309547e06b51e57bfcada42403f32/2fd48/11.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 95.42857142857143%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAATCAYAAACQjC21AAAACXBIWXMAABYlAAAWJQFJUiTwAAACLUlEQVQ4y5VUTW/aQBD1r+TICQn1D3Dvqb+haq9VT0VpVCVRe6pEC2qFCm2DoEkIMRibtbHxrr+/XrVrQDY4LVnpaWd3Zt7O6HksAUCWZditQztNU2EPh0OBfr+PyWQCWZbF7vt+KU/aGXwv2od34/EYnU4H3W4XvV4Po9EIg8EAQRCcTlhVddUq+k+ukLfOEcfxHkmSHJGeVOGp1f2TsAi+wjBErVZDq9VCs9lEvV6HbdtH8dJhchk7pXPSRqMBSZL2aLfb4p63vyf8T0Olk+MwnJ+/x+XFBa6uLrE2jKMMybQ9rDcOzI0LmwVgbgTDYthQH46fwLRdmNxvu/DCTDyRbpP9CCKW59tOCOpGkB6UNW4fNNzcLyGrJlamh8ndAjPFgL4JxP1kquB+TkAsX/g4NMPF2g7xZ6oI8FxiesctF5tM0gxp9riiGjHgB+HWl0PajVcSJ0gSvud2HKelZ6qUp5QJ9Usq82DPDaHOKXTNwVKmkGcUpuZgSiJ8m/nwo/RRUlFQmZBPQQKiMsynNojC4BEH1zcUz94SPP9AEG2rrRrJIvn2w85bstYeVnOKX7cMrz5beNOz8PXOg86ifPREYHWFRXs/Kb4XQVcdTGUXH7+bOPtB8foLxe9lWCA8FqiCMDe4ILrmQl8yMOJgYwdYGAyMMURhcNIPZE/IW+EVagoToqgLBn3F0Pkp46wzhm6YTyHMD1GYQJWpIFRmXGkLLz9N8eLdNcgTCP8CkpOx03pNT0EAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;initial-load-compiler-works.png&quot;
+        title=&quot;initial-load-compiler-works.png&quot;
+        src=&quot;/static/806309547e06b51e57bfcada42403f32/2fd48/11.png&quot;
+        srcset=&quot;/static/806309547e06b51e57bfcada42403f32/4edbd/11.png 175w,
+/static/806309547e06b51e57bfcada42403f32/13ae7/11.png 350w,
+/static/806309547e06b51e57bfcada42403f32/2fd48/11.png 508w&quot;
+        sizes=&quot;(max-width: 508px) 100vw, 508px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;그리고 결과를 측정합니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 700px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/d49ddc46b5774ae76e134989ae9931ed/a2792/12.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 36.57142857142857%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAHCAYAAAAIy204AAAACXBIWXMAABYlAAAWJQFJUiTwAAABXUlEQVQoz5WSsU7CYBSFmzACAZ6ACQYQJhZNTHkYnXgWQtSEV8BJ7NBKFQcLA+EFHEyMmqhULfxCq/Qv5TOUBAdNjDf5lnuSe0/uucrB0SHmVZdTrU2n06HX623o9/v0Li8xNA1d1yPdsiyGwyHlcplYLEYymSSRSBCPx0mn0yiDwYA/y/N+tPb39qhUKuyqKjvb26iqSqFQQDnvXjDx37l/vGc6nSKlRAaS+XzO2BU8OyPexg6e50Wa7/sR4XKJFALx9IQQIlrSaDRQriyLgJDxzPnh4kPOEe6EmTsjDMNvYblc658unuMwc93vgSftNnejB65vrnl9eWVkj7BtO2Ll8Na+xXZspC8JgmDDYrHgzZ0wngrEZO2wXq+j5HK56MBbpS2KxSKlUol8Pk+1WsVxBf+pZrOJkslkSKVSG1ZJrVLLZrO0jltoZxq6oWOa55im+SuGYURfUavV+AIXfMSMsIhRdwAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;intial-load-stats-after.png&quot;
+        title=&quot;intial-load-stats-after.png&quot;
+        src=&quot;/static/d49ddc46b5774ae76e134989ae9931ed/8c557/12.png&quot;
+        srcset=&quot;/static/d49ddc46b5774ae76e134989ae9931ed/4edbd/12.png 175w,
+/static/d49ddc46b5774ae76e134989ae9931ed/13ae7/12.png 350w,
+/static/d49ddc46b5774ae76e134989ae9931ed/8c557/12.png 700w,
+/static/d49ddc46b5774ae76e134989ae9931ed/e996b/12.png 1050w,
+/static/d49ddc46b5774ae76e134989ae9931ed/2cefc/12.png 1400w,
+/static/d49ddc46b5774ae76e134989ae9931ed/a2792/12.png 1462w&quot;
+        sizes=&quot;(max-width: 700px) 100vw, 700px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;첫 번째 이미지는 활성화 전이고, 두 번째 이미지는 활성화 후입니다. 보시다시피 결과는 거의 동일합니다.&lt;/p&gt;
+&lt;p&gt;확실히 하기 위해 몇 페이지에서 더 실행해 보았는데 결과는 거의 동일했습니다. 일부 수치는 약간 증가했고 일부는 감소했습니다. 큰 변화는 없었습니다.&lt;/p&gt;
+&lt;p&gt;컴파일러에 또 하나의 승리를 추가할 수 있을 것 같습니다(🏆🏆🏆🏆). 제가 조사한 첫 번째 질문에 대한 답은, &lt;strong&gt;컴파일러는 초기 로드에 거의 영향을 미치지 않거나 전혀 영향을 미치지 않는다는 것&lt;/strong&gt;입니다. 따라서, 이는 좋은 소식입니다. 모든 것을 메모이제이션하더라도 상황이 나빠지지 않습니다.&lt;/p&gt;
+&lt;h2 id=&quot;상호작용-성능과-리액트-컴파일러&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%83%81%ED%98%B8%EC%9E%91%EC%9A%A9-%EC%84%B1%EB%8A%A5%EA%B3%BC-%EB%A6%AC%EC%95%A1%ED%8A%B8-%EC%BB%B4%ED%8C%8C%EC%9D%BC%EB%9F%AC&quot; aria-label=&quot;상호작용 성능과 리액트 컴파일러 permalink&quot; class=&quot;heading-anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;상호작용 성능과 리액트 컴파일러&lt;/h2&gt;
+&lt;h3 id=&quot;첫-페이지-측정하기&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EC%B2%AB-%ED%8E%98%EC%9D%B4%EC%A7%80-%EC%B8%A1%EC%A0%95%ED%95%98%EA%B8%B0&quot; aria-label=&quot;첫 페이지 측정하기 permalink&quot; class=&quot;heading-anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;첫 페이지 측정하기&lt;/h3&gt;
+&lt;p&gt;상호작용 성능을 측정하기 위해 ‘컴포넌트’ 페이지부터 시작했습니다. 이 페이지에서는 제가 작업 중인 UI 컴포넌트 라이브러리의 리액트 컴포넌트 미리보기를 보여주고 있습니다. 미리보기는 버튼부터 전체 페이지까지 무엇이든 될 수 있습니다. 저는 ‘설정’ 페이지의 미리 보기를 측정했습니다.&lt;/p&gt;
+&lt;p&gt;미리보기 페이지에는 ‘라이트’ 및 ‘다크’ 모드 토글이 있습니다. 아래에서 볼 수 있듯이 모드를 전환하면 미리보기가 다시 렌더링되며 녹색 선이 이를 나타냅니다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/b9ee9e22022806df5a3bc1f55735baf1/13.gif&quot; alt=&quot;components-preview-re-renders.gif&quot;&gt;&lt;/p&gt;
+&lt;p&gt;컴파일러를 사용하기 전과 후의 상호 작용 성능은 다음과 같습니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 700px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/08808a0cc449650c32309d8283b2341e/5f652/14.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 49.71428571428571%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAACXBIWXMAABYlAAAWJQFJUiTwAAACJklEQVQoz3WSTUsbURSGJzNJRJLJdyYppQtb664LN4Ixi4BaSAhmEQKiBAN2peDGfrmwdAxmJjZxUaj+iP6QLFrpHwilrXYhLSYhommrPOVe66CLHjjcj/Pec9573qPEYjGER6NRgsEggUCAUCiEruvyHI/HZVys1/Frj0WjhKNxRh7cJfIPpxiGIYG5XI5sNsvMzAyZTIZ0Os34+DiRSASBEUXE3fz8PNPT00xOpkjEIsw+nqXx/hOlhTK634ciKotHhbk5VldXqVQqlEolyuUyxWJRFhMJw+EwhUKBpaUllpeXWVhcxIgEyRQrvP1wQe7JC3Tf8BVDn8+HqqqoLheKosi9WN1u960vu27Exd6lKGjDAYzRR8TvjcoWKKIXgt2bHYtXZhWzWmVra4tGo8Ha2ppkL5IlDINnL5/T3N3FrtlYlkWz2aRuWzy8P0IoqMufKB6Ph/39PYQNjj7D+SnX1m63HWHuJJN8/X7IL/7QHXS4aVNTafx+nUQigTI0NIRl21xwSe/4mH6ny8nJiQS2Wi0phkiYTCb5eHDA+e8B3W6XXq9Hv9+n0+kwMTEhp8Jh+G7viuFh/4jTy/8z/HL0jTMG/Dz7cYthKpXC7/dfMRQ9zOfzWLUaG5sbbL7exDRNtmvbrKysOD0U1Z+ur2PtWJjbJrZtU6/XqVarjI2NySkQOEdloZpbc6OpmqOi1+t1VBbu8XpkXODkVKgqmqY5RcVg/wWCE4iJK5SAegAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;settings-page-re-renders-performance.png&quot;
+        title=&quot;settings-page-re-renders-performance.png&quot;
+        src=&quot;/static/08808a0cc449650c32309d8283b2341e/8c557/14.png&quot;
+        srcset=&quot;/static/08808a0cc449650c32309d8283b2341e/4edbd/14.png 175w,
+/static/08808a0cc449650c32309d8283b2341e/13ae7/14.png 350w,
+/static/08808a0cc449650c32309d8283b2341e/8c557/14.png 700w,
+/static/08808a0cc449650c32309d8283b2341e/e996b/14.png 1050w,
+/static/08808a0cc449650c32309d8283b2341e/5f652/14.png 1302w&quot;
+        sizes=&quot;(max-width: 700px) 100vw, 700px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;컴파일러를 활성화하면 총 blocking 시간이 280ms에서 말 그대로 0으로 감소했습니다!&lt;/p&gt;
+&lt;p&gt;이것은 매우 인상적입니다. 하지만 궁금한 점도 생겼습니다. 정확히 어떻게 이런 일이 발생했을까요? 제가 코드에서 무엇을 잘못했을까요?&lt;/p&gt;
+&lt;p&gt;이 페이지의 코드는 다음과 같습니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;tsx&quot;&gt;&lt;pre class=&quot;language-tsx&quot;&gt;&lt;code class=&quot;language-tsx&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;Preview&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; renderCode &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;useRenderCode&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; darkMode &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;useDarkMode&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;div&lt;/span&gt;
+      &lt;span class=&quot;token attr-name&quot;&gt;className&lt;/span&gt;&lt;span class=&quot;token script language-javascript&quot;&gt;&lt;span class=&quot;token script-punctuation punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;merge&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+        darkMode &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;dark&apos;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;dark bg-buGray900&apos;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;bg-buGray25&apos;&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token plain-text&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;LiveProvider&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;code&lt;/span&gt;&lt;span class=&quot;token script language-javascript&quot;&gt;&lt;span class=&quot;token script-punctuation punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;renderCode&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;trim&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;language&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation attr-equals&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&apos;&lt;/span&gt;tsx&lt;span class=&quot;token punctuation&quot;&gt;&apos;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token plain-text&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;LivePreview&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;/&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token plain-text&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;LiveProvider&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token plain-text&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;div&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;LiveProvider&lt;/code&gt; 블록은 문자열로 전달된 전체 “설정” 컴포넌트를 렌더링하는 부분입니다. 이는 처음에 다뤘던 간단한 예제 중 하나와 매우 유사합니다. 몇 개의 프로퍼티를 가진 매우 느린 컴포넌트(&lt;code class=&quot;language-text&quot;&gt;LiveProvider&lt;/code&gt;)입니다.&lt;/p&gt;
+&lt;p&gt;컴파일러가 이를 감지한 것은 매우 흥미로웠습니다. 하지만 약간 속임수 같기도 했습니다. 😅 더 일반적인 시나리오는 크고 작은 컴포넌트들이 여기저기에 존재하는 경우일 것입니다. 그래서 좀 더 현실적인 페이지를 측정해 보았습니다.&lt;/p&gt;
+&lt;h3 id=&quot;두-번째-페이지-측정&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%91%90-%EB%B2%88%EC%A7%B8-%ED%8E%98%EC%9D%B4%EC%A7%80-%EC%B8%A1%EC%A0%95&quot; aria-label=&quot;두 번째 페이지 측정 permalink&quot; class=&quot;heading-anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;두 번째 페이지 측정&lt;/h3&gt;
+&lt;p&gt;다음 페이지에서는 헤더, 푸터, 그리고 그 사이에 카드 목록이 있습니다. 헤더에는 버튼, 입력 필드, 체크박스와 같은 몇 개의 “빠른 필터”가 있습니다. 버튼을 선택하면 버튼이 포함된 모든 카드 목록이 나타납니다. 체크박스를 활성화하면 체크박스가 포함된 카드가 목록에 추가됩니다.&lt;/p&gt;
+&lt;p&gt;메모이제이션하지 않으면 매우 긴 카드 목록을 포함한 전체 페이지가 다시 렌더링됩니다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/c43db8b3186d6ed87cfb9cfdabf25dc8/15.gif&quot; alt=&quot;checkbox-re-renders-before-compiler.gif&quot;&gt;&lt;/p&gt;
+&lt;p&gt;체크박스 카드를 기존 목록에 추가하는 동작의 성능은 컴파일러 활성화 전후 다음과 같습니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 700px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/d9e3d19902de5c6ffc18aebfc2e65fa7/5f652/16.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 49.71428571428571%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAACXBIWXMAABYlAAAWJQFJUiTwAAACXElEQVQoz0VTS09aQRi9PBq1PAXulRBrg7bhZbqgF7igibKRlS59EhQCadxJ4qLxP3TVxw5Eok1c9Bc0af9Du7EbUyoqV6DAlUfE0tPM16iTTL6ZL+c758x8M5zNZoMgCBgdHYVer4fJZKKo0+kox/M8GIZNi8VC0Ww2Y2RkhPZWqxW+QAji3BysvB2c0WjE5uYmtre3kUqlkEwmEYvFsLy8DJfLRcVMkAmtrq4inU4jk8kgvrGB5y4Pnj2x4M3RVxS+/EJI8oNjKvPReaytrWF9fZ2IlpaWKHo8HiLkBZ6cLCwskNjKygoJT01NQnCM49WHz3j96QecL0Lg2LEeabVQqVTgOA4qtQpqtZrWBoOB3N0dWavRQqPR0GT4oaEhPNbpYRTGYbI/hU2wg4tGoyh+PEQ+l8d+bh+5XA75fB7Hx8dYXFwkUuZu0unE2/fvcHh0hIP9AxQKBRSLRYrTXjfMRgMEngeXSafBRq1bQ0W5xAAD3I29vT0MDw/T5U/7fKi3W+jiBjWlitvB7T1udnaWGjk2NgYukUhQstqqQm7JaHfb6HQ6lMtms9RN5tDt8aB8VsZ1X8F56xy9fg+DPwPChsNhImTXwyW3tvAXgFyXcfX7Co1mA81mkwh3d3fvn4fP60WpUkbrpg25WkG9UYeiKOj3+4hEIg8O4/E4FZ/Kpzi5PEHjuoFO+7/DnZ2dB4duN0o/S5AVGd/PvuGifoFet0ekkiQ9OJyYmIAoigiKQUgBCeJLEX6/H4FAAE6nk8hYh+12O+UjUgQz4RmEQ2EEg0HCORwOwrFP8A9c/a2guqqBuwAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;checkbox-re-renders-performance.png&quot;
+        title=&quot;checkbox-re-renders-performance.png&quot;
+        src=&quot;/static/d9e3d19902de5c6ffc18aebfc2e65fa7/8c557/16.png&quot;
+        srcset=&quot;/static/d9e3d19902de5c6ffc18aebfc2e65fa7/4edbd/16.png 175w,
+/static/d9e3d19902de5c6ffc18aebfc2e65fa7/13ae7/16.png 350w,
+/static/d9e3d19902de5c6ffc18aebfc2e65fa7/8c557/16.png 700w,
+/static/d9e3d19902de5c6ffc18aebfc2e65fa7/e996b/16.png 1050w,
+/static/d9e3d19902de5c6ffc18aebfc2e65fa7/5f652/16.png 1302w&quot;
+        sizes=&quot;(max-width: 700px) 100vw, 700px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;blocking 시간이 130ms에서 90ms로 감소했습니다. 여전히 꽤 괜찮고, 훨씬 더 현실적입니다! 하지만 해당 페이지의 모든 리렌더링이 제거되었다면, 수치는 훨씬 더 많이 감소할 것으로 예상했습니다. 기존 목록에 몇 개의 카드만 추가하는 것은 거의 즉각적으로 이루어져야 합니다.&lt;/p&gt;
+&lt;p&gt;여기서 다시 렌더링이 발생하는 상황을 확인했는데, 안타깝게도 그렇습니다. 대부분의 리렌더링은 제거되었지만, 페이지에서 가장 무거운 카드 자체는 여전히 리렌더링됩니다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/91627aeed52c585b893b7704c2313228/17.gif&quot; alt=&quot;checkbox-re-renders-after-compiler.gif&quot;&gt;&lt;/p&gt;
+&lt;p&gt;코드를 다시 확인해봤는데, 정말 미스터리 합니다. 왜냐하면 이 코드는 리액트에서 가장 표준적인 코드이기 때문입니다. 데이터 배열을 map으로 순회하고, 내부에 &lt;code class=&quot;language-text&quot;&gt;GalleryCard&lt;/code&gt; 아이템을 렌더링하는 식이죠.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;tsx&quot;&gt;&lt;pre class=&quot;language-tsx&quot;&gt;&lt;code class=&quot;language-tsx&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  data&lt;span class=&quot;token operator&quot;&gt;?.&lt;/span&gt;data&lt;span class=&quot;token operator&quot;&gt;?.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;example&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+      &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;GalleryCard&lt;/span&gt;&lt;/span&gt;
+        &lt;span class=&quot;token attr-name&quot;&gt;href&lt;/span&gt;&lt;span class=&quot;token script language-javascript&quot;&gt;&lt;span class=&quot;token script-punctuation punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token template-string&quot;&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;/examples/code-examples/&lt;/span&gt;&lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;${&lt;/span&gt;example&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;key&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;
+        &lt;span class=&quot;token attr-name&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;token script language-javascript&quot;&gt;&lt;span class=&quot;token script-punctuation punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;example&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;key&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;
+        &lt;span class=&quot;token attr-name&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;token script language-javascript&quot;&gt;&lt;span class=&quot;token script-punctuation punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;example&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;name&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;
+        &lt;span class=&quot;token attr-name&quot;&gt;preview&lt;/span&gt;&lt;span class=&quot;token script language-javascript&quot;&gt;&lt;span class=&quot;token script-punctuation punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;example&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;previewUrl&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;/&gt;&lt;/span&gt;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;컴파일러 문제를 디버깅할 때 가장 먼저 하는 일은 고전적인 도구로 메모이제이션을 다시 구현하는 것입니다. 이번 경우에는 카드 컴포넌트를 React.memo로 감싸는 것만으로 충분합니다. 만약 코드가 괜찮다면, 기존 카드들은 리렌더링을 멈출 것이며, 이는 컴파일러가 이 컴포넌트를 어떤 이유로 건너뛰었다는 것을 의미합니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;tsx&quot;&gt;&lt;pre class=&quot;language-tsx&quot;&gt;&lt;code class=&quot;language-tsx&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// 이전 어딘가에서&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; GalleryCardMemo &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; React&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;memo&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;GalleryCardMemo&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;// render 함수 어딘가에서&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  data&lt;span class=&quot;token operator&quot;&gt;?.&lt;/span&gt;data&lt;span class=&quot;token operator&quot;&gt;?.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;example&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+      &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;GalleryCardMemo&lt;/span&gt;&lt;/span&gt;
+        &lt;span class=&quot;token attr-name&quot;&gt;href&lt;/span&gt;&lt;span class=&quot;token script language-javascript&quot;&gt;&lt;span class=&quot;token script-punctuation punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token template-string&quot;&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;/examples/code-examples/&lt;/span&gt;&lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;${&lt;/span&gt;example&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;key&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;
+        &lt;span class=&quot;token attr-name&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;token script language-javascript&quot;&gt;&lt;span class=&quot;token script-punctuation punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;example&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;key&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;
+        &lt;span class=&quot;token attr-name&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;token script language-javascript&quot;&gt;&lt;span class=&quot;token script-punctuation punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;example&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;name&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;
+        &lt;span class=&quot;token attr-name&quot;&gt;preview&lt;/span&gt;&lt;span class=&quot;token script language-javascript&quot;&gt;&lt;span class=&quot;token script-punctuation punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;example&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;previewUrl&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;/&gt;&lt;/span&gt;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;하지만, 그런 일은 일어나지 않았습니다.&lt;/p&gt;
+&lt;p&gt;이는 컴파일러의 문제가 아니라, 코드 자체에 심각한 문제가 있다는 것을 의미합니다.&lt;/p&gt;
+&lt;p&gt;우리가 이미 알고 있듯이, 메모이제이션된 컴포넌트에서 단 하나의 프로퍼티라도 변경되면 메모이제이션은 작동하지 않고, 리렌더링이 발생합니다. 그러므로 프로퍼티에 문제가 있을 것입니다. 좀 더 자세히 살펴보니, 프로퍼티 대부분은 원시 문자열이었지만 &lt;code class=&quot;language-text&quot;&gt;example.previewUrl&lt;/code&gt;만 예외였습니다. 이것은 객체였습니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;{
+  light: &quot;/public/light/...&quot;,
+  dark: &quot;/public/dark/...&quot;,
+};&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;그러면 객체는 다시 렌더링할 때마다 참조를 변경하고 있습니다. 어떻게 된 일 일까요? 이 데이터는 &lt;a href=&quot;https://tanstack.com/query/latest&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;리액트쿼리 라이브러리&lt;/a&gt;를 사용해 REST 엔드포인트를 쿼리하여 가져오는 &lt;code class=&quot;language-text&quot;&gt;data&lt;/code&gt; 변수에서 가져왔습니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;tsx&quot;&gt;&lt;pre class=&quot;language-tsx&quot;&gt;&lt;code class=&quot;language-tsx&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; data &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;useQuery&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  queryKey&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;examples&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; elements&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;,&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token function-variable function&quot;&gt;queryFn&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; json &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;fetch&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token template-string&quot;&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;/examples?elements=&lt;/span&gt;&lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;${&lt;/span&gt;elements&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;,&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; data &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;await&lt;/span&gt; json&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; data&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;리액트쿼리는 &lt;code class=&quot;language-text&quot;&gt;queryKey&lt;/code&gt;에 제공된 키를 기준으로 &lt;code class=&quot;language-text&quot;&gt;queryFn&lt;/code&gt;에서 반환된 데이터를 캐시합니다. 제 경우에는 선택된 요소에 따라 &lt;code class=&quot;language-text&quot;&gt;elements&lt;/code&gt; 배열을 결합해 키를 변경하고 있었습니다. 따라서 버튼만 선택되면 키는 &lt;code class=&quot;language-text&quot;&gt;button&lt;/code&gt;이 되고, 체크박스가 목록에 추가되면 키는 &lt;code class=&quot;language-text&quot;&gt;button,checkbox&lt;/code&gt;로 바뀝니다.&lt;/p&gt;
+&lt;p&gt;리액트쿼리가 이 두 키와 해당 키에 대해 반환된 데이터를 완전히 다른 데이터 배열로 간주한다는 것입니다. 이 부분은 이해가 됩니다. 저는 그것들이 동일한 배열이며 단순히 업데이트될 수 있다고 명시하지 않았으니까요.&lt;/p&gt;
+&lt;p&gt;제가 의심하는 바는, 키가 &lt;code class=&quot;language-text&quot;&gt;button&lt;/code&gt;에서 &lt;code class=&quot;language-text&quot;&gt;button,checkbox&lt;/code&gt;로 변경될 때, 쿼리 라이브러리가 새로운 데이터를 가져와 완전히 새로운 배열로 반환하고, 내부의 모든 객체는 완전히 새로운 참조를 갖는다는 것입니다. 그 결과, 메모이제이션된 &lt;code class=&quot;language-text&quot;&gt;GalleryCard&lt;/code&gt; 컴포넌트는 비원시 프로퍼티 중 하나에 대해 새로운 참조를 받게 되고, 메모이제이션은 작동하지 않으며, 데이터는 기술적으로 동일하지만 여전히 리렌더링됩니다.&lt;/p&gt;
+&lt;p&gt;이를 확인하는 방법은 매우 간단합니다. 단순히 해당 객체를 원시 프로퍼티로 변환해 참조 변경을 제거하면 됩니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;tsx&quot;&gt;&lt;pre class=&quot;language-tsx&quot;&gt;&lt;code class=&quot;language-tsx&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  data&lt;span class=&quot;token operator&quot;&gt;?.&lt;/span&gt;data&lt;span class=&quot;token operator&quot;&gt;?.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;example&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+      &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;GalleryCardMemo&lt;/span&gt;&lt;/span&gt;
+        &lt;span class=&quot;token attr-name&quot;&gt;href&lt;/span&gt;&lt;span class=&quot;token script language-javascript&quot;&gt;&lt;span class=&quot;token script-punctuation punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token template-string&quot;&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;/examples/code-examples/&lt;/span&gt;&lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;${&lt;/span&gt;example&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;key&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;
+        &lt;span class=&quot;token attr-name&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;token script language-javascript&quot;&gt;&lt;span class=&quot;token script-punctuation punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;example&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;key&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;
+        &lt;span class=&quot;token attr-name&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;token script language-javascript&quot;&gt;&lt;span class=&quot;token script-punctuation punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;example&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;name&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;
+        &lt;span class=&quot;token comment&quot;&gt;// 전체 객체 대신 원시 값들을 전달&lt;/span&gt;
+        &lt;span class=&quot;token attr-name&quot;&gt;previewLight&lt;/span&gt;&lt;span class=&quot;token script language-javascript&quot;&gt;&lt;span class=&quot;token script-punctuation punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;example&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;previewUrl&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;light&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;
+        &lt;span class=&quot;token attr-name&quot;&gt;previewDark&lt;/span&gt;&lt;span class=&quot;token script language-javascript&quot;&gt;&lt;span class=&quot;token script-punctuation punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;example&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;previewUrl&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;dark&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;/&gt;&lt;/span&gt;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;실제로 이 작업을 수행한 후 모든 리렌더링이 완전히 중단되었습니다!&lt;/p&gt;
+&lt;p&gt;마지막 단계는 변경 사항이 실제로 얼마나 영향을 미쳤는지 측정하는 것입니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 700px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/7a10cf73802c8b90a805d1ddb199a62f/eee07/18.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 39.42857142857142%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAICAYAAAD5nd/tAAAACXBIWXMAABYlAAAWJQFJUiTwAAACGUlEQVQozz2QT0zScRjGf0PWkP/w+0H4j4NsDlzE1qyJtsWcB13oJUlShrSB42BMD+lJ/AMlrvDgrIteWp26tVanPLVaR49e6qAHpkDpIpvJ+DS+mzzbu/d59rzvu/d9pfb2dtxuNy0tLTidTux2OzabDVmWcTgcuFwuOjo6hHZf83L9Rg+y1UxrWxtdXV2ixmqVGb4l43LakLxeL+l0mng8TjKZJJFIMDg4iFarxe/3k0qlWFxMM3p3mHh6k/T2R4waFaH748zPP2Y6kWAsPMG3twsEerqR9Ho9RqMRk9kk8mUoioLFbEGj0WCVZfQ6LVcUJw7PTRTFhsViQafTYTabUOx2PN4+Wq86ke6Fxsitr7OytMLy0jK5XI7Z2VkMegMjoyM8z+fJrGRYXc2w8WydO7f7aG5uJj6dIJ/fIJvJks1myeWe4On2IL1685o6CpUClzg8PESlUrG5tSV06azY8OYXFpAkic9fvwh9dvGn4dVfJW29fMEFVQrFAqVyiVqtxt7eHmq1mqdra9SA8q8Sp6enomnm0YwY+O7Deyr/zjguHlEul6lWqwQCAaTtnR1RePDzgMrfiuD7+/s0NTWJc+v4cfSdk98ngs/NzYmBn3Z3OeecUqXU2HBgYACpv7+fSCRCaDxEOBwWPBgMYjKZ8Pf2MjUVJfQgxMTkBLFYDJ/Ph8FgYGhoiNjDGJORSaLRqPA6Ozv5D9dqcXhG4H3MAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;final-summary.png&quot;
+        title=&quot;final-summary.png&quot;
+        src=&quot;/static/7a10cf73802c8b90a805d1ddb199a62f/8c557/18.png&quot;
+        srcset=&quot;/static/7a10cf73802c8b90a805d1ddb199a62f/4edbd/18.png 175w,
+/static/7a10cf73802c8b90a805d1ddb199a62f/13ae7/18.png 350w,
+/static/7a10cf73802c8b90a805d1ddb199a62f/8c557/18.png 700w,
+/static/7a10cf73802c8b90a805d1ddb199a62f/e996b/18.png 1050w,
+/static/7a10cf73802c8b90a805d1ddb199a62f/2cefc/18.png 1400w,
+/static/7a10cf73802c8b90a805d1ddb199a62f/eee07/18.png 1628w&quot;
+        sizes=&quot;(max-width: 700px) 100vw, 700px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;빵! 차단 시간이 0으로 떨어졌고, Interaction to Next Paint는 절반 이상 줄었습니다. 정말 🎤 드롭 상황이네요. 컴파일러는 성능을 약간 향상시켰지만, 저는 훨씬 더 잘 해냈습니다 ✌🏼 💪🏼&lt;/p&gt;
+&lt;p&gt;이것이 두 번째로 자주 묻는 질문, “컴파일러가 상호작용 성능에 영향을 미칠 수 있나요?”에 대한 답변이 될 수 있다고 생각합니다. 답변은, “가능합니다.” 눈에 띄긴 하지만 페이지마다 다르며, 사람의 노력이 들어가면 더 좋은 효과를 만들 수 있습니다.&lt;/p&gt;
+&lt;h2 id=&quot;리액트-컴파일러가-모든-리렌더링을-잡아낼-수-있을까요&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EB%A6%AC%EC%95%A1%ED%8A%B8-%EC%BB%B4%ED%8C%8C%EC%9D%BC%EB%9F%AC%EA%B0%80-%EB%AA%A8%EB%93%A0-%EB%A6%AC%EB%A0%8C%EB%8D%94%EB%A7%81%EC%9D%84-%EC%9E%A1%EC%95%84%EB%82%BC-%EC%88%98-%EC%9E%88%EC%9D%84%EA%B9%8C%EC%9A%94&quot; aria-label=&quot;리액트 컴파일러가 모든 리렌더링을 잡아낼 수 있을까요 permalink&quot; class=&quot;heading-anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;리액트 컴파일러가 모든 리렌더링을 잡아낼 수 있을까요?&lt;/h2&gt;
+&lt;p&gt;이제 마지막 질문에 답할 시간입니다. 컴파일러가 정말 모든 것을 잡아낼 만큼 똑똑할까요? 우리는 이미 여기서 대답이 ‘아니오’라는 것을 알았습니다.&lt;/p&gt;
+&lt;p&gt;하지만 조금 더 테스트하기 위해 앱에서 가장 눈에 띄는 리렌더 목록을 수집하고 컴파일러를 활성화한 후 얼마나 많은 리렌더링이 여전히 존재하는지 확인했습니다.&lt;/p&gt;
+&lt;p&gt;9개의 눈에 띄는 리렌더링 사례를 확인했는데, 예를 들어 “탭이 변경될 때 전체 drawer가 리렌더링되는 경우”와 같은 상황들이 있었습니다. 9개의 사례의 결과는 다음과 같습니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;두 경우는&lt;/strong&gt; 모든 리렌더링이 100% 완벽하게 수정되었습니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;두 경우는&lt;/strong&gt; 단 하나도 수정되지 않았습니다.&lt;/li&gt;
+&lt;li&gt;나머지는 위에서 조사한 경우처럼 중간 정도였습니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;그런데 아무것도 수정되지 않은 경우는 컴파일러가 이 줄 때문에 컴포넌트를 건너뛴 경우였습니다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;tsx&quot;&gt;&lt;pre class=&quot;language-tsx&quot;&gt;&lt;code class=&quot;language-tsx&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; filteredData &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; fuse&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;search&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;search&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;이 줄 하나만으로요. &lt;code class=&quot;language-text&quot;&gt;filteredData&lt;/code&gt; 변수는 어디에서도 사용되지 않았습니다. &lt;code class=&quot;language-text&quot;&gt;fuse&lt;/code&gt;는 외부 퍼지 검색 라이브러리입니다. 따라서 이 동작의 가장 가능성 있는 이유는 라이브러리가 컴파일러와 호환되지 않는 무언가를 수행하고 있으며, 이는 제 통제 밖이라는 것입니다.&lt;/p&gt;
+&lt;p&gt;결국, 컴파일러가 모든 리렌더링을 잡을 수 있는지에 대한 답은 명확합니다. 절대 아닙니다. 항상 컴파일러 자체 또는 메모이제이션 규칙과 호환되지 않는 외부 의존성이 있을 것입니다.&lt;/p&gt;
+&lt;p&gt;또는 컴파일러가 처리 방법을 모르는 이상한 레거시 코드가 있을 수도 있습니다.&lt;/p&gt;
+&lt;p&gt;아니면, 제가 가지고 있었던 것처럼 &lt;em&gt;잘못된&lt;/em&gt; 것은 아니지만 메모이제이션에 최적화되지 않은 코드일 수 있습니다.&lt;/p&gt;
+&lt;h2 id=&quot;간단-요약&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#%EA%B0%84%EB%8B%A8-%EC%9A%94%EC%95%BD&quot; aria-label=&quot;간단 요약 permalink&quot; class=&quot;heading-anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;간단 요약&lt;/h2&gt;
+&lt;p&gt;조사의 결과와 결론을 빠르게 요약해 보겠습니다.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 700px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/c295cd0cf26f98244a3aaeba03149476/f868f/19.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 51.42857142857144%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAACXBIWXMAABYlAAAWJQFJUiTwAAABwklEQVQoz3VSSW4aQRStXSLZ9EBX9WBiYRDNJKDBQIsxhEEIHNg58TqLLC1ZPoFX3uQI2WaZC/gIPkJO86JXogiylMXTH6rq1X//f1EsFpGmKZIkQavVQrvdRr1eR7PZRK/XQ6PR0HmiUqnA8zwopTR8X8E+dzG76+DHywPGn68hyuUyFosF5vM5BoMBttstJpMJ1us1ZrMZptMplsulvsPzbDZ7Qugjc2bj5ttH/Hx9QnpTh+AF27bhOA5c19W+sW/BPImklAdSefAlVOBBKglBCeaBZVlHnx+c2v+RSk8iugxwVbtAlAshqtWqlkSZq9XqKJ19ZUzZ4/FYW4L3jWw/8GGdOdh+H+LXn2fMb1OIfD6Pbrer0e/30el09IA4EMZmUDxnrlQqHQfDoVjnNpZfBnj+fY/kU/yvh5R7Ktnk3ko21VGyke24Lt5nMvCyEoJJ9oW/EvT5iGBsfMKcHYdyII2UQhKG8JWC4J5xVUajEYbDITabDXa7nfbZQ1r2l/n9fq9z3FMSh76Pd66Lu7gEfL3F6PIDRC6X040uFAoatVoNcRyDC89+EYy51CSiH4ahrowVOVKiEUV4rJRxFQT4C6uAHoL3KhFUAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;19&quot;
+        title=&quot;19&quot;
+        src=&quot;/static/c295cd0cf26f98244a3aaeba03149476/8c557/19.png&quot;
+        srcset=&quot;/static/c295cd0cf26f98244a3aaeba03149476/4edbd/19.png 175w,
+/static/c295cd0cf26f98244a3aaeba03149476/13ae7/19.png 350w,
+/static/c295cd0cf26f98244a3aaeba03149476/8c557/19.png 700w,
+/static/c295cd0cf26f98244a3aaeba03149476/e996b/19.png 1050w,
+/static/c295cd0cf26f98244a3aaeba03149476/f868f/19.png 1382w&quot;
+        sizes=&quot;(max-width: 700px) 100vw, 700px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+        decoding=&quot;async&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;초기 로드 성능&lt;/strong&gt; - 부정적인 영향은 없었습니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;인터랙션 성능&lt;/strong&gt; - 일부는 많이, 일부는 약간 개선되었습니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;모든 리렌더를 포착할 수 있나요?&lt;/strong&gt; - 아니요, 앞으로도 그럴 일은 없을 것입니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;“곧 메모이제이션을 안 쓰게 될까요?”라는 질문에 대한 대답은 “아니오”인가요? 꼭 그렇지는 않습니다! 상황에 따라 다릅니다.&lt;/p&gt;
+&lt;p&gt;앱의 성능이 세상에서 가장 중요한 것이 아니거나, “그럭저럭 괜찮다, 더 나아질 수 있지만 신경 쓰기 귀찮다”는 수준이라면, 컴파일러를 활성화하는 것만으로도 약간 나아지거나 저비용으로 충분히 괜찮아질 것입니다. “충분히 괜찮다”의 정의는 여러분에게 달려 있습니다. 하지만 대부분의 경우 컴파일러를 켜고 메모이제이션을 잊어도 괜찮을 것이라고 생각합니다.&lt;/p&gt;
+&lt;p&gt;하지만! “충분히 괜찮다”에 만족할 수 없고, 앱에서 &lt;strong&gt;1밀리초라도&lt;/strong&gt; 더 쥐어짜야 한다면, 다시 수동 메모이제이션의 세계로 돌아오셔야 합니다.&lt;/p&gt;
+&lt;p&gt;여러분에게는 “아니요”라는 답이 나올 것입니다. 죄송합니다. 지금 알아야 하는 모든 것에 더해, 컴파일러가 무엇을 하고 있는지, 어떻게 작동하는지까지 알아야 합니다. 그러니 일이 조금 더 복잡해질 것입니다.&lt;/p&gt;
+&lt;p&gt;하지만 이 모든 것을 실제로 알아야 할 필요성을 느끼는 사람은 거의 없을 것이라고 생각합니다.&lt;/p&gt;
+&lt;p&gt;그리고 만약 여러분이 그런 사람이 되고 싶다면, 저는 이 주제에 대한 &lt;a href=&quot;https://www.developerway.com/tags/performance&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;많은 글&lt;/a&gt;을 썼고, &lt;a href=&quot;https://www.youtube.com/playlist?list=PL6dw1BPCcLC4n-4o-t1kQZH0NJeZtpmGp&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;유튜브 영상&lt;/a&gt;도 많이 올렸으며, 리렌더링과 이를 제거하는 방법에 절반을 할애한 &lt;a href=&quot;https://advanced-react.com/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;책&lt;/a&gt;도 썼습니다. 한번 확인해보세요 😉&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;🚀 한국어로 된 프런트엔드 아티클을 빠르게 받아보고 싶다면 &lt;a href=&quot;https://kofearticle.substack.com/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Korean FE Article&lt;/a&gt;을 구독해주세요!&lt;/p&gt;
+&lt;/blockquote&gt;</content:encoded></item><item><title><![CDATA[(번역) 자바스크립트 모노레포의 깃 용량을 94% 줄인 방법]]></title><description><![CDATA[원문: How we shrunk our Javascript monorepo git size by 94% 이건 낚시가 아닙니다. 진짜로 해냈습니다! 우리는 마이크로소프트에서 1JS…]]></description><link>https://emewjin.github.io/git-repo-size/</link><guid isPermaLink="false">https://emewjin.github.io/git-repo-size/</guid><pubDate>Tue, 12 Nov 2024 00:00:00 GMT</pubDate><content:encoded>&lt;blockquote&gt;
 &lt;p&gt;원문: &lt;a href=&quot;https://www.jonathancreamer.com/how-we-shrunk-our-git-repo-size-by-94-percent/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;How we shrunk our Javascript monorepo git size by 94%&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;이건 낚시가 아닙니다. 진짜로 해냈습니다! 우리는 마이크로소프트에서 1JS라고 부르는 &lt;em&gt;대규모&lt;/em&gt; 자바스크립트 모노레포에서 작업하고 있습니다. 이는 단순한 GB 크기의 문제가 아니라, 코드의 양과 기여된 작업의 규모 면에서도 방대한 양을 자랑합니다. 최근에는 월간 활동 사용자가 1,000명을 넘었고, 약 2,500개의 패키지와 2천만 줄의 코드가 있습니다! 제가 최근에 저장소를 복제했을 때 크기가 무려 178GB였습니다.&lt;/p&gt;
