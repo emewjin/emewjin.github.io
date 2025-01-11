@@ -1,2 +1,7 @@
 User-agent: *
-Disallow:
+Disallow: /core-javascript/*
+Disallow: /imoji-editor
+Disallow: /array-reducer
+Disallow: /2022
+Disallow: /grokking-simplicity
+Disallow: /review/*
