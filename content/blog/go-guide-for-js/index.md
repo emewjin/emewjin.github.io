@@ -1,5 +1,5 @@
 ---
-title: 자바스크립트 개발자를 위한 Go 가이드
+title: (번역) 자바스크립트 개발자를 위한 Go 가이드
 description:
 date: 2025-06-18
 lastUpdated: 2025-06-18
