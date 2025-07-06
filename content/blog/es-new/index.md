@@ -1,5 +1,5 @@
 ---
-title: Ecma International, ECMAScript 2025 승인 - 새로운 기능은?
+title: (번역) Ecma International, ECMAScript 2025 승인 - 새로운 기능은?
 description:
 date: 2025-07-06
 lastUpdated: 2025-07-06
