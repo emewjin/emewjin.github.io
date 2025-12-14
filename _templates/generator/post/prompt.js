@@ -35,10 +35,10 @@ module.exports = {
                     type: 'input',
                     name: 'tag',
                     message: '포스트의 태그를 선택하세요',
-                    choices: ['React', 'Typescript'],
+                    choices: ['번역', 'React', 'Typescript'],
                   })
                   .then((choice) => {
-                    const date = new Date().toISOString().split("T")[0];
+                    const date = new Date().toISOString().split('T')[0];
                     // 최종적으로 반환하는 객체의 형태입니다.
                     return {
                       title: title,
@@ -46,7 +46,7 @@ module.exports = {
                       tag: choice,
                       name: name,
                       args,
-                      date
+                      date,
                     };
                   });
               });
