@@ -1,5 +1,5 @@
 ---
-title: 웹 개발자를 위한 Safari MCP 서버를 소개합니다
+title: (번역) 웹 개발자를 위한 Safari MCP 서버를 소개합니다
 description:
 date: 2026-07-20
 lastUpdated: 2026-07-20
