@@ -1,5 +1,5 @@
 ---
-title: Linear는 어떻게 이렇게 빠를까요? 기술적으로 분석해봅시다.
+title: (번역) Linear는 어떻게 이렇게 빠를까요? 기술적으로 분석해봅시다.
 description:
 date: 2026-08-09
 lastUpdated: 2026-08-09
