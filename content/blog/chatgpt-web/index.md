@@ -8,10 +8,6 @@ tags: [React, 번역]
 
 > 원문 : [ChatGPT 웹 리버스 엔지니어링, OpenAI는 10억 사용자를 위해 ChatGPT를 어떻게 만들었을까요?](https://performance.dev/chatgpt)
 
-[Dennis Brotzky](https://x.com/brotzky) · 2026년 7월 2일
-
-![ChatGPT 웹 리버스 엔지니어링, OpenAI는 10억 사용자를 위해 ChatGPT를 어떻게 만들었을까요?](https://media.performance.dev/cdn-cgi/image/width=1024,quality=90,format=auto,fit=scale-down/posts/p_IE23cQZdfRUJ/IE67n5ltBXi4.jpg)
-
 새 탭을 열고 [chatgpt.com](https://chatgpt.com)을 입력한 뒤 무언가 물어보세요. 계정도, 로그인도, 스피너도 필요 없습니다. 페이지는 즉시 사용할 수 있고, Enter를 누르면 잠시 뒤 답변이 스트리밍되기 시작합니다. 약 10억 명이 이런 경험을 누립니다. 덕분에 chatgpt.com은 인터넷 전체에서 손꼽히는 웹사이트이자 세계에서 가장 많이 쓰이는 웹 앱 가운데 하나가 되었습니다. 겉보기에는 단순한 인터페이스 같지만, 파고들어 보면 전혀 그렇지 않습니다. 저는 이 웹 앱이 어떻게 만들어졌는지 알아보려고 며칠 동안 페이지 소스와 번들 코드, 네트워크 요청을 살피며 리버스 엔지니어링했습니다.
 
 ## 살펴볼 내용
