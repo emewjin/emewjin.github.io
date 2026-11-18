@@ -6,8 +6,6 @@ lastUpdated: 2026-11-18
 tags: [번역]
 ---
 
-# 아무도 웹 컴포넌트를 작성하지 않는다면, 웹 컴포넌트에 미래가 있을까요?
-
 > 원문: https://nolanlawson.com/2026/10/19/do-web-components-have-a-future-if-nobody-is-writing-them/
 
 지난번 [“플랫폼 활용하기”](https://nolanlawson.com/2026/10/03/why-dont-more-developers-use-the-platform/)에 관한 글을 쓴 뒤, [Hacker News](https://news.ycombinator.com/item?id=49950554)와 [Lobsters](https://lobste.rs/s/srduzv/why_don_t_more_developers_use_platform)의 댓글이 웹 컴포넌트 쪽으로 흘러가는 것을 보고 놀랐습니다. 글에서는 웹 컴포넌트를 전혀 언급하지 않았기 때문입니다.
